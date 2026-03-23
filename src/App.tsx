@@ -224,7 +224,7 @@ export default function App() {
               className="relative z-10 w-full flex justify-end drop-shadow-2xl"
             >
                <img 
-                 src="https://i.postimg.cc/PJfhnbhs/phone.png"
+                 src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
                  className="w-full max-w-[260px] md:max-w-[340px] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
                />
