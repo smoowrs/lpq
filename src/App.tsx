@@ -35,7 +35,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-[#F5F5F7] selection:bg-white/20 overflow-x-hidden">
+    <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F7] selection:bg-white/20">
 
       {/* ─── NAV (novo design) ─────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
