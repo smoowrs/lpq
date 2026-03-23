@@ -6,8 +6,8 @@
 }
 
 body {
-  background-color: #000000;
-  color: #F5F5F7;
+  background-color: #04050D;
+  color: #FFFFFF;
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -22,55 +22,54 @@ body {
 }
 
 .text-gradient-ai {
-  background: linear-gradient(135deg, #582ef5 0%, #2b34f5 100%);
+  background: linear-gradient(135deg, #5833FF 0%, #3B54FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(18, 20, 36, 0.4);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-}
-
-.glow-button {
-  position: relative;
-}
-.glow-button::before {
-  content: '';
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  background: linear-gradient(135deg, #582ef5, #2b34f5);
-  border-radius: inherit;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.glow-button:hover::before {
-  opacity: 1;
-  filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-nav {
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(4, 5, 13, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.feature-card {
-  background: #0A0A0A;
+.glass-pill {
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
 }
 
-.feature-card:hover {
-  background: #111111;
-  border-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
+.btn-primary {
+  background-color: #4354FF;
+  border-radius: 0.5rem;
+  color: #FFFFFF;
+  font-weight: 500;
+  transition: background-color 0.2s, transform 0.2s;
+  box-shadow: 0 4px 14px 0 rgba(67, 84, 255, 0.39);
+}
+.btn-primary:hover {
+  background-color: #3846E6;
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: #FFFFFF;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.08);
 }
 
 /* Marquee Animation */
@@ -87,21 +86,4 @@ body {
 
 .animate-marquee:hover {
   animation-play-state: paused;
-}
-
-/* iPhone Mockup */
-.phone-mockup {
-  box-shadow: 0 0 0 10px #1a1a1a, 0 0 0 12px #2a2a2a, 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-}
-
-.dynamic-island {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 28px;
-  background-color: #000;
-  border-radius: 20px;
-  z-index: 50;
 }
