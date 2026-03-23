@@ -218,13 +218,17 @@ export default function App() {
             className="absolute -right-4 md:right-auto bottom-[10px] md:bottom-auto md:relative w-[55%] sm:w-[45%] md:w-1/2 flex justify-end z-20"
           >
             {/* O Container do celular como imagem transparente já exportada */}
-            <div className="relative z-10 w-full flex justify-end drop-shadow-2xl">
+            <motion.div 
+              animate={{ y: [0, -15, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 w-full flex justify-end drop-shadow-2xl"
+            >
                <img 
                  src="https://i.postimg.cc/PJfhnbhs/phone.png"
                  alt="App Comunidade"
                  className="w-full max-w-[260px] md:max-w-[340px] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
                />
-            </div>
+            </motion.div>
           </motion.div>
           
         </div>
