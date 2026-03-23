@@ -180,11 +180,7 @@ export default function App() {
         </div>
       </section>
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
-      {/* ─── COMUNIDADE ────────────────────────────────────────── */}
       <section id="comunidade" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden">
-        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#2b34f5]/10 rounded-full blur-[100px] pointer-events-none" />
-
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10">
           
           {/* Texto (Esquerda) */}
@@ -219,9 +215,9 @@ export default function App() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="absolute -right-6 md:right-auto bottom-[-60px] md:bottom-auto md:relative w-[50%] md:w-1/2 flex justify-end z-10"
+            className="absolute -right-8 md:right-auto bottom-[-60px] md:bottom-auto md:relative w-[70%] sm:w-[50%] md:w-1/2 flex justify-end z-10"
           >
-            <div className="relative w-full max-w-[360px] aspect-[9/18] md:aspect-[9/16] rounded-tl-3xl md:rounded-3xl overflow-hidden drop-shadow-2xl shadow-[-20px_0_60px_rgba(88,46,245,0.15)] md:shadow-[0_0_60px_rgba(88,46,245,0.15)]">
+            <div className="relative w-full max-w-[360px] aspect-[9/18] md:aspect-[9/16] rounded-tl-[2.5rem] md:rounded-3xl overflow-hidden drop-shadow-2xl shadow-[-30px_0_60px_rgba(0,0,0,0.5)] md:shadow-[0_0_60px_rgba(88,46,245,0.15)]">
               <iframe 
                 src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=9e9191df-6ce0-400d-ac0c-09838b001a5e&autoplay=1&loop=1&muted=1&controls=0"
                 className="absolute inset-0 w-full h-[105%] md:h-full border-0 pointer-events-none"
