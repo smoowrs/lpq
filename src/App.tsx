@@ -245,6 +245,51 @@ export default function App() {
         </div>
       </section>
 
+      {/* ─── O MINERADOR ────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-black to-[#050505] border-t border-white/5">
+        <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-[#582ef5]/5 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex justify-center mb-8"
+          >
+            <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-3 shadow-[0_0_50px_rgba(88,46,245,0.15)] overflow-hidden">
+               <img 
+                 src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGJzeHd3YTZlbTVhd2x5dHB2eTRtaHR3am5sajFqNW55OWxoMXhmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S5Itfetiqrv3emmx8h/giphy.gif"
+                 alt="O Mineradorzinho"
+                 className="w-full h-full object-contain rounded-xl"
+               />
+               <div className="absolute inset-0 bg-gradient-to-tr from-[#582ef5]/10 to-transparent pointer-events-none" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-5 backdrop-blur-md text-[#582ef5] tracking-wide">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>O MINERADOR</span>
+             </div>
+             
+             <h2 className="text-[32px] md:text-5xl font-bold tracking-tight mb-6">
+               <span className="text-white">O Assistente</span> <span className="text-gradient-ai">com IA</span>
+             </h2>
+
+             <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+               Uma inteligência artificial que te ajuda a encontrar os melhores produtos, preços e a declarar evitando taxas abusivas.
+             </p>
+          </motion.div>
+          
+        </div>
+      </section>
+
       {/* ─── CONNECT AI / IMAGE CAROUSEL ──────────────────────── */}
       <section className="py-24 md:py-32 border-y border-white/5 bg-white/[0.02] overflow-hidden relative">
         <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
