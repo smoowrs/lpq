@@ -190,9 +190,9 @@ export default function App() {
             viewport={{ once: true }}
             className="w-full md:w-1/2 relative z-20 text-left md:pr-10 pb-16 md:pb-0"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <Users className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300">Comunidade</span>
+              <span className="text-gray-300 uppercase tracking-wider">Comunidade</span>
             </div>
             
             <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
@@ -201,7 +201,7 @@ export default function App() {
               do Importador
             </h2>
             
-            <p className="text-[14px] md:text-base text-gray-400 mb-8 leading-relaxed w-[75%] md:w-full">
+            <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed max-w-2xl">
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
@@ -248,12 +248,16 @@ export default function App() {
               <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300 uppercase tracking-wider">Aulas passo a passo</span>
             </div>
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 leading-[1.1]">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               <span className="text-gradient-ai">Economize ou Lucre</span>
             </h2>
-            <p className="text-gray-400 text-[14px] md:text-base max-w-2xl leading-relaxed">
+            <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed mb-8">
               Do zero até a chegada dos seus produtos na porta da sua casa ou da sua loja.
             </p>
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2">
+              Aprender grátis
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </motion.div>
 
           {/* Carrossel de Aulas */}
@@ -326,18 +330,23 @@ export default function App() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-5 backdrop-blur-md text-[#582ef5] tracking-wide">
+             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-5 backdrop-blur-md text-[#582ef5] uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>O MINERADOR</span>
              </div>
              
-             <h2 className="text-[28px] md:text-4xl font-bold tracking-tight mb-6">
+             <h2 className="text-[28px] md:text-4xl font-bold tracking-tight mb-6 leading-[1.1]">
                <span className="text-white">O Assistente</span> <span className="text-gradient-ai">com IA</span>
              </h2>
 
              <p className="text-sm md:text-base text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
                Uma inteligência artificial que te ajuda a encontrar os melhores produtos, preços e a declarar evitando taxas abusivas.
              </p>
+
+             <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold w-fit mx-auto flex items-center justify-center gap-2">
+               Testar Minerador
+               <ArrowRight className="w-4 h-4" />
+             </button>
           </motion.div>
           
         </div>
@@ -356,9 +365,9 @@ export default function App() {
             viewport={{ once: true }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300">Connect AI</span>
+              <span className="text-gray-300 uppercase tracking-wider">Connect AI</span>
             </div>
             <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               Crie imagens que <br />
@@ -377,8 +386,9 @@ export default function App() {
                 </li>
               ))}
             </ul>
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
               Testar Connect AI
+              <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
         </div>
@@ -459,9 +469,9 @@ export default function App() {
             viewport={{ once: true }}
             className="order-1 md:order-2"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <Package className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300">Logística Inteligente</span>
+              <span className="text-gray-300 uppercase tracking-wider">Logística Inteligente</span>
             </div>
             <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               Rastreio em <br />
@@ -480,8 +490,9 @@ export default function App() {
                 </li>
               ))}
             </ul>
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
               Testar rastreio grátis
+              <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
         </div>
