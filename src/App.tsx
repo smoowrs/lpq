@@ -215,22 +215,22 @@ export default function App() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="absolute -right-8 sm:-right-4 md:right-auto bottom-[-80px] md:bottom-auto md:relative w-[75%] sm:w-[60%] md:w-1/2 flex justify-end z-10"
+            className="absolute -right-8 sm:-right-4 md:right-auto bottom-[-80px] md:bottom-auto md:relative w-[75%] sm:w-[60%] md:w-1/2 flex justify-end z-20"
           >
             {/* O Container do celular com perspectiva inclinado e um glow atrás */}
-            <div className="relative z-10 drop-shadow-2xl">
+            <div className="relative z-10 drop-shadow-2xl w-full flex justify-end">
               <div 
-                className="relative w-full max-w-[340px] md:max-w-[380px] aspect-[9/19.5] rounded-[2.5rem] md:rounded-[3.5rem] p-1.5 md:p-2.5 bg-[#121213] border border-white/10 shadow-[0_0_80px_rgba(88,46,245,0.15)] flex flex-col"
+                className="relative w-full max-w-[340px] md:max-w-[380px] aspect-[9/19.5] rounded-[2.5rem] md:rounded-[3.5rem] p-2 bg-black border-[6px] md:border-[8px] border-[#222] shadow-[0_0_80px_rgba(88,46,245,0.4)] flex flex-col"
                 style={{ transform: "perspective(1200px) rotateY(-12deg) rotate(-4deg)" }}
               >
                 {/* Entalhe Superior (Dynamic Island) */}
-                <div className="absolute top-4 md:top-6 left-1/2 -translate-x-1/2 w-[30%] h-5 md:h-6 bg-black rounded-full z-20 flex items-center justify-end px-2 border border-white/5 shadow-inner">
-                  <div className="w-1.5 h-1.5 bg-blue-500/20 rounded-full mr-1" />
-                  <div className="w-2.5 h-2.5 bg-[#0a0a0a] rounded-full border border-white/10" />
+                <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[35%] h-6 bg-[#0a0a0a] rounded-full z-30 flex items-center justify-end px-2 border border-white/5">
+                  <div className="w-1.5 h-1.5 bg-blue-500/30 rounded-full mr-2" />
+                  <div className="w-2.5 h-2.5 bg-[#111] rounded-full border border-white/10" />
                 </div>
                 
                 {/* Tela Real (Onde entra o iFrame) */}
-                <div className="relative w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-black select-none pointer-events-auto border border-white/5">
+                <div className="relative w-full h-full rounded-[1.8rem] md:rounded-[2.8rem] overflow-hidden bg-[#111] select-none pointer-events-auto">
                   <iframe 
                     src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=d100c2e0-4b2d-453a-9f3a-543788c0f071&autoplay=1&loop=1&muted=1&controls=0"
                     className="absolute inset-0 w-full h-full border-0 scale-[1.03] pointer-events-none origin-center"
