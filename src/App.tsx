@@ -570,12 +570,12 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="glass-card p-10 md:p-16 rounded-[2.5rem] border border-white/10 text-center relative overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
+            className="glass-card p-6 py-10 md:p-16 rounded-[2rem] md:rounded-[2.5rem] border border-white/10 text-center relative overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
           >
             {/* Brilho interno do cartão */}
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#582ef5]/20 rounded-full blur-3xl" />
             
-            <h2 className="text-[28px] sm:text-[32px] md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.05]">
+            <h2 className="text-[22px] sm:text-[32px] md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.2]">
               REGISTRE-SE e GANHE <br />
               <span className="text-gradient-ai">R$660 em CUPONS</span>
             </h2>
