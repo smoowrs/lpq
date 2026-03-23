@@ -128,18 +128,15 @@ export default function App() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md glass-pill text-[11px] font-semibold text-gray-300 tracking-wider mb-5 border border-white/10">
               <Users className="w-3.5 h-3.5 text-[#4354FF]" />
-              PARA EMPRESAS &amp; IMPORTADORES
+              Para uso pessoal ou revenda
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.08] mb-5 text-white drop-shadow-xl">
-              A solução mais completa<br />
-              de importação
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.08] mb-8 text-white drop-shadow-xl">
+              A 1ª Rede Social de<br />
+              Importadores e<br />
+              empreendedores
             </h1>
-
-            <p className="text-[16px] md:text-[18px] text-[#C4C4CC] font-light mb-8 max-w-md leading-relaxed">
-              Importe, rastreie e avalie suas remessas com inteligência artificial — tudo em um só lugar.
-            </p>
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-3">
