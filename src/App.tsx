@@ -173,7 +173,7 @@ export default function App() {
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 group"
+              className="btn-primary px-6 sm:px-8 py-4 text-[13px] sm:text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap"
             >
               Criar conta grátis
               <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
@@ -185,7 +185,7 @@ export default function App() {
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-secondary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg group"
+              className="btn-secondary px-6 sm:px-8 py-4 text-[13px] sm:text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg group whitespace-nowrap"
             >
               Ver como funciona
               <Play className="w-4 h-4 fill-white" />
@@ -575,9 +575,9 @@ export default function App() {
             {/* Brilho interno do cartão */}
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#582ef5]/20 rounded-full blur-3xl" />
             
-            <h2 className="text-[32px] md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.05]">
-              Registre-se e <br className="hidden md:block" />
-              <span className="text-gradient-ai">GANHE R$660</span> em CUPONS
+            <h2 className="text-[28px] sm:text-[32px] md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.05]">
+              REGISTRE-SE e GANHE <br />
+              <span className="text-gradient-ai">R$660 em CUPONS</span>
             </h2>
             
             <p className="text-gray-400 text-sm md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
@@ -589,7 +589,7 @@ export default function App() {
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-12 py-5 text-lg md:text-xl font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)] group"
+              className="btn-primary px-10 py-5 text-[15px] sm:text-xl font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)] group whitespace-nowrap"
             >
               Crie sua conta grátis
               <motion.div variants={{ initial: { x: 0 }, hover: { x: 8 } }}>
