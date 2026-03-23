@@ -276,7 +276,8 @@ export default function App() {
       </section>
 
       {/* ─── CONNECT AI / IMAGE CAROUSEL ──────────────────────── */}
-      <section className="py-24 md:py-32 border-y border-white/5 bg-white/[0.02] overflow-hidden relative">
+      <section className="py-24 md:py-32 border-t border-white/5 bg-black overflow-hidden relative">
+        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
         
@@ -291,7 +292,7 @@ export default function App() {
               <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300">Connect AI</span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
               Crie imagens que <br />
               <span className="text-gradient-ai">vendem mais.</span>
             </h2>
@@ -341,17 +342,17 @@ export default function App() {
             viewport={{ once: true }}
             className="order-2 md:order-1"
           >
-            <div className="glass-card rounded-3xl p-8 relative overflow-hidden shadow-[0_0_40px_rgba(88,46,245,0.1)]">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#582ef5]/20 rounded-full blur-3xl" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2b34f5]/10 rounded-full blur-3xl" />
+            <div className="glass-card rounded-3xl p-8 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#582ef5]/15 rounded-full blur-3xl opacity-50" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2b34f5]/10 rounded-full blur-3xl opacity-30" />
               
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-8">
                   <div>
                     <h3 className="text-xl font-semibold text-white">Status do Pedido</h3>
-                    <p className="text-sm text-gray-400 mt-1">Código: BR987654321CN</p>
+                    <p className="text-sm text-gray-400 mt-1 uppercase tracking-wider font-medium">Logística Connect</p>
                   </div>
-                  <div className="px-4 py-1.5 bg-[#582ef5]/20 text-[#582ef5] rounded-full text-xs font-semibold border border-[#582ef5]/30 backdrop-blur-md">
+                  <div className="px-4 py-1.5 bg-[#582ef5] text-white rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest shadow-[0_0_15px_rgba(88,46,245,0.4)]">
                     Em trânsito
                   </div>
                 </div>
@@ -361,18 +362,18 @@ export default function App() {
                     const isActive = index <= trackingStep;
                     const isCurrent = index === trackingStep;
                     return (
-                      <div key={index} className="flex gap-4 relative">
+                      <div key={index} className="flex gap-5 relative">
                         {index < trackingStages.length - 1 && (
-                          <div className={`absolute left-[15px] top-8 bottom-[-24px] w-[2px] ${isActive ? 'bg-gradient-to-b from-[#582ef5] to-[#2b34f5]' : 'bg-white/10'}`} />
+                          <div className={`absolute left-[15px] top-8 bottom-[-24px] w-[1px] ${isActive ? 'bg-[#582ef5]' : 'bg-white/10'}`} />
                         )}
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 relative z-10 transition-all duration-500 ${
-                          isActive ? 'bg-[#582ef5] text-white shadow-[0_0_15px_rgba(88,46,245,0.5)]' : 'bg-white/5 text-gray-500 border border-white/10'
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 relative z-10 transition-all duration-700 ${
+                          isActive ? 'bg-[#582ef5] text-white shadow-[0_0_20px_rgba(88,46,245,0.6)]' : 'bg-white/5 text-gray-600 border border-white/5'
                         }`}>
                           {stage.icon}
                         </div>
-                        <div className={`pt-1 transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-40'}`}>
-                          <p className={`font-medium ${isCurrent ? 'text-white' : 'text-gray-300'}`}>{stage.title}</p>
-                          <p className="text-xs text-gray-500 flex items-center gap-1 mt-1">
+                        <div className={`pt-0.5 transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-30'}`}>
+                          <p className={`text-[15px] font-bold ${isCurrent ? 'text-white' : 'text-gray-300'}`}>{stage.title}</p>
+                          <p className="text-[12px] text-gray-500 flex items-center gap-1.5 mt-0.5 font-medium">
                             <Clock className="w-3 h-3" /> {stage.time}
                           </p>
                         </div>
@@ -394,7 +395,7 @@ export default function App() {
               <Package className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300">Logística Inteligente</span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
               Rastreio em <br />
               <span className="text-gradient-ai">Tempo Real.</span>
             </h2>
@@ -424,8 +425,9 @@ export default function App() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#2b34f5]/20 rounded-full blur-[150px] pointer-events-none" />
         
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-            Pronto para <span className="text-gradient-ai">decolar?</span>
+          <h2 className="text-[40px] md:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
+            Pronto para <br className="md:hidden" />
+            <span className="text-gradient-ai">decolar?</span>
           </h2>
           <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
             Junte-se a milhares de importadores que já estão lucrando com o Asas de Importação.
