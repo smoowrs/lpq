@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { 
   Package, Sparkles, Users, ShieldCheck, 
   ArrowRight, PlayCircle, Menu, CheckCircle2,
-  Clock, MapPin, Globe
+  Clock, MapPin, Globe, Play
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -169,20 +169,26 @@ export default function App() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
           >
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover="hover"
+              initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2"
+              className="btn-primary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 group"
             >
-              Criar conta grátis ⚡
+              Criar conta grátis
+              <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                <ArrowRight className="w-4 h-4" strokeWidth={3} />
+              </motion.div>
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover="hover"
+              initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-secondary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg"
+              className="btn-secondary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg group"
             >
-              Ver como funciona 📽️
+              Ver como funciona
+              <Play className="w-4 h-4 fill-white" />
             </motion.button>
           </motion.div>
         </div>
@@ -214,12 +220,16 @@ export default function App() {
             </p>
             
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover="hover"
+              initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
+              className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
             >
-              Testar comunidade 🤝
+              Testar comunidade
+              <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                <ArrowRight className="w-4 h-4" strokeWidth={3} />
+              </motion.div>
             </motion.button>
           </motion.div>
 
@@ -316,12 +326,14 @@ export default function App() {
             className="flex justify-center"
           >
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover="hover"
+              initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2"
+              className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2 group"
             >
-              Aprender grátis 📈
+              Aprender grátis
+              <PlayCircle className="w-4 h-4" strokeWidth={2.5} />
             </motion.button>
           </motion.div>
           
@@ -370,12 +382,14 @@ export default function App() {
              </p>
 
              <motion.button
-               whileHover={{ scale: 1.05 }}
+               whileHover="hover"
+               initial="initial"
                whileTap={{ scale: 0.95 }}
                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-               className="btn-primary px-8 py-4 text-sm font-bold w-fit mx-auto flex items-center justify-center gap-2"
+               className="btn-primary px-8 py-4 text-sm font-bold w-fit mx-auto flex items-center justify-center gap-2 group"
              >
-               Testar Minerador 💎
+               Testar Minerador
+               <Sparkles className="w-4 h-4 fill-white/20" strokeWidth={2.5} />
              </motion.button>
           </motion.div>
           
@@ -417,12 +431,16 @@ export default function App() {
               ))}
             </ul>
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover="hover"
+              initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
+              className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
             >
-              Testar Connect AI 🪄
+              Testar Connect AI
+              <motion.div variants={{ initial: { x: 0 }, hover: { opacity: [1, 0.5, 1] } }}>
+                <Sparkles className="w-4 h-4" strokeWidth={2.5} />
+              </motion.div>
             </motion.button>
           </motion.div>
         </div>
@@ -525,12 +543,16 @@ export default function App() {
               ))}
             </ul>
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover="hover"
+              initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
+              className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
             >
-              Testar rastreio grátis ✅
+              Testar rastreio grátis
+              <motion.div variants={{ initial: { x: 0 }, hover: { x: 3 } }}>
+                <Package className="w-4 h-4" strokeWidth={2.5} />
+              </motion.div>
             </motion.button>
           </motion.div>
         </div>
@@ -563,12 +585,16 @@ export default function App() {
             </p>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover="hover"
+              initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-12 py-5 text-lg md:text-xl font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)]"
+              className="btn-primary px-12 py-5 text-lg md:text-xl font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)] group"
             >
-              Crie sua conta grátis ⚡
+              Crie sua conta grátis
+              <motion.div variants={{ initial: { x: 0 }, hover: { x: 8 } }}>
+                <ArrowRight className="w-6 h-6" strokeWidth={3} />
+              </motion.div>
             </motion.button>
 
             {/* Selo de Confiança / Badges Rápidos */}
