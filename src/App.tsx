@@ -215,7 +215,7 @@ export default function App() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="absolute -right-4 md:right-auto bottom-[-40px] md:bottom-auto md:relative w-[55%] sm:w-[45%] md:w-1/2 flex justify-end z-20"
+            className="absolute -right-4 md:right-auto bottom-[10px] md:bottom-auto md:relative w-[55%] sm:w-[45%] md:w-1/2 flex justify-end z-20"
           >
             {/* O Container do celular como imagem transparente já exportada */}
             <div className="relative z-10 w-full flex justify-end drop-shadow-2xl">
