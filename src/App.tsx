@@ -277,7 +277,7 @@ export default function App() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="min-w-[240px] md:min-w-[320px] aspect-[16/10] md:aspect-[5/7] rounded-2xl md:rounded-3xl overflow-hidden relative group/card snap-start shadow-xl border border-white/5 bg-white/[0.02]"
+                  className="min-w-[165px] md:min-w-[280px] aspect-[9/16] rounded-2xl md:rounded-[2rem] overflow-hidden relative group/card snap-start shadow-xl border border-white/5 bg-white/[0.02]"
                 >
                   <img src={aula.img} alt={aula.title} className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover/card:opacity-60 transition-opacity duration-500" />
