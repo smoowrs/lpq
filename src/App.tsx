@@ -77,19 +77,19 @@ export default function App() {
           {/* Direito: CTAs */}
           <div className="flex-[2] sm:flex-1 flex items-center justify-end">
             <div className="hidden lg:flex items-center gap-4">
-              <button className="text-[15px] font-medium text-gray-300 hover:text-white transition-colors px-4 py-2">
+              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="text-[15px] font-medium text-gray-300 hover:text-white transition-colors px-4 py-2">
                 Entrar
               </button>
-              <button className="btn-primary px-5 py-2.5 text-[15px]">
+              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-5 py-2.5 text-[15px]">
                 Criar conta grátis
               </button>
             </div>
 
             <div className="lg:hidden flex items-center gap-1 sm:gap-1.5">
-              <button className="text-[11px] sm:text-[12px] font-medium text-gray-300 hover:text-white transition-colors px-1 sm:px-1.5 py-1 whitespace-nowrap">
+              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="text-[11px] sm:text-[12px] font-medium text-gray-300 hover:text-white transition-colors px-1 sm:px-1.5 py-1 whitespace-nowrap">
                 Entrar
               </button>
-              <button className="btn-primary px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-[12px] whitespace-nowrap">
+              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-[12px] whitespace-nowrap">
                 Criar conta
               </button>
             </div>
@@ -168,11 +168,11 @@ export default function App() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
           >
-            <button className="btn-primary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
               Criar conta grátis
               <ArrowRight className="w-4 h-4" />
             </button>
-            <button className="btn-secondary w-full sm:w-auto px-8 py-4 text-sm font-medium flex items-center justify-center gap-2 rounded-lg">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-secondary w-full sm:w-auto px-8 py-4 text-sm font-medium flex items-center justify-center gap-2 rounded-lg">
               <PlayCircle className="w-5 h-5" />
               Ver como funciona
             </button>
@@ -208,38 +208,26 @@ export default function App() {
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade através de posts e vídeos.
             </p>
             
-            <button className="btn-primary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 mx-auto md:mx-0">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 mx-auto md:mx-0">
               Testar comunidade
               <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
 
-          {/* Vídeo / Mockup de Celular (Direita) */}
+          {/* Vídeo / Mockup (Direita) */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="order-1 md:order-2 flex justify-center md:justify-end"
           >
-            {/* Wrapper do Celular */}
-            <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[9/19.5] rounded-[3rem] border border-white/10 bg-[#0a0a0a] shadow-[0_0_60px_rgba(88,46,245,0.2)] p-1.5 sm:p-2">
-              {/* Entalhe Superior (Notch/Dynamic Island look) */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#0a0a0a] rounded-b-2xl z-20" />
-              
-              {/* Tela / Container do iframe */}
-              <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-black select-none border border-white/5">
-                <iframe 
-                  src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=9e9191df-6ce0-400d-ac0c-09838b001a5e&autoplay=1&loop=1&muted=1&controls=0"
-                  className="absolute inset-0 w-full h-full border-0 pointer-events-none scale-[1.05]"
-                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-
-              {/* Detalhes laterais do celular (botões) */}
-              <div className="absolute top-24 -left-1 w-1 h-12 bg-white/10 rounded-l-md" />
-              <div className="absolute top-36 -left-1 w-1 h-12 bg-white/10 rounded-l-md" />
-              <div className="absolute top-28 -right-1 w-1 h-16 bg-white/10 rounded-r-md" />
+            <div className="relative w-full max-w-[360px] aspect-[9/16] mx-auto md:mr-0 rounded-3xl overflow-hidden drop-shadow-2xl shadow-[0_0_60px_rgba(88,46,245,0.15)]">
+              <iframe 
+                src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=9e9191df-6ce0-400d-ac0c-09838b001a5e&autoplay=1&loop=1&muted=1&controls=0"
+                className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                allowFullScreen
+              />
             </div>
           </motion.div>
           
@@ -279,7 +267,7 @@ export default function App() {
                 </li>
               ))}
             </ul>
-            <button className="btn-primary px-8 py-4 text-sm font-bold">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold">
               Testar Connect AI
             </button>
           </motion.div>
@@ -382,7 +370,7 @@ export default function App() {
                 </li>
               ))}
             </ul>
-            <button className="btn-primary px-8 py-4 text-sm font-bold">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold">
               Testar rastreio grátis
             </button>
           </motion.div>
@@ -401,7 +389,7 @@ export default function App() {
           <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
             Junte-se a milhares de importadores que já estão lucrando com o Asas de Importação.
           </p>
-          <button className="btn-primary px-10 py-5 text-lg font-semibold flex items-center justify-center gap-2 mx-auto shadow-[0_0_40px_rgba(88,46,245,0.4)]">
+          <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-10 py-5 text-lg font-semibold flex items-center justify-center gap-2 mx-auto shadow-[0_0_40px_rgba(88,46,245,0.4)]">
             Criar conta grátis agora
             <ArrowRight className="w-5 h-5" />
           </button>
