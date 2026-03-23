@@ -368,12 +368,12 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* Visual (Dashboard Integrado no Meio - Centralizado) */}
+          {/* Visual (Dashboard Integrado no Meio - Centralizado e Menor) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, rotateY: -10, rotateX: 5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="w-full max-w-[850px] my-10"
+            className="w-full max-w-[500px] my-10"
             style={{ perspective: "1500px" }}
           >
             <div className="relative group">
@@ -397,7 +397,7 @@ export default function App() {
             whileHover="hover"
             whileTap={{ scale: 0.95 }}
             onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-            className="btn-primary w-full max-w-[850px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
+            className="btn-primary w-full max-w-[500px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
           >
             Criar conta grátis
             <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
