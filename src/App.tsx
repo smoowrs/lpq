@@ -381,7 +381,7 @@ export default function App() {
             </motion.button>
           </motion.div>
 
-          {/* Visual (Direita - iPad Mockup) */}
+          {/* Visual (Direita - Dashboard Integrado) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -389,26 +389,32 @@ export default function App() {
             className="w-full md:w-1/2 flex justify-center items-center z-10"
           >
             <motion.div 
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative w-full max-w-[550px]"
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+              className="relative w-full max-w-[650px] group"
+              style={{ perspective: "1500px" }}
             >
-              {/* Moldura do iPad */}
-              <div className="relative p-1.5 md:p-2 bg-[#0a0a0a] rounded-[1.5rem] md:rounded-[2.5rem] border-[6px] md:border-[10px] border-[#161616] shadow-[0_40px_100px_rgba(0,0,0,0.6),0_0_50px_rgba(88,46,245,0.15)] overflow-hidden">
-                {/* Tela */}
-                <div className="relative aspect-[4/3] w-full bg-[#050505] rounded-[0.8rem] md:rounded-[1.8rem] overflow-hidden">
-                   <img 
-                     src="https://i.postimg.cc/kXk4cdnQ/Captura-de-Tela-2026-03-23-as-19-28-18.png"
-                     alt="Painel de Produtos Connect Academy"
-                     className="w-full h-full object-cover"
-                   />
-                   {/* Brilho da tela */}
-                   <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
+              <motion.div
+                initial={{ rotateY: 20, rotateX: 5 }}
+                whileInView={{ rotateY: -15, rotateX: 5 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                className="relative overflow-hidden"
+              >
+                {/* Imagem com máscara de desfoque nas bordas para integração total */}
+                <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(88,46,245,0.1)]">
+                  <img 
+                    src="https://i.postimg.cc/kXk4cdnQ/Captura-de-Tela-2026-03-23-as-19-28-18.png"
+                    alt="Painel de Produtos Integrado"
+                    className="w-full h-auto object-cover [mask-image:radial-gradient(ellipse_90%_90%_at_50%_50%,#000_60%,transparent_100%)] opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                  />
                 </div>
-              </div>
+                
+                {/* Glow interativo */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#582ef5]/20 to-transparent pointer-events-none" />
+              </motion.div>
 
-              {/* Detalhes de profundidade extra */}
-              <div className="absolute -inset-4 bg-[#582ef5]/5 blur-[80px] -z-10 rounded-full" />
+              {/* Aura de fundo */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-[#582ef5]/10 blur-[130px] -z-10 rounded-full pointer-events-none" />
             </motion.div>
           </motion.div>
         </div>
