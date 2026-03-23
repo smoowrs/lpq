@@ -546,13 +546,17 @@ export default function App() {
             Pronto para <br className="md:hidden" />
             <span className="text-gradient-ai">decolar?</span>
           </h2>
-          <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-            Junte-se a milhares de importadores que já estão lucrando com o Asas de Importação.
+          <p className="text-sm md:text-base text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
+            Junte-se a milhares de importadores e empreendedores que já estão lucrando ou economizando com a Connect Academy
           </p>
-          <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-10 py-5 text-lg font-semibold flex items-center justify-center gap-2 mx-auto shadow-[0_0_40px_rgba(88,46,245,0.4)]">
-            Criar conta grátis agora
-            <ArrowRight className="w-5 h-5" />
-          </button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+            className="btn-primary px-10 py-5 text-lg font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_0_40px_rgba(88,46,245,0.4)]"
+          >
+            Quero me inscrever agora 🚀
+          </motion.button>
         </div>
       </section>
 
