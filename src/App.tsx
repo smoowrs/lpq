@@ -85,81 +85,73 @@ export default function App() {
       </nav>
 
       {/* ─── HERO — Video Background ──────────────────────────── */}
-      {/*
-        Estrutura: container relativo com altura definida.
-        O iframe do vídeo fica absoluto cobrindo tudo.
-        Um gradiente escuro por cima cria o efeito de overlay.
-        O conteúdo (texto + botões) fica por cima do tudo.
-      */}
-      <section className="relative w-full min-h-screen flex flex-col overflow-hidden">
+      {/* ─── HERO — Texto + Vídeo visível com fade nas bordas ─── */}
+      <section className="relative w-full bg-[#04050D] pt-28 md:pt-36 pb-0 overflow-hidden">
 
-        {/* VIDEO BACKGROUND */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <iframe
-            src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b&autoplay=1&loop=1&muted=1&controls=0&transparent=1"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            style={{
-              width: "177.78vh",   /* 16:9 a partir da altura */
-              height: "56.25vw",  /* 16:9 a partir da largura */
-              minWidth: "100%",
-              minHeight: "100%",
-            }}
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen
-          />
-        </div>
-
-        {/* OVERLAYS — para escurecer e integrar o vídeo */}
-        {/* Gradiente principal de cima pra baixo */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#04050D]/80 via-[#04050D]/40 to-[#04050D]" />
-        {/* Gradiente lateral (esquerda mais escura para melhor leitura do texto) */}
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#04050D]/80 via-transparent to-transparent" />
-        {/* Topo escuro para a nav */}
-        <div className="absolute top-0 left-0 right-0 h-32 z-10 bg-gradient-to-b from-[#04050D] to-transparent" />
-
-        {/* CONTENT */}
-        <div className="relative z-20 flex flex-col justify-end flex-1 max-w-[1400px] mx-auto w-full px-4 md:px-8 pt-40 pb-16">
+        {/* Texto central */}
+        <div className="max-w-[900px] mx-auto px-4 md:px-8 text-center pb-10 md:pb-14">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="max-w-xl"
+            transition={{ duration: 0.6 }}
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md glass-pill text-[11px] font-semibold text-gray-300 tracking-wider mb-5 border border-white/10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md glass-pill text-[11px] font-semibold text-gray-300 tracking-wider mb-6 border border-white/10">
               <Users className="w-3.5 h-3.5 text-[#4354FF]" />
               Para uso pessoal ou revenda
             </div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.08] mb-8 text-white drop-shadow-xl">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.10] mb-8 text-white">
               A 1ª Rede Social de<br />
-              Importadores e<br />
-              empreendedores
+              Importadores e empreendedores
             </h1>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button className="btn-primary px-7 py-4 text-[15px] w-full sm:w-auto text-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button className="btn-primary px-7 py-4 text-[15px] w-full sm:w-auto">
                 Começar teste grátis
               </button>
-              <button className="btn-secondary px-7 py-4 text-[15px] w-full sm:w-auto text-center">
+              <button className="btn-secondary px-7 py-4 text-[15px] w-full sm:w-auto">
                 Saiba mais
               </button>
             </div>
           </motion.div>
-
-          {/* Carousel dots */}
-          <div className="flex gap-2 mt-12">
-            <div className="w-2 h-2 rounded-full bg-white" />
-            <div className="w-2 h-2 rounded-full bg-white/30" />
-            <div className="w-2 h-2 rounded-full bg-white/30" />
-            <div className="w-2 h-2 rounded-full bg-white/30" />
-          </div>
         </div>
 
-        {/* Fade bottom to next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 z-20 bg-gradient-to-t from-[#04050D] to-transparent" />
+        {/* Vídeo — visível, integrando com fade só nas bordas */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="relative w-full max-w-[1100px] mx-auto px-2 md:px-6"
+        >
+          {/* Container do vídeo */}
+          <div className="relative w-full aspect-video rounded-xl md:rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(67,84,255,0.15)]">
+            <iframe
+              src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
+              className="absolute inset-0 w-full h-full border-0"
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+
+          {/* Fades de borda — só nas laterais e embaixo, para integrar ao fundo */}
+          {/* Esquerda */}
+          <div className="absolute inset-y-0 left-2 md:left-6 w-8 md:w-16 bg-gradient-to-r from-[#04050D] to-transparent z-10 rounded-l-xl pointer-events-none" />
+          {/* Direita */}
+          <div className="absolute inset-y-0 right-2 md:right-6 w-8 md:w-16 bg-gradient-to-l from-[#04050D] to-transparent z-10 rounded-r-xl pointer-events-none" />
+          {/* Baixo — fade de saída para a próxima seção */}
+          <div className="absolute bottom-0 left-0 right-0 h-20 md:h-32 bg-gradient-to-t from-[#04050D] to-transparent z-10 pointer-events-none" />
+        </motion.div>
+
+        {/* Carousel dots */}
+        <div className="flex justify-center gap-2 py-6 relative z-20">
+          <div className="w-1.5 h-1.5 rounded-full bg-white" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+        </div>
       </section>
 
       {/* ─── STATS BAR ────────────────────────────────────────── */}
