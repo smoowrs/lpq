@@ -342,74 +342,68 @@ export default function App() {
 
 
       {/* ─── PRODUTOS ────────────────────────────────────────── */}
-      <section id="produtos" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
+      <section id="produtos" className="pt-24 md:pt-32 pb-24 md:pb-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10">
-          {/* Texto (Esquerda) */}
+        <div className="max-w-5xl mx-auto flex flex-col items-start relative z-10">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 relative z-20 text-left md:pr-10 pb-16 md:pb-0"
+            className="text-left"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <Package className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
             </div>
             
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
               Os melhores <br />
               <span className="text-gradient-ai">produtos e preços</span>
             </h2>
             
-            <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed max-w-2xl">
-              Tenha acesso grátis a um painel repleto de produtos incriveis
+            <p className="text-sm md:text-lg text-gray-400 mb-2 leading-relaxed max-w-2xl">
+              Tenha acesso grátis a um painel cheio<br />
+              de produtos incriveis.
             </p>
-            
-            <motion.button
-              whileHover="hover"
-              initial="initial"
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
-            >
-              Ver Produtos
-              <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                <ArrowRight className="w-4 h-4" strokeWidth={3} />
-              </motion.div>
-            </motion.button>
           </motion.div>
 
-          {/* Visual (Direita - Dashboard Integrado Estático) */}
+          {/* Visual (Dashboard Integrado no Meio - Alinhado à Esquerda) */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9, rotateY: -10, rotateX: 5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 flex justify-center items-center z-10"
+            className="w-full max-w-[850px] my-10"
+            style={{ perspective: "1500px" }}
           >
-            <div 
-              className="relative w-full max-w-[650px] group"
-              style={{ perspective: "1500px" }}
-            >
-              <div
-                className="relative overflow-hidden"
-                style={{ transform: "rotateY(-15deg) rotateX(5deg)" }}
-              >
-                {/* Imagem com máscara dark de integração */}
-                <div className="relative rounded-2xl overflow-hidden border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,1)]">
-                  <img 
-                    src="https://i.postimg.cc/9Mt8xV5t/Captura-de-Tela-2026-03-23-as-20-04-46.png"
-                    alt="Painel de Produtos Integrado"
-                    className="w-full h-auto object-cover [mask-image:radial-gradient(ellipse_90%_90%_at_50%_50%,#000_50%,transparent_100%)] opacity-80 group-hover:opacity-100 transition-opacity duration-1000"
-                  />
-                </div>
-                
-                {/* Sombra de profundidade escura */}
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+            <div className="relative group">
+              <div className="relative rounded-2xl overflow-hidden border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,1)]">
+                <img 
+                  src="https://i.postimg.cc/9Mt8xV5t/Captura-de-Tela-2026-03-23-as-20-04-46.png"
+                  alt="Painel de Produtos Integrado"
+                  className="w-full h-auto object-cover [mask-image:radial-gradient(ellipse_95%_95%_at_50%_50%,#000_60%,transparent_100%)] opacity-85 group-hover:opacity-100 transition-opacity duration-1000"
+                />
               </div>
+              
+              {/* Sombra de profundidade escura */}
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black to-transparent pointer-events-none" />
             </div>
           </motion.div>
+
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover="hover"
+            whileTap={{ scale: 0.95 }}
+            onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+            className="btn-primary px-10 py-5 text-[15px] sm:text-base font-bold flex items-center justify-center gap-2 group"
+          >
+            Ver Produtos
+            <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+              <ArrowRight className="w-5 h-5" strokeWidth={3} />
+            </motion.div>
+          </motion.button>
         </div>
       </section>
 
