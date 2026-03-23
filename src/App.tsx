@@ -84,11 +84,72 @@ export default function App() {
         </div>
       </nav>
 
-      {/* ─── HERO — Video Background ──────────────────────────── */}
-      {/* ─── HERO — Vídeo fullscreen + texto bottom-left ──────── */}
-      <section className="relative w-full overflow-hidden" style={{ height: "92vh", minHeight: "520px", maxHeight: "900px" }}>
+      {/* ─── HERO ─────────────────────────────────────────────── */}
 
-        {/* VÍDEO FULLSCREEN — cobre toda a section */}
+      {/* ── MOBILE: texto + card de vídeo empilhados ─────────── */}
+      <section className="lg:hidden bg-[#04050D] pt-24 pb-6 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-6"
+        >
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md glass-pill text-[11px] font-semibold text-gray-300 tracking-wider mb-5 border border-white/15">
+            <Users className="w-3.5 h-3.5 text-[#4354FF]" />
+            Para uso pessoal ou revenda
+          </div>
+          {/* Headline */}
+          <h1 className="text-[28px] font-semibold tracking-tight leading-[1.15] mb-3 text-white">
+            A 1ª Rede Social de<br />
+            Importadores &amp; Empreendedores 💙
+          </h1>
+          {/* CTAs */}
+          <div className="flex flex-col gap-3 mb-6">
+            <button className="btn-primary py-4 text-[15px] w-full">
+              Começar teste grátis
+            </button>
+            <button className="btn-secondary py-4 text-[15px] w-full">
+              Saiba mais
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Card de vídeo bonito */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="relative w-full"
+        >
+          {/* Container com bordas arredondadas e glow */}
+          <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_40px_rgba(67,84,255,0.2)]">
+            <iframe
+              src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
+              className="absolute inset-0 w-full h-full border-0"
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+              allowFullScreen
+            />
+            {/* Fade nas bordas laterais para integrar com o fundo */}
+            <div className="absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#04050D] to-transparent z-10 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#04050D] to-transparent z-10 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-[#04050D] to-transparent z-10 pointer-events-none" />
+          </div>
+        </motion.div>
+
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-5">
+          <div className="w-1.5 h-1.5 rounded-full bg-white" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+        </div>
+      </section>
+
+      {/* ── DESKTOP: vídeo fullscreen + texto bottom-left ─────── */}
+      <section className="hidden lg:block relative w-full overflow-hidden" style={{ height: "92vh", minHeight: "560px", maxHeight: "900px" }}>
+
+        {/* VÍDEO FULLSCREEN */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <iframe
             src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
@@ -104,48 +165,37 @@ export default function App() {
           />
         </div>
 
-        {/* ── OVERLAYS — apenas bordas, centro livre ────────── */}
-        {/* Topo escuro (cobertura da nav) */}
+        {/* OVERLAYS — apenas bordas, centro livre */}
         <div className="absolute top-0 left-0 right-0 h-40 z-10 bg-gradient-to-b from-[#04050D] via-[#04050D]/60 to-transparent pointer-events-none" />
-        {/* Baixo — escurece para o texto e faz fade para a próxima seção */}
         <div className="absolute bottom-0 left-0 right-0 h-2/3 z-10 bg-gradient-to-t from-[#04050D] via-[#04050D]/70 to-transparent pointer-events-none" />
-        {/* Esquerda — ajuda leitura do texto */}
         <div className="absolute inset-y-0 left-0 w-1/2 z-10 bg-gradient-to-r from-[#04050D]/80 via-[#04050D]/20 to-transparent pointer-events-none" />
-        {/* Direita — fade sutil */}
         <div className="absolute inset-y-0 right-0 w-1/4 z-10 bg-gradient-to-l from-[#04050D]/50 to-transparent pointer-events-none" />
 
-        {/* ── CONTEÚDO — canto inferior esquerdo ──────────── */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 max-w-[1400px] mx-auto px-4 md:px-8 pb-16 md:pb-20">
+        {/* CONTEÚDO — canto inferior esquerdo */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 max-w-[1400px] mx-auto px-8 pb-20">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
             className="max-w-lg"
           >
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md glass-pill text-[11px] font-semibold text-gray-300 tracking-wider mb-5 border border-white/15 backdrop-blur-sm">
               <Users className="w-3.5 h-3.5 text-[#4354FF]" />
               Para uso pessoal ou revenda
             </div>
-
-            {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.10] mb-3 text-white drop-shadow-lg">
+            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.10] mb-3 text-white drop-shadow-lg">
               A 1ª Rede Social de<br />
               Importadores &amp; Empreendedores 💙
             </h1>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button className="btn-primary px-7 py-4 text-[15px] w-full sm:w-auto">
+            <div className="flex flex-row gap-3">
+              <button className="btn-primary px-7 py-4 text-[15px]">
                 Começar teste grátis
               </button>
-              <button className="btn-secondary px-7 py-4 text-[15px] w-full sm:w-auto">
+              <button className="btn-secondary px-7 py-4 text-[15px]">
                 Saiba mais
               </button>
             </div>
           </motion.div>
-
-          {/* Dots */}
           <div className="flex gap-2 mt-10">
             <div className="w-2 h-2 rounded-full bg-white" />
             <div className="w-2 h-2 rounded-full bg-white/30" />
