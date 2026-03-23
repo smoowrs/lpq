@@ -381,23 +381,34 @@ export default function App() {
             </motion.button>
           </motion.div>
 
-          {/* Visual (Direita) */}
+          {/* Visual (Direita - iPad Mockup) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="w-full md:w-1/2 flex justify-center items-center z-10"
           >
             <motion.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative"
+              className="relative w-full max-w-[550px]"
             >
-              <img 
-                src="https://i.postimg.cc/nLX3tB8r/ani.png"
-                alt="Painel de Produtos"
-                className="w-full max-w-[500px] object-contain drop-shadow-[0_0_80px_rgba(88,46,245,0.2)]"
-              />
+              {/* Moldura do iPad */}
+              <div className="relative p-1.5 md:p-2 bg-[#0a0a0a] rounded-[1.5rem] md:rounded-[2.5rem] border-[6px] md:border-[10px] border-[#161616] shadow-[0_40px_100px_rgba(0,0,0,0.6),0_0_50px_rgba(88,46,245,0.15)] overflow-hidden">
+                {/* Tela */}
+                <div className="relative aspect-[4/3] w-full bg-[#050505] rounded-[0.8rem] md:rounded-[1.8rem] overflow-hidden">
+                   <img 
+                     src="https://i.postimg.cc/kXk4cdnQ/Captura-de-Tela-2026-03-23-as-19-28-18.png"
+                     alt="Painel de Produtos Connect Academy"
+                     className="w-full h-full object-cover"
+                   />
+                   {/* Brilho da tela */}
+                   <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Detalhes de profundidade extra */}
+              <div className="absolute -inset-4 bg-[#582ef5]/5 blur-[80px] -z-10 rounded-full" />
             </motion.div>
           </motion.div>
         </div>
