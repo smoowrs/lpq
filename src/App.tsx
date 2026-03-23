@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { 
   Package, Sparkles, Users, ShieldCheck, 
   ArrowRight, PlayCircle, Menu, CheckCircle2,
-  Clock, MapPin
+  Clock, MapPin, Globe
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -39,41 +39,62 @@ export default function App() {
 
       {/* ─── NAV (novo design) ─────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] flex items-center justify-between">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] flex items-center justify-between relative">
           
-          <img
-            src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
-            alt="Asas de Importação"
-            className="h-6 md:h-8 object-contain"
-            referrerPolicy="no-referrer"
-          />
+          {/* Lado esquerdo: Desktop = Logo, Mobile = Idioma */}
+          <div className="flex-[0.5] sm:flex-1 flex items-center justify-start lg:hidden">
+            {/* Mobile Idioma Toggle (Quadrado) */}
+            <button className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-300 hover:text-white hover:bg-white/10 transition-colors">
+              <Globe className="w-4 h-4" />
+            </button>
+          </div>
 
-          <div className="hidden lg:flex items-center gap-8 text-[15px] font-medium text-gray-400">
+          <div className="hidden lg:flex flex-1 items-center justify-start">
+            <img
+              src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
+              alt="Asas de Importação"
+              className="h-6 md:h-8 object-contain"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+
+          {/* Centro: Desktop = Links, Mobile = Logo */}
+          <div className="hidden lg:flex flex-[2] items-center justify-center gap-8 text-[15px] font-medium text-gray-400">
             <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
             <a href="#rastreio" className="hover:text-white transition-colors">Rastreio</a>
             <a href="#comunidade" className="hover:text-white transition-colors">Comunidade</a>
           </div>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <button className="text-[15px] font-medium text-gray-300 hover:text-white transition-colors px-4 py-2">
-              Entrar
-            </button>
-            <button className="btn-primary px-5 py-2.5 text-[15px]">
-              Criar conta grátis
-            </button>
+          <div className="lg:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
+            <img
+              src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
+              alt="Asas de Importação"
+              className="h-4 sm:h-5 object-contain"
+              referrerPolicy="no-referrer"
+            />
           </div>
 
-          <div className="lg:hidden flex items-center gap-2">
-            <button className="text-[13px] font-medium text-gray-300 hover:text-white transition-colors px-2 py-1.5">
-              Entrar
-            </button>
-            <button className="btn-primary px-3.5 py-2 text-[13px]">
-              Criar conta
-            </button>
-            <button className="btn-secondary p-2.5 ml-1">
-              <Menu className="w-4 h-4" />
-            </button>
+          {/* Direito: CTAs */}
+          <div className="flex-[2] sm:flex-1 flex items-center justify-end">
+            <div className="hidden lg:flex items-center gap-4">
+              <button className="text-[15px] font-medium text-gray-300 hover:text-white transition-colors px-4 py-2">
+                Entrar
+              </button>
+              <button className="btn-primary px-5 py-2.5 text-[15px]">
+                Criar conta grátis
+              </button>
+            </div>
+
+            <div className="lg:hidden flex items-center gap-1 sm:gap-2">
+              <button className="text-[12px] sm:text-[13px] font-medium text-gray-300 hover:text-white transition-colors px-1 sm:px-2 py-1.5 whitespace-nowrap">
+                Entrar
+              </button>
+              <button className="btn-primary px-3 sm:px-3.5 py-1.5 sm:py-2 text-[12px] sm:text-[13px] whitespace-nowrap">
+                Criar conta
+              </button>
+            </div>
           </div>
+
         </div>
       </nav>
 
