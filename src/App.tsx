@@ -179,6 +179,72 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+      {/* ─── COMUNIDADE ────────────────────────────────────────── */}
+      <section id="comunidade" className="py-24 md:py-32 px-6 relative overflow-hidden">
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#2b34f5]/10 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 md:gap-8 items-center relative z-10">
+          
+          {/* Texto (Esquerda) */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="max-w-xl mx-auto md:mx-0 order-2 md:order-1 text-center md:text-left"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6 backdrop-blur-md">
+              <Users className="w-3.5 h-3.5 text-[#582ef5]" />
+              <span className="text-gray-300">Comunidade</span>
+            </div>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+              A Primeira <br />
+              <span className="text-gradient-ai">Rede Social</span><br />
+              do Importador
+            </h2>
+            
+            <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
+              Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade através de posts e vídeos.
+            </p>
+            
+            <button className="btn-primary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 mx-auto md:mx-0">
+              Testar comunidade
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </motion.div>
+
+          {/* Vídeo / Mockup de Celular (Direita) */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="order-1 md:order-2 flex justify-center md:justify-end"
+          >
+            {/* Wrapper do Celular */}
+            <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[9/19.5] rounded-[3rem] border border-white/10 bg-[#0a0a0a] shadow-[0_0_60px_rgba(88,46,245,0.2)] p-1.5 sm:p-2">
+              {/* Entalhe Superior (Notch/Dynamic Island look) */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-[#0a0a0a] rounded-b-2xl z-20" />
+              
+              {/* Tela / Container do iframe */}
+              <div className="relative w-full h-full rounded-[2.5rem] overflow-hidden bg-black select-none border border-white/5">
+                <iframe 
+                  src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=9e9191df-6ce0-400d-ac0c-09838b001a5e&autoplay=1&loop=1&muted=1&controls=0"
+                  className="absolute inset-0 w-full h-full border-0 pointer-events-none scale-[1.05]"
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+
+              {/* Detalhes laterais do celular (botões) */}
+              <div className="absolute top-24 -left-1 w-1 h-12 bg-white/10 rounded-l-md" />
+              <div className="absolute top-36 -left-1 w-1 h-12 bg-white/10 rounded-l-md" />
+              <div className="absolute top-28 -right-1 w-1 h-16 bg-white/10 rounded-r-md" />
+            </div>
+          </motion.div>
+          
+        </div>
+      </section>
 
       {/* ─── CONNECT AI / IMAGE CAROUSEL ──────────────────────── */}
       <section className="py-24 md:py-32 border-y border-white/5 bg-white/[0.02] overflow-hidden relative">
