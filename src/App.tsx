@@ -85,30 +85,58 @@ export default function App() {
       </nav>
 
       {/* ─── HERO — Video Background ──────────────────────────── */}
-      {/* ─── HERO — Texto + Vídeo visível com fade nas bordas ─── */}
-      <section className="relative w-full bg-[#04050D] pt-28 md:pt-36 pb-0 overflow-hidden">
+      {/* ─── HERO — Vídeo fullscreen + texto bottom-left ──────── */}
+      <section className="relative w-full overflow-hidden" style={{ height: "92vh", minHeight: "520px", maxHeight: "900px" }}>
 
-        {/* Texto central */}
-        <div className="max-w-[900px] mx-auto px-4 md:px-8 text-center pb-10 md:pb-14">
+        {/* VÍDEO FULLSCREEN — cobre toda a section */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <iframe
+            src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            style={{
+              width: "177.78vh",
+              height: "56.25vw",
+              minWidth: "100%",
+              minHeight: "100%",
+            }}
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+
+        {/* ── OVERLAYS — apenas bordas, centro livre ────────── */}
+        {/* Topo escuro (cobertura da nav) */}
+        <div className="absolute top-0 left-0 right-0 h-40 z-10 bg-gradient-to-b from-[#04050D] via-[#04050D]/60 to-transparent pointer-events-none" />
+        {/* Baixo — escurece para o texto e faz fade para a próxima seção */}
+        <div className="absolute bottom-0 left-0 right-0 h-2/3 z-10 bg-gradient-to-t from-[#04050D] via-[#04050D]/70 to-transparent pointer-events-none" />
+        {/* Esquerda — ajuda leitura do texto */}
+        <div className="absolute inset-y-0 left-0 w-1/2 z-10 bg-gradient-to-r from-[#04050D]/80 via-[#04050D]/20 to-transparent pointer-events-none" />
+        {/* Direita — fade sutil */}
+        <div className="absolute inset-y-0 right-0 w-1/4 z-10 bg-gradient-to-l from-[#04050D]/50 to-transparent pointer-events-none" />
+
+        {/* ── CONTEÚDO — canto inferior esquerdo ──────────── */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 max-w-[1400px] mx-auto px-4 md:px-8 pb-16 md:pb-20">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-lg"
           >
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md glass-pill text-[11px] font-semibold text-gray-300 tracking-wider mb-6 border border-white/10">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md glass-pill text-[11px] font-semibold text-gray-300 tracking-wider mb-5 border border-white/15 backdrop-blur-sm">
               <Users className="w-3.5 h-3.5 text-[#4354FF]" />
               Para uso pessoal ou revenda
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.10] mb-8 text-white">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.10] mb-6 text-white drop-shadow-lg">
               A 1ª Rede Social de<br />
-              Importadores e empreendedores
+              Importadores e<br />
+              empreendedores
             </h1>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3">
               <button className="btn-primary px-7 py-4 text-[15px] w-full sm:w-auto">
                 Começar teste grátis
               </button>
@@ -117,40 +145,14 @@ export default function App() {
               </button>
             </div>
           </motion.div>
-        </div>
 
-        {/* Vídeo — visível, integrando com fade só nas bordas */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative w-full max-w-[1100px] mx-auto px-2 md:px-6"
-        >
-          {/* Container do vídeo */}
-          <div className="relative w-full aspect-video rounded-xl md:rounded-2xl overflow-hidden border border-white/10 shadow-[0_0_60px_rgba(67,84,255,0.15)]">
-            <iframe
-              src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
-              className="absolute inset-0 w-full h-full border-0"
-              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-            />
+          {/* Dots */}
+          <div className="flex gap-2 mt-10">
+            <div className="w-2 h-2 rounded-full bg-white" />
+            <div className="w-2 h-2 rounded-full bg-white/30" />
+            <div className="w-2 h-2 rounded-full bg-white/30" />
+            <div className="w-2 h-2 rounded-full bg-white/30" />
           </div>
-
-          {/* Fades de borda — só nas laterais e embaixo, para integrar ao fundo */}
-          {/* Esquerda */}
-          <div className="absolute inset-y-0 left-2 md:left-6 w-8 md:w-16 bg-gradient-to-r from-[#04050D] to-transparent z-10 rounded-l-xl pointer-events-none" />
-          {/* Direita */}
-          <div className="absolute inset-y-0 right-2 md:right-6 w-8 md:w-16 bg-gradient-to-l from-[#04050D] to-transparent z-10 rounded-r-xl pointer-events-none" />
-          {/* Baixo — fade de saída para a próxima seção */}
-          <div className="absolute bottom-0 left-0 right-0 h-20 md:h-32 bg-gradient-to-t from-[#04050D] to-transparent z-10 pointer-events-none" />
-        </motion.div>
-
-        {/* Carousel dots */}
-        <div className="flex justify-center gap-2 py-6 relative z-20">
-          <div className="w-1.5 h-1.5 rounded-full bg-white" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
-          <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
         </div>
       </section>
 
