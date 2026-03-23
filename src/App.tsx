@@ -367,31 +367,26 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* Visual (Dashboard Integrado no Meio) */}
+          {/* Visual (Dashboard Integrado no Meio - Estático e Dark) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.9, rotateY: -15, rotateX: 5 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="w-full max-w-[850px] my-12"
             style={{ perspective: "1500px" }}
           >
-            <motion.div 
-              animate={{ y: [0, -15, 0], rotateY: [-10, -15, -10], rotateX: [5, 2, 5] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              className="relative group"
-            >
-              <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
+            <div className="relative group">
+              <div className="relative rounded-2xl overflow-hidden border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,1)]">
                 <img 
                   src="https://i.postimg.cc/kXk4cdnQ/Captura-de-Tela-2026-03-23-as-19-28-18.png"
                   alt="Painel de Produtos Integrado"
-                  className="w-full h-auto object-cover [mask-image:radial-gradient(ellipse_95%_95%_at_50%_50%,#000_70%,transparent_100%)] opacity-90 group-hover:opacity-100 transition-opacity duration-700"
+                  className="w-full h-auto object-cover [mask-image:radial-gradient(ellipse_90%_90%_at_50%_50%,#000_50%,transparent_100%)] opacity-80 group-hover:opacity-100 transition-opacity duration-1000"
                 />
               </div>
               
-              {/* Glow interativo e aura */}
-              <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#582ef5]/20 to-transparent pointer-events-none" />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-[#582ef5]/5 blur-[120px] -z-10 rounded-full" />
-            </motion.div>
+              {/* Sombra de profundidade escura */}
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+            </div>
           </motion.div>
 
           <motion.button
