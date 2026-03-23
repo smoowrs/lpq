@@ -168,14 +168,22 @@ export default function App() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
           >
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
-              Criar conta grátis
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-secondary w-full sm:w-auto px-8 py-4 text-sm font-medium flex items-center justify-center gap-2 rounded-lg">
-              <PlayCircle className="w-5 h-5" />
-              Ver como funciona
-            </button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              className="btn-primary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2"
+            >
+              Criar conta grátis 🚀
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              className="btn-secondary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg"
+            >
+              Ver como funciona ⚡️
+            </motion.button>
           </motion.div>
         </div>
       </section>
@@ -205,10 +213,14 @@ export default function App() {
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
-              Testar comunidade
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
+            >
+              Testar comunidade 💎
+            </motion.button>
           </motion.div>
 
           {/* Celular Flutuante (Mockup iPhone 16 Pro Frontal - Menor) */}
@@ -249,9 +261,13 @@ export default function App() {
               <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300 uppercase tracking-wider">Aulas passo a passo</span>
             </div>
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-6">
               <span className="text-gradient-ai">Economize ou Lucre</span>
             </h2>
+            <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed">
+              Do zero até a chegada dos seus produtos<br />
+              na porta da sua casa ou da sua loja.
+            </p>
           </motion.div>
 
           {/* Carrossel de Aulas */}
@@ -297,15 +313,16 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col items-center text-center"
+            className="flex justify-center"
           >
-            <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed mb-8">
-              Do zero até a chegada dos seus produtos na porta da sua casa ou da sua loja.
-            </p>
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2">
-              Aprender grátis
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2"
+            >
+              Aprender grátis 📚
+            </motion.button>
           </motion.div>
           
         </div>
@@ -352,10 +369,14 @@ export default function App() {
                Uma inteligência artificial que te ajuda a encontrar os melhores produtos, preços e a declarar evitando taxas abusivas.
              </p>
 
-             <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold w-fit mx-auto flex items-center justify-center gap-2">
-               Testar Minerador
-               <ArrowRight className="w-4 h-4" />
-             </button>
+             <motion.button
+               whileHover={{ scale: 1.05 }}
+               whileTap={{ scale: 0.95 }}
+               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+               className="btn-primary px-8 py-4 text-sm font-bold w-fit mx-auto flex items-center justify-center gap-2"
+             >
+               Testar Minerador 🤖
+             </motion.button>
           </motion.div>
           
         </div>
@@ -395,10 +416,14 @@ export default function App() {
                 </li>
               ))}
             </ul>
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
-              Testar Connect AI
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
+            >
+              Testar Connect AI ✨
+            </motion.button>
           </motion.div>
         </div>
 
@@ -499,10 +524,14 @@ export default function App() {
                 </li>
               ))}
             </ul>
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
-              Testar rastreio grátis
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
+            >
+              Testar rastreio grátis 📦
+            </motion.button>
           </motion.div>
         </div>
       </section>
