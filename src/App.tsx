@@ -100,9 +100,9 @@ export default function App() {
             Para uso pessoal ou revenda
           </div>
           {/* Headline */}
-          <h1 className="text-[28px] font-semibold tracking-tight leading-[1.15] mb-3 text-white">
-            A 1ª Rede Social de<br />
-            Importadores &amp; Empreendedores 💙
+          <h1 className="font-semibold tracking-tight leading-[1.2] mb-3 text-white">
+            <span className="text-[28px] block">A 1ª Rede Social de</span>
+            <span className="text-[18px] block text-gray-200">Importadores &amp; Empreendedores 💙</span>
           </h1>
           {/* CTAs */}
           <div className="flex flex-col gap-3 mb-6">
@@ -183,9 +183,9 @@ export default function App() {
               <Users className="w-3.5 h-3.5 text-[#4354FF]" />
               Para uso pessoal ou revenda
             </div>
-            <h1 className="text-4xl md:text-5xl font-semibold tracking-tight leading-[1.10] mb-3 text-white drop-shadow-lg">
-              A 1ª Rede Social de<br />
-              Importadores &amp; Empreendedores 💙
+            <h1 className="font-semibold tracking-tight leading-[1.2] mb-3 text-white drop-shadow-lg">
+              <span className="text-4xl md:text-5xl block">A 1ª Rede Social de</span>
+              <span className="text-xl md:text-2xl block text-gray-200">Importadores &amp; Empreendedores 💙</span>
             </h1>
             <div className="flex flex-row gap-3">
               <button className="btn-primary px-7 py-4 text-[15px]">
