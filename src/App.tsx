@@ -80,10 +80,8 @@ export default function App() {
       {/* ─── HERO ─────────────────────────────────────────────── */}
       <section className="pt-20 pb-20 px-6 relative overflow-hidden border-b border-white/5 min-h-[85vh] flex flex-col items-center justify-start">
         
-        {/* Grid Background & Glowing Orbs */}
+        {/* Grid Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/20 rounded-full blur-[120px] pointer-events-none z-0" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#2b34f5]/20 rounded-full blur-[100px] pointer-events-none z-0" />
         
         <div className="max-w-5xl mx-auto flex flex-col items-center text-center relative z-10 w-full mt-2">
           <motion.div
