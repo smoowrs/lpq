@@ -129,10 +129,9 @@ export default function App() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.10] mb-6 text-white drop-shadow-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight leading-[1.10] mb-3 text-white drop-shadow-lg">
               A 1ª Rede Social de<br />
-              Importadores e<br />
-              empreendedores
+              Importadores &amp; Empreendedores 💙
             </h1>
 
             {/* CTAs */}
