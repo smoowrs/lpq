@@ -180,51 +180,51 @@ export default function App() {
         </div>
       </section>
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
-      <section id="comunidade" className="py-24 md:py-32 px-6 relative overflow-hidden">
+      {/* ─── COMUNIDADE ────────────────────────────────────────── */}
+      <section id="comunidade" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden">
         <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#2b34f5]/10 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 md:gap-8 items-center relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10">
           
           {/* Texto (Esquerda) */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="max-w-xl mx-auto md:mx-0 order-2 md:order-1 text-center md:text-left"
+            className="w-full md:w-1/2 relative z-20 text-left md:pr-10 pb-16 md:pb-0"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6 backdrop-blur-md">
               <Users className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300">Comunidade</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
               A Primeira <br />
               <span className="text-gradient-ai">Rede Social</span><br />
               do Importador
             </h2>
             
-            <p className="text-lg text-gray-400 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
-              Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade através de posts e vídeos.
+            <p className="text-[15px] sm:text-base md:text-lg text-gray-400 mb-8 leading-relaxed w-[65%] md:w-full">
+              Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary w-full sm:w-auto px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 mx-auto md:mx-0">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary w-[fit-content] px-8 py-4 text-sm font-bold flex items-center justify-center">
               Testar comunidade
-              <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
 
-          {/* Vídeo / Mockup (Direita) */}
+          {/* Celular Flutuante (Direita / Cortado no mobile) */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="order-1 md:order-2 flex justify-center md:justify-end"
+            className="absolute -right-6 md:right-auto bottom-[-60px] md:bottom-auto md:relative w-[50%] md:w-1/2 flex justify-end z-10"
           >
-            <div className="relative w-full max-w-[360px] aspect-[9/16] mx-auto md:mr-0 rounded-3xl overflow-hidden drop-shadow-2xl shadow-[0_0_60px_rgba(88,46,245,0.15)]">
+            <div className="relative w-full max-w-[360px] aspect-[9/18] md:aspect-[9/16] rounded-tl-3xl md:rounded-3xl overflow-hidden drop-shadow-2xl shadow-[-20px_0_60px_rgba(88,46,245,0.15)] md:shadow-[0_0_60px_rgba(88,46,245,0.15)]">
               <iframe 
                 src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=9e9191df-6ce0-400d-ac0c-09838b001a5e&autoplay=1&loop=1&muted=1&controls=0"
-                className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                className="absolute inset-0 w-full h-[105%] md:h-full border-0 pointer-events-none"
                 allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
                 allowFullScreen
               />
