@@ -174,7 +174,7 @@ export default function App() {
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
               className="btn-primary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2"
             >
-              Criar conta grátis 🚀
+              Criar conta grátis ⚡
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -182,7 +182,7 @@ export default function App() {
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
               className="btn-secondary px-8 py-4 text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg"
             >
-              Ver como funciona ⚡️
+              Ver como funciona 📽️
             </motion.button>
           </motion.div>
         </div>
@@ -219,7 +219,7 @@ export default function App() {
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
               className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
             >
-              Testar comunidade 💎
+              Testar comunidade 🤝
             </motion.button>
           </motion.div>
 
@@ -321,7 +321,7 @@ export default function App() {
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
               className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2"
             >
-              Aprender grátis 📚
+              Aprender grátis 📈
             </motion.button>
           </motion.div>
           
@@ -375,7 +375,7 @@ export default function App() {
                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
                className="btn-primary px-8 py-4 text-sm font-bold w-fit mx-auto flex items-center justify-center gap-2"
              >
-               Testar Minerador 🤖
+               Testar Minerador 💎
              </motion.button>
           </motion.div>
           
@@ -422,7 +422,7 @@ export default function App() {
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
               className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
             >
-              Testar Connect AI ✨
+              Testar Connect AI 🪄
             </motion.button>
           </motion.div>
         </div>
@@ -530,7 +530,7 @@ export default function App() {
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
               className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2"
             >
-              Testar rastreio grátis 📦
+              Testar rastreio grátis ✅
             </motion.button>
           </motion.div>
         </div>
@@ -555,7 +555,7 @@ export default function App() {
             onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
             className="btn-primary px-10 py-5 text-lg font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_0_40px_rgba(88,46,245,0.4)]"
           >
-            Quero me inscrever agora 🚀
+            Quero me inscrever agora ⚡
           </motion.button>
         </div>
       </section>
