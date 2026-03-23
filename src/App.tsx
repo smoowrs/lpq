@@ -242,7 +242,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 md:mb-16 flex flex-col items-end text-right"
+            className="mb-12 md:mb-16 flex flex-col items-center text-center"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
@@ -256,13 +256,13 @@ export default function App() {
             </p>
           </motion.div>
 
-          {/* Carrossel de Aulas */}
-          <div className="relative group">
-            {/* Sombeamento de borda para scroll */}
-            <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#04050D] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#04050D] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+          {/* Carrossel de Aulas (Loop Automático) */}
+          <div className="relative group overflow-hidden -mx-6 px-6">
+            {/* Sombeamento de borda (Desfoque Bonito) */}
+            <div className="absolute inset-y-0 left-0 w-24 md:w-64 bg-gradient-to-r from-[#04050D] via-[#04050D]/80 to-transparent z-20 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-24 md:w-64 bg-gradient-to-l from-[#04050D] via-[#04050D]/80 to-transparent z-20 pointer-events-none" />
             
-            <div className="flex gap-4 md:gap-6 overflow-x-auto pb-8 pt-2 no-scrollbar snap-x snap-mandatory scroll-smooth">
+            <div className="flex gap-4 md:gap-6 animate-marquee py-4 hover:[animation-play-state:paused] cursor-grab active:cursor-grabbing">
               {[
                 { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", title: "Primeiros Passos" },
                 { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", title: "Endereço" },
@@ -270,14 +270,17 @@ export default function App() {
                 { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", title: "Compras" },
                 { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", title: "Envios" },
                 { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", title: "Rastreio" }
-              ].map((aula, idx) => (
-                <motion.div
+              ].concat([
+                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", title: "Primeiros Passos" },
+                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", title: "Endereço" },
+                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", title: "Recarga" },
+                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", title: "Compras" },
+                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", title: "Envios" },
+                { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", title: "Rastreio" }
+              ]).map((aula, idx) => (
+                <div
                   key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.1 }}
-                  viewport={{ once: true }}
-                  className="min-w-[165px] md:min-w-[280px] aspect-[9/16] rounded-2xl md:rounded-[2rem] overflow-hidden relative group/card snap-start shadow-xl border border-white/5 bg-white/[0.02]"
+                  className="min-w-[165px] md:min-w-[280px] aspect-[9/16] rounded-2xl md:rounded-[2rem] overflow-hidden relative group/card shadow-xl border border-white/5 bg-white/[0.02]"
                 >
                   <img src={aula.img} alt={aula.title} className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover/card:opacity-60 transition-opacity duration-500" />
@@ -290,7 +293,7 @@ export default function App() {
                      </span>
                      <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{aula.title}</h4>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
