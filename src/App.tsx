@@ -210,20 +210,35 @@ export default function App() {
             </button>
           </motion.div>
 
-          {/* Celular Flutuante (Direita / Cortado no mobile) */}
+          {/* Celular Flutuante (Mockup iPhone 16 Pro Frontal) */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="absolute -right-8 md:right-auto bottom-[-60px] md:bottom-auto md:relative w-[70%] sm:w-[50%] md:w-1/2 flex justify-end z-10"
+            className="absolute -right-8 sm:-right-4 md:right-auto bottom-[-80px] md:bottom-auto md:relative w-[75%] sm:w-[60%] md:w-1/2 flex justify-end z-10"
           >
-            <div className="relative w-full max-w-[360px] aspect-[9/18] md:aspect-[9/16] rounded-tl-[2.5rem] md:rounded-3xl overflow-hidden drop-shadow-2xl shadow-[-30px_0_60px_rgba(0,0,0,0.5)] md:shadow-[0_0_60px_rgba(88,46,245,0.15)]">
-              <iframe 
-                src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=9e9191df-6ce0-400d-ac0c-09838b001a5e&autoplay=1&loop=1&muted=1&controls=0"
-                className="absolute inset-0 w-full h-[105%] md:h-full border-0 pointer-events-none"
-                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
+            {/* O Container do celular com perspectiva inclinado e um glow atrás */}
+            <div className="relative z-10 drop-shadow-2xl">
+              <div 
+                className="relative w-full max-w-[340px] md:max-w-[380px] aspect-[9/19.5] rounded-[2.5rem] md:rounded-[3.5rem] p-1.5 md:p-2.5 bg-[#121213] border border-white/10 shadow-[0_0_80px_rgba(88,46,245,0.15)] flex flex-col"
+                style={{ transform: "perspective(1200px) rotateY(-12deg) rotate(-4deg)" }}
+              >
+                {/* Entalhe Superior (Dynamic Island) */}
+                <div className="absolute top-4 md:top-6 left-1/2 -translate-x-1/2 w-[30%] h-5 md:h-6 bg-black rounded-full z-20 flex items-center justify-end px-2 border border-white/5 shadow-inner">
+                  <div className="w-1.5 h-1.5 bg-blue-500/20 rounded-full mr-1" />
+                  <div className="w-2.5 h-2.5 bg-[#0a0a0a] rounded-full border border-white/10" />
+                </div>
+                
+                {/* Tela Real (Onde entra o iFrame) */}
+                <div className="relative w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-black select-none pointer-events-auto border border-white/5">
+                  <iframe 
+                    src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=d100c2e0-4b2d-453a-9f3a-543788c0f071&autoplay=1&loop=1&muted=1&controls=0"
+                    className="absolute inset-0 w-full h-full border-0 scale-[1.03] pointer-events-none origin-center"
+                    allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
             </div>
           </motion.div>
           
