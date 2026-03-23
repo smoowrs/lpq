@@ -35,7 +35,7 @@ export default function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-black text-[#F5F5F7] selection:bg-white/20">
+    <div className="min-h-screen bg-black text-[#F5F5F7] selection:bg-white/20 overflow-x-hidden">
 
       {/* ─── NAV (novo design) ─────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
@@ -205,8 +205,9 @@ export default function App() {
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary w-[fit-content] px-8 py-4 text-sm font-bold flex items-center justify-center">
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2">
               Testar comunidade
+              <ArrowRight className="w-4 h-4" />
             </button>
           </motion.div>
 
@@ -215,7 +216,7 @@ export default function App() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="absolute -right-4 md:right-auto bottom-[10px] md:bottom-auto md:relative w-[55%] sm:w-[45%] md:w-1/2 flex justify-end z-20"
+            className="absolute right-0 md:right-auto bottom-[10px] md:bottom-auto md:relative w-[50%] sm:w-[45%] md:w-1/2 flex justify-end z-20"
           >
             {/* O Container do celular como imagem transparente já exportada */}
             <motion.div 
@@ -242,31 +243,24 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 md:mb-16 flex flex-col items-center text-center"
+            className="mb-10 flex flex-col items-center text-center"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300 uppercase tracking-wider">Aulas passo a passo</span>
             </div>
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]">
               <span className="text-gradient-ai">Economize ou Lucre</span>
             </h2>
-            <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed mb-8">
-              Do zero até a chegada dos seus produtos na porta da sua casa ou da sua loja.
-            </p>
-            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2">
-              Aprender grátis
-              <ArrowRight className="w-4 h-4" />
-            </button>
           </motion.div>
 
           {/* Carrossel de Aulas */}
-          <div className="relative group">
+          <div className="relative group mb-12">
             {/* Sombeamento de borda para scroll */}
             <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#04050D] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#04050D] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
             
-            <div className="flex gap-4 md:gap-6 overflow-x-auto pb-8 pt-2 no-scrollbar snap-x snap-mandatory scroll-smooth">
+            <div className="flex gap-4 md:gap-6 overflow-x-auto pb-4 pt-2 no-scrollbar snap-x snap-mandatory scroll-smooth">
               {[
                 { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", title: "Primeiros Passos" },
                 { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", title: "Endereço" },
@@ -298,6 +292,21 @@ export default function App() {
               ))}
             </div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center text-center"
+          >
+            <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed mb-8">
+              Do zero até a chegada dos seus produtos na porta da sua casa ou da sua loja.
+            </p>
+            <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2">
+              Aprender grátis
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </motion.div>
           
         </div>
       </section>
