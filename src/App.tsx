@@ -101,13 +101,26 @@ export default function App() {
             </h1>
           </motion.div>
 
-          {/* Video */}
+          {/* Video + Ambilight */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative w-full max-w-4xl mx-auto mb-10"
           >
+            {/* Ambilight blobs — 4 cantos, ciclando cores independentemente */}
+            <div className="absolute -inset-6 z-0 pointer-events-none">
+              {/* Top-left */}
+              <div className="ambilight-tl absolute top-0 left-0 w-3/5 h-3/5 blur-[60px] opacity-80 rounded-full" />
+              {/* Top-right */}
+              <div className="ambilight-tr absolute top-0 right-0 w-3/5 h-3/5 blur-[60px] opacity-80 rounded-full" />
+              {/* Bottom-left */}
+              <div className="ambilight-bl absolute bottom-0 left-0 w-3/5 h-3/5 blur-[60px] opacity-80 rounded-full" />
+              {/* Bottom-right */}
+              <div className="ambilight-br absolute bottom-0 right-0 w-3/5 h-3/5 blur-[60px] opacity-80 rounded-full" />
+            </div>
+
+            {/* Video card */}
             <div className="relative z-10 w-full md:w-[90%] mx-auto bg-[#0a0a0a] rounded-2xl md:rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(88,46,245,0.2)] overflow-hidden p-1 md:p-2">
               <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
                 <iframe 

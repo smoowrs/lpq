@@ -85,3 +85,41 @@ body {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* ── Ambilight ─────────────────────────────────────────────── */
+@keyframes ambilight-tl {
+  0%   { background: radial-gradient(ellipse, rgba(88,46,245,0.85) 0%, transparent 70%); }
+  20%  { background: radial-gradient(ellipse, rgba(43,52,245,0.85) 0%, transparent 70%); }
+  40%  { background: radial-gradient(ellipse, rgba(0,180,255,0.75) 0%, transparent 70%); }
+  60%  { background: radial-gradient(ellipse, rgba(120,0,255,0.80) 0%, transparent 70%); }
+  80%  { background: radial-gradient(ellipse, rgba(60,100,245,0.80) 0%, transparent 70%); }
+  100% { background: radial-gradient(ellipse, rgba(88,46,245,0.85) 0%, transparent 70%); }
+}
+
+@keyframes ambilight-tr {
+  0%   { background: radial-gradient(ellipse, rgba(0,140,255,0.80) 0%, transparent 70%); }
+  25%  { background: radial-gradient(ellipse, rgba(180,40,255,0.75) 0%, transparent 70%); }
+  50%  { background: radial-gradient(ellipse, rgba(88,46,245,0.85) 0%, transparent 70%); }
+  75%  { background: radial-gradient(ellipse, rgba(0,200,220,0.70) 0%, transparent 70%); }
+  100% { background: radial-gradient(ellipse, rgba(0,140,255,0.80) 0%, transparent 70%); }
+}
+
+@keyframes ambilight-bl {
+  0%   { background: radial-gradient(ellipse, rgba(43,52,245,0.80) 0%, transparent 70%); }
+  30%  { background: radial-gradient(ellipse, rgba(0,200,220,0.70) 0%, transparent 70%); }
+  60%  { background: radial-gradient(ellipse, rgba(88,46,245,0.85) 0%, transparent 70%); }
+  90%  { background: radial-gradient(ellipse, rgba(30,80,255,0.80) 0%, transparent 70%); }
+  100% { background: radial-gradient(ellipse, rgba(43,52,245,0.80) 0%, transparent 70%); }
+}
+
+@keyframes ambilight-br {
+  0%   { background: radial-gradient(ellipse, rgba(120,0,255,0.75) 0%, transparent 70%); }
+  33%  { background: radial-gradient(ellipse, rgba(88,46,245,0.85) 0%, transparent 70%); }
+  66%  { background: radial-gradient(ellipse, rgba(0,140,255,0.80) 0%, transparent 70%); }
+  100% { background: radial-gradient(ellipse, rgba(120,0,255,0.75) 0%, transparent 70%); }
+}
+
+.ambilight-tl { animation: ambilight-tl 6s ease-in-out infinite; }
+.ambilight-tr { animation: ambilight-tr 7s ease-in-out infinite; }
+.ambilight-bl { animation: ambilight-bl 8s ease-in-out infinite; }
+.ambilight-br { animation: ambilight-br 5s ease-in-out infinite; }
