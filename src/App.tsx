@@ -345,12 +345,12 @@ export default function App() {
       <section id="produtos" className="pt-24 md:pt-32 pb-24 md:pb-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-5xl mx-auto flex flex-col items-start relative z-10">
+        <div className="max-w-5xl mx-auto flex flex-col items-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-left"
+            className="text-center flex flex-col items-center"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <Package className="w-3.5 h-3.5 text-[#582ef5]" />
@@ -362,13 +362,13 @@ export default function App() {
               <span className="text-gradient-ai">produtos e preços</span>
             </h2>
             
-            <p className="text-sm md:text-lg text-gray-400 mb-2 leading-relaxed max-w-2xl">
+            <p className="text-sm md:text-lg text-gray-400 mb-2 leading-relaxed max-w-2xl text-center">
               Tenha acesso grátis a um painel cheio<br />
               de produtos incriveis.
             </p>
           </motion.div>
 
-          {/* Visual (Dashboard Integrado no Meio - Alinhado à Esquerda) */}
+          {/* Visual (Dashboard Integrado no Meio - Centralizado) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, rotateY: -10, rotateX: 5 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -397,11 +397,11 @@ export default function App() {
             whileHover="hover"
             whileTap={{ scale: 0.95 }}
             onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-            className="btn-primary px-10 py-5 text-[15px] sm:text-base font-bold flex items-center justify-center gap-2 group"
+            className="btn-primary w-full max-w-[850px] py-6 text-[15px] sm:text-lg font-bold flex items-center justify-center gap-3 group mx-auto rounded-[1.2rem]"
           >
             Ver Produtos
-            <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-              <ArrowRight className="w-5 h-5" strokeWidth={3} />
+            <motion.div variants={{ initial: { x: 0 }, hover: { x: 8 } }}>
+              <ArrowRight className="w-6 h-6" strokeWidth={3} />
             </motion.div>
           </motion.button>
         </div>
