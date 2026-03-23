@@ -249,7 +249,7 @@ export default function App() {
               <span className="text-gray-300 uppercase tracking-wider">Aulas passo a passo</span>
             </div>
             <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 leading-[1.1]">
-              Aprenda, <span className="text-gradient-ai">Economizar ou Lucrar</span>
+              <span className="text-gradient-ai">Economize ou Lucre</span>
             </h2>
             <p className="text-gray-400 text-[14px] md:text-base max-w-2xl leading-relaxed">
               Do zero até a chegada dos seus produtos na porta da sua casa ou da sua loja.
