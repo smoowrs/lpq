@@ -537,26 +537,49 @@ export default function App() {
       </section>
 
       {/* ─── CTA ──────────────────────────────────────────────── */}
-      <section className="py-32 px-6 relative overflow-hidden border-t border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#582ef5]/10 to-black pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#2b34f5]/20 rounded-full blur-[150px] pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-[40px] md:text-7xl font-bold tracking-tight mb-6 leading-[1.1]">
-            Pronto para <br className="md:hidden" />
-            <span className="text-gradient-ai">decolar?</span>
-          </h2>
-          <p className="text-sm md:text-base text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
-            Junte-se a milhares de importadores e empreendedores que já estão lucrando ou economizando com a Connect Academy
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-            className="btn-primary px-10 py-5 text-lg font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_0_40px_rgba(88,46,245,0.4)]"
+      <section id="cadastro" className="py-24 md:py-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
+        {/* Efeitos de Fundo */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#582ef5]/50 to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#582ef5]/10 rounded-full blur-[160px] pointer-events-none" />
+        <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[120%] h-[300px] bg-[#2b34f5]/5 rounded-[100%] blur-[100px] pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="glass-card p-10 md:p-16 rounded-[2.5rem] border border-white/10 text-center relative overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
           >
-            Quero me inscrever agora ⚡
-          </motion.button>
+            {/* Brilho interno do cartão */}
+            <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#582ef5]/20 rounded-full blur-3xl" />
+            
+            <h2 className="text-[32px] md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.05]">
+              Registre-se e <br className="hidden md:block" />
+              <span className="text-gradient-ai">GANHE R$660</span> em CUPONS
+            </h2>
+            
+            <p className="text-gray-400 text-sm md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+              Criando sua conta grátis você ganha cupons de desconto para realizar suas primeiras importação
+            </p>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              className="btn-primary px-12 py-5 text-lg md:text-xl font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)]"
+            >
+              Crie sua conta grátis ⚡
+            </motion.button>
+
+            {/* Selo de Confiança / Badges Rápidos */}
+            <div className="mt-10 flex items-center justify-center gap-6 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+               <ShieldCheck className="w-5 h-5" />
+               <span className="text-[10px] uppercase tracking-widest font-bold">Acesso Seguro</span>
+               <div className="w-1 h-1 rounded-full bg-white/20" />
+               <Package className="w-5 h-5" />
+               <span className="text-[10px] uppercase tracking-widest font-bold">Envio Direto</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
