@@ -195,13 +195,13 @@ export default function App() {
               <span className="text-gray-300">Comunidade</span>
             </div>
             
-            <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               A Primeira <br />
               <span className="text-gradient-ai">Rede Social</span><br />
               do Importador
             </h2>
             
-            <p className="text-[15px] sm:text-base md:text-lg text-gray-400 mb-8 leading-relaxed w-[65%] md:w-full">
+            <p className="text-[14px] md:text-base text-gray-400 mb-8 leading-relaxed w-[75%] md:w-full">
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
@@ -242,17 +242,17 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-12 md:mb-16"
+            className="mb-12 md:mb-16 flex flex-col items-end text-right"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300 uppercase tracking-wider">Aulas passo a passo</span>
             </div>
-            <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
-              Aprenda, <span className="text-gradient-ai">Economize e Lucre</span>
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 leading-[1.1]">
+              Aprenda, <span className="text-gradient-ai">Economizar ou Lucrar</span>
             </h2>
-            <p className="text-gray-400 text-base md:text-lg max-w-2xl">
-              Do zero absoluto ao avançado. Módulos completos focados em resultados reais e economia máxima nas suas importações.
+            <p className="text-gray-400 text-[14px] md:text-base max-w-2xl leading-relaxed">
+              Do zero até a chegada dos seus produtos na porta da sua casa ou da sua loja.
             </p>
           </motion.div>
 
@@ -331,11 +331,11 @@ export default function App() {
                 <span>O MINERADOR</span>
              </div>
              
-             <h2 className="text-[32px] md:text-5xl font-bold tracking-tight mb-6">
+             <h2 className="text-[28px] md:text-4xl font-bold tracking-tight mb-6">
                <span className="text-white">O Assistente</span> <span className="text-gradient-ai">com IA</span>
              </h2>
 
-             <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+             <p className="text-sm md:text-base text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
                Uma inteligência artificial que te ajuda a encontrar os melhores produtos, preços e a declarar evitando taxas abusivas.
              </p>
           </motion.div>
@@ -360,11 +360,11 @@ export default function App() {
               <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300">Connect AI</span>
             </div>
-            <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               Crie imagens que <br />
               <span className="text-gradient-ai">vendem mais.</span>
             </h2>
-            <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+            <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed">
               Com o uso da Connect AI você transforma fotos simples de fornecedores em imagens que realmente geram interesse e um visual incrível na sua loja.
             </p>
             <ul className="space-y-4 mb-10">
@@ -463,11 +463,11 @@ export default function App() {
               <Package className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300">Logística Inteligente</span>
             </div>
-            <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               Rastreio em <br />
               <span className="text-gradient-ai">Tempo Real.</span>
             </h2>
-            <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+            <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed">
               Nosso sistema se conecta diretamente com as transportadoras internacionais e Correios para te dar atualizações precisas e automáticas.
             </p>
             <ul className="space-y-4 mb-10">
