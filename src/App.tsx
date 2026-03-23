@@ -1,0 +1,335 @@
+import { motion } from 'motion/react';
+import { 
+  Package, Sparkles, Users, ShieldCheck, 
+  ArrowRight, PlayCircle, Menu, CheckCircle2,
+  Clock, MapPin, Search, Bot, MessageSquare
+} from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+export default function App() {
+  const [trackingStep, setTrackingStep] = useState(0);
+
+  // Simulate tracking animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTrackingStep((prev) => (prev + 1) % 4);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Carousel Images (Simulating Connect AI generated images)
+  const carouselImages = [
+    "https://picsum.photos/seed/sneaker/400/400",
+    "https://picsum.photos/seed/watch/400/400",
+    "https://picsum.photos/seed/drone/400/400",
+    "https://picsum.photos/seed/headphones/400/400",
+    "https://picsum.photos/seed/camera/400/400",
+    "https://picsum.photos/seed/bag/400/400",
+    "https://picsum.photos/seed/glasses/400/400",
+    "https://picsum.photos/seed/tech/400/400",
+  ];
+
+  const trackingStages = [
+    { title: "Postado na China", time: "09:41 AM", icon: <Package className="w-4 h-4" /> },
+    { title: "Chegou no Brasil", time: "14:20 PM", icon: <MapPin className="w-4 h-4" /> },
+    { title: "Fiscalização Concluída", time: "10:15 AM", icon: <ShieldCheck className="w-4 h-4" /> },
+    { title: "Saiu para Entrega", time: "08:30 AM", icon: <CheckCircle2 className="w-4 h-4" /> },
+  ];
+
+  return (
+    <div className="min-h-screen bg-black text-[#F5F5F7] selection:bg-white/20">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between relative">
+          
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400 w-1/3">
+            <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
+            <a href="#rastreio" className="hover:text-white transition-colors">Rastreio</a>
+            <a href="#comunidade" className="hover:text-white transition-colors">Comunidade</a>
+          </div>
+
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <img src="https://i.postimg.cc/t4CHMJzj/brancalogo.png" alt="Asas de Importação" className="h-5 md:h-7 object-contain" referrerPolicy="no-referrer" />
+          </div>
+
+          <div className="hidden md:flex items-center justify-end gap-4 w-1/3 ml-auto">
+            <button className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
+              Entrar
+            </button>
+            <button className="bg-gradient-to-r from-[#582ef5] to-[#2b34f5] text-white px-5 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition-colors shadow-[0_0_15px_rgba(88,46,245,0.3)]">
+              Criar conta grátis
+            </button>
+          </div>
+
+          <div className="md:hidden flex items-center gap-2 ml-auto relative z-10">
+            <button className="text-[11px] font-medium text-gray-300 hover:text-white transition-colors">
+              Entrar
+            </button>
+            <button className="bg-gradient-to-r from-[#582ef5] to-[#2b34f5] text-white px-2.5 py-1 rounded-full text-[11px] font-semibold hover:opacity-90 transition-colors shadow-[0_0_10px_rgba(88,46,245,0.3)] whitespace-nowrap">
+              Criar conta
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-20 pb-20 px-6 relative overflow-hidden border-b border-white/5 min-h-[85vh] flex flex-col items-center justify-start">
+        {/* Subtle Grid Background & Glowing Orbs */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/20 rounded-full blur-[120px] pointer-events-none z-0" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-[#2b34f5]/20 rounded-full blur-[100px] pointer-events-none z-0" />
+        
+        <div className="max-w-5xl mx-auto flex flex-col items-center text-center relative z-10 w-full mt-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-medium mb-5 backdrop-blur-md shadow-[0_0_20px_rgba(88,46,245,0.15)]">
+              <Sparkles className="w-3 h-3 text-[#582ef5]" />
+              <span className="text-gray-200">A revolução da importação com IA</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
+              A 1ª Rede Social <br />
+              <span className="text-gradient-ai">do importador</span>
+            </h1>
+          </motion.div>
+
+          {/* Video Section between Title and Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative w-full max-w-4xl mx-auto mb-10"
+          >
+            <div className="relative z-10 w-full md:w-[90%] mx-auto bg-[#0a0a0a] rounded-2xl md:rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(88,46,245,0.2)] overflow-hidden p-1 md:p-2 glass-card">
+              <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
+                <iframe 
+                  src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b" 
+                  className="absolute top-0 left-0 w-full h-full border-0"
+                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" 
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <p className="text-xs md:text-sm text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+              Crie sua conta grátis e acesse a aulas, rastreio em tempo real, IA para geração de imagens, o minerador uma ia que te ajuda com sua declarações evitando taxas abusivas
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
+          >
+            <button className="w-full sm:w-auto bg-gradient-to-r from-[#582ef5] to-[#2b34f5] text-white px-8 py-4 rounded-full text-sm font-bold hover:opacity-90 transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(88,46,245,0.3)]">
+              Criar conta grátis
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <button className="w-full sm:w-auto px-8 py-4 rounded-full text-sm font-medium text-white border border-white/20 hover:bg-white/10 transition-colors flex items-center justify-center gap-2 backdrop-blur-md glass-card">
+              <PlayCircle className="w-5 h-5" />
+              Ver como funciona
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Infinite Carousel Section */}
+      <section className="py-24 md:py-32 border-y border-white/5 bg-white/[0.02] overflow-hidden relative">
+        <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 mb-16 relative z-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-2xl"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6 backdrop-blur-md">
+              <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
+              <span className="text-gray-300">Connect AI</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+              Crie imagens que <br />
+              <span className="text-gradient-ai">vendem mais.</span>
+            </h2>
+            <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+              Com o uso da Connect AI você transforma fotos simples de fornecedores em imagens que realmente geram interesse e um visual incrível na sua loja.
+            </p>
+            <ul className="space-y-4 mb-10">
+              {['Imagens em 4K', 'Menos de 30s', 'Alta Conversão'].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-gray-300">
+                  <div className="w-6 h-6 rounded-full bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/30 shrink-0">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#582ef5]" />
+                  </div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <button className="bg-gradient-to-r from-[#582ef5] to-[#2b34f5] text-white px-8 py-4 rounded-full text-sm font-bold transition-all hover:scale-105 shadow-[0_0_20px_rgba(88,46,245,0.4)]">
+              Testar Connect AI
+            </button>
+          </motion.div>
+        </div>
+
+        <div className="flex gap-6 animate-marquee">
+          {[...carouselImages, ...carouselImages].map((img, index) => (
+            <div key={index} className="flex-shrink-0 w-48 md:w-64 aspect-square rounded-2xl overflow-hidden border border-white/10 relative group">
+              <img src={img} alt={`Product ${index}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                <span className="text-sm font-medium flex items-center gap-1">
+                  <Sparkles className="w-4 h-4 text-[#582ef5]" /> Connect AI
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Interactive Tracking Section */}
+      <section id="rastreio" className="py-32 px-6 relative overflow-hidden">
+        <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-[#2b34f5]/10 rounded-full blur-[150px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="order-2 md:order-1"
+          >
+            <div className="glass-card rounded-3xl p-8 relative overflow-hidden shadow-[0_0_40px_rgba(88,46,245,0.1)]">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#582ef5]/20 rounded-full blur-3xl" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2b34f5]/10 rounded-full blur-3xl" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-xl font-semibold text-white">Status do Pedido</h3>
+                    <p className="text-sm text-gray-400 mt-1">Código: BR987654321CN</p>
+                  </div>
+                  <div className="px-4 py-1.5 bg-[#582ef5]/20 text-[#582ef5] rounded-full text-xs font-semibold border border-[#582ef5]/30 backdrop-blur-md">
+                    Em trânsito
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  {trackingStages.map((stage, index) => {
+                    const isActive = index <= trackingStep;
+                    const isCurrent = index === trackingStep;
+                    
+                    return (
+                      <div key={index} className="flex gap-4 relative">
+                        {/* Line connector */}
+                        {index < trackingStages.length - 1 && (
+                          <div className={`absolute left-[15px] top-8 bottom-[-24px] w-[2px] ${isActive ? 'bg-gradient-to-b from-[#582ef5] to-[#2b34f5]' : 'bg-white/10'}`} />
+                        )}
+                        
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 relative z-10 transition-all duration-500 ${
+                          isActive ? 'bg-[#582ef5] text-white shadow-[0_0_15px_rgba(88,46,245,0.5)]' : 'bg-white/5 text-gray-500 border border-white/10'
+                        }`}>
+                          {stage.icon}
+                        </div>
+                        
+                        <div className={`pt-1 transition-opacity duration-500 ${isActive ? 'opacity-100' : 'opacity-40'}`}>
+                          <p className={`font-medium ${isCurrent ? 'text-white' : 'text-gray-300'}`}>{stage.title}</p>
+                          <p className="text-xs text-gray-500 flex items-center gap-1 mt-1">
+                            <Clock className="w-3 h-3" /> {stage.time}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="order-1 md:order-2"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium mb-6 backdrop-blur-md">
+              <Package className="w-3.5 h-3.5 text-[#582ef5]" />
+              <span className="text-gray-300">Logística Inteligente</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+              Rastreio em <br />
+              <span className="text-gradient-ai">Tempo Real.</span>
+            </h2>
+            <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+              Nosso sistema se conecta diretamente com as transportadoras internacionais e Correios para te dar atualizações precisas e automáticas.
+            </p>
+            <ul className="space-y-4 mb-10">
+              {['Notificações push a cada movimentação', 'Previsão de entrega com IA', 'Alerta automático de taxas'].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-gray-300">
+                  <div className="w-6 h-6 rounded-full bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/30">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#582ef5]" />
+                  </div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <button className="bg-gradient-to-r from-[#582ef5] to-[#2b34f5] text-white px-8 py-4 rounded-full text-sm font-bold transition-all hover:scale-105 shadow-[0_0_20px_rgba(88,46,245,0.4)]">
+              Testar rastreio grátis
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 px-6 relative overflow-hidden border-t border-white/5">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#582ef5]/10 to-black pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#2b34f5]/20 rounded-full blur-[150px] pointer-events-none" />
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+            Pronto para <span className="text-gradient-ai">decolar?</span>
+          </h2>
+          <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+            Junte-se a milhares de importadores que já estão lucrando com o Asas de Importação.
+          </p>
+          <button className="bg-white text-black px-10 py-5 rounded-full text-lg font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2 mx-auto shadow-[0_0_40px_rgba(255,255,255,0.2)]">
+            Criar conta grátis agora
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 py-12 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
+          <div className="flex items-center justify-center">
+            <img src="https://i.postimg.cc/DZcqskjG/IMG_3713_3.png" alt="Drone Connect Academy" className="h-8 object-contain" referrerPolicy="no-referrer" />
+          </div>
+          <p className="text-sm text-gray-500 text-center">
+            © 2026 Connect Academy LTDA Todos os direitos reservados - CNPJ:{' '}
+            <a 
+              href="https://cnpj.biz/44292841000195" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="underline hover:text-gray-300 transition-colors"
+            >
+              44.292.841/0001-95
+            </a>
+          </p>
+          <div className="flex gap-6 text-sm text-gray-500">
+            <a href="#" className="hover:text-white transition-colors">Termos</a>
+            <a href="#" className="hover:text-white transition-colors">Privacidade</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
