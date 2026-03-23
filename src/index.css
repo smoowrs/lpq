@@ -123,3 +123,12 @@ body {
 .ambilight-tr { animation: ambilight-tr 7s ease-in-out infinite; }
 .ambilight-bl { animation: ambilight-bl 8s ease-in-out infinite; }
 .ambilight-br { animation: ambilight-br 5s ease-in-out infinite; }
+
+/* ── Utilities ─────────────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

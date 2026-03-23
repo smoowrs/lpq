@@ -234,6 +234,70 @@ export default function App() {
         </div>
       </section>
 
+      {/* ─── AULAS PASSO A PASSO ────────────────────────────────── */}
+      <section id="aulas" className="py-20 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-[#04050D]">
+        <div className="max-w-7xl mx-auto relative z-10">
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-12 md:mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+              <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
+              <span className="text-gray-300 uppercase tracking-wider">Aulas passo a passo</span>
+            </div>
+            <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">
+              Aprenda, <span className="text-gradient-ai">Economize e Lucre</span>
+            </h2>
+            <p className="text-gray-400 text-base md:text-lg max-w-2xl">
+              Do zero absoluto ao avançado. Módulos completos focados em resultados reais e economia máxima nas suas importações.
+            </p>
+          </motion.div>
+
+          {/* Carrossel de Aulas */}
+          <div className="relative group">
+            {/* Sombeamento de borda para scroll */}
+            <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#04050D] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#04050D] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+            
+            <div className="flex gap-4 md:gap-6 overflow-x-auto pb-8 pt-2 no-scrollbar snap-x snap-mandatory scroll-smooth">
+              {[
+                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", title: "Primeiros Passos" },
+                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", title: "Endereço" },
+                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", title: "Recarga" },
+                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", title: "Compras" },
+                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", title: "Envios" },
+                { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", title: "Rastreio" }
+              ].map((aula, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className="min-w-[240px] md:min-w-[320px] aspect-[16/10] md:aspect-[5/7] rounded-2xl md:rounded-3xl overflow-hidden relative group/card snap-start shadow-xl border border-white/5 bg-white/[0.02]"
+                >
+                  <img src={aula.img} alt={aula.title} className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover/card:opacity-60 transition-opacity duration-500" />
+                  
+                  {/* Overlay Info */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-4 group-hover/card:translate-y-0 opacity-0 group-hover/card:opacity-100 transition-all duration-500">
+                     <span className="text-[10px] md:text-sm font-bold text-[#582ef5] uppercase tracking-widest mb-1.5 flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-[#582ef5] animate-pulse" />
+                        Aula Disponível
+                     </span>
+                     <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{aula.title}</h4>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
       {/* ─── O MINERADOR ────────────────────────────────────────── */}
       <section className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-black to-[#050505] border-t border-white/5">
         <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-[#582ef5]/5 rounded-full blur-[100px] pointer-events-none" />
