@@ -44,8 +44,8 @@ export default function App() {
           {/* Lado esquerdo: Desktop = Logo, Mobile = Idioma */}
           <div className="flex-[0.5] sm:flex-1 flex items-center justify-start lg:hidden">
             {/* Mobile Idioma Toggle (Quadrado) */}
-            <button className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-gray-300 hover:text-white hover:bg-white/10 transition-colors">
-              <Globe className="w-4 h-4" />
+            <button className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-[14px] hover:bg-white/10 transition-colors">
+              🇧🇷
             </button>
           </div>
 
@@ -69,7 +69,7 @@ export default function App() {
             <img
               src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
               alt="Asas de Importação"
-              className="h-4 sm:h-5 object-contain"
+              className="h-5 sm:h-6 object-contain"
               referrerPolicy="no-referrer"
             />
           </div>
@@ -85,11 +85,11 @@ export default function App() {
               </button>
             </div>
 
-            <div className="lg:hidden flex items-center gap-1 sm:gap-2">
-              <button className="text-[12px] sm:text-[13px] font-medium text-gray-300 hover:text-white transition-colors px-1 sm:px-2 py-1.5 whitespace-nowrap">
+            <div className="lg:hidden flex items-center gap-1 sm:gap-1.5">
+              <button className="text-[11px] sm:text-[12px] font-medium text-gray-300 hover:text-white transition-colors px-1 sm:px-1.5 py-1 whitespace-nowrap">
                 Entrar
               </button>
-              <button className="btn-primary px-3 sm:px-3.5 py-1.5 sm:py-2 text-[12px] sm:text-[13px] whitespace-nowrap">
+              <button className="btn-primary px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-[12px] whitespace-nowrap">
                 Criar conta
               </button>
             </div>
