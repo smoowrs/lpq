@@ -581,67 +581,50 @@ export default function App() {
         
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4 relative z-10">
           
-          {/* Esquerda: Visual (Dashboard) */}
+          {/* Esquerda: Visual de Cards Espalhados (Scattered Stack) */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 order-2 md:order-1"
-            style={{ perspective: "1500px" }}
+            className="w-full md:w-1/2 order-2 md:order-1 relative h-[500px] md:h-[700px] flex items-center justify-center perspective-[2500px]"
           >
-            {/* Esquerda: Grid 3x3 Cinematográfico (Agora em Produtos) */}
-            {/* Esquerda: Pilha de Cards 3D (Produtos - Estilo Connect AI) */}
-            <div className="relative h-[450px] md:h-[650px] flex items-center justify-center -ml-12 md:-ml-72 lg:-ml-96 perspective-[2000px]">
-              {[
-                "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp",
-                "https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp",
-                "https://i.postimg.cc/C1b4bq9m/connect_ai_1774346157539.webp",
-                "https://i.postimg.cc/fWjKLYcN/connect_ai_1774346252722.jpg",
-                "https://i.postimg.cc/yd0T0Z2L/connect_ai_1774346417447.webp",
-                "https://i.postimg.cc/yxByjNH4/connect_ai_1774346485902.jpg",
-                "https://i.postimg.cc/Y03fswr6/connect_ai_1774346610865.jpg",
-                "https://i.postimg.cc/nrkYPtF3/connect_ai_1774346674187.jpg",
-                "https://i.postimg.cc/PJ4zRkX2/connect_ai_1774346817363.jpg"
-              ].map((img, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: -200, rotateX: 0, rotateY: 0 }}
-                  whileInView={{ 
-                    opacity: 1, 
-                    x: idx * 30, // Ainda mais compacto para evitar overlap
-                    y: idx * -24,
-                    rotateX: 10,
-                    rotateY: -25
-                  }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.08, duration: 1, type: "spring", stiffness: 45 }}
-                  className="absolute w-36 md:w-52 lg:w-64 aspect-[3/4.5] rounded-xl md:rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-500 hover:z-50 hover:scale-105 group/prod-card bg-[#0d0d0d]"
-                  style={{ 
-                    zIndex: idx,
-                    transformStyle: "preserve-3d"
-                  }}
-                >
-                  {/* Label 00X */}
-                  <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 opacity-60 group-hover/prod-card:opacity-100 transition-opacity">
-                    <span className="text-[8px] font-mono font-bold text-white tracking-tighter bg-black/40 px-1.5 py-0.5 rounded border border-white/5">
-                      {String(idx + 1).padStart(3, '0')}
-                    </span>
-                  </div>
-
-                  <img src={img} alt={`Product card ${idx}`} className="w-full h-full object-cover brightness-90 group-hover/prod-card:brightness-110 transition-all duration-500" />
-                  
-                  {/* Overlay Gradiente */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
-                </motion.div>
-              ))}
-
-              {/* Brilho Atmosférico */}
-              <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[140px] -z-10 translate-x-[-20%]" />
-            </div>
+            {[
+              { img: "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp", x: -140, y: -120, r: -15, s: 0.95, z: 10 },
+              { img: "https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp", x: 120, y: -180, r: 10, s: 0.9, z: 5 },
+              { img: "https://i.postimg.cc/C1b4bq9m/connect_ai_1774346157539.webp", x: -60, y: 180, r: 12, s: 1.1, z: 15 },
+              { img: "https://i.postimg.cc/fWjKLYcN/connect_ai_1774346252722.jpg", x: 200, y: 140, r: -8, s: 0.85, z: 8 },
+              { img: "https://i.postimg.cc/yd0T0Z2L/connect_ai_1774346417447.webp", x: -260, y: 60, r: -22, s: 1.05, z: 12 },
+              { img: "https://i.postimg.cc/yxByjNH4/connect_ai_1774346485902.jpg", x: 240, y: -40, r: 18, s: 1.0, z: 4 },
+              { img: "https://i.postimg.cc/Y03fswr6/connect_ai_1774346610865.jpg", x: -40, y: -240, r: 5, s: 0.8, z: 1 },
+              { img: "https://i.postimg.cc/nrkYPtF3/connect_ai_1774346674187.jpg", x: 100, y: 50, r: -10, s: 1.25, z: 25 },
+              { img: "https://i.postimg.cc/PJ4zRkX2/connect_ai_1774346817363.jpg", x: 0, y: -30, r: 0, s: 1.15, z: 20 },
+            ].map((card, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.5, x: 0, y: 50 }}
+                whileInView={{ 
+                  opacity: 1, 
+                  x: card.x, 
+                  y: card.y, 
+                  rotate: card.r,
+                  scale: card.s
+                }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.06, duration: 1.5, type: "spring", stiffness: 35, damping: 12 }}
+                className="absolute w-44 md:w-56 lg:w-72 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d] transition-all duration-500 hover:z-[100] hover:scale-125"
+                style={{ zIndex: card.z }}
+              >
+                <img src={card.img} className="w-full h-full object-cover" alt="" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 shadow-[inset_0_0_80px_rgba(0,0,0,0.5)]" />
+              </motion.div>
+            ))}
+            
+            {/* Brilho Atmosférico */}
+            <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[150px] -z-10" />
           </motion.div>
 
           {/* Direita: Conteúdo e Informações */}
-          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 md:pl-32 lg:pl-64">
+          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 md:pl-16 lg:pl-20">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -653,7 +636,7 @@ export default function App() {
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
               
-              <h2 className="text-[28px] sm:text-[36px] md:text-5xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.1] text-center md:text-left w-full">
+              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white whitespace-normal md:whitespace-nowrap">
                 Os melhores preços <br className="hidden md:block" />
                 <span className="text-gradient-ai">produtos e qualidade.</span>
               </h2>
