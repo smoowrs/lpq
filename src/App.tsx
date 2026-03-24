@@ -551,19 +551,10 @@ export default function App() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
                   viewport={{ once: true }}
-                  className="min-w-[165px] md:min-w-[280px] aspect-[9/16] rounded-2xl md:rounded-[2rem] overflow-hidden relative group/card snap-start shadow-xl border border-white/5 bg-white/[0.02]"
+                  className="min-w-[110px] md:min-w-[190px] aspect-[9/16] rounded-xl md:rounded-2xl overflow-hidden relative group/card snap-start shadow-xl border border-white/5 bg-white/[0.02]"
                 >
                   <img src={aula.img} alt={aula.title} className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-0 group-hover/card:opacity-60 transition-opacity duration-500" />
-                  
-                  {/* Overlay Info */}
-                  <div className="absolute inset-0 flex flex-col justify-end p-6 translate-y-4 group-hover/card:translate-y-0 opacity-0 group-hover/card:opacity-100 transition-all duration-500">
-                     <span className="text-[10px] md:text-sm font-bold text-[#582ef5] uppercase tracking-widest mb-1.5 flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-[#582ef5] animate-pulse" />
-                        Aula Disponível
-                     </span>
-                     <h4 className="text-lg md:text-xl font-bold text-white leading-tight">{aula.title}</h4>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover/card:opacity-40 transition-opacity duration-500" />
                 </motion.div>
               ))}
             </div>
