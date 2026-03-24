@@ -246,7 +246,7 @@ export default function App() {
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
-                 className="w-full max-w-[260px] md:max-w-[340px] border border-white/5 rounded-[3rem] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
+                 className="w-full max-w-[260px] md:max-w-[340px] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
                />
             </motion.div>
           </motion.div>
