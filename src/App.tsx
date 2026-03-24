@@ -115,7 +115,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20 relative z-10 w-full">
           
           {/* Lado Esquerdo (ou Mobile Top) */}
-          <div className="md:w-[58%] flex flex-col items-center md:items-start text-center md:text-left w-full">
+          <div className="md:w-[52%] flex flex-col items-center md:items-start text-center md:text-left w-full">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -129,7 +129,7 @@ export default function App() {
               
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8 leading-[1.1] flex flex-col items-center md:items-start">
                 <span className="whitespace-nowrap">Economize ou Lucre</span>
-                <span className="text-gradient-ai whitespace-nowrap">Importando da China 💙</span>
+                <span className="text-gradient-ai whitespace-nowrap">Importando da China</span>
               </h1>
 
               {/* Vídeo apenas no MOBILE (Entre Título e Descrição) */}
@@ -185,7 +185,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.9, x: 30 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden md:block relative w-full md:w-[42%] mx-auto"
+            className="hidden md:block relative w-full md:w-[48%] mx-auto"
           >
             <div className="absolute -inset-10 z-0 pointer-events-none">
               <div className="ambilight-tl absolute top-0 left-0 w-3/5 h-3/5 blur-[80px] opacity-80 rounded-full" />
