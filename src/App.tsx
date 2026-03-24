@@ -196,9 +196,25 @@ export default function App() {
         {/* Glow de fundo atmosférico */}
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center relative z-10 gap-16 md:gap-12">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10 gap-16 md:gap-12">
           
-          {/* Texto (Direita) */}
+          {/* Celular (Fica em cima no Mobile, Esquerda no Desktop) */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="w-full md:w-1/2 flex justify-center md:justify-start z-20"
+          >
+            <div className="relative z-10 flex justify-center md:justify-start">
+               <img 
+                 src="https://i.postimg.cc/3RkrkCVn/phones.png"
+                 alt="App Comunidade"
+                 className="w-full max-w-[280px] md:max-w-[480px] object-contain"
+               />
+            </div>
+          </motion.div>
+
+          {/* Texto (Fica embaixo no Mobile, Direita na Desktop) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -230,26 +246,6 @@ export default function App() {
               Testar comunidade
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
             </motion.button>
-          </motion.div>
- 
-          {/* Celular Flutuante (Esquerda) */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="w-full md:w-1/2 flex justify-center md:justify-start z-20"
-          >
-            <motion.div 
-              animate={{ y: [0, -20, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 flex justify-center md:justify-start"
-            >
-               <img 
-                 src="https://i.postimg.cc/3RkrkCVn/phones.png"
-                 alt="App Comunidade"
-                 className="w-full max-w-[280px] md:max-w-[480px] object-contain drop-shadow-[0_0_80px_rgba(88,46,245,0.4)]"
-               />
-            </motion.div>
           </motion.div>
           
         </div>
