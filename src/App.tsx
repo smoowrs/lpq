@@ -419,6 +419,18 @@ export default function App() {
                   <span className="text-gradient-ai">ganhe prêmios</span>
                 </h2>
 
+                <motion.button
+                  whileHover="hover"
+                  initial="initial"
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                  className="btn-primary w-fit px-12 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
+                >
+                  Subir níveis
+                  <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                    <ArrowRight className="w-5 h-5" strokeWidth={3} />
+                  </motion.div>
+                </motion.button>
               </motion.div>
             </div>
 
@@ -492,26 +504,6 @@ export default function App() {
               </div>
             </div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-16 sm:mt-24 flex justify-center relative z-20"
-          >
-            <motion.button
-              whileHover="hover"
-              initial="initial"
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary w-fit px-12 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
-            >
-              Subir níveis
-              <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                <ArrowRight className="w-5 h-5" strokeWidth={3} />
-              </motion.div>
-            </motion.button>
-          </motion.div>
         </div>
       </section>
 
