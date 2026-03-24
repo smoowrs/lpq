@@ -3,7 +3,7 @@ import {
   Package, Sparkles, Users, ShieldCheck, 
   ArrowRight, PlayCircle, Menu, CheckCircle2,
   Clock, MapPin, Globe, Play, Trophy,
-  Crown, Star, Medal
+  Crown, Star, Medal, ChevronDown, Check
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -38,26 +38,22 @@ export default function App() {
   return (
     <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F7] selection:bg-white/20">
 
-      {/* ─── NAV (novo design) ─────────────────────────────────── */}
+      {/* ─── NAV ──────────────────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] lg:grid lg:grid-cols-3 flex items-center justify-between relative">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] grid grid-cols-3 items-center relative">
           
-          {/* Lado esquerdo: Desktop = Links, Mobile = Idioma */}
-          <div className="flex-[0.5] sm:flex-1 flex items-center justify-start lg:hidden">
-            {/* Mobile Idioma Toggle (Quadrado) */}
-            <button className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-[14px] hover:bg-white/10 transition-colors">
-              🇧🇷
-            </button>
-          </div>
-
+          {/* Lado esquerdo: Desktop = Links */}
           <div className="hidden lg:flex items-center justify-start gap-8 text-[15px] font-medium text-gray-400">
             <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
             <a href="#rastreio" className="hover:text-white transition-colors">Rastreio</a>
             <a href="#comunidade" className="hover:text-white transition-colors">Comunidade</a>
           </div>
+          
+          {/* Mobile Placeholder para manter o logo no centro */}
+          <div className="lg:hidden"></div>
 
-          {/* Centro: Logo (Tanto Desktop quanto Mobile) */}
-          <div className="flex-1 lg:flex items-center justify-center pointer-events-none lg:pointer-events-auto">
+          {/* Centro: Logo */}
+          <div className="flex items-center justify-center">
             <img
               src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
               alt="Asas de Importação"
@@ -66,29 +62,48 @@ export default function App() {
             />
           </div>
 
-          {/* Direito: CTAs */}
-          <div className="flex-[2] sm:flex-1 flex items-center justify-end">
-            <div className="hidden lg:flex items-center gap-4">
-              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="text-[15px] font-medium text-gray-300 hover:text-white transition-colors px-4 py-2">
-                Entrar
+          {/* Direito: Idioma e CTAs */}
+          <div className="flex items-center justify-end gap-2 md:gap-4 font-medium">
+            {/* Idioma Selector */}
+            <div className="relative group/lang">
+              <button className="flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all text-sm md:text-base">
+                <span className="text-lg">🇧🇷</span>
+                <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover/lang:text-white transition-colors" />
               </button>
-              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-5 py-2.5 text-[15px]">
-                Criar conta grátis
-              </button>
+              
+              {/* Dropdown Falso (Visual) */}
+              <div className="absolute top-full right-0 mt-2 w-32 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all transform scale-95 group-hover/lang:scale-100 shadow-2xl z-50">
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 transition-colors">
+                  🇺🇸 English
+                </button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 transition-colors text-white">
+                  🇧🇷 Port (BR) <Check className="w-3.5 h-3.5 text-[#582ef5]" />
+                </button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 transition-colors">
+                  🇪🇸 Español
+                </button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 transition-colors">
+                  🇫🇷 Français
+                </button>
+              </div>
             </div>
 
-            <div className="lg:hidden flex items-center gap-1 sm:gap-1.5">
-              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="text-[11px] sm:text-[12px] font-medium text-gray-300 hover:text-white transition-colors px-1 sm:px-1.5 py-1 whitespace-nowrap">
+            <div className="flex items-center gap-1 sm:gap-4">
+              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="text-[11px] sm:text-[14px] md:text-[15px] font-medium text-gray-300 hover:text-white transition-colors px-2 py-2">
                 Entrar
               </button>
-              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-2.5 sm:px-3 py-1.5 text-[11px] sm:text-[12px] whitespace-nowrap">
-                Criar conta
+              <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-3 sm:px-5 py-2 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
+                {/* Texto dinâmico para mobile */}
+                <span className="hidden sm:inline">Criar conta grátis</span>
+                <span className="sm:hidden">Criar conta</span>
               </button>
             </div>
           </div>
-
+          
         </div>
       </nav>
+
+      {/* ─── HERO ─────────────────────────────────────────────── */}
 
       {/* ─── HERO ─────────────────────────────────────────────── */}
       <section className="min-h-screen pt-20 pb-20 px-6 relative overflow-hidden border-b border-white/5 flex items-center justify-center">
