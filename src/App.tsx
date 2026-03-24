@@ -537,7 +537,7 @@ export default function App() {
               <span className="text-gray-300 uppercase tracking-wider">Aulas passo a passo</span>
             </div>
             <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1] mb-6">
-              <span className="text-gradient-ai">Economize ou Lucre</span>
+              <span className="text-gradient-ai">Aprenda passo a passo</span>
             </h2>
             <p className="text-gray-400 text-sm md:text-base max-w-2xl leading-relaxed">
               Do zero até a chegada dos seus produtos<br />
@@ -571,23 +571,6 @@ export default function App() {
             </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex justify-center"
-          >
-            <motion.button
-              whileHover="hover"
-              initial="initial"
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-8 py-4 text-sm font-bold w-fit flex items-center justify-center gap-2 group"
-            >
-              Aprender grátis
-              <PlayCircle className="w-4 h-4" strokeWidth={2.5} />
-            </motion.button>
-          </motion.div>
           
         </div>
       </section>
