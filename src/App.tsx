@@ -196,14 +196,14 @@ export default function App() {
         {/* Glow de fundo atmosférico */}
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center relative z-10 gap-16 md:gap-32">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center relative z-10 gap-16 md:gap-12">
           
           {/* Texto (Direita) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 relative z-20 text-left md:pl-16"
+            className="w-full md:w-1/2 relative z-20 text-left"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold mb-8 backdrop-blur-md uppercase tracking-[0.2em] text-gray-400">
               <Users className="w-3.5 h-3.5 text-[#582ef5]" />
@@ -247,7 +247,7 @@ export default function App() {
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
-                 className="w-full max-w-[280px] md:max-w-[420px] object-contain drop-shadow-[0_0_80px_rgba(88,46,245,0.4)]"
+                 className="w-full max-w-[280px] md:max-w-[480px] object-contain drop-shadow-[0_0_80px_rgba(88,46,245,0.4)]"
                />
             </motion.div>
           </motion.div>
