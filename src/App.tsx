@@ -591,7 +591,7 @@ export default function App() {
           >
             {/* Esquerda: Grid 3x3 Cinematográfico (Agora em Produtos) */}
             {/* Esquerda: Pilha de Cards 3D (Produtos - Estilo Connect AI) */}
-            <div className="relative h-[450px] md:h-[650px] flex items-center justify-center -ml-12 md:-ml-40 lg:-ml-56 perspective-[2000px]">
+            <div className="relative h-[450px] md:h-[650px] flex items-center justify-center -ml-12 md:-ml-72 lg:-ml-96 perspective-[2000px]">
               {[
                 "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp",
                 "https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp",
@@ -608,7 +608,7 @@ export default function App() {
                   initial={{ opacity: 0, x: -200, rotateX: 0, rotateY: 0 }}
                   whileInView={{ 
                     opacity: 1, 
-                    x: idx * 56, // Mais aberto conforme solicitado
+                    x: idx * 30, // Ainda mais compacto para evitar overlap
                     y: idx * -24,
                     rotateX: 10,
                     rotateY: -25
@@ -641,7 +641,7 @@ export default function App() {
           </motion.div>
 
           {/* Direita: Conteúdo e Informações */}
-          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 md:pl-8">
+          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 md:pl-32 lg:pl-64">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -789,39 +789,39 @@ export default function App() {
             viewport={{ once: true }}
             className="order-2 md:order-1"
           >
-            <div className="glass-card rounded-3xl p-8 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10">
+            <div className="glass-card rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 flex flex-col justify-center min-h-[500px] md:min-h-[580px] lg:min-h-[620px]">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#582ef5]/15 rounded-full blur-3xl opacity-50" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2b34f5]/10 rounded-full blur-3xl opacity-30" />
               
               <div className="relative z-10">
-                <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center justify-between mb-12">
                   <div>
-                    <h3 className="text-xl font-semibold text-white">Status do Pedido</h3>
-                    <p className="text-sm text-gray-400 mt-1 uppercase tracking-wider font-medium">Logística Connect</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Status do Pedido</h3>
+                    <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold">LOGÍSTICA CONNECT</p>
                   </div>
-                  <div className="px-4 py-1.5 bg-[#582ef5] text-white rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest shadow-[0_0_15px_rgba(88,46,245,0.4)]">
+                  <div className="px-5 py-2 bg-[#582ef5] text-white rounded-xl text-[10px] md:text-[11px] font-extrabold border border-white/20 uppercase tracking-widest shadow-[0_0_25px_rgba(88,46,245,0.4)] animate-pulse">
                     Em trânsito
                   </div>
                 </div>
 
-                <div className="space-y-6">
+                <div className="space-y-8">
                   {trackingStages.map((stage, index) => {
                     const isActive = index <= trackingStep;
                     const isCurrent = index === trackingStep;
                     return (
-                      <div key={index} className="flex gap-5 relative">
+                      <div key={index} className="flex gap-6 relative">
                         {index < trackingStages.length - 1 && (
-                          <div className={`absolute left-[15px] top-8 bottom-[-24px] w-[1px] ${isActive ? 'bg-[#582ef5]' : 'bg-white/10'}`} />
+                          <div className={`absolute left-[15px] top-10 bottom-[-32px] w-[2px] ${isActive ? 'bg-[#582ef5]' : 'bg-white/10'}`} />
                         )}
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 relative z-10 transition-all duration-700 ${
-                          isActive ? 'bg-[#582ef5] text-white shadow-[0_0_20px_rgba(88,46,245,0.6)]' : 'bg-white/5 text-gray-600 border border-white/5'
+                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 relative z-10 transition-all duration-700 ${
+                          isActive ? 'bg-[#582ef5] text-white shadow-[0_0_25px_rgba(88,46,245,0.5)]' : 'bg-white/5 text-gray-600 border border-white/10'
                         }`}>
                           {stage.icon}
                         </div>
-                        <div className={`pt-0.5 transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-30'}`}>
-                          <p className={`text-[15px] font-bold ${isCurrent ? 'text-white' : 'text-gray-300'}`}>{stage.title}</p>
-                          <p className="text-[12px] text-gray-500 flex items-center gap-1.5 mt-0.5 font-medium">
-                            <Clock className="w-3 h-3" /> {stage.time}
+                        <div className={`pt-1 transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-30'}`}>
+                          <p className={`text-[15px] md:text-[17px] font-bold ${isCurrent ? 'text-white' : 'text-gray-300'}`}>{stage.title}</p>
+                          <p className="text-[12px] text-gray-500 flex items-center gap-1.5 mt-1 font-medium italic opacity-80">
+                            <Clock className="w-3.5 h-3.5" /> {stage.time}
                           </p>
                         </div>
                       </div>
@@ -892,9 +892,9 @@ export default function App() {
             {/* Brilho interno do cartão */}
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#582ef5]/20 rounded-full blur-3xl" />
             
-            <h2 className="text-[22px] sm:text-[32px] md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.2]">
-              REGISTRE-SE e GANHE <br />
-              <span className="text-gradient-ai">R$660 em CUPONS</span>
+            <h2 className="text-[28px] sm:text-[42px] md:text-6xl lg:text-7xl font-bold tracking-tighter mb-10 leading-[1.05]">
+              <span className="block whitespace-nowrap">REGISTRE-SE e GANHE</span>
+              <span className="text-gradient-ai block whitespace-nowrap">R$660 em CUPONS</span>
             </h2>
             
             <p className="text-gray-400 text-sm md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
