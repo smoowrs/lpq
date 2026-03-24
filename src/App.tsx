@@ -242,9 +242,9 @@ export default function App() {
               <span>COMUNIDADE</span>
             </div>
             
-            <h2 className="text-[38px] md:text-6xl lg:text-[86px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
+            <h2 className="text-[38px] md:text-6xl lg:text-[82px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
               A 1ª Rede Social <br />
-              do Importador 💙
+              <span className="whitespace-nowrap text-inherit">do Importador <span className="text-[0.85em] inline-block align-middle transform translate-y-[-2px]">💙</span></span>
             </h2>
             
             <p className="text-sm md:text-base text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
