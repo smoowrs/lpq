@@ -134,7 +134,7 @@ export default function App() {
               </div>
               
               <p className="text-base md:text-lg text-gray-400 mb-10 max-w-xl leading-relaxed">
-                Crie sua conta grátis e acesse ferramentas, aulas exclusivas, rastreio em tempo real, gerador de imagens profissional e a IA Mineradora, sua inteligência estratégica para otimizar declarações e evitar taxas abusivas, conecte-se a uma comunidade de networking e tenha tudo o que você precisa para importar e economizar ou lucrar com a importação.
+                Crie sua conta gratuita e domine a importação direto da China! Acesse aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador — a IA estratégica desenvolvida para otimizar suas declarações e evitar taxas abusivas. Participe da nossa comunidade de networking e utilize ferramentas de elite para economizar e lucrar com importação.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
