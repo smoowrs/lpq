@@ -431,12 +431,6 @@ export default function App() {
           </motion.div>
 
           <div className="glass-card rounded-[2.5rem] p-6 md:p-12 border border-white/10 relative overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
-            {/* Título Interno do Card */}
-            <div className="flex items-center gap-3 mb-10 text-left">
-              <Trophy className="w-5 h-5 text-yellow-500" />
-              <h3 className="text-lg font-bold text-white uppercase tracking-widest">Top Formandos</h3>
-            </div>
-
             {/* Pódio de Ranking */}
             <div className="flex flex-row items-end justify-center gap-4 md:gap-12 mb-12 py-6 scale-90 md:scale-100">
               
