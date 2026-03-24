@@ -233,7 +233,7 @@ export default function App() {
             </h2>
             
             <p className="text-sm md:text-base text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
-              Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
+              Sua nova rede social, uma comunidade exclusiva para importadores e empreendedores, troque informações estratégicas, compartilhe seus resultados e evolua ao lado de quem fala a sua língua.
             </p>
             
             <motion.button
