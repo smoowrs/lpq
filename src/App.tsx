@@ -203,9 +203,9 @@ export default function App() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 flex justify-center md:justify-start z-20"
+            className="w-full md:w-1/2 flex justify-center md:justify-end z-20"
           >
-            <div className="relative z-10 flex justify-center md:justify-start">
+            <div className="relative z-10 flex justify-center md:justify-end">
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
