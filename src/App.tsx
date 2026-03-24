@@ -175,7 +175,10 @@ export default function App() {
         </div>
       </section>
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
-      <section id="comunidade" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden">
+      <section id="comunidade" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden bg-gradient-to-br from-[#582ef5] to-[#4c25e6]">
+        {/* Glow suave para profundidade no degradê */}
+        <div className="absolute inset-0 bg-white/5 pointer-events-none" />
+        
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10">
           
           {/* Texto (Esquerda) */}
@@ -185,31 +188,31 @@ export default function App() {
             viewport={{ once: true }}
             className="w-full md:w-1/2 relative z-20 text-left md:pr-10 pb-16 md:pb-0"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
-              <Users className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300 uppercase tracking-wider">Comunidade</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 border border-white/20 text-xs font-semibold mb-6 backdrop-blur-md">
+              <Users className="w-3.5 h-3.5 text-white" />
+              <span className="text-white uppercase tracking-wider">Comunidade</span>
             </div>
             
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1] text-white">
               A Primeira <br />
-              <span className="text-gradient-ai">Rede Social</span><br />
+              Rede Social<br />
               do Importador
             </h2>
             
-            <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed max-w-2xl">
+            <p className="text-sm md:text-base text-white/90 mb-8 leading-relaxed max-w-2xl">
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
             <motion.button
-              whileHover="hover"
+              whileHover={{ scale: 1.02, backgroundColor: '#f8f9fa' }}
               initial="initial"
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
+              className="bg-white text-[#582ef5] w-fit px-8 py-4.5 rounded-2xl text-[15px] font-bold flex items-center justify-center gap-2 group shadow-[0_20px_40px_rgba(0,0,0,0.15)] transition-all duration-300"
             >
               Testar comunidade
-              <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                <ArrowRight className="w-4 h-4" strokeWidth={3} />
+              <motion.div animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
+                <ArrowRight className="w-5 h-5 text-[#582ef5]" strokeWidth={3} />
               </motion.div>
             </motion.button>
           </motion.div>
@@ -230,7 +233,7 @@ export default function App() {
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
-                 className="w-full max-w-[260px] md:max-w-[340px] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
+                 className="w-full max-w-[260px] md:max-w-[340px] shadow-2xl rounded-[3rem] object-contain drop-shadow-[0_0_60px_rgba(255,255,255,0.2)]"
                />
             </motion.div>
           </motion.div>
