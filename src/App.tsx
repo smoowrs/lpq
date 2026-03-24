@@ -438,7 +438,7 @@ export default function App() {
             </div>
 
             {/* Pódio de Ranking */}
-            <div className="flex flex-row items-end justify-center gap-4 md:gap-12 mb-12 py-10 scale-90 md:scale-100">
+            <div className="flex flex-row items-end justify-center gap-4 md:gap-12 mb-12 py-6 scale-90 md:scale-100">
               
               {/* 2º Lugar (Esquerda) */}
               <motion.div
@@ -449,14 +449,14 @@ export default function App() {
                 className="flex flex-col items-center"
               >
                 <div className="relative mb-4">
-                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-white/20 p-1">
-                    <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover" alt="2º Lugar" />
+                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-[#582ef5]/30 p-1">
+                    <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover grayscale opacity-70" alt="2º Lugar" />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#333] border-2 border-white/20 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">2</div>
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#1a1a1a] border-2 border-[#582ef5]/30 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">2</div>
                 </div>
-                <h4 className="font-bold text-sm md:text-lg text-white mb-2">Gabriel</h4>
+                <h4 className="font-bold text-sm md:text-lg text-white mb-2 text-center">Gabriel</h4>
                 <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[10px] md:text-[12px] font-bold text-gray-400 mb-4">620 XP</div>
-                <div className="w-20 md:w-32 h-16 md:h-24 bg-white/5 border border-white/10 rounded-t-xl flex items-center justify-center font-bold text-gray-600 text-lg md:text-2xl">2º</div>
+                <div className="w-20 md:w-32 h-10 md:h-16 bg-white/5 border border-white/10 rounded-t-xl flex items-center justify-center font-bold text-white/10 text-lg md:text-2xl">2º</div>
               </motion.div>
 
               {/* 1º Lugar (Centro - Mais Alto) */}
@@ -465,24 +465,24 @@ export default function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center -translate-y-6 md:-translate-y-10"
+                className="flex flex-col items-center -translate-y-4 md:-translate-y-6"
               >
                 <motion.div 
-                  animate={{ y: [-5, 5, -5] }}
+                  animate={{ y: [-3, 3, -3] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                   className="mb-2"
                 >
-                  <Crown className="w-6 h-6 md:w-10 md:h-10 text-yellow-500 fill-yellow-500/20 drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
+                  <Crown className="w-6 h-6 md:w-10 md:h-10 text-[#582ef5] fill-[#582ef5]/20 drop-shadow-[0_0_10px_rgba(88,46,245,0.5)]" />
                 </motion.div>
                 <div className="relative mb-4">
-                  <div className="w-20 h-20 md:w-32 md:h-32 rounded-full border-4 border-yellow-500 p-1 shadow-[0_0_30px_rgba(234,179,8,0.3)]">
+                  <div className="w-20 h-20 md:w-32 md:h-32 rounded-full border-4 border-[#582ef5] p-1 shadow-[0_0_30px_rgba(88,46,245,0.3)]">
                     <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover" alt="1º Lugar" />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-8 h-8 md:w-10 md:h-10 bg-yellow-500 border-2 border-black rounded-full flex items-center justify-center text-xs md:text-sm font-black text-black">1</div>
+                  <div className="absolute -bottom-1 -right-1 w-8 h-8 md:w-10 md:h-10 bg-[#582ef5] border-2 border-black rounded-full flex items-center justify-center text-xs md:text-sm font-black text-white">1</div>
                 </div>
-                <h4 className="font-bold text-base md:text-2xl text-white mb-2">Douglas</h4>
-                <div className="bg-yellow-500/10 border border-yellow-500/20 px-4 py-1.5 rounded-lg text-[10px] md:text-[12px] font-bold text-yellow-500 mb-4 shadow-lg">850 XP</div>
-                <div className="w-24 md:w-36 h-28 md:h-40 bg-yellow-500/10 border border-yellow-500/20 rounded-t-2xl flex items-center justify-center font-bold text-yellow-500/50 text-2xl md:text-4xl shadow-[inset_0_20px_50px_rgba(234,179,8,0.1)]">1º</div>
+                <h4 className="font-bold text-base md:text-2xl text-white mb-2 text-center">Douglas</h4>
+                <div className="bg-[#582ef5]/10 border border-[#582ef5]/20 px-4 py-1.5 rounded-lg text-[10px] md:text-[12px] font-bold text-[#582ef5] mb-4 shadow-lg">850 XP</div>
+                <div className="w-24 md:w-36 h-20 md:h-28 bg-[#582ef5]/10 border border-[#582ef5]/20 rounded-t-2xl flex items-center justify-center font-bold text-[#582ef5]/40 text-2xl md:text-4xl shadow-[inset_0_20px_50px_rgba(88,46,245,0.1)]">1º</div>
               </motion.div>
 
               {/* 3º Lugar (Direita) */}
@@ -494,14 +494,14 @@ export default function App() {
                 className="flex flex-col items-center"
               >
                 <div className="relative mb-4">
-                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-amber-600/40 p-1">
-                    <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover" alt="3º Lugar" />
+                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-[#582ef5]/30 p-1">
+                    <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover grayscale opacity-70" alt="3º Lugar" />
                   </div>
-                  <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#2a1a10] border-2 border-amber-600/40 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-amber-600">3</div>
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#1a1a1a] border-2 border-[#582ef5]/30 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">3</div>
                 </div>
-                <h4 className="font-bold text-sm md:text-lg text-white mb-2">Lucas</h4>
-                <div className="bg-amber-600/10 border border-amber-600/20 px-3 py-1 rounded-lg text-[10px] md:text-[12px] font-bold text-amber-600 mb-4">400 XP</div>
-                <div className="w-20 md:w-32 h-12 md:h-20 bg-amber-600/5 border border-amber-600/10 rounded-t-xl flex items-center justify-center font-bold text-amber-700/40 text-lg md:text-2xl">3º</div>
+                <h4 className="font-bold text-sm md:text-lg text-white mb-2 text-center">Lucas</h4>
+                <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[10px] md:text-[12px] font-bold text-gray-400 mb-4">400 XP</div>
+                <div className="w-20 md:w-32 h-6 md:h-10 bg-white/5 border border-white/10 rounded-t-xl flex items-center justify-center font-bold text-white/5 text-lg md:text-2xl">3º</div>
               </motion.div>
 
             </div>
