@@ -337,65 +337,65 @@ export default function App() {
       <section id="produtos" className="pt-24 md:pt-32 pb-24 md:pb-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-5xl mx-auto flex flex-col items-center relative z-10">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20 relative z-10">
+          
+          {/* Esquerda: Visual (Dashboard) */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="text-center flex flex-col items-center"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
-              <Package className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
-            </div>
-            
-            <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-              Os melhores preços <br />
-              <span className="text-gradient-ai">produtos e qualidade.</span>
-            </h2>
-            
-            <p className="text-sm md:text-lg text-gray-400 mb-2 leading-relaxed max-w-2xl text-center">
-              Tenha acesso grátis a um painel cheio<br />
-              de produtos incriveis.
-            </p>
-          </motion.div>
-
-          {/* Visual (Dashboard Integrado no Meio - Centralizado e Menor) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotateY: -10, rotateX: 5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="w-full max-w-[500px] my-10"
+            className="w-full md:w-1/2 order-2 md:order-1"
             style={{ perspective: "1500px" }}
           >
             <div className="relative group">
-              <div className="relative rounded-2xl overflow-hidden border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,1)]">
+              <div className="relative rounded-2xl overflow-hidden border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,1)] bg-white/5 backdrop-blur-sm">
                 <img 
                   src="https://i.postimg.cc/9Mt8xV5t/Captura-de-Tela-2026-03-23-as-20-04-46.png"
                   alt="Painel de Produtos Integrado"
-                  className="w-full h-auto object-cover [mask-image:radial-gradient(ellipse_95%_95%_at_50%_50%,#000_60%,transparent_100%)] opacity-85 group-hover:opacity-100 transition-opacity duration-1000"
+                  className="w-full h-auto object-cover [mask-image:radial-gradient(ellipse_95%_95%_at_50%_50%,#000_60%,transparent_100%)] opacity-85 group-hover:opacity-100 transition-all duration-1000 scale-100 md:scale-110 lg:scale-125"
                 />
               </div>
-              
-              {/* Sombra de profundidade escura */}
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black to-transparent pointer-events-none" />
             </div>
           </motion.div>
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover="hover"
-            whileTap={{ scale: 0.95 }}
-            onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-            className="btn-primary w-full max-w-[500px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
-          >
-            Criar conta grátis
-            <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-              <ArrowRight className="w-4 h-4" strokeWidth={3} />
+          {/* Direita: Conteúdo e Informações */}
+          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center md:items-start"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+                <Package className="w-3.5 h-3.5 text-[#582ef5]" />
+                <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
+              </div>
+              
+              <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+                Os melhores preços <br />
+                <span className="text-gradient-ai">produtos e qualidade.</span>
+              </h2>
+              
+              <p className="text-sm md:text-lg text-gray-400 mb-10 leading-relaxed max-w-md">
+                Tenha acesso grátis a um painel cheio<br />
+                de produtos incríveis.
+              </p>
+
+              <motion.button
+                whileHover="hover"
+                initial="initial"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
+              >
+                Ver produtos
+                <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                  <ArrowRight className="w-4 h-4" strokeWidth={3} />
+                </motion.div>
+              </motion.button>
             </motion.div>
-          </motion.button>
+          </div>
         </div>
       </section>
 
