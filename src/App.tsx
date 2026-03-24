@@ -430,82 +430,91 @@ export default function App() {
             </h2>
           </motion.div>
 
-          <div className="glass-card rounded-[2.5rem] p-6 md:p-10 border border-white/10 relative overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
-            {/* Top de Ranking */}
-            <div className="space-y-2">
-              {[
-                { name: "Douglas Ferreira", xp: "15.420 XP", lv: "Nível 50", rank: 1, icon: <Crown className="w-5 h-5 text-yellow-500 fill-yellow-500/20" /> },
-                { name: "Juliana Santos", xp: "12.280 XP", lv: "Nível 42", rank: 2, icon: <Medal className="w-5 h-5 text-gray-400 fill-gray-400/20" /> },
-                { name: "Rodrigo Almeida", xp: "9.520 XP", lv: "Nível 35", rank: 3, icon: <Medal className="w-5 h-5 text-amber-600 fill-amber-600/20" /> },
-                { name: "Ana Paula", xp: "7.840 XP", lv: "Nível 28", rank: 4 },
-                { name: "Marcos Vinícius", xp: "6.120 XP", lv: "Nível 21", rank: 5 }
-              ].map((user, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`flex items-center gap-4 p-4 rounded-2xl border ${idx < 3 ? 'bg-white/[0.05] border-white/10 shadow-lg' : 'border-transparent opacity-80'}`}
-                >
-                  {/* Rank Position */}
-                  <div className={`w-8 h-8 flex items-center justify-center font-bold text-sm rounded-full ${user.rank === 1 ? 'bg-yellow-500/10 text-yellow-500' : 'text-gray-500'}`}>
-                    {user.rank}
-                  </div>
-
-                  {/* Avatar */}
-                  <div className="relative">
-                    <img 
-                      src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" 
-                      alt={user.name}
-                      className={`w-12 h-12 rounded-xl object-cover border-2 shadow-2xl ${user.rank === 1 ? 'border-yellow-500/30' : 'border-white/10'}`}
-                    />
-                    {user.icon && (
-                      <div className="absolute -top-2 -right-2 transform rotate-12">
-                        {user.icon}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* User Info */}
-                  <div className="flex-1 text-left">
-                    <h4 className="font-bold text-sm md:text-base text-white">{user.name}</h4>
-                    <div className="flex items-center gap-3 mt-1">
-                       <span className="text-[10px] md:text-xs text-gray-400 font-medium uppercase tracking-widest">{user.lv}</span>
-                       <div className="h-1 flex-1 bg-white/5 rounded-full overflow-hidden max-w-[80px]">
-                          <motion.div 
-                            initial={{ width: 0 }}
-                            whileInView={{ width: idx === 0 ? '90%' : idx === 1 ? '75%' : '60%' }}
-                            transition={{ duration: 1, delay: idx * 0.1 }}
-                            className={`h-full ${idx === 0 ? 'bg-yellow-500' : 'bg-[#582ef5]'}`}
-                          />
-                       </div>
-                    </div>
-                  </div>
-
-                  {/* XP and Badges */}
-                  <div className="text-right flex flex-col items-end">
-                    <span className="font-bold text-xs md:text-sm text-[#582ef5]">{user.xp}</span>
-                    {idx < 3 && (
-                      <div className="flex gap-1 mt-1">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-[10px] text-green-500/60 uppercase font-black uppercase">Active</span>
-                      </div>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
+          <div className="glass-card rounded-[2.5rem] p-6 md:p-12 border border-white/10 relative overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
+            {/* Título Interno do Card */}
+            <div className="flex items-center gap-3 mb-10 text-left">
+              <Trophy className="w-5 h-5 text-yellow-500" />
+              <h3 className="text-lg font-bold text-white uppercase tracking-widest">Top Formandos</h3>
             </div>
 
-            {/* Bottom Info */}
-            <div className="mt-10 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4 text-left">
-                <div className="w-10 h-10 rounded-full bg-[#582ef5]/20 flex items-center justify-center">
-                  <Trophy className="w-5 h-5 text-[#582ef5]" />
+            {/* Pódio de Ranking */}
+            <div className="flex flex-row items-end justify-center gap-4 md:gap-12 mb-12 py-10 scale-90 md:scale-100">
+              
+              {/* 2º Lugar (Esquerda) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center"
+              >
+                <div className="relative mb-4">
+                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-white/20 p-1">
+                    <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover" alt="2º Lugar" />
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#333] border-2 border-white/20 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">2</div>
+                </div>
+                <h4 className="font-bold text-sm md:text-lg text-white mb-2">Gabriel</h4>
+                <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[10px] md:text-[12px] font-bold text-gray-400 mb-4">620 XP</div>
+                <div className="w-20 md:w-32 h-16 md:h-24 bg-white/5 border border-white/10 rounded-t-xl flex items-center justify-center font-bold text-gray-600 text-lg md:text-2xl">2º</div>
+              </motion.div>
+
+              {/* 1º Lugar (Centro - Mais Alto) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center -translate-y-6 md:-translate-y-10"
+              >
+                <motion.div 
+                  animate={{ y: [-5, 5, -5] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="mb-2"
+                >
+                  <Crown className="w-6 h-6 md:w-10 md:h-10 text-yellow-500 fill-yellow-500/20 drop-shadow-[0_0_10px_rgba(234,179,8,0.5)]" />
+                </motion.div>
+                <div className="relative mb-4">
+                  <div className="w-20 h-20 md:w-32 md:h-32 rounded-full border-4 border-yellow-500 p-1 shadow-[0_0_30px_rgba(234,179,8,0.3)]">
+                    <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover" alt="1º Lugar" />
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-8 h-8 md:w-10 md:h-10 bg-yellow-500 border-2 border-black rounded-full flex items-center justify-center text-xs md:text-sm font-black text-black">1</div>
+                </div>
+                <h4 className="font-bold text-base md:text-2xl text-white mb-2">Douglas</h4>
+                <div className="bg-yellow-500/10 border border-yellow-500/20 px-4 py-1.5 rounded-lg text-[10px] md:text-[12px] font-bold text-yellow-500 mb-4 shadow-lg">850 XP</div>
+                <div className="w-24 md:w-36 h-28 md:h-40 bg-yellow-500/10 border border-yellow-500/20 rounded-t-2xl flex items-center justify-center font-bold text-yellow-500/50 text-2xl md:text-4xl shadow-[inset_0_20px_50px_rgba(234,179,8,0.1)]">1º</div>
+              </motion.div>
+
+              {/* 3º Lugar (Direita) */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center"
+              >
+                <div className="relative mb-4">
+                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-amber-600/40 p-1">
+                    <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover" alt="3º Lugar" />
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#2a1a10] border-2 border-amber-600/40 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-amber-600">3</div>
+                </div>
+                <h4 className="font-bold text-sm md:text-lg text-white mb-2">Lucas</h4>
+                <div className="bg-amber-600/10 border border-amber-600/20 px-3 py-1 rounded-lg text-[10px] md:text-[12px] font-bold text-amber-600 mb-4">400 XP</div>
+                <div className="w-20 md:w-32 h-12 md:h-20 bg-amber-600/5 border border-amber-600/10 rounded-t-xl flex items-center justify-center font-bold text-amber-700/40 text-lg md:text-2xl">3º</div>
+              </motion.div>
+
+            </div>
+
+            {/* Bottom Info - Recompensas */}
+            <div className="mt-6 pt-10 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="flex items-center gap-5 text-left">
+                <div className="w-14 h-14 rounded-2xl bg-[#582ef5]/20 flex items-center justify-center shadow-[0_10px_30px_rgba(88,46,245,0.2)]">
+                  <Trophy className="w-7 h-7 text-[#582ef5]" />
                 </div>
                 <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Ganhe Prêmios</p>
-                  <p className="text-sm text-white font-medium">Equipamentos, mentorias e créditos</p>
+                  <p className="text-xs text-gray-500 uppercase tracking-[0.2em] font-black mb-1">Ganhe Prêmios</p>
+                  <p className="text-base md:text-lg text-white font-bold leading-tight">Equipamentos, mentorias e créditos</p>
                 </div>
               </div>
               
@@ -514,11 +523,11 @@ export default function App() {
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary px-8 py-3 text-sm font-bold flex items-center justify-center gap-2 group w-full md:w-auto"
+                className="btn-primary px-10 py-5 text-[15px] font-bold flex items-center justify-center gap-3 group w-full md:w-auto rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
               >
                 Começar agora
                 <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                  <ArrowRight className="w-4 h-4" strokeWidth={3} />
+                  <ArrowRight className="w-5 h-5" strokeWidth={3} />
                 </motion.div>
               </motion.button>
             </div>
