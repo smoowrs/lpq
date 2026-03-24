@@ -284,13 +284,12 @@ export default function App() {
                 <span>O MINERADOR</span>
               </div>
               
-              <h2 className="text-[32px] md:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
-                <span className="text-white">O Assistente</span> <br />
-                <span className="text-gradient-ai">inteligente para importar</span>
+              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
+                O Assistente <br className="hidden md:block" />
+                <span className="text-gradient-ai">inteligente 💬</span>
               </h2>
-
               <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                Nossa IA processa milhares de dados para encontrar os melhores fornecedores, calcular tributos e gerar declarações que evitam taxas abusivas automaticamente.
+                Através de uma base de fábricas confiáveis, nossa IA garante o melhor preço entre diferentes unidades, o sistema automatiza o cálculo de tributos e a emissão de declarações, eliminando definitivamente o risco das taxas abusivas.
               </p>
 
               <motion.button
