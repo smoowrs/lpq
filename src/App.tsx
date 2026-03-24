@@ -621,7 +621,7 @@ export default function App() {
                   className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer"
                 >
                   <div className="w-24 h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center p-2 border border-white/5">
-                    <img src="https://i.postimg.cc/mD83W4Hq/iphone.png" alt="iPhone 17" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+                    <img src="https://i.postimg.cc/qRvhYVzb/iphone-17-pro-finish-select-202509-6-9inch-deepblue-2.webp" alt="iPhone 17" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
                   </div>
                   <div className="flex-1 flex flex-col justify-center">
                     <div className="flex justify-between items-start mb-1">
@@ -629,8 +629,8 @@ export default function App() {
                       <span className="bg-green-500/10 text-green-500 text-[9px] px-1.5 py-0.5 rounded font-bold border border-green-500/20">VERIFICADO</span>
                     </div>
                     <div className="flex items-end gap-2 mb-3">
-                      <span className="text-lg font-black text-white">$1,199.00</span>
-                      <span className="text-[10px] text-gray-500 line-through mb-1">$1,299.00</span>
+                      <span className="text-lg font-black text-white">R$7.600</span>
+                      <span className="text-[10px] text-gray-500 line-through mb-1">R$11.900</span>
                     </div>
                     <button className="w-full py-2 bg-[#582ef5] text-white text-[11px] font-black rounded-lg hover:bg-[#4c25e6] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
                       ACESSAR LINK <ArrowRight className="w-3 h-3" strokeWidth={3} />
