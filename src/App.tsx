@@ -498,9 +498,9 @@ export default function App() {
             </motion.div>
           </div>
 
-          {/* Bottom Info - Recompensas */}
-          <div className="mt-12 pt-12 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 max-w-2xl mx-auto">
-            <div className="flex items-center gap-5 text-left">
+          {/* Bottom Info - Recompensas (Vertical e Centralizado) */}
+          <div className="mt-6 flex flex-col items-center gap-10">
+            <div className="flex items-center gap-5 text-left bg-white/[0.03] border border-white/5 p-4 rounded-2xl">
               <div className="w-14 h-14 rounded-2xl bg-[#582ef5]/20 flex items-center justify-center shadow-[0_10px_30px_rgba(88,46,245,0.2)]">
                 <Trophy className="w-7 h-7 text-[#582ef5]" />
               </div>
@@ -515,11 +515,11 @@ export default function App() {
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-10 py-5 text-[15px] font-bold flex items-center justify-center gap-3 group w-full md:w-auto rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
+              className="btn-primary w-full max-w-[500px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
             >
               Começar agora
               <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                <ArrowRight className="w-5 h-5" strokeWidth={3} />
+                <ArrowRight className="w-4 h-4" strokeWidth={3} />
               </motion.div>
             </motion.button>
           </div>
