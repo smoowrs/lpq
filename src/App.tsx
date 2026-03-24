@@ -413,24 +413,24 @@ export default function App() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[150px] pointer-events-none" />
         
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center mb-16"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
-              <Star className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300 uppercase tracking-wider">Níveis e Recompensas</span>
-            </div>
-            
-            <h2 className="text-3xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
-              Suba de nível e<br />
-              <span className="text-gradient-ai">ganhe prêmios</span>
-            </h2>
-          </motion.div>
-
           <div className="glass-card rounded-[2.5rem] p-6 md:p-12 border border-white/10 relative overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center mb-10"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+                <Star className="w-3.5 h-3.5 text-[#582ef5]" />
+                <span className="text-gray-300 uppercase tracking-wider">Níveis e Recompensas</span>
+              </div>
+              
+              <h2 className="text-2xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-2 leading-[1.1]">
+                Suba de nível e<br />
+                <span className="text-gradient-ai">ganhe prêmios</span>
+              </h2>
+            </motion.div>
+            
             {/* Pódio de Ranking */}
             <div className="flex flex-row items-end justify-center gap-4 md:gap-12 mb-12 py-6 scale-90 md:scale-100">
               
