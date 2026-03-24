@@ -113,7 +113,7 @@ export default function App() {
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
                 A 1ª Rede Social <br />
-                <span className="text-gradient-ai">do importador</span>
+                <span className="text-gradient-ai">do importador 💙</span>
               </h1>
 
               {/* Vídeo apenas no MOBILE (Entre Título e Descrição) */}
