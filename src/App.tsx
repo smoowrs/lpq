@@ -722,62 +722,58 @@ export default function App() {
               </motion.button>
             </motion.div>
 
-            {/* Direita: Pilha de Imagens 3D (Refletindo a imagem de referência) */}
-            <div className="relative h-[500px] md:h-[600px] flex items-center justify-center mt-12 md:mt-24 perspective-[1500px]">
-              {[
-                { img: "https://i.postimg.cc/TwNgxsJ0/076f0c2f-8200-4570-b72a-822c7df16a62.png", id: "001" },
-                { img: "https://i.postimg.cc/Q8mqS415/08446b2c-a24e-46c6-8601-56f1da7ac6df.png", id: "002" },
-                { img: "https://i.postimg.cc/6Wt0rJ2N/0a2ce7ac-acba-43b6-8dc3-aa8cff090ab8.png", id: "003" },
-                { img: "https://i.postimg.cc/Q8mqS41F/2687e321-b162-46e1-89c0-d00081ad55d5.png", id: "004" },
-                { img: "https://i.postimg.cc/cxhcT9wX/63495536-d73c-4923-9bb0-f2f1fbbc0a0e.png", id: "005" },
-                { img: "https://i.postimg.cc/rVMJ1X0y/6d4fba9a-9563-4b8d-ac09-0a8a9eed8971.png", id: "006" }
-              ].map((card, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, x: 200, y: 100, rotateX: 0, rotateY: 0 }}
-                  whileInView={{ 
-                    opacity: 1, 
-                    x: idx * 45, // Staggered X
-                    y: idx * -20, // Staggered Y upward
-                    rotateX: 10,  // Tilted back
-                    rotateY: -25, // Perspective tilt
-                    rotateZ: 0
-                  }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 1, type: "spring", stiffness: 50 }}
-                  className="absolute w-40 md:w-56 lg:w-64 aspect-[3/4.5] rounded-xl md:rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-transform hover:z-50 hover:scale-105 duration-500 group/card-3d bg-[#0d0d0d]"
-                  style={{ 
-                    zIndex: idx,
-                    transformStyle: "preserve-3d",
-                    left: `${idx * 10}%`,
-                    top: `${40 - (idx * 5)}%`
-                  }}
-                >
-                  {/* Label 00X */}
-                  <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 opacity-60 group-hover/card-3d:opacity-100 transition-opacity">
-                    <span className="text-[9px] font-mono font-bold text-white tracking-tighter bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-md border border-white/5">
-                      {card.id}
-                    </span>
-                  </div>
+            {/* Direita: Grid 3x3 Cinematográfico (Connect AI) */}
+            <div className="relative mt-12 md:mt-0 flex items-center justify-center scale-110 md:scale-125">
+              {/* Brilho de Fundo */}
+              <div className="absolute inset-0 bg-[#582ef5]/20 rounded-full blur-[120px] -z-10 animate-pulse" />
+              
+              {/* Container da Grade com "Glow Preto" (Máscara de Gradiente) */}
+              <div className="relative p-2 md:p-4 rounded-[2.5rem] bg-white/[0.02] border border-white/10 backdrop-blur-3xl overflow-hidden [mask-image:radial-gradient(circle_at_center,black_80%,transparent_100%)]">
+                <div className="grid grid-cols-3 gap-1.5 md:gap-3">
+                  {[
+                    "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp",
+                    "https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp",
+                    "https://i.postimg.cc/C1b4bq9m/connect_ai_1774346157539.webp",
+                    "https://i.postimg.cc/fWjKLYcN/connect_ai_1774346252722.jpg",
+                    "https://i.postimg.cc/yd0T0Z2L/connect_ai_1774346417447.webp",
+                    "https://i.postimg.cc/yxByjNH4/connect_ai_1774346485902.jpg",
+                    "https://i.postimg.cc/Y03fswr6/connect_ai_1774346610865.jpg",
+                    "https://i.postimg.cc/nrkYPtF3/connect_ai_1774346674187.jpg",
+                    "https://i.postimg.cc/PJ4zRkX2/connect_ai_1774346817363.jpg"
+                  ].map((img, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, scale: 0.8, rotate: idx % 2 === 0 ? -2 : 2 }}
+                      whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.05, duration: 0.6, type: "spring" }}
+                      whileHover={{ scale: 1.05, zIndex: 10, filter: "brightness(1.2)" }}
+                      className="w-20 sm:w-28 md:w-32 lg:w-40 aspect-square rounded-lg md:rounded-xl overflow-hidden border border-white/10 bg-black/40 group/grid-item shadow-2xl relative"
+                    >
+                      <img src={img} alt={`AI Gen ${idx}`} className="w-full h-full object-cover transition-transform duration-700 group-hover/grid-item:scale-110" />
+                      
+                      {/* Overlay sutil em cada item */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                      
+                      {/* Tag ID discreta */}
+                      <div className="absolute bottom-1 right-1 opacity-0 group-hover/grid-item:opacity-100 transition-opacity">
+                         <span className="text-[6px] md:text-[8px] font-mono text-white/40">GEN_0{idx+1}</span>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
 
-                  <img 
-                    src={card.img} 
-                    alt={`Connect AI ${card.id}`} 
-                    className="w-full h-full object-cover brightness-90 group-hover/card-3d:brightness-110 transition-all duration-500" 
-                  />
-                  
-                  {/* Overlay Gradiente */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
-                  
-                  {/* Detalhe Logo/ID no Hover */}
-                  <div className="absolute bottom-4 left-4 right-4 z-20 opacity-0 group-hover/card-3d:opacity-100 transition-all transform translate-y-2 group-hover/card-3d:translate-y-0">
-                    <div className="flex items-center gap-2">
-                       <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
-                       <span className="text-[10px] font-bold text-white uppercase tracking-widest">Connect AI v4</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                {/* Efeito de Reflexo Glass */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent pointer-events-none" />
+              </div>
+
+              {/* Badges de Status Connect AI envolta do grid */}
+              <div className="absolute -top-4 -right-4 bg-[#582ef5] text-white text-[8px] md:text-[10px] font-black px-2 md:px-3 py-1 rounded-full shadow-[0_0_20px_rgba(88,46,245,0.5)] z-30 animate-bounce">
+                NEW
+              </div>
+              <div className="absolute -bottom-2 -left-2 bg-white/5 backdrop-blur-md border border-white/10 text-white/60 text-[8px] font-mono px-2 py-1 rounded-md z-30">
+                AI ENGINE v5.0
+              </div>
             </div>
 
           </div>
