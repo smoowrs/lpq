@@ -693,35 +693,59 @@ export default function App() {
               </motion.button>
             </motion.div>
 
-            {/* Direita: Pilha de Imagens Criativa */}
-            <div className="relative h-[400px] md:h-[600px] flex items-center justify-center mt-12 md:mt-0">
+            {/* Direita: Pilha de Imagens 3D (Refletindo a imagem de referência) */}
+            <div className="relative h-[500px] md:h-[600px] flex items-center justify-center mt-12 md:mt-24 perspective-[1500px]">
               {[
-                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", rot: "rotate-[6deg]", x: "translate-x-0" },
-                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", rot: "rotate-[12deg]", x: "translate-x-12" },
-                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", rot: "rotate-[18deg]", x: "translate-x-24" },
-                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", rot: "rotate-[24deg]", x: "translate-x-36" },
-                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", rot: "rotate-[30deg]", x: "translate-x-48" }
+                { img: "https://i.postimg.cc/TwNgxsJ0/076f0c2f-8200-4570-b72a-822c7df16a62.png", id: "001" },
+                { img: "https://i.postimg.cc/Q8mqS415/08446b2c-a24e-46c6-8601-56f1da7ac6df.png", id: "002" },
+                { img: "https://i.postimg.cc/6Wt0rJ2N/0a2ce7ac-acba-43b6-8dc3-aa8cff090ab8.png", id: "003" },
+                { img: "https://i.postimg.cc/Q8mqS41F/2687e321-b162-46e1-89c0-d00081ad55d5.png", id: "004" },
+                { img: "https://i.postimg.cc/cxhcT9wX/63495536-d73c-4923-9bb0-f2f1fbbc0a0e.png", id: "005" },
+                { img: "https://i.postimg.cc/rVMJ1X0y/6d4fba9a-9563-4b8d-ac09-0a8a9eed8971.png", id: "006" }
               ].map((card, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: 100, rotate: 0 }}
-                  whileInView={{ opacity: 1, x: 0, rotate: parseInt(card.rot.match(/\d+/)[0]) }}
+                  initial={{ opacity: 0, x: 200, y: 100, rotateX: 0, rotateY: 0 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    x: idx * 45, // Staggered X
+                    y: idx * -20, // Staggered Y upward
+                    rotateX: 10,  // Tilted back
+                    rotateY: -25, // Perspective tilt
+                    rotateZ: 0
+                  }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 0.8, type: "spring" }}
-                  className={`absolute w-32 md:w-48 lg:w-56 aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl transition-transform hover:z-50 hover:scale-110 duration-300 cursor-pointer group/stack-card`}
+                  transition={{ delay: idx * 0.1, duration: 1, type: "spring", stiffness: 50 }}
+                  className="absolute w-40 md:w-56 lg:w-64 aspect-[3/4.5] rounded-xl md:rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-transform hover:z-50 hover:scale-105 duration-500 group/card-3d bg-[#0d0d0d]"
                   style={{ 
-                    left: `${idx * 15}%`,
-                    top: `${idx * 5}%`,
                     zIndex: idx,
+                    transformStyle: "preserve-3d",
+                    left: `${idx * 10}%`,
+                    top: `${40 - (idx * 5)}%`
                   }}
                 >
-                  <img src={card.img} alt={`Connect AI ${idx}`} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/stack-card:opacity-100 transition-opacity flex flex-col justify-end p-4">
-                    <span className="text-[10px] md:text-xs font-bold text-white tracking-widest uppercase mb-1 flex items-center gap-1.5">
-                      <div className="w-1.5 h-1.5 rounded-full bg-[#582ef5] animate-pulse" />
-                      Geração Pro
+                  {/* Label 00X */}
+                  <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 opacity-60 group-hover/card-3d:opacity-100 transition-opacity">
+                    <span className="text-[9px] font-mono font-bold text-white tracking-tighter bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-md border border-white/5">
+                      {card.id}
                     </span>
-                    <span className="text-[10px] md:text-xs text-gray-300">#{idx + 1} Artificial Intelligence</span>
+                  </div>
+
+                  <img 
+                    src={card.img} 
+                    alt={`Connect AI ${card.id}`} 
+                    className="w-full h-full object-cover brightness-90 group-hover/card-3d:brightness-110 transition-all duration-500" 
+                  />
+                  
+                  {/* Overlay Gradiente */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
+                  
+                  {/* Detalhe Logo/ID no Hover */}
+                  <div className="absolute bottom-4 left-4 right-4 z-20 opacity-0 group-hover/card-3d:opacity-100 transition-all transform translate-y-2 group-hover/card-3d:translate-y-0">
+                    <div className="flex items-center gap-2">
+                       <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
+                       <span className="text-[10px] font-bold text-white uppercase tracking-widest">Connect AI v4</span>
+                    </div>
                   </div>
                 </motion.div>
               ))}
