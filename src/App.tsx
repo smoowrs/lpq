@@ -648,60 +648,86 @@ export default function App() {
         <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto px-6 mb-16 relative z-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-2xl"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
-              <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300 uppercase tracking-wider">Connect AI</span>
-            </div>
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
-              Crie imagens que <br />
-              <span className="text-gradient-ai">vendem mais.</span>
-            </h2>
-            <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed">
-              Com o uso da Connect AI você transforma fotos simples de fornecedores em imagens que realmente geram interesse e um visual incrível na sua loja.
-            </p>
-            <ul className="space-y-4 mb-10">
-              {['Imagens em 4K', 'Menos de 30s', 'Alta Conversão'].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-gray-300">
-                  <div className="w-6 h-6 rounded-full bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/30 shrink-0">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#582ef5]" />
-                  </div>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <motion.button
-              whileHover="hover"
-              initial="initial"
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            
+            {/* Esquerda: Conteúdo */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative z-20"
             >
-              Testar Connect AI
-              <motion.div variants={{ initial: { x: 0 }, hover: { opacity: [1, 0.5, 1] } }}>
-                <Sparkles className="w-4 h-4" strokeWidth={2.5} />
-              </motion.div>
-            </motion.button>
-          </motion.div>
-        </div>
-
-        <div className="flex gap-6 animate-marquee">
-          {[...carouselImages, ...carouselImages].map((img, index) => (
-            <div key={index} className="flex-shrink-0 w-48 md:w-64 aspect-square rounded-2xl overflow-hidden border border-white/10 relative group">
-              <img src={img} alt={`Product ${index}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                <span className="text-sm font-medium flex items-center gap-1">
-                  <Sparkles className="w-4 h-4 text-[#582ef5]" /> Connect AI
-                </span>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+                <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
+                <span className="text-gray-300 uppercase tracking-wider">Connect AI</span>
               </div>
+              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+                Crie imagens que <br />
+                <span className="text-gradient-ai">vendem mais.</span>
+              </h2>
+              <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed max-w-md">
+                Com o uso da Connect AI você transforma fotos simples de fornecedores em imagens que realmente geram interesse e um visual incrível na sua loja.
+              </p>
+              <ul className="space-y-4 mb-10">
+                {['Imagens em 4K', 'Menos de 30s', 'Alta Conversão'].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-gray-300 font-medium">
+                    <div className="w-6 h-6 rounded-full bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/30 shrink-0">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#582ef5]" />
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <motion.button
+                whileHover="hover"
+                initial="initial"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] transition-all duration-300"
+              >
+                Testar Connect AI
+                <motion.div variants={{ initial: { x: 0 }, hover: { rotate: 15, scale: 1.2 } }}>
+                  <Sparkles className="w-4 h-4" strokeWidth={2.5} />
+                </motion.div>
+              </motion.button>
+            </motion.div>
+
+            {/* Direita: Pilha de Imagens Criativa */}
+            <div className="relative h-[400px] md:h-[600px] flex items-center justify-center mt-12 md:mt-0">
+              {[
+                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", rot: "rotate-[6deg]", x: "translate-x-0" },
+                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", rot: "rotate-[12deg]", x: "translate-x-12" },
+                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", rot: "rotate-[18deg]", x: "translate-x-24" },
+                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", rot: "rotate-[24deg]", x: "translate-x-36" },
+                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", rot: "rotate-[30deg]", x: "translate-x-48" }
+              ].map((card, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: 100, rotate: 0 }}
+                  whileInView={{ opacity: 1, x: 0, rotate: parseInt(card.rot.match(/\d+/)[0]) }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.8, type: "spring" }}
+                  className={`absolute w-32 md:w-48 lg:w-56 aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden border-2 border-white/10 shadow-2xl transition-transform hover:z-50 hover:scale-110 duration-300 cursor-pointer group/stack-card`}
+                  style={{ 
+                    left: `${idx * 15}%`,
+                    top: `${idx * 5}%`,
+                    zIndex: idx,
+                  }}
+                >
+                  <img src={card.img} alt={`Connect AI ${idx}`} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/stack-card:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <span className="text-[10px] md:text-xs font-bold text-white tracking-widest uppercase mb-1 flex items-center gap-1.5">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#582ef5] animate-pulse" />
+                      Geração Pro
+                    </span>
+                    <span className="text-[10px] md:text-xs text-gray-300">#{idx + 1} Artificial Intelligence</span>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          ))}
+
+          </div>
         </div>
       </section>
 
