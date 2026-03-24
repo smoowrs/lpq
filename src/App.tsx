@@ -133,7 +133,7 @@ export default function App() {
                 </div>
               </div>
               
-              <p className="text-base md:text-lg text-gray-400 mb-10 max-w-xl leading-relaxed">
+              <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed">
                 Crie sua conta gratuita e domine a importação direto da China! Acesse aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador — a IA estratégica desenvolvida para otimizar suas declarações e evitar taxas abusivas. Participe da nossa comunidade de networking e utilize ferramentas de elite para economizar e lucrar com importação.
               </p>
 
@@ -232,7 +232,7 @@ export default function App() {
               do Importador
             </h2>
             
-            <p className="text-base md:text-lg text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
+            <p className="text-sm md:text-base text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
@@ -274,7 +274,7 @@ export default function App() {
                 <span className="text-gradient-ai">inteligente para importar</span>
               </h2>
 
-              <p className="text-base md:text-lg text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
                 Nossa IA processa milhares de dados para encontrar os melhores fornecedores, calcular tributos e gerar declarações que evitam taxas abusivas automaticamente.
               </p>
 
