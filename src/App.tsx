@@ -42,15 +42,28 @@ export default function App() {
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] grid grid-cols-3 items-center relative">
           
-          {/* Lado esquerdo: Desktop = Links */}
-          <div className="hidden lg:flex items-center justify-start gap-8 text-[15px] font-medium text-gray-400">
-            <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
-            <a href="#rastreio" className="hover:text-white transition-colors">Rastreio</a>
-            <a href="#comunidade" className="hover:text-white transition-colors">Comunidade</a>
+          {/* Lado esquerdo: Desktop = Links / Mobile = Idioma */}
+          <div className="flex items-center justify-start gap-8 text-[15px] font-medium text-gray-400">
+            {/* Desktop Links */}
+            <div className="hidden lg:flex items-center gap-8">
+              <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
+              <a href="#rastreio" className="hover:text-white transition-colors">Rastreio</a>
+              <a href="#comunidade" className="hover:text-white transition-colors">Comunidade</a>
+            </div>
+
+            {/* Mobile Idioma Selector */}
+            <div className="lg:hidden relative group/lang-mob">
+              <button className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg hover:bg-white/5 transition-all text-sm">
+                <span className="text-lg">🇧🇷</span>
+                <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-32 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang-mob:opacity-100 group-hover/lang-mob:visible transition-all shadow-2xl z-50">
+                <button className="w-full px-4 py-2 flex items-center justify-between text-xs hover:bg-white/5">🇺🇸 English</button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-xs hover:bg-white/5 text-white font-bold">🇧🇷 Port (BR) <Check className="w-3 h-3 text-[#582ef5]" /></button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-xs hover:bg-white/5">🇪🇸 Español</button>
+              </div>
+            </div>
           </div>
-          
-          {/* Mobile Placeholder para manter o logo no centro */}
-          <div className="lg:hidden"></div>
 
           {/* Centro: Logo */}
           <div className="flex items-center justify-center">
@@ -62,29 +75,18 @@ export default function App() {
             />
           </div>
 
-          {/* Direito: Idioma e CTAs */}
+          {/* Direito: CTAs e Idioma (Desktop) */}
           <div className="flex items-center justify-end gap-2 md:gap-4 font-medium">
-            {/* Idioma Selector */}
-            <div className="relative group/lang">
-              <button className="flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all text-sm md:text-base">
+            {/* Desktop Idioma Selector */}
+            <div className="hidden lg:block relative group/lang">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all">
                 <span className="text-lg">🇧🇷</span>
-                <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover/lang:text-white transition-colors" />
+                <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
               </button>
-              
-              {/* Dropdown Falso (Visual) */}
-              <div className="absolute top-full right-0 mt-2 w-32 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all transform scale-95 group-hover/lang:scale-100 shadow-2xl z-50">
-                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 transition-colors">
-                  🇺🇸 English
-                </button>
-                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 transition-colors text-white">
-                  🇧🇷 Port (BR) <Check className="w-3.5 h-3.5 text-[#582ef5]" />
-                </button>
-                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 transition-colors">
-                  🇪🇸 Español
-                </button>
-                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 transition-colors">
-                  🇫🇷 Français
-                </button>
+              <div className="absolute top-full right-0 mt-2 w-32 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-2xl z-50">
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5">🇺🇸 English</button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 text-white font-bold">🇧🇷 Port (BR) <Check className="w-3.5 h-3.5 text-[#582ef5]" /></button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5">🇪🇸 Español</button>
               </div>
             </div>
 
@@ -93,7 +95,6 @@ export default function App() {
                 Entrar
               </button>
               <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="btn-primary px-3 sm:px-5 py-2 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] whitespace-nowrap">
-                {/* Texto dinâmico para mobile */}
                 <span className="hidden sm:inline">Criar conta grátis</span>
                 <span className="sm:hidden">Criar conta</span>
               </button>
@@ -586,7 +587,7 @@ export default function App() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 order-2 md:order-1 relative h-[500px] md:h-[700px] flex items-center justify-center perspective-[2500px]"
+            className="w-full md:w-1/2 order-2 md:order-1 relative h-[320px] md:h-[700px] flex items-center justify-center perspective-[2500px]"
           >
             {[
               { img: "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp", x: -140, y: -120, r: -15, s: 0.95, z: 10 },
@@ -596,8 +597,8 @@ export default function App() {
               { img: "https://i.postimg.cc/yd0T0Z2L/connect_ai_1774346417447.webp", x: -260, y: 60, r: -22, s: 1.05, z: 12 },
               { img: "https://i.postimg.cc/yxByjNH4/connect_ai_1774346485902.jpg", x: 240, y: -40, r: 18, s: 1.0, z: 4 },
               { img: "https://i.postimg.cc/Y03fswr6/connect_ai_1774346610865.jpg", x: -40, y: -240, r: 5, s: 0.8, z: 1 },
-              { img: "https://i.postimg.cc/nrkYPtF3/connect_ai_1774346674187.jpg", x: 100, y: 50, r: -10, s: 1.25, z: 25 },
-              { img: "https://i.postimg.cc/PJ4zRkX2/connect_ai_1774346817363.jpg", x: 0, y: -30, r: 0, s: 1.15, z: 20 },
+              { img: "https://i.postimg.cc/nrkYPtF3/connect_ai_1774346674187.jpg", x: 100, y: 50, r: -10, s: 1.15, z: 25 },
+              { img: "https://i.postimg.cc/PJ4zRkX2/connect_ai_1774346817363.jpg", x: 0, y: -30, r: 0, s: 1.05, z: 20 },
             ].map((card, idx) => (
               <motion.div
                 key={idx}
@@ -611,7 +612,7 @@ export default function App() {
                 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.06, duration: 1.5, type: "spring", stiffness: 35, damping: 12 }}
-                className="absolute w-44 md:w-56 lg:w-72 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d] transition-all duration-500 hover:z-[100] hover:scale-125"
+                className="absolute w-32 md:w-52 lg:w-64 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d] transition-all duration-500 hover:z-[100] hover:scale-125"
                 style={{ zIndex: card.z }}
               >
                 <img src={card.img} className="w-full h-full object-cover" alt="" />
