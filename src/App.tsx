@@ -581,12 +581,12 @@ export default function App() {
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
         {/* Layer de Fundo: Cards Espalhados e Vignette (Ocupa a seção inteira) */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center md:justify-end md:pr-12 lg:pr-24">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="relative w-full h-full flex items-center justify-center perspective-[2500px]"
+            className="relative w-full md:w-1/2 h-full flex items-center justify-center perspective-[2500px]"
           >
             {[
               { img: "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp", x: -140, y: -120, r: -15, s: 0.95, z: 10 },
@@ -611,7 +611,7 @@ export default function App() {
                 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.05, duration: 1.2, type: "spring", stiffness: 35, damping: 15 }}
-                className="absolute w-36 md:w-52 lg:w-64 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d]"
+                className="absolute w-32 md:w-44 lg:w-48 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d]"
                 style={{ zIndex: card.z }}
               >
                 <img src={card.img} className="w-full h-full object-cover" alt="" />
@@ -625,11 +625,9 @@ export default function App() {
           </motion.div>
         </div>
 
-        {/* Foreground: Conteúdo Textual */}
+        {/* Foreground: Conteúdo Textual (Agora na esquerda no desktop) */}
         <div className="max-w-7xl mx-auto px-6 relative z-30 flex flex-col md:flex-row items-center justify-center md:justify-between min-h-[600px] md:min-h-0">
-          <div className="md:w-1/2 hidden md:block" /> {/* Espaçador para manter layout desktop */}
-          
-          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-20">
+          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -641,7 +639,7 @@ export default function App() {
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
               
-              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white  drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                 Os melhores preços <br className="hidden md:block" />
                 <span className="text-gradient-ai">produtos e qualidade.</span>
               </h2>
@@ -665,6 +663,8 @@ export default function App() {
               </motion.button>
             </motion.div>
           </div>
+
+          <div className="md:w-1/2 hidden md:block" /> {/* Espaçador à direita no desktop */}
         </div>
       </section>
 
