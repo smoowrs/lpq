@@ -587,12 +587,12 @@ export default function App() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-2/5 order-2 md:order-1"
+            className="w-full md:w-1/2 order-2 md:order-1"
             style={{ perspective: "1500px" }}
           >
             {/* Esquerda: Grid 3x3 Cinematográfico (Agora em Produtos) */}
             {/* Esquerda: Pilha de Cards 3D (Produtos - Estilo Connect AI) */}
-            <div className="relative h-[450px] md:h-[600px] flex items-center justify-center -ml-16 md:-ml-40 lg:-ml-56 perspective-[2000px]">
+            <div className="relative h-[450px] md:h-[600px] flex items-center justify-center -ml-20 md:-ml-64 lg:-ml-80 perspective-[2000px]">
               {[
                 "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp",
                 "https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp",
@@ -609,8 +609,8 @@ export default function App() {
                   initial={{ opacity: 0, x: -200, rotateX: 0, rotateY: 0 }}
                   whileInView={{ 
                     opacity: 1, 
-                    x: idx * 52, // Ajustado para 9 imagens preencherem bem
-                    y: idx * -22,
+                    x: idx * 32, // Ajustado para 9 imagens preencherem bem
+                    y: idx * -24,
                     rotateX: 10,
                     rotateY: -25
                   }}
@@ -642,7 +642,7 @@ export default function App() {
           </motion.div>
 
           {/* Direita: Conteúdo e Informações */}
-          <div className="md:w-3/5 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2">
+          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 md:pl-16 lg:pl-32">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -654,13 +654,13 @@ export default function App() {
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
               
-              <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1] flex flex-col items-center md:items-start">
-                <span className="whitespace-nowrap">Os melhores preços</span>
-                <span className="text-gradient-ai whitespace-nowrap">produtos e qualidade.</span>
+              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1] text-center md:text-left">
+                Os melhores preços <br className="hidden md:block" />
+                <span className="text-gradient-ai">produtos e qualidade.</span>
               </h2>
               
-              <p className="text-sm md:text-lg text-gray-400 mb-10 leading-relaxed max-w-md">
-                Tenha acesso grátis a um painel cheio<br />
+              <p className="text-sm md:text-lg text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left">
+                Tenha acesso grátis a um painel cheio<br className="hidden md:block" />
                 de produtos incríveis.
               </p>
 
