@@ -111,9 +111,9 @@ export default function App() {
                 <span className="text-gray-200">A revolução da importação com IA</span>
               </div>
               
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
-                Aprenda a importar direto <br />
-                <span className="text-gradient-ai">de fábricas da China 💙</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8 leading-[1.1]">
+                Economize ou Lucre <br />
+                <span className="text-gradient-ai">Importando da China 💙</span>
               </h1>
 
               {/* Vídeo apenas no MOBILE (Entre Título e Descrição) */}
