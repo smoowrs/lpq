@@ -462,7 +462,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* Botão Subir Níveis (Abaixo do Pódio) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -474,7 +473,7 @@ export default function App() {
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary w-full max-w-[340px] py-5 text-[15px] font-bold flex items-center justify-center gap-3 group rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
+              className="btn-primary w-fit px-12 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
             >
               Subir níveis
               <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
