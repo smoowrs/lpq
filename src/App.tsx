@@ -193,14 +193,14 @@ export default function App() {
 
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
       <section id="comunidade" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center relative z-10 gap-12 md:gap-20">
           
-          {/* Texto (Esquerda) */}
+          {/* Texto (Agora à Direita no Desktop) */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 relative z-20 text-left md:pr-10 pb-16 md:pb-0"
+            className="w-full md:w-1/2 relative z-20 text-left md:pl-10 pb-16 md:pb-0 order-1 md:order-2"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
               <Users className="w-3.5 h-3.5 text-[#582ef5]" />
@@ -230,23 +230,23 @@ export default function App() {
               </motion.div>
             </motion.button>
           </motion.div>
-
-          {/* Celular Flutuante */}
+ 
+          {/* Celular Flutuante (Agora à Esquerda no Desktop) */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="absolute right-0 md:right-auto bottom-[10px] md:bottom-auto md:relative w-[50%] sm:w-[45%] md:w-1/2 flex justify-end z-20"
+            className="w-full md:w-1/2 flex justify-center md:justify-start z-20 order-2 md:order-1"
           >
             <motion.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 w-full flex justify-end drop-shadow-2xl"
+              className="relative z-10 w-full flex justify-center md:justify-start drop-shadow-2xl"
             >
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
-                 className="w-full max-w-[260px] md:max-w-[340px] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
+                 className="w-full max-w-[260px] md:max-w-[400px] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
                />
             </motion.div>
           </motion.div>
