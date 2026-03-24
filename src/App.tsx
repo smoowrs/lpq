@@ -278,7 +278,7 @@ export default function App() {
             </p>
 
             {/* Chat Experience Mockup - Compacto e Centralizado */}
-            <div className="w-full max-w-md mb-12 transform scale-90 md:scale-95 transition-transform">
+            <div className="w-full max-w-sm mb-12 transform scale-95 md:scale-100 transition-transform">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
