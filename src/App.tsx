@@ -532,10 +532,6 @@ export default function App() {
 
           {/* Carrossel de Aulas */}
           <div className="relative group mb-12">
-            {/* Sombeamento de borda para scroll */}
-            <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#04050D] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#04050D] to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
-            
             <div className="flex gap-4 md:gap-6 overflow-x-auto pb-4 pt-2 no-scrollbar snap-x snap-mandatory scroll-smooth">
               {[
                 { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", title: "Primeiros Passos" },
