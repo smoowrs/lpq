@@ -590,15 +590,40 @@ export default function App() {
             className="w-full md:w-2/5 order-2 md:order-1"
             style={{ perspective: "1500px" }}
           >
-            <div className="relative group">
-              <div className="relative rounded-2xl overflow-hidden border border-white/5 shadow-[0_40px_100px_rgba(0,0,0,1)] bg-white/5 backdrop-blur-sm">
-                <img 
-                  src="https://i.postimg.cc/9Mt8xV5t/Captura-de-Tela-2026-03-23-as-20-04-46.png"
-                  alt="Painel de Produtos Integrado"
-                  className="w-full h-auto object-cover [mask-image:radial-gradient(ellipse_95%_95%_at_50%_50%,#000_60%,transparent_100%)] opacity-85 group-hover:opacity-100 transition-all duration-1000 scale-100 md:scale-110 lg:scale-125"
-                />
-              </div>
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+            <div className="relative h-[450px] md:h-[550px] flex items-center justify-center -ml-4 md:-ml-20 perspective-[2000px]">
+              {[
+                { img: "https://i.postimg.cc/jW61wJQm/IMG-3728.webp", rot: -8, y: 0, x: 0 },
+                { img: "https://i.postimg.cc/2qdtbB7p/IMG-3729.webp", rot: 4, y: 15, x: 30 },
+                { img: "https://i.postimg.cc/qtcFhCXP/IMG-3730.webp", rot: -12, y: -20, x: 60 },
+                { img: "https://i.postimg.cc/f37Pt0fn/IMG-3732.webp", rot: 6, y: 30, x: 90 },
+                { img: "https://i.postimg.cc/Mc0LMjmJ/IMG-3737.webp", rot: -5, y: -10, x: 120 },
+                { img: "https://i.postimg.cc/3yjq4DFH/IMG-3738.webp", rot: 10, y: 40, x: 150 },
+                { img: "https://i.postimg.cc/GBPf8sxd/IMG-3746.webp", rot: -15, y: -30, x: 180 },
+                { img: "https://i.postimg.cc/JD12b4PS/IMG-3747.webp", rot: 2, y: 5, x: 210 }
+              ].map((card, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -100, rotate: 0 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    x: card.x, 
+                    y: card.y, 
+                    rotate: card.rot,
+                    rotateX: 10,
+                    rotateY: -10
+                  }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.08, duration: 0.8, type: "spring" }}
+                  className="absolute w-36 md:w-52 lg:w-60 aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.8)] transition-all duration-500 hover:z-50 hover:scale-110 hover:brightness-110 cursor-pointer origin-bottom"
+                  style={{ zIndex: idx }}
+                >
+                  <img src={card.img} alt={`Product ${idx}`} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                </motion.div>
+              ))}
+              
+              {/* Brilho de fundo para a pilha */}
+              <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[100px] -z-10" />
             </div>
           </motion.div>
 
