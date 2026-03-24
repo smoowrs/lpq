@@ -242,10 +242,9 @@ export default function App() {
               <span>COMUNIDADE</span>
             </div>
             
-            <h2 className="text-[36px] md:text-5xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.05] text-white">
-              A Primeira <br />
-              Rede Social <br />
-              do Importador
+            <h2 className="text-[38px] md:text-6xl lg:text-[86px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
+              A 1ª Rede Social <br />
+              do Importador 💙
             </h2>
             
             <p className="text-sm md:text-base text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
@@ -619,8 +618,8 @@ export default function App() {
               </motion.div>
             ))}
             
-            {/* Glow / Vignette Preto Ocupando Tudo */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-20 pointer-events-none opacity-90" />
+            {/* Glow / Vignette Preto - Apenas Mobile */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-20 pointer-events-none opacity-90 md:hidden" />
             <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[150px] -z-10" />
           </motion.div>
         </div>
