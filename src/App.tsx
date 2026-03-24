@@ -98,21 +98,40 @@ export default function App() {
         
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20 relative z-10 w-full">
           
-          {/* Esquerda: Conteúdo e Ações */}
-          <div className="md:w-[48%] flex flex-col items-center md:items-start text-center md:text-left">
+          {/* Lado Esquerdo (ou Mobile Top) */}
+          <div className="md:w-[48%] flex flex-col items-center md:items-start text-center md:text-left w-full">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
+              className="w-full flex flex-col items-center md:items-start"
             >
               <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-medium mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(88,46,245,0.15)]">
                 <Sparkles className="w-3 h-3 text-[#582ef5]" />
                 <span className="text-gray-200">A revolução da importação com IA</span>
               </div>
+              
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
                 A 1ª Rede Social <br />
                 <span className="text-gradient-ai">do importador</span>
               </h1>
+
+              {/* Vídeo apenas no MOBILE (Entre Título e Descrição) */}
+              <div className="w-full mb-10 md:hidden relative">
+                <div className="absolute -inset-6 z-0 pointer-events-none opacity-50">
+                  <div className="ambilight-tl absolute top-0 left-0 w-3/5 h-3/5 blur-[40px] rounded-full bg-[#582ef5]/30" />
+                  <div className="ambilight-br absolute bottom-0 right-0 w-3/5 h-3/5 blur-[40px] rounded-full bg-[#4c25e6]/30" />
+                </div>
+                <div className="relative z-10 w-full bg-[#0a0a0a] rounded-2xl border border-white/10 shadow-2xl overflow-hidden p-1">
+                  <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
+                    <iframe 
+                      src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b" 
+                      className="absolute top-0 left-0 w-full h-full border-0"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              </div>
               
               <p className="text-base md:text-lg text-gray-400 mb-10 max-w-xl leading-relaxed">
                 Crie sua conta grátis e acesse as aulas, rastreio em tempo real, IA para geração de imagens e o Minerador — uma IA que te ajuda com suas declarações evitando taxas abusivas.
@@ -145,14 +164,13 @@ export default function App() {
             </motion.div>
           </div>
 
-          {/* Direita: Vídeo + Ambilight */}
+          {/* Direita: Vídeo (Desk apenas) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, x: 30 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full md:w-[52%] mx-auto"
+            className="hidden md:block relative w-full md:w-[52%] mx-auto"
           >
-            {/* Ambilight blobs */}
             <div className="absolute -inset-10 z-0 pointer-events-none">
               <div className="ambilight-tl absolute top-0 left-0 w-3/5 h-3/5 blur-[80px] opacity-80 rounded-full" />
               <div className="ambilight-tr absolute top-0 right-0 w-3/5 h-3/5 blur-[80px] opacity-80 rounded-full" />
@@ -160,13 +178,11 @@ export default function App() {
               <div className="ambilight-br absolute bottom-0 right-0 w-3/5 h-3/5 blur-[80px] opacity-80 rounded-full" />
             </div>
 
-            {/* Video card */}
             <div className="relative z-10 w-full bg-[#0a0a0a] rounded-[2rem] border border-white/10 shadow-[0_0_80px_rgba(88,46,245,0.2)] overflow-hidden p-1 md:p-2">
               <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center">
                 <iframe 
                   src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b" 
                   className="absolute top-0 left-0 w-full h-full border-0"
-                  allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" 
                   allowFullScreen
                 />
               </div>
@@ -174,11 +190,9 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
-      <section id="comunidade" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden bg-gradient-to-br from-[#582ef5] to-[#4c25e6]">
-        {/* Glow suave para profundidade no degradê */}
-        <div className="absolute inset-0 bg-white/5 pointer-events-none" />
-        
+      <section id="comunidade" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10">
           
           {/* Texto (Esquerda) */}
@@ -188,43 +202,42 @@ export default function App() {
             viewport={{ once: true }}
             className="w-full md:w-1/2 relative z-20 text-left md:pr-10 pb-16 md:pb-0"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20 border border-white/20 text-xs font-semibold mb-6 backdrop-blur-md">
-              <Users className="w-3.5 h-3.5 text-white" />
-              <span className="text-white uppercase tracking-wider">Comunidade</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+              <Users className="w-3.5 h-3.5 text-[#582ef5]" />
+              <span className="text-gray-300 uppercase tracking-wider">Comunidade</span>
             </div>
             
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1] text-white">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
               A Primeira <br />
-              Rede Social<br />
+              <span className="text-gradient-ai">Rede Social</span><br />
               do Importador
             </h2>
             
-            <p className="text-sm md:text-base text-white/90 mb-8 leading-relaxed max-w-2xl">
+            <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed max-w-2xl">
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
             <motion.button
-              whileHover={{ scale: 1.02, backgroundColor: '#f8f9fa' }}
+              whileHover="hover"
               initial="initial"
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="bg-white text-[#582ef5] w-fit px-8 py-4.5 rounded-2xl text-[15px] font-bold flex items-center justify-center gap-2 group shadow-[0_20px_40px_rgba(0,0,0,0.15)] transition-all duration-300"
+              className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
             >
               Testar comunidade
-              <motion.div animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
-                <ArrowRight className="w-5 h-5 text-[#582ef5]" strokeWidth={3} />
+              <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                <ArrowRight className="w-4 h-4" strokeWidth={3} />
               </motion.div>
             </motion.button>
           </motion.div>
 
-          {/* Celular Flutuante (Mockup iPhone 16 Pro Frontal - Menor) */}
+          {/* Celular Flutuante */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="absolute right-0 md:right-auto bottom-[10px] md:bottom-auto md:relative w-[50%] sm:w-[45%] md:w-1/2 flex justify-end z-20"
           >
-            {/* O Container do celular como imagem transparente já exportada */}
             <motion.div 
               animate={{ y: [0, -15, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -233,7 +246,7 @@ export default function App() {
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
-                 className="w-full max-w-[260px] md:max-w-[340px] shadow-2xl rounded-[3rem] object-contain drop-shadow-[0_0_60px_rgba(255,255,255,0.2)]"
+                 className="w-full max-w-[260px] md:max-w-[340px] border border-white/5 rounded-[3rem] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
                />
             </motion.div>
           </motion.div>
