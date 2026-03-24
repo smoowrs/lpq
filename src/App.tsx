@@ -192,28 +192,31 @@ export default function App() {
       </section>
 
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
-      <section id="comunidade" className="pt-24 md:pt-32 pb-4 md:pb-32 px-6 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center relative z-10 gap-12 md:gap-20">
+      <section id="comunidade" className="pt-24 md:pt-32 pb-16 md:pb-40 px-6 relative overflow-hidden bg-black">
+        {/* Glow de fundo atmosférico */}
+        <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center relative z-10 gap-16 md:gap-32">
           
-          {/* Texto (Direita no Desktop) */}
+          {/* Texto (Direita) */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 relative z-20 text-left md:pl-12 pb-16 md:pb-0"
+            className="w-full md:w-1/2 relative z-20 text-left md:pl-16"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold mb-8 backdrop-blur-md uppercase tracking-[0.2em] text-gray-400">
               <Users className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300 uppercase tracking-wider">Comunidade</span>
+              <span>COMUNIDADE</span>
             </div>
             
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[36px] md:text-5xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.05] text-white">
               A Primeira <br />
-              <span className="text-gradient-ai">Rede Social</span><br />
+              Rede Social <br />
               do Importador
             </h2>
             
-            <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed max-w-2xl">
+            <p className="text-base md:text-lg text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
               Você não precisa empreender sozinho. No nosso espaço, você troca informações de valores com outros importadores, compartilha seu progresso e cresce junto com a comunidade.
             </p>
             
@@ -222,31 +225,29 @@ export default function App() {
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary w-fit px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
+              className="btn-primary w-fit px-10 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
             >
               Testar comunidade
-              <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                <ArrowRight className="w-4 h-4" strokeWidth={3} />
-              </motion.div>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
             </motion.button>
           </motion.div>
  
-          {/* Celular Flutuante (Esquerda no Desktop) */}
+          {/* Celular Flutuante (Esquerda) */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="w-full md:w-1/2 flex justify-center md:justify-start z-20"
           >
             <motion.div 
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="relative z-10 w-full flex justify-center md:justify-start drop-shadow-2xl"
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 flex justify-center md:justify-start"
             >
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
-                 className="w-full max-w-[260px] md:max-w-[340px] object-contain drop-shadow-[0_0_60px_rgba(88,46,245,0.3)]"
+                 className="w-full max-w-[280px] md:max-w-[420px] object-contain drop-shadow-[0_0_80px_rgba(88,46,245,0.4)]"
                />
             </motion.div>
           </motion.div>
