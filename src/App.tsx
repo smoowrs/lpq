@@ -255,142 +255,110 @@ export default function App() {
       <section id="minerador" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-16 md:gap-24">
+        <div className="max-w-4xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
           
-          {/* Esquerda: Texto e CTA */}
-          <div className="lg:w-1/2 text-center lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-6 backdrop-blur-md text-[#582ef5] uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>O MINERADOR</span>
-              </div>
-              
-              <h2 className="text-[32px] md:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
-                <span className="text-white">O Assistente</span> <br />
-                <span className="text-gradient-ai">inteligente para importar</span>
-              </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-6 backdrop-blur-md text-[#582ef5] uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>O MINERADOR</span>
+            </div>
+            
+            <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
+              <span className="text-white">O Assistente</span> <br />
+              <span className="text-gradient-ai">inteligente para importar</span>
+            </h2>
 
-              <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                Nossa IA processa milhares de dados para encontrar os melhores fornecedores, calcular tributos e gerar declarações que evitam taxas abusivas automaticamente.
-              </p>
+            <p className="text-sm md:text-base text-gray-400 mb-10 max-w-2xl leading-relaxed">
+              Nossa IA processa milhares de dados para encontrar os melhores fornecedores, calcular tributos e gerar declarações que evitam taxas abusivas automaticamente.
+            </p>
 
-              <motion.button
-                whileHover="hover"
-                initial="initial"
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary px-10 py-5 text-base font-bold w-fit mx-auto lg:mx-0 flex items-center justify-center gap-2 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
+            {/* Chat Experience Mockup - Compacto e Centralizado */}
+            <div className="w-full max-w-md mb-12 transform scale-90 md:scale-95 transition-transform">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative bg-[#0d0d0d] rounded-3xl border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.5)] overflow-hidden text-left"
               >
-                Testar Minerador Agora
-                <Sparkles className="w-5 h-5 fill-white/20" strokeWidth={2.5} />
-              </motion.button>
-            </motion.div>
-          </div>
+                {/* Header do Chat */}
+                <div className="bg-white/5 border-b border-white/5 p-3 flex items-center justify-between backdrop-blur-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="relative">
+                      <div className="w-8 h-8 rounded-full bg-[#582ef5]/20 flex items-center justify-center overflow-hidden border border-[#582ef5]/30">
+                        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGJzeHd3YTZlbTVhd2x5dHB2eTRtaHR3am5sajFqNW55OWxoMXhmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S5Itfetiqrv3emmx8h/giphy.gif" alt="Minerador" className="w-6 h-6 object-contain" />
+                      </div>
+                      <div className="absolute bottom-0 right-0 w-2 h-2 bg-green-500 rounded-full border border-black" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-white leading-none mb-0.5">O Minerador 💙</h4>
+                      <p className="text-[9px] text-green-500 font-medium">IA Online</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-white/10" />
+                  </div>
+                </div>
 
-          {/* Direita: Chat Experience Mockup */}
-          <div className="lg:w-1/2 w-full max-w-xl">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative bg-[#0d0d0d] rounded-3xl border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.5)] overflow-hidden"
+                {/* Corpo do Chat */}
+                <div className="p-4 space-y-4">
+                  {/* Pergunta */}
+                  <div className="flex flex-col items-end">
+                    <div className="bg-[#582ef5] text-white px-3 py-2 rounded-xl rounded-tr-none text-[12px] max-w-[85%] shadow-lg">
+                      Preciso de link de iphone 17 pro max
+                    </div>
+                  </div>
+
+                  {/* Resposta */}
+                  <div className="flex flex-col items-start">
+                    <div className="bg-white/10 text-gray-200 px-3 py-2 rounded-xl rounded-tl-none text-[12px] max-w-[90%] leading-relaxed border border-white/5">
+                      Encontrei fornecedores verificados com envio direto! 🚀
+                    </div>
+                  </div>
+
+                  {/* Product Card */}
+                  <div className="bg-white/5 border border-white/10 rounded-xl p-2 flex gap-3 backdrop-blur-xl">
+                    <div className="w-16 h-16 bg-black/40 rounded-lg overflow-hidden flex items-center justify-center p-1 border border-white/5">
+                      <img src="https://i.postimg.cc/qRvhYVzb/iphone-17-pro-finish-select-202509-6-9inch-deepblue-2.webp" alt="iPhone 17" className="w-full h-full object-contain" />
+                    </div>
+                    <div className="flex-1 flex flex-col justify-center">
+                      <h5 className="text-[10px] font-bold text-white uppercase mb-1">iPhone 17 Pro Max</h5>
+                      <div className="flex items-end gap-2">
+                        <span className="text-sm font-black text-white">R$7.600</span>
+                        <span className="text-[9px] text-gray-500 line-through mb-0.5">R$11.900</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Input Fake */}
+                <div className="bg-white/5 border-t border-white/5 p-3 flex items-center gap-2">
+                   <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 text-gray-500 text-[10px]">
+                      Pergunte ao Minerador...
+                   </div>
+                   <div className="w-8 h-8 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg">
+                      <ArrowRight className="w-4 h-4 text-white" />
+                   </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.button
+              whileHover="hover"
+              initial="initial"
+              whileTap={{ scale: 0.95 }}
+              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              className="btn-primary px-10 py-5 text-base font-bold w-fit flex items-center justify-center gap-2 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
             >
-              {/* Header do Chat */}
-              <div className="bg-white/5 border-b border-white/5 p-4 flex items-center justify-between backdrop-blur-xl">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-full bg-[#582ef5]/20 flex items-center justify-center overflow-hidden border border-[#582ef5]/30">
-                      <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGJzeHd3YTZlbTVhd2x5dHB2eTRtaHR3am5sajFqNW55OWxoMXhmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S5Itfetiqrv3emmx8h/giphy.gif" alt="Minerador" className="w-8 h-8 object-contain" />
-                    </div>
-                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white leading-none mb-1">O Minerador 💙</h4>
-                    <p className="text-[10px] text-green-500 font-medium">IA Online agora</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <div className="w-2 h-2 rounded-full bg-white/10" />
-                  <div className="w-2 h-2 rounded-full bg-white/10" />
-                  <div className="w-2 h-2 rounded-full bg-white/10" />
-                </div>
-              </div>
-
-              {/* Corpo do Chat */}
-              <div className="p-5 space-y-6">
-                {/* Pergunta do User */}
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="flex flex-col items-end"
-                >
-                  <div className="bg-[#582ef5] text-white px-4 py-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-lg">
-                    Preciso de link de iphone 17 pro max
-                  </div>
-                  <span className="text-[10px] text-gray-500 mt-1.5 mr-1 font-medium italic">Enviado agora</span>
-                </motion.div>
-
-                {/* Resposta do Minerador */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 1.2 }}
-                  className="flex flex-col items-start"
-                >
-                  <div className="bg-white/10 text-gray-200 px-4 py-3 rounded-2xl rounded-tl-none text-sm max-w-[90%] leading-relaxed border border-white/5 backdrop-blur-md">
-                    Encontrei 3 fornecedores verificados com estoque disponível e envio direto para o seu redirecionador no Oregon! 🚀
-                  </div>
-                </motion.div>
-
-                {/* Product Card Result */}
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ delay: 1.8 }}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer"
-                >
-                  <div className="w-24 h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center p-2 border border-white/5">
-                    <img src="https://i.postimg.cc/qRvhYVzb/iphone-17-pro-finish-select-202509-6-9inch-deepblue-2.webp" alt="iPhone 17" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                  <div className="flex-1 flex flex-col justify-center">
-                    <div className="flex justify-between items-start mb-1">
-                      <h5 className="text-xs font-bold text-white uppercase tracking-tight">iPhone 17 Pro Max (256GB)</h5>
-                      <span className="bg-green-500/10 text-green-500 text-[9px] px-1.5 py-0.5 rounded font-bold border border-green-500/20">VERIFICADO</span>
-                    </div>
-                    <div className="flex items-end gap-2 mb-3">
-                      <span className="text-lg font-black text-white">R$7.600</span>
-                      <span className="text-[10px] text-gray-500 line-through mb-1">R$11.900</span>
-                    </div>
-                    <button className="w-full py-2 bg-[#582ef5] text-white text-[11px] font-black rounded-lg hover:bg-[#4c25e6] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
-                      ACESSAR LINK <ArrowRight className="w-3 h-3" strokeWidth={3} />
-                    </button>
-                  </div>
-                </motion.div>
-                
-                {/* Typing status (fake) */}
-                <div className="flex items-center gap-1.5">
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce" />
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.2s]" />
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.4s]" />
-                </div>
-              </div>
-
-              {/* Barra de Input Fake */}
-              <div className="bg-white/5 border-t border-white/5 p-4 flex items-center gap-3">
-                 <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-xs">
-                    Pergunte ao Minerador...
-                 </div>
-                 <div className="w-10 h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/30">
-                    <ArrowRight className="w-5 h-5 text-white" />
-                 </div>
-              </div>
-            </motion.div>
-          </div>
+              Testar Minerador Agora
+              <Sparkles className="w-5 h-5 fill-white/20" strokeWidth={2.5} />
+            </motion.button>
+          </motion.div>
           
         </div>
       </section>
