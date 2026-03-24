@@ -2,7 +2,8 @@ import { motion } from 'motion/react';
 import { 
   Package, Sparkles, Users, ShieldCheck, 
   ArrowRight, PlayCircle, Menu, CheckCircle2,
-  Clock, MapPin, Globe, Play
+  Clock, MapPin, Globe, Play, Trophy,
+  Crown, Star, Medal
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -406,6 +407,125 @@ export default function App() {
           </motion.button>
         </div>
       </section>
+
+      {/* ─── NÍVEIS E RECOMPENSAS ────────────────────────────────────────── */}
+      <section id="ranking" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[150px] pointer-events-none" />
+        
+        <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+              <Star className="w-3.5 h-3.5 text-[#582ef5]" />
+              <span className="text-gray-300 uppercase tracking-wider">Níveis e Recompensas</span>
+            </div>
+            
+            <h2 className="text-3xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
+              Suba de nível e<br />
+              <span className="text-gradient-ai">ganhe prêmios</span>
+            </h2>
+          </motion.div>
+
+          <div className="glass-card rounded-[2.5rem] p-6 md:p-10 border border-white/10 relative overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
+            {/* Top de Ranking */}
+            <div className="space-y-2">
+              {[
+                { name: "Douglas Ferreira", xp: "15.420 XP", lv: "Nível 50", rank: 1, icon: <Crown className="w-5 h-5 text-yellow-500 fill-yellow-500/20" /> },
+                { name: "Juliana Santos", xp: "12.280 XP", lv: "Nível 42", rank: 2, icon: <Medal className="w-5 h-5 text-gray-400 fill-gray-400/20" /> },
+                { name: "Rodrigo Almeida", xp: "9.520 XP", lv: "Nível 35", rank: 3, icon: <Medal className="w-5 h-5 text-amber-600 fill-amber-600/20" /> },
+                { name: "Ana Paula", xp: "7.840 XP", lv: "Nível 28", rank: 4 },
+                { name: "Marcos Vinícius", xp: "6.120 XP", lv: "Nível 21", rank: 5 }
+              ].map((user, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`flex items-center gap-4 p-4 rounded-2xl border ${idx < 3 ? 'bg-white/[0.05] border-white/10 shadow-lg' : 'border-transparent opacity-80'}`}
+                >
+                  {/* Rank Position */}
+                  <div className={`w-8 h-8 flex items-center justify-center font-bold text-sm rounded-full ${user.rank === 1 ? 'bg-yellow-500/10 text-yellow-500' : 'text-gray-500'}`}>
+                    {user.rank}
+                  </div>
+
+                  {/* Avatar */}
+                  <div className="relative">
+                    <img 
+                      src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" 
+                      alt={user.name}
+                      className={`w-12 h-12 rounded-xl object-cover border-2 shadow-2xl ${user.rank === 1 ? 'border-yellow-500/30' : 'border-white/10'}`}
+                    />
+                    {user.icon && (
+                      <div className="absolute -top-2 -right-2 transform rotate-12">
+                        {user.icon}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* User Info */}
+                  <div className="flex-1 text-left">
+                    <h4 className="font-bold text-sm md:text-base text-white">{user.name}</h4>
+                    <div className="flex items-center gap-3 mt-1">
+                       <span className="text-[10px] md:text-xs text-gray-400 font-medium uppercase tracking-widest">{user.lv}</span>
+                       <div className="h-1 flex-1 bg-white/5 rounded-full overflow-hidden max-w-[80px]">
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            whileInView={{ width: idx === 0 ? '90%' : idx === 1 ? '75%' : '60%' }}
+                            transition={{ duration: 1, delay: idx * 0.1 }}
+                            className={`h-full ${idx === 0 ? 'bg-yellow-500' : 'bg-[#582ef5]'}`}
+                          />
+                       </div>
+                    </div>
+                  </div>
+
+                  {/* XP and Badges */}
+                  <div className="text-right flex flex-col items-end">
+                    <span className="font-bold text-xs md:text-sm text-[#582ef5]">{user.xp}</span>
+                    {idx < 3 && (
+                      <div className="flex gap-1 mt-1">
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-[10px] text-green-500/60 uppercase font-black uppercase">Active</span>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Bottom Info */}
+            <div className="mt-10 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4 text-left">
+                <div className="w-10 h-10 rounded-full bg-[#582ef5]/20 flex items-center justify-center">
+                  <Trophy className="w-5 h-5 text-[#582ef5]" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Ganhe Prêmios</p>
+                  <p className="text-sm text-white font-medium">Equipamentos, mentorias e créditos</p>
+                </div>
+              </div>
+              
+              <motion.button
+                whileHover="hover"
+                initial="initial"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary px-8 py-3 text-sm font-bold flex items-center justify-center gap-2 group w-full md:w-auto"
+              >
+                Começar agora
+                <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                  <ArrowRight className="w-4 h-4" strokeWidth={3} />
+                </motion.div>
+              </motion.button>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* ─── O MINERADOR ────────────────────────────────────────── */}
       <section className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-b from-black to-[#050505] border-t border-white/5">
