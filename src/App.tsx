@@ -40,9 +40,9 @@ export default function App() {
 
       {/* ─── NAV (novo design) ─────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] flex items-center justify-between relative">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] lg:grid lg:grid-cols-3 flex items-center justify-between relative">
           
-          {/* Lado esquerdo: Desktop = Logo, Mobile = Idioma */}
+          {/* Lado esquerdo: Desktop = Links, Mobile = Idioma */}
           <div className="flex-[0.5] sm:flex-1 flex items-center justify-start lg:hidden">
             {/* Mobile Idioma Toggle (Quadrado) */}
             <button className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-md border border-white/10 bg-white/5 text-[14px] hover:bg-white/10 transition-colors">
@@ -50,27 +50,18 @@ export default function App() {
             </button>
           </div>
 
-          <div className="hidden lg:flex flex-1 items-center justify-start">
-            <img
-              src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
-              alt="Asas de Importação"
-              className="h-6 md:h-8 object-contain"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-
-          {/* Centro: Desktop = Links, Mobile = Logo */}
-          <div className="hidden lg:flex flex-[2] items-center justify-center gap-8 text-[15px] font-medium text-gray-400">
+          <div className="hidden lg:flex items-center justify-start gap-8 text-[15px] font-medium text-gray-400">
             <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
             <a href="#rastreio" className="hover:text-white transition-colors">Rastreio</a>
             <a href="#comunidade" className="hover:text-white transition-colors">Comunidade</a>
           </div>
 
-          <div className="lg:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
+          {/* Centro: Logo (Tanto Desktop quanto Mobile) */}
+          <div className="flex-1 lg:flex items-center justify-center pointer-events-none lg:pointer-events-auto">
             <img
               src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
               alt="Asas de Importação"
-              className="h-5 sm:h-6 object-contain"
+              className="h-5 sm:h-6 md:h-8 object-contain"
               referrerPolicy="no-referrer"
             />
           </div>
