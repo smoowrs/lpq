@@ -591,43 +591,56 @@ export default function App() {
             style={{ perspective: "1500px" }}
           >
             {/* Esquerda: Grid 3x3 Cinematográfico (Agora em Produtos) */}
-            <div className="relative mt-8 md:mt-0 flex items-center justify-center scale-100 md:scale-110 lg:scale-125 -ml-4 md:-ml-20">
-              {/* Brilho de Fundo */}
-              <div className="absolute inset-0 bg-[#582ef5]/15 rounded-full blur-[100px] -z-10 animate-pulse" />
-              
-              {/* Container da Grade com "Glow Preto" (Máscara de Gradiente) */}
-              <div className="relative p-3 md:p-4 rounded-[2.5rem] bg-white/[0.02] border border-white/10 backdrop-blur-3xl overflow-hidden [mask-image:radial-gradient(circle_at_center,black_85%,transparent_100%)] shadow-2xl">
-                <div className="grid grid-cols-3 gap-2 md:gap-3">
-                  {[
-                    "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp",
-                    "https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp",
-                    "https://i.postimg.cc/C1b4bq9m/connect_ai_1774346157539.webp",
-                    "https://i.postimg.cc/fWjKLYcN/connect_ai_1774346252722.jpg",
-                    "https://i.postimg.cc/yd0T0Z2L/connect_ai_1774346417447.webp",
-                    "https://i.postimg.cc/yxByjNH4/connect_ai_1774346485902.jpg",
-                    "https://i.postimg.cc/Y03fswr6/connect_ai_1774346610865.jpg",
-                    "https://i.postimg.cc/nrkYPtF3/connect_ai_1774346674187.jpg",
-                    "https://i.postimg.cc/PJ4zRkX2/connect_ai_1774346817363.jpg"
-                  ].map((img, idx) => (
-                    <motion.div
-                      key={idx}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.04, duration: 0.5 }}
-                      whileHover={{ scale: 1.05, zIndex: 10 }}
-                      className="w-16 sm:w-24 md:w-32 lg:w-36 aspect-square rounded-lg md:rounded-xl overflow-hidden border border-white/10 group/grid-prod"
-                    >
-                      <img src={img} alt={`Produto ${idx}`} className="w-full h-full object-cover transition-transform duration-500 group-hover/grid-prod:scale-110" />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+            {/* Esquerda: Pilha de Cards 3D (Produtos - Estilo Connect AI) */}
+            <div className="relative h-[450px] md:h-[600px] flex items-center justify-center -ml-16 md:-ml-40 lg:-ml-56 perspective-[2000px]">
+              {[
+                "https://i.postimg.cc/jW61wJQm/IMG-3728.webp",
+                "https://i.postimg.cc/2qdtbB7p/IMG-3729.webp",
+                "https://i.postimg.cc/qtcFhCXP/IMG-3730.webp",
+                "https://i.postimg.cc/f37Pt0fn/IMG-3732.webp",
+                "https://i.postimg.cc/Mc0LMjmJ/IMG-3737.webp",
+                "https://i.postimg.cc/3yjq4DFH/IMG-3738.webp",
+                "https://i.postimg.cc/GBPf8sxd/IMG-3746.webp",
+                "https://i.postimg.cc/JD12b4PS/IMG-3747.webp",
+                "https://i.postimg.cc/bG05D29z/IMG-3750.webp",
+                "https://i.postimg.cc/3yjq4DF3/IMG-3752.webp",
+                "https://i.postimg.cc/2bzK482P/IMG-3759.webp",
+                "https://i.postimg.cc/G8c5khqW/IMG-3760.webp"
+              ].map((img, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -200, rotateX: 0, rotateY: 0 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    x: idx * 42, // Escalonamento horizontal
+                    y: idx * -18, // Escalonamento vertical
+                    rotateX: 10,
+                    rotateY: -25
+                  }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.08, duration: 1, type: "spring", stiffness: 45 }}
+                  className="absolute w-36 md:w-52 lg:w-60 aspect-[3/4.5] rounded-xl md:rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-500 hover:z-50 hover:scale-105 group/prod-card bg-[#0d0d0d]"
+                  style={{ 
+                    zIndex: idx,
+                    transformStyle: "preserve-3d"
+                  }}
+                >
+                  {/* Label 00X */}
+                  <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 opacity-60 group-hover/prod-card:opacity-100 transition-opacity">
+                    <span className="text-[8px] font-mono font-bold text-white tracking-tighter bg-black/40 px-1.5 py-0.5 rounded border border-white/5">
+                      {String(idx + 1).padStart(3, '0')}
+                    </span>
+                  </div>
 
-               {/* Badge Decoração v5 */}
-               <div className="absolute -bottom-4 -left-4 bg-white/5 backdrop-blur-md border border-white/10 text-white/40 text-[7px] font-mono px-2 py-1 rounded tracking-tighter z-30">
-                PROD_CATALOG_SYNCED_v5
-              </div>
+                  <img src={img} alt={`Product card ${idx}`} className="w-full h-full object-cover brightness-90 group-hover/prod-card:brightness-110 transition-all duration-500" />
+                  
+                  {/* Overlay Gradiente */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
+                </motion.div>
+              ))}
+
+              {/* Brilho Atmosférico */}
+              <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[120px] -z-10 translate-x-[-20%]" />
             </div>
           </motion.div>
 
