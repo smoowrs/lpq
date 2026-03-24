@@ -368,8 +368,8 @@ export default function App() {
                   transition={{ delay: 1.8 }}
                   className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer"
                 >
-                  <div className="w-24 h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center p-2 border border-white/5">
-                    <img src="https://i.postimg.cc/qRvhYVzb/iphone-17-pro-finish-select-202509-6-9inch-deepblue-2.webp" alt="iPhone 17" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500" />
+                  <div className="w-24 h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center border border-white/5">
+                    <img src="https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp" alt="iPhone 17" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   </div>
                   <div className="flex-1 flex flex-col justify-center">
                     <div className="flex justify-between items-start mb-1">
