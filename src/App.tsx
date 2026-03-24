@@ -499,13 +499,13 @@ export default function App() {
           </div>
 
           {/* Bottom Action - Ranking */}
-          <div className="mt-8">
+          <div className="mt-2 md:mt-4">
             <motion.button
               whileHover="hover"
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-6 sm:px-8 py-4 text-[13px] sm:text-[15px] font-bold w-fit flex items-center justify-center gap-2 group mx-auto whitespace-nowrap rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
+              className="btn-primary w-full max-w-[340px] md:max-w-[480px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
             >
               Subir níveis
               <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
