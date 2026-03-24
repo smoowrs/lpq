@@ -590,40 +590,44 @@ export default function App() {
             className="w-full md:w-2/5 order-2 md:order-1"
             style={{ perspective: "1500px" }}
           >
-            <div className="relative h-[450px] md:h-[550px] flex items-center justify-center -ml-4 md:-ml-20 perspective-[2000px]">
+            <div className="relative h-[450px] md:h-[600px] flex items-center justify-center -ml-16 md:-ml-48 lg:-ml-64 perspective-[2000px] -translate-x-16 md:-translate-x-24">
               {[
-                { img: "https://i.postimg.cc/jW61wJQm/IMG-3728.webp", rot: -8, y: 0, x: 0 },
-                { img: "https://i.postimg.cc/2qdtbB7p/IMG-3729.webp", rot: 4, y: 15, x: 30 },
-                { img: "https://i.postimg.cc/qtcFhCXP/IMG-3730.webp", rot: -12, y: -20, x: 60 },
-                { img: "https://i.postimg.cc/f37Pt0fn/IMG-3732.webp", rot: 6, y: 30, x: 90 },
-                { img: "https://i.postimg.cc/Mc0LMjmJ/IMG-3737.webp", rot: -5, y: -10, x: 120 },
-                { img: "https://i.postimg.cc/3yjq4DFH/IMG-3738.webp", rot: 10, y: 40, x: 150 },
-                { img: "https://i.postimg.cc/GBPf8sxd/IMG-3746.webp", rot: -15, y: -30, x: 180 },
-                { img: "https://i.postimg.cc/JD12b4PS/IMG-3747.webp", rot: 2, y: 5, x: 210 }
-              ].map((card, idx) => (
+                "https://i.postimg.cc/jW61wJQm/IMG-3728.webp",
+                "https://i.postimg.cc/2qdtbB7p/IMG-3729.webp",
+                "https://i.postimg.cc/qtcFhCXP/IMG-3730.webp",
+                "https://i.postimg.cc/f37Pt0fn/IMG-3732.webp",
+                "https://i.postimg.cc/Mc0LMjmJ/IMG-3737.webp",
+                "https://i.postimg.cc/3yjq4DFH/IMG-3738.webp",
+                "https://i.postimg.cc/GBPf8sxd/IMG-3746.webp",
+                "https://i.postimg.cc/JD12b4PS/IMG-3747.webp",
+                "https://i.postimg.cc/bG05D29z/IMG-3750.webp",
+                "https://i.postimg.cc/3yjq4DF3/IMG-3752.webp",
+                "https://i.postimg.cc/2bzK482P/IMG-3759.webp",
+                "https://i.postimg.cc/G8c5khqW/IMG-3760.webp"
+              ].map((img, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: -100, rotate: 0 }}
+                  initial={{ opacity: 0, x: -150, rotate: 0 }}
                   whileInView={{ 
                     opacity: 1, 
-                    x: card.x, 
-                    y: card.y, 
-                    rotate: card.rot,
-                    rotateX: 10,
-                    rotateY: -10
+                    x: idx * 28, // Compactamos o X para não invadir o texto
+                    y: (idx % 3) * 15 - 20, 
+                    rotate: (idx % 2 === 0 ? -5 : 5) + (idx * 1.5),
+                    rotateX: 12,
+                    rotateY: -15
                   }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.08, duration: 0.8, type: "spring" }}
-                  className="absolute w-36 md:w-52 lg:w-60 aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.8)] transition-all duration-500 hover:z-50 hover:scale-110 hover:brightness-110 cursor-pointer origin-bottom"
+                  transition={{ delay: idx * 0.05, duration: 1, type: "spring", stiffness: 40 }}
+                  className="absolute w-32 md:w-52 lg:w-64 aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-700 hover:z-50 hover:scale-110 hover:brightness-110 cursor-pointer origin-bottom bg-[#0d0d0d]"
                   style={{ zIndex: idx }}
                 >
-                  <img src={card.img} alt={`Product ${idx}`} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                  <img src={img} alt={`Produto ${idx}`} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40" />
                 </motion.div>
               ))}
               
-              {/* Brilho de fundo para a pilha */}
-              <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[100px] -z-10" />
+              {/* Brilho Atmosférico */}
+              <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[140px] -z-10 translate-x-[-20%]" />
             </div>
           </motion.div>
 
