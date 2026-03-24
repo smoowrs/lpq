@@ -577,17 +577,16 @@ export default function App() {
 
 
       {/* ─── PRODUTOS ────────────────────────────────────────── */}
-      <section id="produtos" className="pt-24 md:pt-32 pb-24 md:pb-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
+      <section id="produtos" className="pt-24 md:pt-32 pb-12 md:pb-32 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4 relative z-10 min-h-[750px] md:min-h-[auto]">
-          
-          {/* Esquerda: Visual de Cards Espalhados (Scattered Stack) */}
+        {/* Layer de Fundo: Cards Espalhados e Vignette (Ocupa a seção inteira) */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="absolute inset-0 md:relative md:w-1/2 w-full h-full md:h-[700px] flex items-center justify-center perspective-[2500px] z-0 md:z-10 pointer-events-none md:pointer-events-auto"
+            className="relative w-full h-full flex items-center justify-center perspective-[2500px]"
           >
             {[
               { img: "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp", x: -140, y: -120, r: -15, s: 0.95, z: 10 },
@@ -611,8 +610,8 @@ export default function App() {
                   scale: card.s
                 }}
                 viewport={{ once: true }}
-                transition={{ delay: idx * 0.06, duration: 1.5, type: "spring", stiffness: 35, damping: 12 }}
-                className="absolute w-32 md:w-52 lg:w-64 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d] transition-all duration-500 hover:z-[100] hover:scale-125"
+                transition={{ delay: idx * 0.05, duration: 1.2, type: "spring", stiffness: 35, damping: 15 }}
+                className="absolute w-36 md:w-52 lg:w-64 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d]"
                 style={{ zIndex: card.z }}
               >
                 <img src={card.img} className="w-full h-full object-cover" alt="" />
@@ -620,15 +619,17 @@ export default function App() {
               </motion.div>
             ))}
             
-            {/* Glow / Vignette Preto no Mobile para profundidade */}
-            <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_85%)] z-20 pointer-events-none opacity-80" />
-            
-            {/* Brilho Atmosférico */}
+            {/* Glow / Vignette Preto Ocupando Tudo */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-20 pointer-events-none opacity-90" />
             <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[150px] -z-10" />
           </motion.div>
+        </div>
 
-          {/* Direita: Conteúdo e Informações */}
-          <div className="relative z-30 md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-20 py-12 md:py-0">
+        {/* Foreground: Conteúdo Textual */}
+        <div className="max-w-7xl mx-auto px-6 relative z-30 flex flex-col md:flex-row items-center justify-center md:justify-between min-h-[600px] md:min-h-0">
+          <div className="md:w-1/2 hidden md:block" /> {/* Espaçador para manter layout desktop */}
+          
+          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-20">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -640,7 +641,7 @@ export default function App() {
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
               
-              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white whitespace-normal md:whitespace-nowrap drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white  drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                 Os melhores preços <br className="hidden md:block" />
                 <span className="text-gradient-ai">produtos e qualidade.</span>
               </h2>
@@ -668,7 +669,7 @@ export default function App() {
       </section>
 
       {/* ─── CONNECT AI / IMAGE CAROUSEL ──────────────────────── */}
-      <section className="py-24 md:py-32 border-t border-white/5 bg-black overflow-hidden relative">
+      <section className="pt-8 pb-24 md:py-32 border-t border-white/5 bg-black overflow-hidden relative">
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
