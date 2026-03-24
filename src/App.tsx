@@ -580,14 +580,14 @@ export default function App() {
       <section id="produtos" className="pt-24 md:pt-32 pb-24 md:pb-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4 relative z-10 min-h-[750px] md:min-h-[auto]">
           
           {/* Esquerda: Visual de Cards Espalhados (Scattered Stack) */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 order-2 md:order-1 relative h-[320px] md:h-[700px] flex items-center justify-center perspective-[2500px]"
+            className="absolute inset-0 md:relative md:w-1/2 w-full h-full md:h-[700px] flex items-center justify-center perspective-[2500px] z-0 md:z-10 pointer-events-none md:pointer-events-auto"
           >
             {[
               { img: "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp", x: -140, y: -120, r: -15, s: 0.95, z: 10 },
@@ -620,15 +620,18 @@ export default function App() {
               </motion.div>
             ))}
             
+            {/* Glow / Vignette Preto no Mobile para profundidade */}
+            <div className="md:hidden absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_85%)] z-20 pointer-events-none opacity-80" />
+            
             {/* Brilho Atmosférico */}
             <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[150px] -z-10" />
           </motion.div>
 
           {/* Direita: Conteúdo e Informações */}
-          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 md:pl-16 lg:pl-20">
+          <div className="relative z-30 md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left md:pl-16 lg:pl-20 py-12 md:py-0">
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="flex flex-col items-center md:items-start w-full max-w-xl"
             >
@@ -637,12 +640,12 @@ export default function App() {
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
               
-              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white whitespace-normal md:whitespace-nowrap">
+              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white whitespace-normal md:whitespace-nowrap drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                 Os melhores preços <br className="hidden md:block" />
                 <span className="text-gradient-ai">produtos e qualidade.</span>
               </h2>
               
-              <p className="text-sm md:text-lg text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left">
+              <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg">
                 Tenha acesso grátis a um painel cheio<br className="hidden md:block" />
                 de produtos incríveis.
               </p>
@@ -652,7 +655,7 @@ export default function App() {
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
+                className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
               >
                 Ver produtos
                 <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
