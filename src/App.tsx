@@ -580,7 +580,7 @@ export default function App() {
       <section id="produtos" className="pt-24 md:pt-32 pb-24 md:pb-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12 md:gap-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 md:gap-4 relative z-10">
           
           {/* Esquerda: Visual (Dashboard) */}
           <motion.div
@@ -592,7 +592,7 @@ export default function App() {
           >
             {/* Esquerda: Grid 3x3 Cinematográfico (Agora em Produtos) */}
             {/* Esquerda: Pilha de Cards 3D (Produtos - Estilo Connect AI) */}
-            <div className="relative h-[450px] md:h-[600px] flex items-center justify-center -ml-20 md:-ml-64 lg:-ml-80 perspective-[2000px]">
+            <div className="relative h-[450px] md:h-[650px] flex items-center justify-center -ml-12 md:-ml-40 lg:-ml-56 perspective-[2000px]">
               {[
                 "https://i.postimg.cc/DZ1c1XRC/connect_ai_1774345789074.webp",
                 "https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp",
@@ -609,7 +609,7 @@ export default function App() {
                   initial={{ opacity: 0, x: -200, rotateX: 0, rotateY: 0 }}
                   whileInView={{ 
                     opacity: 1, 
-                    x: idx * 32, // Ajustado para 9 imagens preencherem bem
+                    x: idx * 56, // Mais aberto conforme solicitado
                     y: idx * -24,
                     rotateX: 10,
                     rotateY: -25
@@ -637,24 +637,24 @@ export default function App() {
               ))}
 
               {/* Brilho Atmosférico */}
-              <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[120px] -z-10 translate-x-[-20%]" />
+              <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[140px] -z-10 translate-x-[-20%]" />
             </div>
           </motion.div>
 
           {/* Direita: Conteúdo e Informações */}
-          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 md:pl-16 lg:pl-32">
+          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2 md:pl-8">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center md:items-start"
+              className="flex flex-col items-center md:items-start w-full max-w-xl"
             >
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
                 <Package className="w-3.5 h-3.5 text-[#582ef5]" />
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
               
-              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1] text-center md:text-left">
+              <h2 className="text-[28px] sm:text-[36px] md:text-5xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.1] text-center md:text-left w-full">
                 Os melhores preços <br className="hidden md:block" />
                 <span className="text-gradient-ai">produtos e qualidade.</span>
               </h2>
