@@ -602,7 +602,7 @@ export default function App() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 order-2 md:order-1"
+            className="w-full md:w-2/5 order-2 md:order-1"
             style={{ perspective: "1500px" }}
           >
             <div className="relative group">
@@ -618,7 +618,7 @@ export default function App() {
           </motion.div>
 
           {/* Direita: Conteúdo e Informações */}
-          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2">
+          <div className="md:w-3/5 flex flex-col items-center md:items-start text-center md:text-left order-1 md:order-2">
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -630,9 +630,9 @@ export default function App() {
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
               
-              <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-                Os melhores preços <br />
-                <span className="text-gradient-ai">produtos e qualidade.</span>
+              <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1] flex flex-col items-center md:items-start">
+                <span className="whitespace-nowrap">Os melhores preços</span>
+                <span className="text-gradient-ai whitespace-nowrap">produtos e qualidade.</span>
               </h2>
               
               <p className="text-sm md:text-lg text-gray-400 mb-10 leading-relaxed max-w-md">
