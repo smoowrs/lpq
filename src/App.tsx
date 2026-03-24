@@ -768,87 +768,45 @@ export default function App() {
             viewport={{ once: true }}
             className="order-2 md:order-1"
           >
-            <div className="glass-card rounded-[2.5rem] p-0 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 h-[350px] md:h-[450px] bg-[#0d0d0d] group/map">
-              {/* Mapa de Fundo */}
-              <div className="absolute inset-0 opacity-20 grayscale mix-blend-screen pointer-events-none">
-                <img 
-                  src="https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg" 
-                  className="w-[200%] h-full object-cover translate-x-[-20%] invert scale-125 opacity-30"
-                  alt="World Map"
-                />
-              </div>
-
-              {/* Rota Animada (SVG) */}
-              <svg className="absolute inset-0 w-full h-full z-10 pointer-events-none" viewBox="0 0 1000 500">
-                <motion.path
-                  id="deliveryPath"
-                  d="M 850 150 Q 550 200 370 380" // China -> Brasil aprox
-                  fill="none"
-                  stroke="#582ef5"
-                  strokeWidth="3"
-                  strokeDasharray="8 8"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: 0.6 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                />
-                
-                {/* Glow da linha */}
-                <motion.path
-                  d="M 850 150 Q 550 200 370 380"
-                  fill="none"
-                  stroke="#582ef5"
-                  strokeWidth="6"
-                  className="blur-md opacity-20"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                />
-
-                {/* Pontos fixos */}
-                <circle cx="850" cy="150" r="5" fill="#582ef5" className="animate-pulse shadow-[0_0_15px_#582ef5]" />
-                <circle cx="370" cy="380" r="8" fill="#582ef5" className="animate-pulse shadow-[0_0_25px_#582ef5]" />
-              </svg>
-
-              {/* Drone / Pacote Animado */}
-              <div className="absolute inset-0 z-20 pointer-events-none">
-                <div 
-                  className="absolute w-12 h-12 flex items-center justify-center"
-                  style={{ 
-                    offsetPath: "path('M 850 150 Q 550 200 370 380')",
-                    animation: "droneMove 8s linear infinite"
-                  }}
-                >
-                  <div className="relative">
-                    <div className="absolute -inset-6 bg-[#582ef5]/30 rounded-full blur-2xl animate-pulse" />
-                    <div className="bg-[#1a1a1a] border-2 border-[#582ef5] p-2.5 rounded-2xl shadow-[0_0_30px_rgba(88,46,245,0.6)] flex items-center justify-center relative z-10">
-                      <Package className="w-6 h-6 text-white" />
-                    </div>
-                    {/* Hélices Animadas */}
-                    <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-[#582ef5] rounded-full animate-spin [animation-duration:0.4s]" />
-                    <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-[#582ef5] rounded-full animate-spin [animation-duration:0.3s]" />
-                    <div className="absolute -bottom-1 -left-1 w-4 h-4 border-t-2 border-[#582ef5] rounded-full animate-spin [animation-duration:0.5s]" />
-                    <div className="absolute -bottom-1 -right-1 w-4 h-4 border-t-2 border-[#582ef5] rounded-full animate-spin [animation-duration:0.35s]" />
+            <div className="glass-card rounded-3xl p-8 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#582ef5]/15 rounded-full blur-3xl opacity-50" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2b34f5]/10 rounded-full blur-3xl opacity-30" />
+              
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-8">
+                  <div>
+                    <h3 className="text-xl font-semibold text-white">Status do Pedido</h3>
+                    <p className="text-sm text-gray-400 mt-1 uppercase tracking-wider font-medium">Logística Connect</p>
+                  </div>
+                  <div className="px-4 py-1.5 bg-[#582ef5] text-white rounded-full text-[10px] font-bold border border-white/20 uppercase tracking-widest shadow-[0_0_15px_rgba(88,46,245,0.4)]">
+                    Em trânsito
                   </div>
                 </div>
-              </div>
 
-              {/* Badge: Rota Confirmada */}
-              <div className="absolute bottom-8 left-8 z-30">
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-2.5 bg-black/80 backdrop-blur-xl border border-[#582ef5]/30 px-5 py-2.5 rounded-2xl shadow-2xl"
-                >
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#582ef5] animate-pulse shadow-[0_0_10px_#582ef5]" />
-                  <span className="text-xs font-bold text-white uppercase tracking-[0.15em]">Rota Confirmada</span>
-                </motion.div>
-              </div>
-
-              {/* Overlay de Vinheta Decorativa */}
-              <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black/80 pointer-events-none" />
-              <div className="absolute top-8 right-8 text-right opacity-30 select-none">
-                <p className="text-[10px] font-mono text-[#582ef5] leading-none mb-1">LOCALIZATION SYSTEM v4.2</p>
-                <p className="text-[10px] font-mono text-gray-500 leading-none">TRACKING ACTIVE</p>
+                <div className="space-y-6">
+                  {trackingStages.map((stage, index) => {
+                    const isActive = index <= trackingStep;
+                    const isCurrent = index === trackingStep;
+                    return (
+                      <div key={index} className="flex gap-5 relative">
+                        {index < trackingStages.length - 1 && (
+                          <div className={`absolute left-[15px] top-8 bottom-[-24px] w-[1px] ${isActive ? 'bg-[#582ef5]' : 'bg-white/10'}`} />
+                        )}
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 relative z-10 transition-all duration-700 ${
+                          isActive ? 'bg-[#582ef5] text-white shadow-[0_0_20px_rgba(88,46,245,0.6)]' : 'bg-white/5 text-gray-600 border border-white/5'
+                        }`}>
+                          {stage.icon}
+                        </div>
+                        <div className={`pt-0.5 transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-30'}`}>
+                          <p className={`text-[15px] font-bold ${isCurrent ? 'text-white' : 'text-gray-300'}`}>{stage.title}</p>
+                          <p className="text-[12px] text-gray-500 flex items-center gap-1.5 mt-0.5 font-medium">
+                            <Clock className="w-3 h-3" /> {stage.time}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </motion.div>
