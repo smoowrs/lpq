@@ -91,44 +91,44 @@ export default function App() {
       </nav>
 
       {/* ─── HERO ─────────────────────────────────────────────── */}
-      <section className="pt-20 pb-20 px-6 relative overflow-hidden border-b border-white/5 min-h-[85vh] flex flex-col items-center justify-start">
+      <section className="min-h-screen pt-20 pb-20 px-6 relative overflow-hidden border-b border-white/5 flex items-center justify-center">
         
         {/* Grid Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
         
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20 relative z-10 w-full mt-2">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16 md:gap-24 relative z-10 w-full">
           
-          {/* Esquerda: Conteúdo e Ação */}
-          <div className="md:w-[48%] flex flex-col items-center md:items-start text-center md:text-left">
+          {/* Esquerda: Conteúdo e Ações */}
+          <div className="md:w-[45%] flex flex-col items-center md:items-start text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-medium mb-5 backdrop-blur-md shadow-[0_0_20px_rgba(88,46,245,0.15)]">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] font-medium mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(88,46,245,0.15)]">
                 <Sparkles className="w-3 h-3 text-[#582ef5]" />
                 <span className="text-gray-200">A revolução da importação com IA</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-8 leading-[1.05]">
                 A 1ª Rede Social <br />
                 <span className="text-gradient-ai">do importador</span>
               </h1>
               
-              <p className="text-xs md:text-base text-gray-400 mb-10 max-w-2xl leading-relaxed">
-                Crie sua conta grátis e acesse as aulas, rastreio em tempo real, IA para geração de imagens e o Minerador — uma IA que te ajuda com suas declarações evitando taxas abusivas
+              <p className="text-sm md:text-lg lg:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed">
+                Crie sua conta grátis e acesse as aulas, rastreio em tempo real, IA para geração de imagens e o Minerador — uma IA que te ajuda com suas declarações evitando taxas abusivas.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              <div className="flex flex-col sm:flex-row items-center gap-5 w-full sm:w-auto">
                 <motion.button
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
                   onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                  className="btn-primary px-6 sm:px-8 py-4 text-[13px] sm:text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap"
+                  className="btn-primary px-8 sm:px-10 py-5 text-[15px] sm:text-[17px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap rounded-full shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
                 >
                   Criar conta grátis
                   <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                    <ArrowRight className="w-4 h-4" strokeWidth={3} />
+                    <ArrowRight className="w-5 h-5" strokeWidth={3} />
                   </motion.div>
                 </motion.button>
                 <motion.button
@@ -136,10 +136,10 @@ export default function App() {
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
                   onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                  className="btn-secondary px-6 sm:px-8 py-4 text-[13px] sm:text-[15px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-lg group whitespace-nowrap"
+                  className="btn-secondary px-8 sm:px-10 py-5 text-[15px] sm:text-[17px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-full group whitespace-nowrap border border-white/10 bg-white/5 backdrop-blur-sm"
                 >
-                  Ver como funciona
-                  <Play className="w-4 h-4 fill-white" />
+                  Ver vídeo
+                  <Play className="w-4 h-4 fill-white text-white" />
                 </motion.button>
               </div>
             </motion.div>
@@ -147,22 +147,22 @@ export default function App() {
 
           {/* Direita: Vídeo + Ambilight */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9, x: 30 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full md:w-[52%] mx-auto"
+            className="relative w-full md:w-[55%] mx-auto"
           >
             {/* Ambilight blobs */}
-            <div className="absolute -inset-6 z-0 pointer-events-none">
-              <div className="ambilight-tl absolute top-0 left-0 w-3/5 h-3/5 blur-[60px] opacity-80 rounded-full" />
-              <div className="ambilight-tr absolute top-0 right-0 w-3/5 h-3/5 blur-[60px] opacity-80 rounded-full" />
-              <div className="ambilight-bl absolute bottom-0 left-0 w-3/5 h-3/5 blur-[60px] opacity-80 rounded-full" />
-              <div className="ambilight-br absolute bottom-0 right-0 w-3/5 h-3/5 blur-[60px] opacity-80 rounded-full" />
+            <div className="absolute -inset-10 z-0 pointer-events-none">
+              <div className="ambilight-tl absolute top-0 left-0 w-3/5 h-3/5 blur-[80px] opacity-90 rounded-full" />
+              <div className="ambilight-tr absolute top-0 right-0 w-3/5 h-3/5 blur-[80px] opacity-90 rounded-full" />
+              <div className="ambilight-bl absolute bottom-0 left-0 w-3/5 h-3/5 blur-[80px] opacity-90 rounded-full" />
+              <div className="ambilight-br absolute bottom-0 right-0 w-3/5 h-3/5 blur-[80px] opacity-90 rounded-full" />
             </div>
 
             {/* Video card */}
-            <div className="relative z-10 w-full bg-[#0a0a0a] rounded-2xl md:rounded-3xl border border-white/10 shadow-[0_0_50px_rgba(88,46,245,0.2)] overflow-hidden p-1 md:p-2">
-              <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
+            <div className="relative z-10 w-full bg-[#0a0a0a] rounded-[2.5rem] border border-white/10 shadow-[0_0_100px_rgba(88,46,245,0.25)] overflow-hidden p-1 md:p-2.5">
+              <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden bg-black flex items-center justify-center">
                 <iframe 
                   src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b" 
                   className="absolute top-0 left-0 w-full h-full border-0"
