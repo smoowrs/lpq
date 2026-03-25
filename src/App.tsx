@@ -985,8 +985,16 @@ export default function App() {
                 <span className="text-gray-300 uppercase tracking-wider">Connect AI</span>
               </div>
               <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
-                Crie imagens que <br />
-                <span className="text-gradient-ai">vendem mais.</span>
+                {/* Versão Desktop */}
+                <span className="hidden md:block">
+                  Crie imagens que <br />
+                  <span className="text-gradient-ai">vendem mais.</span>
+                </span>
+                {/* Versão Mobile */}
+                <span className="md:hidden block">
+                  Crie imagens que <br />
+                  <span className="text-gradient-ai">vendem mais</span> 🖼️
+                </span>
               </h2>
               <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed max-w-md">
                 Com o uso da Connect AI você transforma fotos simples de fornecedores em imagens que realmente geram interesse e um visual incrível na sua loja.
