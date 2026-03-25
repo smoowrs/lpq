@@ -882,19 +882,20 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative p-8 py-12 md:p-20 rounded-[2.5rem] md:rounded-[4rem] text-left overflow-hidden bg-[#22c55e] shadow-[0_40px_100px_rgba(34,197,94,0.3)]"
+            className="relative p-6 pt-16 pb-12 md:p-20 rounded-[2.5rem] md:rounded-[4rem] text-left overflow-hidden bg-[#22c55e] shadow-[0_40px_100px_rgba(34,197,94,0.3)]"
           >
-            {/* Efeito de Cupom: Cortes Circulares nas laterais */}
-            <div className="absolute top-1/2 -left-5 md:-left-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-r border-white/20 z-20" />
-            <div className="absolute top-1/2 -right-5 md:-right-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-l border-white/20 z-20" />
+            {/* Efeito de Cupom: Cortes Circulares */}
+            <div className="absolute top-[12%] md:top-1/2 -left-5 md:-left-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-r border-white/20 z-20" />
+            <div className="absolute top-[12%] md:top-1/2 -right-5 md:-right-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-l border-white/20 z-20" />
             
-            {/* Linha de Perfuração Vertical */}
-            <div className="absolute top-0 bottom-0 left-[10%] md:left-[18%] w-px border-l-2 border-dashed border-white/30" />
+            {/* Linha de Perfuração (Horizontal no Mobile, Vertical no Desktop) */}
+            <div className="absolute top-[12%] left-0 right-0 h-px border-t-2 border-dashed border-white/30 md:hidden" />
+            <div className="absolute top-0 bottom-0 left-[18%] w-px border-l-2 border-dashed border-white/30 hidden md:block" />
 
             {/* Brilhos Internos */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-[120px] pointer-events-none" />
             
-            <div className="relative z-10 pl-[12%] md:pl-[22%] pr-6 md:pr-12">
+            <div className="relative z-10 pt-8 md:pt-0 md:pl-[22%] pr-4 md:pr-12">
               <h2 className="text-[20px] sm:text-[30px] md:text-4xl lg:text-6xl font-black tracking-tighter mb-5 leading-[1.1] text-white">
                 <span className="block mb-1 uppercase opacity-90 sm:whitespace-nowrap">REGISTRE-SE e GANHE</span>
                 <span className="block drop-shadow-xl sm:whitespace-nowrap">R$660 em CUPONS</span>
