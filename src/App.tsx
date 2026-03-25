@@ -694,7 +694,7 @@ export default function App() {
                 <img 
                   src="https://i.postimg.cc/TPRLJ4S7/containerzada.webp" 
                   alt="Fábricas" 
-                  className="w-[350px] sm:w-[600px] md:w-[800px] lg:w-[1000px] max-w-none relative z-10 transform -translate-x-[10%] md:-translate-x-[20%]"
+                  className="w-[350px] sm:w-[500px] md:w-[700px] lg:w-[750px] max-w-none relative z-10 transform -translate-x-[5%] md:-translate-x-[15%]"
                 />
              </div>
           </motion.div>
@@ -717,7 +717,8 @@ export default function App() {
               </div>
               
               <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)] px-4 sm:px-0">
-                Os maiores fabricantes <br className="hidden md:block" />
+                Os maiores <br />
+                fabricantes <br />
                 <span className="text-gradient-ai">e lojas oficiais da China</span>
               </h2>
               
