@@ -122,7 +122,7 @@ export default function App() {
                 <span className="text-gray-200">A revolução da importação com IA</span>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-8 leading-[1.1] flex flex-col items-center md:items-start">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[82px] font-extrabold tracking-tight mb-8 leading-[1] flex flex-col items-center md:items-start">
                 <span className="whitespace-nowrap">Economize ou Lucre</span>
                 <span className="text-gradient-ai whitespace-nowrap">Importando da China</span>
               </h1>
@@ -277,7 +277,7 @@ export default function App() {
                 <span>O MINERADOR</span>
               </div>
               
-              <h2 className="text-[36px] sm:text-[42px] md:text-5xl lg:text-7xl font-black tracking-tighter mb-4 leading-[1] text-white">
+              <h2 className="text-[36px] sm:text-[42px] md:text-5xl lg:text-[82px] font-black tracking-tighter mb-4 leading-[1] text-white">
                 O Assistente <br />
                 <span className="text-gradient-ai">inteligente 💬</span>
               </h2>
