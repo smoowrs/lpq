@@ -457,7 +457,7 @@ export default function App() {
               </span>
             </h2>
             <p className="text-sm md:text-base text-gray-300 md:text-gray-400 mb-8 md:mb-10 leading-relaxed max-w-md drop-shadow-lg">
-              Do primeiro acesso até a chegada dos produtos na porta da sua casa ou da sua loja. Nosso treinamento completo ensina cada detalhe do processo.
+              Do primeiro acesso até a chegada dos produtos na porta da sua casa ou da sua loja.
             </p>
             
             <ul className="hidden md:block space-y-5 mb-12 w-full max-w-sm drop-shadow-2xl">
