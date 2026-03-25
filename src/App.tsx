@@ -395,8 +395,15 @@ export default function App() {
                 <span className="text-gray-300 uppercase tracking-wider">Aulas Passo a Passo</span>
               </div>
               <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
-                Aprenda a <br />
-                <span className="text-gradient-ai">importar do zero.</span>
+                {/* Versão Desktop */}
+                <span className="hidden md:block">
+                  Aprenda a <br />
+                  <span className="text-gradient-ai">importar do zero.</span>
+                </span>
+                {/* Versão Mobile (1 linha) */}
+                <span className="md:hidden block whitespace-nowrap">
+                  Aprenda importar do zero ✈️
+                </span>
               </h2>
               <p className="text-sm md:text-base text-gray-400 mb-10 leading-relaxed max-w-md">
                 Do primeiro acesso até a chegada dos produtos na porta da sua casa ou da sua loja. Nosso treinamento completo ensina cada detalhe do processo.
