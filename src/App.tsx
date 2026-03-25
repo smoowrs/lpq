@@ -114,10 +114,19 @@ export default function App() {
                 <span className="text-gray-200">A revolução da importação com IA</span>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[56px] font-black tracking-tight mb-8 leading-[1.05] flex flex-col items-center md:items-start text-white">
-                <span className="whitespace-nowrap">Economize ou Lucre</span>
-                <span className="text-gradient-ai whitespace-nowrap">Importando Produtos</span>
-                <span className="whitespace-nowrap">Direto da China 🌏</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[56px] font-black tracking-tight mb-8 leading-[1.05] text-white">
+                {/* Versão Desktop (3 linhas) */}
+                <div className="hidden md:flex flex-col items-start">
+                  <span className="whitespace-nowrap">Economize ou Lucre</span>
+                  <span className="text-gradient-ai whitespace-nowrap">Importando Produtos</span>
+                  <span className="whitespace-nowrap">Direto da China 🌏</span>
+                </div>
+                
+                {/* Versão Mobile (2 linhas) */}
+                <div className="flex md:hidden flex-col items-center">
+                  <span className="whitespace-nowrap">Economize ou Lucre</span>
+                  <span className="text-gradient-ai whitespace-nowrap">Importando da China 🌏</span>
+                </div>
               </h1>
 
               {/* Vídeo apenas no MOBILE (Entre Título e Descrição) */}
