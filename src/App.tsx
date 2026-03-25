@@ -447,9 +447,17 @@ export default function App() {
                 </div>
                 
                 <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-bold tracking-tighter mb-8 leading-[1.1] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
-                  Os maiores <br />
-                  fabricantes e lojas <br />
-                  <span className="text-gradient-ai">da China</span>
+                  {/* Versão Desktop */}
+                  <span className="hidden md:block">
+                    Os maiores <br />
+                    fabricantes e lojas <br />
+                    <span className="text-gradient-ai">da China</span>
+                  </span>
+                  {/* Versão Mobile (2 linhas) */}
+                  <span className="md:hidden text-center md:text-left block">
+                    Os maiores fábricantes <br />
+                    <span className="text-gradient-ai">e lojas da China 🛒</span>
+                  </span>
                 </h2>
                 
                 <p className="text-sm md:text-lg text-gray-300 md:text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-md font-medium">
