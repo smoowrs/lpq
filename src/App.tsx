@@ -3,7 +3,8 @@ import {
   Package, Sparkles, Users, ShieldCheck, 
   ArrowRight, PlayCircle, Menu, CheckCircle2,
   Clock, MapPin, Globe, Play, Trophy,
-  Crown, Star, Medal, ChevronDown, Check
+  Crown, Star, Medal, ChevronDown, Check,
+  Factory
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -673,6 +674,73 @@ export default function App() {
           </div>
 
           <div className="md:w-1/2 hidden md:block" /> {/* Espaçador à direita no desktop */}
+        </div>
+      </section>
+
+      {/* ─── FÁBRICAS ────────────────────────────────────────── */}
+      <section id="fabricas" className="pt-24 md:pt-32 pb-12 md:pb-32 relative overflow-hidden bg-black border-t border-white/5">
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
+        
+        {/* Layer de Fundo: Imagem Encaixada (Esquerda no desktop) */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center md:justify-start md:pl-12 lg:pl-24">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="relative w-full md:w-1/2 h-full flex items-center justify-center sm:justify-start"
+          >
+             <div className="relative group p-4 sm:p-0">
+                <div className="absolute -inset-4 bg-[#582ef5]/20 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <img 
+                  src="https://i.postimg.cc/5ydKcXPS/QPW-2-2.webp" 
+                  alt="Fábricas" 
+                  className="w-[280px] sm:w-[500px] md:w-[600px] lg:w-[700px] max-w-none rounded-[2rem] md:rounded-[3rem] shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/10 relative z-10"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-black/40 rounded-[2rem] md:rounded-[3rem] z-20 pointer-events-none" />
+             </div>
+          </motion.div>
+        </div>
+
+        {/* Foreground: Conteúdo Textual (Direita no desktop) */}
+        <div className="max-w-7xl mx-auto px-6 relative z-30 flex flex-col md:flex-row items-center justify-center md:justify-between min-h-[600px] md:min-h-0">
+          <div className="md:w-1/2 hidden md:block" /> 
+          
+          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left mt-12 md:mt-0">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center md:items-start w-full max-w-xl"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+                <Factory className="w-3.5 h-3.5 text-[#582ef5]" />
+                <span className="text-gray-300 uppercase tracking-wider">Fábricas</span>
+              </div>
+              
+              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)] px-4 sm:px-0">
+                Os maiores fabricantes <br className="hidden md:block" />
+                <span className="text-gradient-ai">e lojas oficiais da China</span>
+              </h2>
+              
+              <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg font-medium lg:whitespace-normal">
+                Um painel com fabricantes e fornecedores confiaveis e com extrema agilidade de entrega, crie sua conta grátis e acesse nossas fabricas.
+              </p>
+
+              <motion.button
+                whileHover="hover"
+                initial="initial"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
+              >
+                Ver fábricas
+                <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                  <ArrowRight className="w-4 h-4" strokeWidth={3} />
+                </motion.div>
+              </motion.button>
+            </motion.div>
+          </div>
         </div>
       </section>
 
