@@ -876,16 +876,16 @@ export default function App() {
             className="relative p-8 py-12 md:p-20 rounded-[2.5rem] md:rounded-[4rem] text-left overflow-hidden bg-[#22c55e] shadow-[0_40px_100px_rgba(34,197,94,0.3)]"
           >
             {/* Efeito de Cupom: Cortes Circulares nas laterais */}
-            <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black border-r border-white/20 hidden md:block z-20" />
-            <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black border-l border-white/20 hidden md:block z-20" />
+            <div className="absolute top-1/2 -left-5 md:-left-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-r border-white/20 z-20" />
+            <div className="absolute top-1/2 -right-5 md:-right-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-l border-white/20 z-20" />
             
             {/* Linha de Perfuração Vertical */}
-            <div className="absolute top-0 bottom-0 left-[18%] w-px border-l-2 border-dashed border-white/30 hidden lg:block" />
+            <div className="absolute top-0 bottom-0 left-[10%] md:left-[18%] w-px border-l-2 border-dashed border-white/30" />
 
             {/* Brilhos Internos */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-[120px] pointer-events-none" />
             
-            <div className="relative z-10 lg:pl-[22%]">
+            <div className="relative z-10 pl-[12%] md:pl-[22%]">
               <h2 className="text-[24px] sm:text-[36px] md:text-5xl lg:text-7xl font-black tracking-tighter mb-6 leading-[1.05] text-white">
                 <span className="block mb-1 uppercase opacity-90 sm:whitespace-nowrap">REGISTRE-SE e GANHE</span>
                 <span className="block drop-shadow-xl sm:whitespace-nowrap">R$660 em CUPONS</span>
