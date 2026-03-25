@@ -207,20 +207,20 @@ export default function App() {
         {/* Glow de fundo atmosférico */}
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center relative z-10 gap-16 md:gap-12">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center relative z-10 gap-12 md:gap-20">
           
           {/* Celular (Fica em cima no Mobile, Esquerda no Desktop) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 flex justify-center md:justify-end z-20"
+            className="w-full md:w-1/2 flex justify-center z-20"
           >
-            <div className="relative z-10 flex justify-center md:justify-end">
+            <div className="relative z-10 flex justify-center">
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
-                 className="w-full max-w-[280px] md:max-w-[480px] object-contain"
+                 className="w-full max-w-[320px] md:max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                />
             </div>
           </motion.div>
