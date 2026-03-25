@@ -12,7 +12,7 @@ type Language = 'pt' | 'en' | 'es';
 
 const translations = {
   pt: {
-    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "🇧🇷 Port (BR)" },
+    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português" },
     hero: {
       sparkle: "A revolução da importação com IA",
       title1: "Economize ou Lucre",
@@ -111,7 +111,7 @@ const translations = {
     footer: { rights: "Todos os direitos reservados", terms: "Termos", privacy: "Privacidade" }
   },
   en: {
-    nav: { login: "Login", create: "Create free account", create_short: "Create account", lang: "🇺🇸 English" },
+    nav: { login: "Login", create: "Create free account", create_short: "Create account", lang: "English" },
     hero: {
       sparkle: "The import revolution with AI",
       title1: "Save or Profit",
@@ -210,7 +210,7 @@ const translations = {
     footer: { rights: "All rights reserved", terms: "Terms", privacy: "Privacy" }
   },
   es: {
-    nav: { login: "Entrar", create: "Crear cuenta gratis", create_short: "Crear cuenta", lang: "🇪🇸 Español" },
+    nav: { login: "Entrar", create: "Crear cuenta gratis", create_short: "Crear cuenta", lang: "Español" },
     hero: {
       sparkle: "La revolución de la importación con IA",
       title1: "Ahorra o Gana",
@@ -380,12 +380,11 @@ export default function App() {
                       e.stopPropagation();
                       setLanguage(lang);
                     }}
-                    className={`w-full px-4 py-3 flex items-center justify-between text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
+                    className={`w-full px-4 py-3 flex items-center gap-3 text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
                   >
-                    <div className="flex items-center gap-2">
-                      <span>{flags[lang]}</span>
-                      <span>{translations[lang].nav.lang}</span>
-                    </div>
+                    <span className="text-lg leading-none">{flags[lang]}</span>
+                    <span>{translations[lang].nav.lang}</span>
+                    <div className="flex-1" />
                     {language === lang && <Check className="w-3.5 h-3.5 text-[#582ef5]" />}
                   </button>
                 ))}
@@ -428,12 +427,11 @@ export default function App() {
                         setLanguage(lang);
                         setIsLangMenuOpen(false);
                       }}
-                      className={`w-full px-4 py-3.5 flex items-center justify-between text-xs hover:bg-white/5 active:bg-white/10 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
+                      className={`w-full px-4 py-3.5 flex items-center gap-3 text-xs hover:bg-white/5 active:bg-white/10 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
                     >
-                      <div className="flex items-center gap-2">
-                        <span>{flags[lang]}</span>
-                        <span>{translations[lang].nav.lang}</span>
-                      </div>
+                      <span className="text-lg leading-none">{flags[lang]}</span>
+                      <span>{translations[lang].nav.lang}</span>
+                      <div className="flex-1" />
                       {language === lang && <Check className="w-3.5 h-3.5 text-[#582ef5]" />}
                     </button>
                   ))}
