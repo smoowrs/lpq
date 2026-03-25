@@ -117,7 +117,7 @@ export default function App() {
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[56px] font-black tracking-tight mb-8 leading-[1.05] flex flex-col items-center md:items-start text-white">
                 <span className="whitespace-nowrap">Economize ou Lucre</span>
                 <span className="text-gradient-ai whitespace-nowrap">Importando Produtos</span>
-                <span className="whitespace-nowrap">Direto da China</span>
+                <span className="whitespace-nowrap">Direto da China 🌏</span>
               </h1>
 
               {/* Vídeo apenas no MOBILE (Entre Título e Descrição) */}
@@ -138,7 +138,7 @@ export default function App() {
                 </div>
               </div>
               
-              <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed">
+              <p className="text-[13px] sm:text-sm md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed px-4 md:px-0">
                 Crie sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe de nossa comunidade de networking e utilize diversas outras ferramentas
               </p>
 
