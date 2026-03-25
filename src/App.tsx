@@ -785,47 +785,73 @@ export default function App() {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
             
-            {/* Esquerda: Pilha de Imagens 3D das Aulas */}
-            <div className="relative h-[500px] md:h-[650px] flex items-center justify-center order-2 md:order-1 perspective-[1500px]">
-              {/* Ambilight Background */}
-              <div className="absolute -inset-10 z-0 pointer-events-none opacity-40">
-                <div className="absolute top-1/4 left-1/4 w-3/5 h-3/5 blur-[80px] rounded-full bg-[#582ef5]/20" />
-                <div className="absolute bottom-1/4 right-1/4 w-3/5 h-3/5 blur-[80px] rounded-full bg-[#2b34f5]/20" />
+            {/* Esquerda: Novo Formato de Cards 3D Espaçados */}
+            <div className="relative h-[550px] md:h-[750px] lg:h-[800px] flex items-center justify-center order-2 md:order-1 perspective-[2000px] py-20">
+              {/* Ambilight Background Reforçado */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[150px] rounded-full bg-[#582ef5]/10" />
+                <div className="absolute top-0 left-0 w-64 h-64 blur-[100px] rounded-full bg-[#582ef5]/15 animate-pulse" />
+                <div className="absolute bottom-0 right-0 w-64 h-64 blur-[100px] rounded-full bg-[#2b34f5]/15 animate-pulse [animation-delay:1s]" />
               </div>
 
               {[
-                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01" },
-                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02" },
-                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03" },
-                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04" },
-                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05" },
-                { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06" }
+                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15, z: 0 },
+                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15, z: 20 },
+                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03", x: -180, y: 40, rot: -25, z: 40 },
+                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04", x: -20, y: -20, rot: 5, z: 60 },
+                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05", x: 160, y: 60, rot: 10, z: 80 },
+                { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06", x: -60, y: 220, rot: -5, z: 100 }
               ].map((aula, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, x: -200, y: 100, rotateX: 0, rotateY: 0 }}
+                  initial={{ opacity: 0, scale: 0.5, x: 0, y: 100, rotateZ: 0 }}
                   whileInView={{ 
                     opacity: 1, 
-                    x: idx * 35 - 80, 
-                    y: idx * -25 + 50, 
-                    rotateX: 12,
-                    rotateY: 25
+                    scale: 1,
+                    x: aula.x, 
+                    y: aula.y, 
+                    rotateZ: aula.rot,
+                    rotateX: 10,
+                    rotateY: idx % 2 === 0 ? -15 : 15,
+                    z: aula.z
                   }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 1.2, type: "spring", stiffness: 40 }}
-                  className="absolute w-40 md:w-56 lg:w-60 aspect-[9/16] rounded-xl md:rounded-3xl overflow-hidden border border-white/10 shadow-[0_30px_60px_rgba(0,0,0,0.9)] transition-all hover:z-50 hover:scale-110 duration-500 group/card-aula bg-[#0d0d0d]"
+                  transition={{ 
+                    delay: idx * 0.1, 
+                    duration: 1.5, 
+                    type: "spring", 
+                    stiffness: 35,
+                    damping: 15
+                  }}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    z: 200, 
+                    rotateZ: 0, 
+                    rotateX: 0, 
+                    rotateY: 0,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="absolute w-36 md:w-52 lg:w-56 aspect-[9/16] rounded-2xl md:rounded-[2.5rem] overflow-hidden border border-white/20 shadow-[0_40px_80px_rgba(0,0,0,0.8)] cursor-pointer group/card-aula bg-black"
                   style={{ 
                     zIndex: idx,
                     transformStyle: "preserve-3d"
                   }}
                 >
-                  <div className="absolute top-3 left-3 z-20 opacity-0 group-hover/card-aula:opacity-100 transition-opacity">
-                    <span className="text-[10px] font-mono font-black text-white bg-[#582ef5] px-2 py-1 rounded-md shadow-lg">
-                      MOD {aula.id}
+                  <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
+                    <span className="text-[10px] font-black text-white bg-[#582ef5] px-2.5 py-1 rounded-lg border border-white/20 shadow-[0_0_15px_rgba(88,46,245,0.5)]">
+                      M{aula.id}
                     </span>
                   </div>
-                  <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90 group-hover/card-aula:brightness-110 transition-all duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
+                  <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90 group-hover/card-aula:brightness-110 transition-all duration-500" />
+                  
+                  {/* Glassmorphism Inner Shadow */}
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl md:rounded-[2.5rem] pointer-events-none" />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                  
+                  {/* Shine effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover/card-aula:opacity-100 transition-opacity" />
                 </motion.div>
               ))}
             </div>
