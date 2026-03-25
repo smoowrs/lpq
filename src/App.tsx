@@ -207,8 +207,8 @@ export default function App() {
 
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
       <section id="comunidade" className="pt-24 md:pt-32 pb-16 md:pb-40 px-6 relative overflow-hidden bg-black border-t border-white/5">
-        {/* Glow de fundo atmosférico */}
-        <div className="absolute top-1/2 left-0 md:left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#582ef5]/20 md:bg-[#582ef5]/10 rounded-full blur-[100px] md:blur-[150px] pointer-events-none" />
+        {/* Glow de fundo atmosférico - Apenas Desktop agora */}
+        <div className="hidden md:block absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto w-full relative z-10">
           
@@ -221,12 +221,12 @@ export default function App() {
             </div>
             
             <div className="flex flex-row items-center w-full">
-              {/* Lado Esquerdo: Imagem do Telefone Cortada */}
-              <div className="w-[45%] flex -ml-10 relative items-center justify-center overflow-visible">
+              {/* Lado Esquerdo: Imagem do Telefone (sem borda no canto e reduzida) */}
+              <div className="w-[45%] flex relative items-center justify-center">
                  <img 
                    src="https://i.postimg.cc/3RkrkCVn/phones.png"
                    alt="App Comunidade"
-                   className="w-[200px] sm:w-[240px] max-w-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                   className="w-[170px] xl:w-[200px] sm:w-[220px] max-w-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
                    loading="eager"
                    decoding="async"
                  />
