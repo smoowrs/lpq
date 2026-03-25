@@ -717,9 +717,9 @@ export default function App() {
               </div>
               
               <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)] px-4 sm:px-0">
-                Os maiores <br />
-                fabricantes <br />
-                <span className="text-gradient-ai">e lojas oficiais da China</span>
+                Os maiores fabricantes <br />
+                e lojas oficiais <br />
+                <span className="text-gradient-ai">da China</span>
               </h2>
               
               <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg font-medium lg:whitespace-normal">
