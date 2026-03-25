@@ -600,9 +600,16 @@ export default function App() {
           <div className="md:hidden flex flex-col w-full mb-12">
             
             <div className="flex flex-row items-center w-full mt-4">
-              {/* Lado Esquerdo: Imagem do Telefone (sem borda no canto e reduzida) */}
-              <div className="w-[45%] flex relative items-center justify-center">
-                 <img 
+              {/* Lado Esquerdo: Imagem do Telefone (com animação de flutuação) */}
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="w-[45%] flex relative items-center justify-center"
+              >
+                 <motion.img 
+                   animate={{ y: [0, -10, 0] }}
+                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                    src="https://i.postimg.cc/3RkrkCVn/phones.png"
                    alt="App Comunidade"
                    className="w-[170px] xl:w-[200px] sm:w-[220px] max-w-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
@@ -611,10 +618,16 @@ export default function App() {
                  />
                  {/* Degradê para sumir suavemente na base */}
                  <div className="absolute inset-x-0 -bottom-10 h-32 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
-              </div>
+              </motion.div>
               
-              {/* Lado Direito: Textos e Botão */}
-              <div className="w-[55%] flex flex-col pl-4">
+              {/* Lado Direito: Textos e Botão com animação de surgimento */}
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="w-[55%] flex flex-col pl-4"
+              >
                 {/* Badge no Topo Direito (agora alinhado com os textos) */}
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[9px] sm:text-[10px] font-bold mb-4 md:mb-8 backdrop-blur-md uppercase tracking-[0.2em] text-gray-400 w-fit">
                   <Users className="w-3 h-3 text-[#582ef5]" />
@@ -635,7 +648,7 @@ export default function App() {
                   {t.comunidade.btn}
                   <ArrowRight className="w-4 h-4" strokeWidth={3} />
                 </button>
-              </div>
+              </motion.div>
             </div>
           </div>
 
