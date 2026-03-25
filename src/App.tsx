@@ -532,7 +532,7 @@ export default function App() {
       </section>
 
       {/* ─── AULAS PASSO A PASSO ────────────────────────────────── */}
-      <section id="aulas" className="py-20 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-[#04050D]">
+      <section id="aulas" className="py-20 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-black">
         <div className="max-w-7xl mx-auto relative z-10">
           
           <motion.div
@@ -679,7 +679,6 @@ export default function App() {
 
       {/* ─── FÁBRICAS ────────────────────────────────────────── */}
       <section id="fabricas" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
-        <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 lg:gap-32">
@@ -692,7 +691,6 @@ export default function App() {
               className="w-full md:w-[45%] flex justify-center md:justify-end"
             >
                <div className="relative">
-                  <div className="absolute -inset-10 bg-[#582ef5]/10 rounded-full blur-3xl opacity-30 pointer-events-none" />
                   <img 
                     src="https://i.postimg.cc/SxvyP1tc/CAIXAS.webp" 
                     alt="Fábricas" 
