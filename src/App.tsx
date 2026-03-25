@@ -540,8 +540,15 @@ export default function App() {
               </div>
               
               <h2 className="text-[28px] md:text-5xl lg:text-[72px] font-black tracking-tighter mb-4 lg:mb-1 leading-[1] text-white">
-                O Assistente <br />
-                <span className="text-gradient-ai">inteligente 💬</span>
+                {/* Versão Desktop */}
+                <span className="hidden md:block">
+                  O Assistente <br />
+                  <span className="text-gradient-ai">inteligente 💬</span>
+                </span>
+                {/* Versão Mobile (1 linha) */}
+                <span className="md:hidden block whitespace-nowrap text-[26px]">
+                  O Assistente <span className="text-gradient-ai">inteligente</span> 💬
+                </span>
               </h2>
 
               <p className="text-sm md:text-base text-gray-400 mb-8 max-w-xl leading-relaxed lg:mx-0">
