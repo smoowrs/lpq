@@ -932,8 +932,15 @@ export default function App() {
               <span className="text-gray-300 uppercase tracking-wider">Logística Inteligente</span>
             </div>
             <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
-              Rastreio em <br />
-              <span className="text-gradient-ai">Tempo Real.</span>
+              {/* Versão Desktop */}
+              <span className="hidden md:block">
+                Rastreio em <br />
+                <span className="text-gradient-ai">Tempo Real.</span>
+              </span>
+              {/* Versão Mobile */}
+              <span className="md:hidden block whitespace-nowrap text-[26px]">
+                Rastreio em <span className="text-gradient-ai">Tempo Real</span> 🗺️
+              </span>
             </h2>
             <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed">
               Nosso sistema se conecta diretamente com as transportadoras internacionais e Correios para te dar atualizações precisas e automáticas.
