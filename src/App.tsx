@@ -110,7 +110,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-8 relative z-10 w-full">
           
           {/* Lado Esquerdo (ou Mobile Top) */}
-          <div className="md:w-[42%] flex flex-col items-center md:items-start text-center md:text-left w-full">
+          <div className="md:w-[45%] flex flex-col items-center md:items-start text-center md:text-left w-full">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -122,10 +122,10 @@ export default function App() {
                 <span className="text-gray-200">A revolução da importação com IA</span>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[76px] font-extrabold tracking-tight mb-8 leading-[0.95] flex flex-col items-center md:items-start">
-                <span>Economize ou Lucre</span>
-                <span className="text-gradient-ai">Importando</span>
-                <span className="text-white">da China</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[72px] font-black tracking-tight mb-8 leading-[1.05] flex flex-col items-center md:items-start text-white">
+                <span className="whitespace-nowrap">Economize ou Lucre</span>
+                <span className="text-gradient-ai whitespace-nowrap">Importando Produtos</span>
+                <span className="whitespace-nowrap">Direto da China</span>
               </h1>
 
               {/* Vídeo apenas no MOBILE (Entre Título e Descrição) */}
