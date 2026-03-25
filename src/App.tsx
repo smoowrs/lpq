@@ -438,9 +438,10 @@ export default function App() {
                   <span className="text-gray-300 uppercase tracking-wider">Fábricas</span>
                 </div>
                 
-                <h2 className="text-[34px] md:text-5xl lg:text-6xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
-                  Os maiores fabricantes <br />
-                  <span className="text-gradient-ai">e lojas oficiais da China</span>
+                <h2 className="text-[30px] md:text-[40px] lg:text-[52px] font-bold tracking-tighter mb-8 leading-[1.1] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+                  Os maiores <br />
+                  fabricantes e lojas <br />
+                  <span className="text-gradient-ai">da China</span>
                 </h2>
                 
                 <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md font-medium">
