@@ -862,52 +862,68 @@ export default function App() {
         </div>
       </section>
 
-      {/* ─── CTA ──────────────────────────────────────────────── */}
+      {/* ─── CTA (CUPOM DOURADO) ─────────────────────────────────── */}
       <section id="cadastro" className="py-24 md:py-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
-        {/* Efeitos de Fundo */}
+        {/* Efeitos de Fundo Atmosféricos */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#582ef5]/50 to-transparent" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#582ef5]/10 rounded-full blur-[160px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] left-1/2 -translate-x-1/2 w-[120%] h-[300px] bg-[#2b34f5]/5 rounded-[100%] blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[160px] pointer-events-none" />
 
-        <div className="max-w-4xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="glass-card p-6 py-10 md:p-16 rounded-[2rem] md:rounded-[2.5rem] border border-white/10 text-center relative overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)]"
+            className="relative p-8 py-12 md:p-20 rounded-[2.5rem] md:rounded-[4rem] border border-[#EAB308]/40 text-center overflow-hidden bg-gradient-to-br from-[#121212] via-[#0d0d0d] to-[#040404] shadow-[0_0_100px_rgba(234,179,8,0.1)]"
           >
-            {/* Brilho interno do cartão */}
-            <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#582ef5]/20 rounded-full blur-3xl" />
+            {/* Efeito de Cupom: Cortes Circulares nas laterais */}
+            <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black border-r border-[#EAB308]/30 hidden md:block z-20" />
+            <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black border-l border-[#EAB308]/30 hidden md:block z-20" />
             
-            <h2 className="text-[28px] sm:text-[42px] md:text-6xl lg:text-7xl font-bold tracking-tighter mb-10 leading-[1.05]">
-              <span className="block whitespace-nowrap">REGISTRE-SE e GANHE</span>
-              <span className="text-gradient-ai block whitespace-nowrap">R$660 em CUPONS</span>
-            </h2>
+            {/* Linha de Perfuração Vertical */}
+            <div className="absolute top-0 bottom-0 left-[18%] w-px border-l-2 border-dashed border-[#EAB308]/20 hidden lg:block" />
+
+            {/* Brilhos Atmosféricos Dourados */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#EAB308]/20 rounded-full blur-[100px]" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#EAB308]/10 rounded-full blur-[80px]" />
             
-            <p className="text-gray-400 text-sm md:text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-              Criando sua conta grátis você ganha cupons de desconto para realizar suas primeiras importação
-            </p>
+            <div className="relative z-10">
+              <h2 className="text-[28px] sm:text-[42px] md:text-6xl lg:text-7xl font-black tracking-tighter mb-10 leading-[1.05] drop-shadow-[0_0_35px_rgba(234,179,8,0.4)]">
+                <span className="block text-white mb-2 uppercase">REGISTRE-SE e GANHE</span>
+                <span className="block bg-gradient-to-r from-[#FFD700] via-[#FDB931] to-[#FFD700] bg-clip-text text-transparent animate-shimmer py-1">R$660 em CUPONS</span>
+              </h2>
+              
+              <p className="text-gray-400 text-sm md:text-lg mb-12 max-w-xl mx-auto leading-relaxed">
+                Aproveite essa oferta exclusiva de boas-vindas. Ganhe cupons de desconto exclusivos para baratear suas primeiras importações diretamente da fábrica.
+              </p>
 
-            <motion.button
-              whileHover="hover"
-              initial="initial"
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary px-10 py-5 text-[15px] sm:text-xl font-bold flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)] group whitespace-nowrap"
-            >
-              Crie sua conta grátis
-              <motion.div variants={{ initial: { x: 0 }, hover: { x: 8 } }}>
-                <ArrowRight className="w-6 h-6" strokeWidth={3} />
-              </motion.div>
-            </motion.button>
+              <motion.button
+                whileHover="hover"
+                initial="initial"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary px-12 py-5 text-base sm:text-xl font-black flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)] md:shadow-[0_20px_60px_rgba(234,179,8,0.2)] group whitespace-nowrap border-0 rounded-2xl md:rounded-[1.5rem]"
+              >
+                Crie sua conta grátis
+                <motion.div variants={{ initial: { x: 0 }, hover: { x: 8 } }}>
+                   <ArrowRight className="w-6 h-6" strokeWidth={3} />
+                </motion.div>
+              </motion.button>
 
-            {/* Selo de Confiança / Badges Rápidos */}
-            <div className="mt-10 flex items-center justify-center gap-6 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-               <ShieldCheck className="w-5 h-5" />
-               <span className="text-[10px] uppercase tracking-widest font-bold">Acesso Seguro</span>
-               <div className="w-1 h-1 rounded-full bg-white/20" />
-               <Package className="w-5 h-5" />
-               <span className="text-[10px] uppercase tracking-widest font-bold">Envio Direto</span>
+              {/* Badges de Cupom */}
+              <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                 <div className="flex items-center gap-2">
+                   <ShieldCheck className="w-4 h-4 text-[#EAB308]" />
+                   <span className="text-[10px] uppercase tracking-widest font-bold">Resgate Imediato</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                   <Users className="w-4 h-4 text-[#EAB308]" />
+                   <span className="text-[10px] uppercase tracking-widest font-bold">Oferta Única</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                   <Sparkles className="w-4 h-4 text-[#EAB308]" />
+                   <span className="text-[10px] uppercase tracking-widest font-bold">VIP Connect</span>
+                 </div>
+              </div>
             </div>
           </motion.div>
         </div>
