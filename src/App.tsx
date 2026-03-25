@@ -439,7 +439,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* ─── FÁBRICAS ────────────────────────────────────────── */}
       <section id="fabricas" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -464,16 +463,27 @@ export default function App() {
                   <span className="text-gradient-ai">da China</span>
                 </h2>
                 
-                <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md font-medium">
-                  Um painel com fabricantes e fornecedores confiaveis e com extrema agilidade de entrega, crie sua conta grátis e acesse nossas fabricas.
+                <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-md font-medium">
+                  Um painel com fabricantes e fornecedores confiáveis e com extrema agilidade de entrega, crie sua conta grátis e acesse nossas fábricas.
                 </p>
+
+                {/* Imagem (Apenas Mobile: Entre Descrição e Botão) */}
+                <div className="flex md:hidden w-full justify-center my-4 relative z-10">
+                  <img 
+                    src="https://i.postimg.cc/nLX55SV5/product.webp" 
+                    alt="Fábricas Mobile" 
+                    className="w-full max-w-[280px] sm:max-w-[340px] drop-shadow-xl z-10"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
 
                 <motion.button
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
                   onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                  className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
+                  className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300 mt-2 md:mt-0"
                 >
                   Ver fábricas
                   <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
@@ -483,18 +493,18 @@ export default function App() {
               </motion.div>
             </div>
 
-            {/* Imagem (Direita no Desktop) */}
+            {/* Imagem (Apenas Desktop: Direita) */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="w-full md:w-[45%] flex justify-center md:justify-start order-1 md:order-2"
+              className="hidden md:flex flex-col w-[45%] justify-center items-start order-1 md:order-2"
             >
                <div className="relative">
                   <img 
                     src="https://i.postimg.cc/nLX55SV5/product.webp" 
                     alt="Fábricas" 
-                    className="w-full max-w-[320px] sm:max-w-[420px] md:max-w-none lg:w-[560px] relative z-10"
+                    className="w-full max-w-none lg:w-[560px] relative z-10"
                     loading="lazy"
                     decoding="async"
                   />
@@ -510,14 +520,15 @@ export default function App() {
       <section id="minerador" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-y-12 lg:gap-24">
-          {/* Coluna esquerda: Título, Descrição e Botão */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-1">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
+          
+          {/* Coluna esquerda: Título, Descrição e Botão (No mobile, engloba tudo) */}
+          <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center lg:items-start"
+              className="flex flex-col items-center lg:items-start w-full"
             >
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-6 backdrop-blur-md text-[#582ef5] uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5" />
@@ -533,12 +544,93 @@ export default function App() {
                 Através de uma base de fábricas confiáveis, nossa IA garante o melhor preço entre diferentes unidades, o sistema automatiza o cálculo de tributos e a emissão de declarações, eliminando definitivamente o risco das taxas abusivas.
               </p>
 
+              {/* Chat Mockup Mobile Sandwich (Apenas Mobile: Entre Descrição e Botão) */}
+              <div className="flex lg:hidden w-full justify-center my-4 relative z-10">
+                <div className="relative bg-[#0d0d0d] rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-[340px] text-left scale-95 transform-gpu">
+                  {/* Header do Chat */}
+                  <div className="bg-white/5 border-b border-white/5 p-4 flex items-center justify-between backdrop-blur-xl">
+                    <div className="flex items-center gap-3">
+                      <div className="relative">
+                        <div className="w-10 h-10 rounded-full bg-[#582ef5]/20 flex items-center justify-center overflow-hidden border border-[#582ef5]/30">
+                          <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGJzeHd3YTZlbTVhd2x5dHB2eTRtaHR3am5sajFqNW55OWxoMXhmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S5Itfetiqrv3emmx8h/giphy.gif" alt="Minerador" className="w-8 h-8 object-contain" loading="lazy" decoding="async" />
+                        </div>
+                        <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black" />
+                      </div>
+                      <div className="text-left">
+                        <h4 className="text-sm font-bold text-white leading-none mb-1">O Minerador 💙</h4>
+                        <p className="text-[10px] text-green-500 font-medium">IA Online agora</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <div className="w-2 h-2 rounded-full bg-white/10" />
+                      <div className="w-2 h-2 rounded-full bg-white/10" />
+                      <div className="w-2 h-2 rounded-full bg-white/10" />
+                    </div>
+                  </div>
+
+                  {/* Corpo do Chat */}
+                  <div className="p-5 space-y-6">
+                    {/* Pergunta do User */}
+                    <div className="flex flex-col items-end">
+                      <div className="bg-[#582ef5] text-white px-4 py-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-lg">
+                        Preciso de link de iphone 17 pro max
+                      </div>
+                      <span className="text-[10px] text-gray-500 mt-1.5 mr-1 font-medium italic">Enviado agora</span>
+                    </div>
+
+                    {/* Resposta do Minerador */}
+                    <div className="flex flex-col items-start">
+                      <div className="bg-white/10 text-gray-200 px-4 py-3 rounded-2xl rounded-tl-none text-sm max-w-[90%] leading-relaxed border border-white/5 backdrop-blur-md text-left">
+                        Encontrei fornecedores verificados com estoque disponível e envio direto! 🚀
+                      </div>
+                    </div>
+
+                    {/* Product Card Result */}
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer">
+                      <div className="w-20 sm:w-24 h-20 sm:h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center border border-white/5 flex-shrink-0">
+                        <img src="https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp" alt="iPhone 17" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+                      </div>
+                      <div className="flex-1 flex flex-col justify-center text-left">
+                        <div className="flex justify-between items-start mb-1">
+                          <h5 className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-tight">iPhone 17 Pro Max</h5>
+                          <span className="bg-green-500/10 text-green-500 text-[8px] sm:text-[9px] px-1 py-0.5 rounded font-bold border border-green-500/20">VERIFICADO</span>
+                        </div>
+                        <div className="flex items-end gap-2 mb-2 sm:mb-3">
+                          <span className="text-sm sm:text-lg font-black text-white">R$7.600</span>
+                          <span className="text-[9px] sm:text-[10px] text-gray-500 line-through mb-0.5 sm:mb-1">R$11.900</span>
+                        </div>
+                        <button className="w-full py-1.5 sm:py-2 bg-[#582ef5] text-white text-[9px] sm:text-[11px] font-black rounded-lg hover:bg-[#4c25e6] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
+                          ACESSAR LINK <ArrowRight className="w-3 h-3" strokeWidth={3} />
+                        </button>
+                      </div>
+                    </div>
+                    
+                    {/* Typing status (fake) */}
+                    <div className="flex items-center gap-1.5">
+                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce" />
+                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.2s]" />
+                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.4s]" />
+                    </div>
+                  </div>
+
+                  {/* Barra de Input Fake */}
+                  <div className="bg-white/5 border-t border-white/5 p-4 flex items-center gap-3">
+                    <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-[10px] sm:text-xs text-left">
+                        Pergunte ao Minerador...
+                    </div>
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/20">
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <motion.button
                 whileHover="hover"
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary px-10 py-5 text-base font-bold w-fit flex items-center justify-center gap-2 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
+                className="btn-primary w-full md:w-auto px-10 py-5 text-base font-bold flex items-center justify-center gap-2 group rounded-[1.25rem] md:rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] mt-4 lg:mt-0"
               >
                 Testar Minerador Agora
                 <Sparkles className="w-5 h-5 fill-white/20" strokeWidth={2.5} />
@@ -546,8 +638,8 @@ export default function App() {
             </motion.div>
           </div>
 
-          {/* Coluna direita: Mockup do Chat */}
-          <div className="order-2 lg:order-none flex justify-center">
+          {/* Coluna direita: Mockup do Chat (Apenas Desktop) */}
+          <div className="hidden lg:flex w-1/2 justify-center order-1 lg:order-2">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 30 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
