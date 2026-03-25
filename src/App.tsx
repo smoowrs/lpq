@@ -882,7 +882,7 @@ export default function App() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative p-6 pt-16 pb-12 md:p-20 rounded-[2.5rem] md:rounded-[4rem] text-left overflow-hidden bg-[#22c55e] shadow-[0_40px_100px_rgba(34,197,94,0.3)]"
+            className="relative p-6 pt-16 pb-8 md:p-20 rounded-[2.5rem] md:rounded-[4rem] text-left overflow-hidden bg-[#22c55e] shadow-[0_40px_100px_rgba(34,197,94,0.3)]"
           >
             {/* Efeito de Cupom: Cortes Circulares */}
             <div className="absolute top-[12%] md:top-1/2 -left-5 md:-left-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-r border-white/20 z-20" />
@@ -917,18 +917,18 @@ export default function App() {
               </motion.button>
 
               {/* Badges de Cupom */}
-              <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 text-white/90">
-                 <div className="flex items-center gap-2">
-                   <ShieldCheck className="w-4 h-4" />
-                   <span className="text-[10px] uppercase tracking-widest font-black">Resgate Imediato</span>
+              <div className="mt-8 md:mt-12 flex flex-row items-center gap-4 md:gap-8 text-white/90">
+                 <div className="flex items-center gap-1.5">
+                   <ShieldCheck className="w-3 md:w-4 h-3 md:h-4" />
+                   <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">Imediato</span>
                  </div>
-                 <div className="flex items-center gap-2">
-                   <Users className="w-4 h-4" />
-                   <span className="text-[10px] uppercase tracking-widest font-black">Oferta Única</span>
+                 <div className="flex items-center gap-1.5">
+                   <Users className="w-3 md:w-4 h-3 md:h-4" />
+                   <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">Única</span>
                  </div>
-                 <div className="flex items-center gap-2">
-                   <Sparkles className="w-4 h-4" />
-                   <span className="text-[10px] uppercase tracking-widest font-black">VIP Connect</span>
+                 <div className="flex items-center gap-1.5">
+                   <Sparkles className="w-3 md:w-4 h-3 md:h-4" />
+                   <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">VIP Connect</span>
                  </div>
               </div>
             </div>
