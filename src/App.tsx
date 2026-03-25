@@ -648,8 +648,8 @@ export default function App() {
               </div>
               
               <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
-                Os melhores preços <br className="hidden md:block" />
-                <span className="text-gradient-ai">produtos e qualidade.</span>
+                Os melhores produtos, <br className="hidden md:block" />
+                <span className="text-gradient-ai">qualidades e preços.</span>
               </h2>
               
               <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg">
