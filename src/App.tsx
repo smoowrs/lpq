@@ -581,6 +581,7 @@ export default function App() {
                   src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b" 
                   className="absolute top-0 left-0 w-full h-full border-0"
                   allowFullScreen
+                  loading="eager"
                 />
               </div>
             </div>
@@ -1047,22 +1048,53 @@ export default function App() {
                   {/* Corpo do Chat */}
                   <div className="p-5 space-y-6">
                     {/* Pergunta do User */}
-                    <div className="flex flex-col items-end">
-                      <div className="bg-[#582ef5] text-white px-4 py-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-lg">
+                    <motion.div 
+                      initial={{ opacity: 0, x: 20, scale: 0.9 }}
+                      whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ delay: 0.3, duration: 0.5 }}
+                      className="flex flex-col items-end"
+                    >
+                      <div className="bg-[#582ef5] text-white px-4 py-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-lg font-medium">
                         {t.minerador.chat.q}
                       </div>
                       <span className="text-[10px] text-gray-500 mt-1.5 mr-1 font-medium italic">Enviado agora</span>
-                    </div>
+                    </motion.div>
+                    
+                    {/* Status Digitando (Visual antes da resposta) */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: [0, 1, 0] }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 1, duration: 1.5 }}
+                      className="flex items-center gap-1.5 ml-2"
+                    >
+                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce" />
+                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.2s]" />
+                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.4s]" />
+                    </motion.div>
 
                     {/* Resposta do Minerador */}
-                    <div className="flex flex-col items-start">
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20, scale: 0.9 }}
+                      whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ delay: 2.2, duration: 0.5 }}
+                      className="flex flex-col items-start"
+                    >
                       <div className="bg-white/10 text-gray-200 px-4 py-3 rounded-2xl rounded-tl-none text-sm max-w-[90%] leading-relaxed border border-white/5 backdrop-blur-md text-left">
                         {t.minerador.chat.a}
                       </div>
-                    </div>
+                    </motion.div>
 
                     {/* Product Card Result */}
-                    <div className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ delay: 3, type: "spring", stiffness: 100, damping: 15 }}
+                      className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer"
+                    >
                       <div className="w-20 sm:w-24 h-20 sm:h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center border border-white/5 flex-shrink-0">
                         <img src="https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp" alt="iPhone 17" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
                       </div>
@@ -1075,18 +1107,11 @@ export default function App() {
                           <span className="text-sm sm:text-lg font-black text-white">R$7.600</span>
                           <span className="text-[9px] sm:text-[10px] text-gray-500 line-through mb-0.5 sm:mb-1">R$11.900</span>
                         </div>
-                        <button className="w-full py-1.5 sm:py-2 bg-[#582ef5] text-white text-[9px] sm:text-[11px] font-black rounded-lg hover:bg-[#4c25e6] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
+                        <button className="w-full py-1.5 sm:py-2 bg-[#582ef5] text-white text-[9px] sm:text-[11px] font-black rounded-lg hover:bg-[#4c26d4] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
                           {t.minerador.chat.btn} <ArrowRight className="w-3 h-3" strokeWidth={3} />
                         </button>
                       </div>
-                    </div>
-                    
-                    {/* Typing status (fake) */}
-                    <div className="flex items-center gap-1.5">
-                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce" />
-                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.2s]" />
-                      <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.4s]" />
-                    </div>
+                    </motion.div>
                   </div>
 
                   {/* Barra de Input Fake */}
