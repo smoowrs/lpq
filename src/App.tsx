@@ -885,8 +885,8 @@ export default function App() {
             {/* Brilhos Internos */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-[120px] pointer-events-none" />
             
-            <div className="relative z-10 pl-[12%] md:pl-[22%]">
-              <h2 className="text-[24px] sm:text-[36px] md:text-5xl lg:text-7xl font-black tracking-tighter mb-6 leading-[1.05] text-white">
+            <div className="relative z-10 pl-[12%] md:pl-[22%] pr-6 md:pr-12">
+              <h2 className="text-[20px] sm:text-[30px] md:text-4xl lg:text-6xl font-black tracking-tighter mb-5 leading-[1.1] text-white">
                 <span className="block mb-1 uppercase opacity-90 sm:whitespace-nowrap">REGISTRE-SE e GANHE</span>
                 <span className="block drop-shadow-xl sm:whitespace-nowrap">R$660 em CUPONS</span>
               </h2>
