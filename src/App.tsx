@@ -868,31 +868,31 @@ export default function App() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#582ef5]/50 to-transparent" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[160px] pointer-events-none" />
 
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-5xl mx-auto relative z-10 px-4 md:px-0">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative p-8 py-12 md:p-20 rounded-[2.5rem] md:rounded-[4rem] border border-[#EAB308]/40 text-center overflow-hidden bg-gradient-to-br from-[#121212] via-[#0d0d0d] to-[#040404] shadow-[0_0_100px_rgba(234,179,8,0.1)]"
+            className="relative p-8 py-10 md:p-20 rounded-[2.5rem] md:rounded-[4rem] border border-[#22c55e]/30 text-center overflow-hidden bg-gradient-to-br from-[#0c0c0c] via-[#080808] to-[#040404] shadow-[0_0_100px_rgba(34,197,94,0.08)]"
           >
             {/* Efeito de Cupom: Cortes Circulares nas laterais */}
-            <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black border-r border-[#EAB308]/30 hidden md:block z-20" />
-            <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black border-l border-[#EAB308]/30 hidden md:block z-20" />
+            <div className="absolute top-1/2 -left-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black border-r border-[#22c55e]/20 hidden md:block z-20" />
+            <div className="absolute top-1/2 -right-6 -translate-y-1/2 w-12 h-12 rounded-full bg-black border-l border-[#22c55e]/20 hidden md:block z-20" />
             
             {/* Linha de Perfuração Vertical */}
-            <div className="absolute top-0 bottom-0 left-[18%] w-px border-l-2 border-dashed border-[#EAB308]/20 hidden lg:block" />
+            <div className="absolute top-0 bottom-0 left-[18%] w-px border-l-2 border-dashed border-[#22c55e]/15 hidden lg:block" />
 
-            {/* Brilhos Atmosféricos Dourados */}
-            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#EAB308]/20 rounded-full blur-[100px]" />
-            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#EAB308]/10 rounded-full blur-[80px]" />
+            {/* Brilhos Atmosféricos Verdes */}
+            <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#22c55e]/15 rounded-full blur-[100px]" />
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#22c55e]/5 rounded-full blur-[80px]" />
             
             <div className="relative z-10">
-              <h2 className="text-[28px] sm:text-[42px] md:text-6xl lg:text-7xl font-black tracking-tighter mb-10 leading-[1.05] drop-shadow-[0_0_35px_rgba(234,179,8,0.4)]">
-                <span className="block text-white mb-2 uppercase">REGISTRE-SE e GANHE</span>
-                <span className="block bg-gradient-to-r from-[#FFD700] via-[#FDB931] to-[#FFD700] bg-clip-text text-transparent animate-shimmer py-1">R$660 em CUPONS</span>
+              <h2 className="text-[26px] sm:text-[36px] md:text-5xl lg:text-6xl font-black tracking-tighter mb-8 leading-[1.05] drop-shadow-[0_0_35px_rgba(34,197,94,0.4)]">
+                <span className="block text-white mb-1 uppercase">REGISTRE-SE e GANHE</span>
+                <span className="block bg-gradient-to-r from-[#4ade80] via-[#22c55e] to-[#4ade80] bg-clip-text text-transparent animate-shimmer py-1">R$660 em CUPONS</span>
               </h2>
               
-              <p className="text-gray-400 text-sm md:text-lg mb-12 max-w-xl mx-auto leading-relaxed">
+              <p className="text-gray-400 text-sm md:text-base mb-10 max-w-xl mx-auto leading-relaxed">
                 Aproveite essa oferta exclusiva de boas-vindas. Ganhe cupons de desconto exclusivos para baratear suas primeiras importações diretamente da fábrica.
               </p>
 
@@ -901,7 +901,7 @@ export default function App() {
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary px-12 py-5 text-base sm:text-xl font-black flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)] md:shadow-[0_20px_60px_rgba(234,179,8,0.2)] group whitespace-nowrap border-0 rounded-2xl md:rounded-[1.5rem]"
+                className="btn-primary px-12 py-5 text-base sm:text-lg font-black flex items-center justify-center gap-3 mx-auto shadow-[0_20px_50px_rgba(88,46,245,0.4)] md:shadow-[0_20px_60px_rgba(34,197,94,0.2)] group whitespace-nowrap border-0 rounded-2xl md:rounded-[1.5rem]"
               >
                 Crie sua conta grátis
                 <motion.div variants={{ initial: { x: 0 }, hover: { x: 8 } }}>
@@ -912,11 +912,11 @@ export default function App() {
               {/* Badges de Cupom */}
               <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
                  <div className="flex items-center gap-2">
-                   <ShieldCheck className="w-4 h-4 text-[#EAB308]" />
+                   <ShieldCheck className="w-4 h-4 text-[#22c55e]" />
                    <span className="text-[10px] uppercase tracking-widest font-bold">Resgate Imediato</span>
                  </div>
                  <div className="flex items-center gap-2">
-                   <Users className="w-4 h-4 text-[#EAB308]" />
+                   <Users className="w-4 h-4 text-[#22c55e]" />
                    <span className="text-[10px] uppercase tracking-widest font-bold">Oferta Única</span>
                  </div>
                  <div className="flex items-center gap-2">
