@@ -690,14 +690,12 @@ export default function App() {
             transition={{ duration: 1.2 }}
             className="relative w-full md:w-1/2 h-full flex items-center justify-center sm:justify-start"
           >
-             <div className="relative group p-4 sm:p-0">
-                <div className="absolute -inset-4 bg-[#582ef5]/20 rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+             <div className="relative p-0">
                 <img 
-                  src="https://i.postimg.cc/5ydKcXPS/QPW-2-2.webp" 
+                  src="https://i.postimg.cc/TPRLJ4S7/containerzada.webp" 
                   alt="Fábricas" 
-                  className="w-[280px] sm:w-[500px] md:w-[600px] lg:w-[700px] max-w-none rounded-[2rem] md:rounded-[3rem] shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/10 relative z-10"
+                  className="w-[350px] sm:w-[600px] md:w-[800px] lg:w-[1000px] max-w-none relative z-10 transform -translate-x-[10%] md:-translate-x-[20%]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-black/40 rounded-[2rem] md:rounded-[3rem] z-20 pointer-events-none" />
              </div>
           </motion.div>
         </div>
