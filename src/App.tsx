@@ -114,7 +114,7 @@ export default function App() {
                 <span className="text-gray-200">A revolução da importação com IA</span>
               </div>
               
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[56px] font-black tracking-tight mb-8 leading-[1.05] text-white">
+              <h1 className="text-[28px] md:text-5xl lg:text-[44px] xl:text-[56px] font-black tracking-tight mb-8 leading-[1.05] text-white">
                 {/* Versão Desktop (3 linhas) */}
                 <div className="hidden md:flex flex-col items-start">
                   <span className="whitespace-nowrap">Economize ou Lucre</span>
@@ -147,7 +147,7 @@ export default function App() {
                 </div>
               </div>
               
-              <p className="text-[13px] sm:text-sm md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed px-4 md:px-0">
+              <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed px-4 md:px-0">
                 Crie sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe de nossa comunidade de networking e utilize diversas outras ferramentas
               </p>
 
@@ -242,7 +242,7 @@ export default function App() {
               <span>COMUNIDADE</span>
             </div>
             
-            <h2 className="text-[34px] sm:text-[38px] md:text-6xl lg:text-[82px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
+            <h2 className="text-[28px] md:text-6xl lg:text-[82px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
               A 1ª Rede Social <br />
               <span className="whitespace-nowrap text-inherit">do Importador <span className="text-[0.85em] inline-block align-middle transform translate-y-[-2px]">💙</span></span>
             </h2>
@@ -329,11 +329,11 @@ export default function App() {
                 <Package className="w-3.5 h-3.5 text-[#582ef5]" />
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
-              <h2 className="text-[32px] sm:text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+              <h2 className="text-[28px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                 Os melhores produtos <br />
                 <span className="text-gradient-ai">qualidades e preços 🔥</span>
               </h2>
-              <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg">
+              <p className="text-sm md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg">
                 Tenha acesso grátis a um painel cheio<br className="hidden md:block" />
                 de produtos incríveis.
               </p>
@@ -405,7 +405,7 @@ export default function App() {
                 <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
                 <span className="text-gray-300 uppercase tracking-wider">Aulas Passo a Passo</span>
               </div>
-              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
+              <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
                 Aprenda a <br />
                 <span className="text-gradient-ai">importar do zero.</span>
               </h2>
@@ -457,13 +457,13 @@ export default function App() {
                   <span className="text-gray-300 uppercase tracking-wider">Fábricas</span>
                 </div>
                 
-                <h2 className="text-[30px] md:text-[40px] lg:text-[52px] font-bold tracking-tighter mb-8 leading-[1.1] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+                <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-bold tracking-tighter mb-8 leading-[1.1] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                   Os maiores <br />
                   fabricantes e lojas <br />
                   <span className="text-gradient-ai">da China</span>
                 </h2>
                 
-                <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-md font-medium">
+                <p className="text-sm md:text-lg text-gray-300 md:text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-md font-medium">
                   Um painel com fabricantes e fornecedores confiáveis e com extrema agilidade de entrega, crie sua conta grátis e acesse nossas fábricas.
                 </p>
 
@@ -535,7 +535,7 @@ export default function App() {
                 <span>O MINERADOR</span>
               </div>
               
-              <h2 className="text-[36px] sm:text-[42px] md:text-5xl lg:text-[72px] font-black tracking-tighter mb-4 lg:mb-1 leading-[1] text-white">
+              <h2 className="text-[28px] md:text-5xl lg:text-[72px] font-black tracking-tighter mb-4 lg:mb-1 leading-[1] text-white">
                 O Assistente <br />
                 <span className="text-gradient-ai">inteligente 💬</span>
               </h2>
@@ -761,7 +761,7 @@ export default function App() {
                   <span className="text-gray-300 uppercase tracking-wider">Níveis e Recompensas</span>
                 </div>
                 
-                <h2 className="text-3xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
+                <h2 className="text-[28px] md:text-5xl lg:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
                   Suba de nível e<br />
                   <span className="text-gradient-ai">ganhe prêmios</span>
                 </h2>
@@ -973,7 +973,7 @@ export default function App() {
                 <Sparkles className="w-3.5 h-3.5 text-[#582ef5]" />
                 <span className="text-gray-300 uppercase tracking-wider">Connect AI</span>
               </div>
-              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
+              <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-[1.1]">
                 Crie imagens que <br />
                 <span className="text-gradient-ai">vendem mais.</span>
               </h2>
@@ -1083,7 +1083,7 @@ export default function App() {
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-[120px] pointer-events-none" />
             
             <div className="relative z-10 pt-8 md:pt-0 md:pl-[22%] pr-4 md:pr-12">
-              <h2 className="text-[20px] sm:text-[30px] md:text-4xl lg:text-6xl font-black tracking-tighter mb-5 leading-[1.1] text-white">
+              <h2 className="text-[28px] md:text-4xl lg:text-6xl font-black tracking-tighter mb-5 leading-[1.1] text-white">
                 <span className="block mb-1 uppercase opacity-90 sm:whitespace-nowrap">REGISTRE-SE e GANHE</span>
                 <span className="block drop-shadow-xl sm:whitespace-nowrap">R$660 em CUPONS</span>
               </h2>
