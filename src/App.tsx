@@ -634,16 +634,16 @@ export default function App() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[150px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row-reverse items-center justify-between gap-12 md:gap-20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
             
-            {/* Texto (Direita no Desktop) */}
+            {/* Texto (Esquerda no Desktop) */}
             <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
               <motion.div
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="flex flex-col items-center md:items-start"
-              >
+                className="flex flex-col items-center md:items-start">
+
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
                   <Star className="w-3.5 h-3.5 text-[#582ef5]" />
                   <span className="text-gray-300 uppercase tracking-wider">Níveis e Recompensas</span>
