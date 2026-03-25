@@ -294,19 +294,19 @@ export default function App() {
                 whileInView={{ opacity: 1, x: card.x, y: card.y, rotate: card.r, scale: card.s }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.05, duration: 1.2, type: "spring", stiffness: 35, damping: 15 }}
-                className="absolute w-32 md:w-44 lg:w-48 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d]"
+                className="absolute w-24 sm:w-28 md:w-44 lg:w-48 aspect-[3/4.2] rounded-[1.25rem] md:rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d]"
                 style={{ zIndex: card.z }}
               >
-                <img src={card.img} className="w-full h-full object-cover" alt="" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 shadow-[inset_0_0_80px_rgba(0,0,0,0.5)]" />
+                <img src={card.img} className="w-full h-full object-cover brightness-50 md:brightness-100" alt="" loading="lazy" decoding="async" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 md:from-black/60 via-transparent to-transparent opacity-60 md:opacity-40 shadow-[inset_0_0_80px_rgba(0,0,0,0.5)]" />
               </motion.div>
             ))}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-20 pointer-events-none opacity-90 md:hidden" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-20 pointer-events-none opacity-95 md:opacity-90 md:hidden" />
             <div className="absolute inset-0 bg-[#582ef5]/5 rounded-full blur-[150px] -z-10" />
           </motion.div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-30 flex flex-col md:flex-row items-center justify-center md:justify-between min-h-[600px] md:min-h-0">
+        <div className="max-w-7xl mx-auto px-6 relative z-30 flex flex-col md:flex-row items-center justify-center md:justify-between min-h-[500px] md:min-h-0">
           <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -318,12 +318,12 @@ export default function App() {
                 <Package className="w-3.5 h-3.5 text-[#582ef5]" />
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
-              <h2 className="text-[28px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+              <h2 className="text-[28px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-4 md:mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                 Os melhores produtos <br />
                 <span className="text-gradient-ai">qualidades e preços 🔥</span>
               </h2>
-              <p className="text-sm md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg">
-                Tenha acesso grátis a um painel cheio<br className="hidden md:block" />
+              <p className="hidden md:block text-sm md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-left drop-shadow-lg">
+                Tenha acesso grátis a um painel cheio<br />
                 de produtos incríveis.
               </p>
               <motion.button
