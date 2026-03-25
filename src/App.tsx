@@ -418,24 +418,8 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 lg:gap-32">
             
-            {/* Lado Esquerdo: Imagem (Caixas) */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="w-full md:w-[45%] flex justify-center md:justify-end"
-            >
-               <div className="relative">
-                  <img 
-                    src="https://i.postimg.cc/SxvyP1tc/CAIXAS.webp" 
-                    alt="Fábricas" 
-                    className="w-full max-w-[340px] sm:max-w-[480px] md:max-w-none lg:w-[650px] relative z-10"
-                  />
-               </div>
-            </motion.div>
-
-            {/* Lado Direito: Conteúdo Textual */}
-            <div className="w-full md:w-[55%] flex flex-col items-center md:items-start text-center md:text-left">
+            {/* Informações (Esquerda no Desktop) */}
+            <div className="w-full md:w-[55%] flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -471,6 +455,156 @@ export default function App() {
                 </motion.button>
               </motion.div>
             </div>
+
+            {/* Imagem (Direita no Desktop) */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="w-full md:w-[45%] flex justify-center md:justify-start order-1 md:order-2"
+            >
+               <div className="relative">
+                  <img 
+                    src="https://i.postimg.cc/SxvyP1tc/CAIXAS.webp" 
+                    alt="Fábricas" 
+                    className="w-full max-w-[340px] sm:max-w-[480px] md:max-w-none lg:w-[650px] relative z-10"
+                  />
+               </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ─── AULAS PASSO A PASSO ────────────────────────────────── */}
+      <section id="aulas" className="py-24 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-black">
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            
+            {/* Esquerda: Novo Formato de Cards 3D Espaçados */}
+            <div className="relative h-[550px] md:h-[750px] lg:h-[800px] flex items-center justify-center order-2 md:order-1 perspective-[2000px] py-20">
+              {/* Ambilight Background Reforçado */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[150px] rounded-full bg-[#582ef5]/10" />
+                <div className="absolute top-0 left-0 w-64 h-64 blur-[100px] rounded-full bg-[#582ef5]/15 animate-pulse" />
+                <div className="absolute bottom-0 right-0 w-64 h-64 blur-[100px] rounded-full bg-[#2b34f5]/15 animate-pulse [animation-delay:1s]" />
+              </div>
+
+              {[
+                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15, z: 0 },
+                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15, z: 20 },
+                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03", x: -180, y: 40, rot: -25, z: 40 },
+                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04", x: -20, y: -20, rot: 5, z: 60 },
+                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05", x: 160, y: 60, rot: 10, z: 80 },
+                { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06", x: -60, y: 220, rot: -5, z: 100 }
+              ].map((aula, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.5, x: 0, y: 100, rotateZ: 0 }}
+                  whileInView={{ 
+                    opacity: 1, 
+                    scale: 1,
+                    x: aula.x, 
+                    y: aula.y, 
+                    rotateZ: aula.rot,
+                    rotateX: 10,
+                    rotateY: idx % 2 === 0 ? -15 : 15,
+                    z: aula.z
+                  }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    delay: idx * 0.1, 
+                    duration: 1.5, 
+                    type: "spring", 
+                    stiffness: 35,
+                    damping: 15
+                  }}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    z: 200, 
+                    rotateZ: 0, 
+                    rotateX: 0, 
+                    rotateY: 0,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="absolute w-36 md:w-52 lg:w-56 aspect-[9/16] rounded-2xl md:rounded-[2.5rem] overflow-hidden border border-white/20 shadow-[0_40px_80px_rgba(0,0,0,0.8)] cursor-pointer group/card-aula bg-black"
+                  style={{ 
+                    zIndex: idx,
+                    transformStyle: "preserve-3d"
+                  }}
+                >
+                  <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
+                    <span className="text-[10px] font-black text-white bg-[#582ef5] px-2.5 py-1 rounded-lg border border-white/20 shadow-[0_0_15px_rgba(88,46,245,0.5)]">
+                      M{aula.id}
+                    </span>
+                  </div>
+                  <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90 group-hover/card-aula:brightness-110 transition-all duration-500" />
+                  
+                  {/* Glassmorphism Inner Shadow */}
+                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl md:rounded-[2.5rem] pointer-events-none" />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                  
+                  {/* Shine effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover/card-aula:opacity-100 transition-opacity" />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Direita: Conteúdo Textual */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative z-20 order-1 md:order-2 flex flex-col items-center md:items-start text-center md:text-left"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+                <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
+                <span className="text-gray-300 uppercase tracking-wider">Aulas Passo a Passo</span>
+              </div>
+              
+              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
+                Aprenda a <br />
+                <span className="text-gradient-ai">importar do zero.</span>
+              </h2>
+              
+              <p className="text-sm md:text-base text-gray-400 mb-10 leading-relaxed max-w-md">
+                Do primeiro acesso até a chegada dos produtos na porta da sua casa ou da sua loja. Nosso treinamento completo ensina cada detalhe do processo.
+              </p>
+
+              <ul className="space-y-5 mb-12 w-full max-w-sm">
+                {[
+                  'Configuração de endereço na China',
+                  'Como comprar de forma segura',
+                  'Gestão de envios e rastreio',
+                  'Estratégias para evitar taxas'
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-gray-300 font-medium">
+                    <div className="w-6 h-6 rounded-full bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/30 shrink-0">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#582ef5]" />
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <motion.button
+                whileHover="hover"
+                initial="initial"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary w-full md:w-auto px-10 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] transition-all duration-300"
+              >
+                Começar agora
+                <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                  <ArrowRight className="w-5 h-5" strokeWidth={3} />
+                </motion.div>
+              </motion.button>
+            </motion.div>
+
           </div>
         </div>
       </section>
@@ -778,138 +912,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* ─── AULAS PASSO A PASSO ────────────────────────────────── */}
-      <section id="aulas" className="py-24 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-black">
-        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-            
-            {/* Esquerda: Novo Formato de Cards 3D Espaçados */}
-            <div className="relative h-[550px] md:h-[750px] lg:h-[800px] flex items-center justify-center order-2 md:order-1 perspective-[2000px] py-20">
-              {/* Ambilight Background Reforçado */}
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[150px] rounded-full bg-[#582ef5]/10" />
-                <div className="absolute top-0 left-0 w-64 h-64 blur-[100px] rounded-full bg-[#582ef5]/15 animate-pulse" />
-                <div className="absolute bottom-0 right-0 w-64 h-64 blur-[100px] rounded-full bg-[#2b34f5]/15 animate-pulse [animation-delay:1s]" />
-              </div>
-
-              {[
-                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15, z: 0 },
-                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15, z: 20 },
-                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03", x: -180, y: 40, rot: -25, z: 40 },
-                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04", x: -20, y: -20, rot: 5, z: 60 },
-                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05", x: 160, y: 60, rot: 10, z: 80 },
-                { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06", x: -60, y: 220, rot: -5, z: 100 }
-              ].map((aula, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.5, x: 0, y: 100, rotateZ: 0 }}
-                  whileInView={{ 
-                    opacity: 1, 
-                    scale: 1,
-                    x: aula.x, 
-                    y: aula.y, 
-                    rotateZ: aula.rot,
-                    rotateX: 10,
-                    rotateY: idx % 2 === 0 ? -15 : 15,
-                    z: aula.z
-                  }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    delay: idx * 0.1, 
-                    duration: 1.5, 
-                    type: "spring", 
-                    stiffness: 35,
-                    damping: 15
-                  }}
-                  whileHover={{ 
-                    scale: 1.1, 
-                    z: 200, 
-                    rotateZ: 0, 
-                    rotateX: 0, 
-                    rotateY: 0,
-                    transition: { duration: 0.3 }
-                  }}
-                  className="absolute w-36 md:w-52 lg:w-56 aspect-[9/16] rounded-2xl md:rounded-[2.5rem] overflow-hidden border border-white/20 shadow-[0_40px_80px_rgba(0,0,0,0.8)] cursor-pointer group/card-aula bg-black"
-                  style={{ 
-                    zIndex: idx,
-                    transformStyle: "preserve-3d"
-                  }}
-                >
-                  <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
-                    <span className="text-[10px] font-black text-white bg-[#582ef5] px-2.5 py-1 rounded-lg border border-white/20 shadow-[0_0_15px_rgba(88,46,245,0.5)]">
-                      M{aula.id}
-                    </span>
-                  </div>
-                  <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90 group-hover/card-aula:brightness-110 transition-all duration-500" />
-                  
-                  {/* Glassmorphism Inner Shadow */}
-                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl md:rounded-[2.5rem] pointer-events-none" />
-                  
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                  
-                  {/* Shine effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover/card-aula:opacity-100 transition-opacity" />
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Direita: Conteúdo Textual */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative z-20 order-1 md:order-2 flex flex-col items-center md:items-start text-center md:text-left"
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
-                <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
-                <span className="text-gray-300 uppercase tracking-wider">Aulas Passo a Passo</span>
-              </div>
-              
-              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
-                Aprenda a <br />
-                <span className="text-gradient-ai">importar do zero.</span>
-              </h2>
-              
-              <p className="text-sm md:text-base text-gray-400 mb-10 leading-relaxed max-w-md">
-                Do primeiro acesso até a chegada dos produtos na porta da sua casa ou da sua loja. Nosso treinamento completo ensina cada detalhe do processo.
-              </p>
-
-              <ul className="space-y-5 mb-12 w-full max-w-sm">
-                {[
-                  'Configuração de endereço na China',
-                  'Como comprar de forma segura',
-                  'Gestão de envios e rastreio',
-                  'Estratégias para evitar taxas'
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 text-gray-300 font-medium">
-                    <div className="w-6 h-6 rounded-full bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/30 shrink-0">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#582ef5]" />
-                    </div>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <motion.button
-                whileHover="hover"
-                initial="initial"
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary w-full md:w-auto px-10 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] transition-all duration-300"
-              >
-                Começar agora
-                <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                  <ArrowRight className="w-5 h-5" strokeWidth={3} />
-                </motion.div>
-              </motion.button>
-            </motion.div>
-
-          </div>
-        </div>
-      </section>
 
 
 
