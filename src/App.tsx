@@ -210,64 +210,53 @@ export default function App() {
         {/* Glow de fundo atmosférico */}
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center relative z-10 gap-12 md:gap-20">
+        <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-center relative z-10 gap-12 md:gap-20">
           
-          {/* Celular (Apenas Desktop: Esquerda) */}
+          {/* Celular (Desktop e Mobile) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="hidden md:flex w-1/2 justify-center z-20"
+            className="flex w-full md:w-1/2 justify-center z-20"
           >
             <div className="relative z-10 flex justify-center">
                <img 
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
-                 className="w-full max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                 className="w-full max-w-[320px] md:max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                  loading="eager"
                  decoding="async"
                />
             </div>
           </motion.div>
 
-          {/* Texto (Mobile: Centered, Desktop: Left) */}
+          {/* Texto (Left Aligned for both Mobile and Desktop) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-full md:w-1/2 relative z-20 flex flex-col items-center md:items-start text-center md:text-left"
+            className="w-full md:w-1/2 relative z-20 flex flex-col items-start text-left"
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold mb-8 backdrop-blur-md uppercase tracking-[0.2em] text-gray-400">
               <Users className="w-3.5 h-3.5 text-[#582ef5]" />
               <span>COMUNIDADE</span>
             </div>
             
-            <h2 className="text-[28px] md:text-6xl lg:text-[82px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
+            <h2 className="text-[28px] md:text-6xl lg:text-[82px] font-bold tracking-tighter mb-6 md:mb-8 leading-[1.05] text-white">
               A 1ª Rede Social <br />
               <span className="whitespace-nowrap text-inherit">do Importador <span className="text-[0.85em] inline-block align-middle transform translate-y-[-2px]">💙</span></span>
             </h2>
             
-            <p className="text-sm md:text-base text-gray-400 mb-4 md:mb-10 leading-relaxed max-w-xl opacity-80">
+            <p className="text-sm md:text-base text-gray-400 mb-8 md:mb-10 leading-relaxed max-w-xl opacity-80">
               Sua nova rede social, uma comunidade exclusiva para importadores e empreendedores, troque informações estratégicas, compartilhe seus resultados e evolua ao lado de quem fala a sua língua.
             </p>
-            
-            {/* Celular (Apenas Mobile: Menor, Entre Desc e Botão) */}
-            <div className="flex md:hidden w-full justify-center my-6 relative z-10">
-               <img 
-                 src="https://i.postimg.cc/3RkrkCVn/phones.png"
-                 alt="App Comunidade Mobile"
-                 className="w-full max-w-[200px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-                 loading="eager"
-                 decoding="async"
-               />
-            </div>
 
             <motion.button
               whileHover="hover"
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary w-full max-w-[320px] md:w-fit md:max-w-none px-10 py-5 text-base font-bold flex items-center justify-center gap-3 group mx-auto md:mx-0 rounded-[1.25rem] md:rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] mt-2 md:mt-0"
+              className="btn-primary w-full md:w-fit md:max-w-none px-10 py-4 md:py-5 text-sm md:text-base font-bold flex items-center justify-center gap-3 group rounded-[1.25rem] md:rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] mt-2 md:mt-0"
             >
               Testar comunidade
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
