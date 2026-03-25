@@ -793,7 +793,6 @@ export default function App() {
                 <div className="flex items-center justify-between mb-12">
                   <div>
                     <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Status do Pedido</h3>
-                    <p className="text-xs uppercase tracking-[0.2em] text-gray-500 font-bold">LOGÍSTICA CONNECT</p>
                   </div>
                   <div className="px-5 py-2 bg-[#582ef5] text-white rounded-xl text-[10px] md:text-[11px] font-extrabold border border-white/20 uppercase tracking-widest shadow-[0_0_25px_rgba(88,46,245,0.4)] animate-pulse">
                     Em trânsito
