@@ -358,7 +358,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F7] selection:bg-white/20">
+    <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F7] selection:bg-white/20 flex flex-col">
 
       {/* ─── NAV ──────────────────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
@@ -589,7 +589,7 @@ export default function App() {
       </section>
 
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
-      <section id="comunidade" className="pt-24 md:pt-32 pb-16 md:pb-40 px-6 relative overflow-hidden bg-black border-t border-white/5">
+      <section id="comunidade" className="pt-24 md:pt-32 pb-16 md:pb-40 px-6 relative overflow-hidden bg-black border-t border-white/5 order-2 md:order-none">
         {/* Glow de fundo atmosférico - Apenas Desktop agora */}
         <div className="hidden md:block absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
         
@@ -695,7 +695,7 @@ export default function App() {
       </section>
 
       {/* ─── PRODUTOS ────────────────────────────────────────── */}
-      <section id="produtos" className="pt-24 md:pt-32 pb-12 md:pb-32 relative overflow-hidden bg-black border-t border-white/5">
+      <section id="produtos" className="pt-24 md:pt-32 pb-12 md:pb-32 relative overflow-hidden bg-black border-t border-white/5 order-4 md:order-none">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
         {/* Layer de Fundo: Cards Espalhados */}
@@ -773,7 +773,7 @@ export default function App() {
       </section>
 
       {/* ─── AULAS PASSO A PASSO ────────────────────────────────── */}
-      <section id="aulas" className="py-24 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-black">
+      <section id="aulas" className="py-24 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-black order-5 md:order-none">
         <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-20 items-center justify-center min-h-[500px] md:min-h-0">
@@ -900,7 +900,7 @@ export default function App() {
         </div>
       </section>
 
-      <section id="fabricas" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
+      <section id="fabricas" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-6 md:order-none">
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 lg:gap-32">
@@ -986,7 +986,7 @@ export default function App() {
 
 
       {/* ─── O MINERADOR ────────────────────────────────────────── */}
-      <section id="minerador" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
+      <section id="minerador" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-3 md:order-none">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
@@ -1218,7 +1218,7 @@ export default function App() {
       </section>
 
       {/* ─── NÍVEIS E RECOMPENSAS ────────────────────────────────────────── */}
-      <section id="ranking" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
+      <section id="ranking" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-7 md:order-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[150px] pointer-events-none" />
         
         <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -1332,7 +1332,7 @@ export default function App() {
 
 
       {/* ─── TRACKING SECTION ─────────────────────────────────── */}
-      <section id="rastreio" className="py-32 px-6 relative overflow-hidden">
+      <section id="rastreio" className="py-32 px-6 relative overflow-hidden order-8 md:order-none">
         <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-[#2b34f5]/10 rounded-full blur-[150px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -1437,7 +1437,7 @@ export default function App() {
       </section>
 
       {/* ─── CONNECT AI / IMAGE CAROUSEL ──────────────────────── */}
-      <section className="pt-8 pb-24 md:py-32 border-t border-white/5 bg-black overflow-hidden relative">
+      <section className="pt-8 pb-24 md:py-32 border-t border-white/5 bg-black overflow-hidden relative order-9 md:order-none">
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
@@ -1550,7 +1550,7 @@ export default function App() {
 
 
       {/* ─── CTA (CUPOM DOURADO) ─────────────────────────────────── */}
-      <section id="cadastro" className="py-24 md:py-32 px-6 relative overflow-hidden bg-black border-t border-white/5">
+      <section id="cadastro" className="py-24 md:py-32 px-6 relative overflow-hidden bg-black border-t border-white/5 order-10 md:order-none">
         {/* Efeitos de Fundo Atmosféricos */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#582ef5]/50 to-transparent" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[160px] pointer-events-none" />
@@ -1615,7 +1615,7 @@ export default function App() {
       </section>
 
       {/* ─── FOOTER ───────────────────────────────────────────── */}
-      <footer className="border-t border-white/10 py-12 px-6">
+      <footer className="border-t border-white/10 py-12 px-6 order-11 md:order-none">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
           <div className="flex items-center justify-center">
             <img src="https://i.postimg.cc/DZcqskjG/IMG_3713_3.png" alt="Drone Connect Academy" className="h-8 object-contain" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
