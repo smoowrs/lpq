@@ -329,9 +329,9 @@ export default function App() {
                 <Package className="w-3.5 h-3.5 text-[#582ef5]" />
                 <span className="text-gray-300 uppercase tracking-wider">Produtos</span>
               </div>
-              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
-                Os melhores produtos qualidades <br />
-                <span className="text-gradient-ai">e preços.</span>
+              <h2 className="text-[32px] sm:text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+                Os melhores produtos <br />
+                <span className="text-gradient-ai">qualidades e preços 🔥</span>
               </h2>
               <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg">
                 Tenha acesso grátis a um painel cheio<br className="hidden md:block" />
