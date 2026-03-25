@@ -692,7 +692,7 @@ export default function App() {
           >
              <div className="relative p-0">
                 <img 
-                  src="https://i.postimg.cc/TPRLJ4S7/containerzada.webp" 
+                  src="https://i.postimg.cc/SxvyP1tc/CAIXAS.webp" 
                   alt="Fábricas" 
                   className="w-[350px] sm:w-[500px] md:w-[700px] lg:w-[750px] max-w-none relative z-10 transform -translate-x-[5%] md:-translate-x-[15%]"
                 />
