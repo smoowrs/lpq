@@ -262,7 +262,6 @@ export default function App() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
             </motion.button>
           </motion.div>
-          
         </div>
       </section>
 
@@ -270,10 +269,9 @@ export default function App() {
       <section id="minerador" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-16 md:gap-24">
-          
-          {/* Esquerda: Texto e CTA */}
-          <div className="lg:w-1/2 text-center lg:text-left">
+        <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-y-12 lg:gap-24">
+          {/* Parte 1: Título e Badge */}
+          <div className="lg:col-start-1 lg:row-start-1 text-center lg:text-left flex flex-col items-center lg:items-start order-1">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -284,34 +282,20 @@ export default function App() {
                 <span>O MINERADOR</span>
               </div>
               
-              <h2 className="text-[32px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-8 leading-[1.1]">
-                O Assistente <br className="hidden md:block" />
+              <h2 className="text-[36px] sm:text-[42px] md:text-5xl lg:text-7xl font-black tracking-tighter mb-4 leading-[1] text-white">
+                O Assistente <br />
                 <span className="text-gradient-ai">inteligente 💬</span>
               </h2>
-              <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                Através de uma base de fábricas confiáveis, nossa IA garante o melhor preço entre diferentes unidades, o sistema automatiza o cálculo de tributos e a emissão de declarações, eliminando definitivamente o risco das taxas abusivas.
-              </p>
-
-              <motion.button
-                whileHover="hover"
-                initial="initial"
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary px-10 py-5 text-base font-bold w-fit mx-auto lg:mx-0 flex items-center justify-center gap-2 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
-              >
-                Testar Minerador Agora
-                <Sparkles className="w-5 h-5 fill-white/20" strokeWidth={2.5} />
-              </motion.button>
             </motion.div>
           </div>
 
-          {/* Direita: Chat Experience Mockup */}
-          <div className="lg:w-1/2 w-full max-w-xl px-2">
+          {/* Parte 2: Mockup do Chat (No meio no mobile) */}
+          <div className="lg:col-start-2 lg:row-span-2 order-2 lg:order-none flex justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 30 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative bg-[#0d0d0d] rounded-3xl border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.5)] overflow-hidden"
+              className="relative bg-[#0d0d0d] rounded-3xl border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-lg"
             >
               {/* Header do Chat */}
               <div className="bg-white/5 border-b border-white/5 p-4 flex items-center justify-between backdrop-blur-xl">
@@ -322,7 +306,7 @@ export default function App() {
                     </div>
                     <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black" />
                   </div>
-                  <div>
+                  <div className="text-left">
                     <h4 className="text-sm font-bold text-white leading-none mb-1">O Minerador 💙</h4>
                     <p className="text-[10px] text-green-500 font-medium">IA Online agora</p>
                   </div>
@@ -356,7 +340,7 @@ export default function App() {
                   transition={{ delay: 1.2 }}
                   className="flex flex-col items-start"
                 >
-                  <div className="bg-white/10 text-gray-200 px-4 py-3 rounded-2xl rounded-tl-none text-sm max-w-[90%] leading-relaxed border border-white/5 backdrop-blur-md">
+                  <div className="bg-white/10 text-gray-200 px-4 py-3 rounded-2xl rounded-tl-none text-sm max-w-[90%] leading-relaxed border border-white/5 backdrop-blur-md text-left">
                     Encontrei fornecedores verificados com estoque disponível e envio direto! 🚀
                   </div>
                 </motion.div>
@@ -368,19 +352,19 @@ export default function App() {
                   transition={{ delay: 1.8 }}
                   className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer"
                 >
-                  <div className="w-24 h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center border border-white/5">
+                  <div className="w-20 sm:w-24 h-20 sm:h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center border border-white/5 flex-shrink-0">
                     <img src="https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp" alt="iPhone 17" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                   </div>
-                  <div className="flex-1 flex flex-col justify-center">
+                  <div className="flex-1 flex flex-col justify-center text-left">
                     <div className="flex justify-between items-start mb-1">
-                      <h5 className="text-xs font-bold text-white uppercase tracking-tight">iPhone 17 Pro Max</h5>
-                      <span className="bg-green-500/10 text-green-500 text-[9px] px-1.5 py-0.5 rounded font-bold border border-green-500/20">VERIFICADO</span>
+                      <h5 className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-tight">iPhone 17 Pro Max</h5>
+                      <span className="bg-green-500/10 text-green-500 text-[8px] sm:text-[9px] px-1 py-0.5 rounded font-bold border border-green-500/20">VERIFICADO</span>
                     </div>
-                    <div className="flex items-end gap-2 mb-3">
-                      <span className="text-lg font-black text-white">R$7.600</span>
-                      <span className="text-[10px] text-gray-500 line-through mb-1">R$11.900</span>
+                    <div className="flex items-end gap-2 mb-2 sm:mb-3">
+                      <span className="text-sm sm:text-lg font-black text-white">R$7.600</span>
+                      <span className="text-[9px] sm:text-[10px] text-gray-500 line-through mb-0.5 sm:mb-1">R$11.900</span>
                     </div>
-                    <button className="w-full py-2 bg-[#582ef5] text-white text-[11px] font-black rounded-lg hover:bg-[#4c25e6] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
+                    <button className="w-full py-1.5 sm:py-2 bg-[#582ef5] text-white text-[9px] sm:text-[11px] font-black rounded-lg hover:bg-[#4c25e6] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
                       ACESSAR LINK <ArrowRight className="w-3 h-3" strokeWidth={3} />
                     </button>
                   </div>
@@ -396,13 +380,38 @@ export default function App() {
 
               {/* Barra de Input Fake */}
               <div className="bg-white/5 border-t border-white/5 p-4 flex items-center gap-3">
-                 <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-xs text-left">
+                 <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-[10px] sm:text-xs text-left">
                     Pergunte ao Minerador...
                  </div>
-                 <div className="w-10 h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/30">
-                    <ArrowRight className="w-5 h-5 text-white" />
+                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/20">
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                  </div>
               </div>
+            </motion.div>
+          </div>
+
+          {/* Parte 3: Descrição e Botão */}
+          <div className="lg:col-start-1 lg:row-start-2 text-center lg:text-left flex flex-col items-center lg:items-start order-3">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center lg:items-start"
+            >
+              <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed lg:mx-0">
+                Através de uma base de fábricas confiáveis, nossa IA garante o melhor preço entre diferentes unidades, o sistema automatiza o cálculo de tributos e a emissão de declarações, eliminando definitivamente o risco das taxas abusivas.
+              </p>
+
+              <motion.button
+                whileHover="hover"
+                initial="initial"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary px-10 py-5 text-base font-bold w-fit flex items-center justify-center gap-2 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
+              >
+                Testar Minerador Agora
+                <Sparkles className="w-5 h-5 fill-white/20" strokeWidth={2.5} />
+              </motion.button>
             </motion.div>
           </div>
         </div>
