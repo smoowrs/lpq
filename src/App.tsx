@@ -213,14 +213,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto w-full relative z-10">
           
           {/* --- MOBILE LAYOUT --- */}
-          <div className="md:hidden flex flex-col w-full mb-8">
-            {/* Badge no Topo Esquerdo */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold mb-8 backdrop-blur-md uppercase tracking-[0.2em] text-gray-400 w-fit">
-              <Users className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span>COMUNIDADE</span>
-            </div>
+          <div className="md:hidden flex flex-col w-full mb-12">
             
-            <div className="flex flex-row items-center w-full">
+            <div className="flex flex-row items-center w-full mt-4">
               {/* Lado Esquerdo: Imagem do Telefone (sem borda no canto e reduzida) */}
               <div className="w-[45%] flex relative items-center justify-center">
                  <img 
@@ -236,6 +231,12 @@ export default function App() {
               
               {/* Lado Direito: Textos e Botão */}
               <div className="w-[55%] flex flex-col pl-4">
+                {/* Badge no Topo Direito (agora alinhado com os textos) */}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[9px] sm:text-[10px] font-bold mb-4 md:mb-8 backdrop-blur-md uppercase tracking-[0.2em] text-gray-400 w-fit">
+                  <Users className="w-3 h-3 text-[#582ef5]" />
+                  <span>COMUNIDADE</span>
+                </div>
+                
                 <h2 className="text-[26px] font-bold tracking-tighter mb-4 leading-[1.05] text-white">
                   A 1ª Rede Social <br />
                   <span className="whitespace-nowrap">do Importador 💙</span>
@@ -395,7 +396,8 @@ export default function App() {
         
         <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-20 items-center justify-center min-h-[500px] md:min-h-0">
           
-          <div className="absolute md:relative z-0 md:z-auto pointer-events-none md:pointer-events-auto inset-0 md:inset-auto h-full flex items-center justify-center order-2 md:order-1 perspective-[2000px] py-10 md:py-20 md:h-[750px] lg:h-[800px] overflow-hidden md:overflow-visible">
+          {/* CARDS (Apenas Desktop - Lado Esquerdo da Grid) */}
+          <div className="hidden md:flex relative z-0 md:z-auto pointer-events-none md:pointer-events-auto inset-0 md:inset-auto h-full items-center justify-center order-2 md:order-1 perspective-[2000px] py-10 md:py-20 md:h-[750px] lg:h-[800px] overflow-hidden md:overflow-visible">
             <div className="absolute inset-0 z-0 pointer-events-none">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[150px] rounded-full bg-[#582ef5]/10" />
               <div className="absolute top-0 left-0 w-64 h-64 blur-[100px] rounded-full bg-[#582ef5]/15 animate-pulse" />
@@ -431,8 +433,6 @@ export default function App() {
                 </motion.div>
               ))}
             </div>
-            
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-20 pointer-events-none opacity-95 md:hidden" />
           </div>
 
           <motion.div
@@ -456,10 +456,11 @@ export default function App() {
                 Aprenda importar do zero ✈️
               </span>
             </h2>
-            <p className="text-sm md:text-base text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md drop-shadow-lg">
+            <p className="text-sm md:text-base text-gray-300 md:text-gray-400 mb-8 md:mb-10 leading-relaxed max-w-md drop-shadow-lg">
               Do primeiro acesso até a chegada dos produtos na porta da sua casa ou da sua loja. Nosso treinamento completo ensina cada detalhe do processo.
             </p>
-            <ul className="space-y-5 mb-12 w-full max-w-sm drop-shadow-2xl">
+            
+            <ul className="hidden md:block space-y-5 mb-12 w-full max-w-sm drop-shadow-2xl">
               {['Configuração de endereço na China','Como comprar de forma segura','Gestão de envios e rastreio','Estratégias para evitar taxas'].map((item, i) => (
                 <li key={i} className="flex items-center gap-3 text-gray-200 md:text-gray-300 font-bold md:font-medium">
                   <div className="w-6 h-6 rounded-full bg-[#582ef5]/40 md:bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/50 md:border-[#582ef5]/30 shrink-0">
@@ -469,6 +470,7 @@ export default function App() {
                 </li>
               ))}
             </ul>
+
             <motion.button
               whileHover="hover"
               initial="initial"
@@ -481,6 +483,37 @@ export default function App() {
                 <ArrowRight className="w-5 h-5" strokeWidth={3} />
               </motion.div>
             </motion.button>
+            
+            {/* CARDS (Apenas Mobile - Abaixo do botão) */}
+            <div className="flex md:hidden relative w-full h-[320px] items-center justify-center perspective-[2000px] mt-10 overflow-visible">
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[150px] rounded-full bg-[#582ef5]/20" />
+              </div>
+              <div className="relative w-full h-full flex items-center justify-center scale-[0.7]">
+                {[
+                  { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15, z: 0 },
+                  { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15, z: 20 },
+                  { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03", x: -180, y: 40, rot: -25, z: 40 },
+                  { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04", x: -20, y: -20, rot: 5, z: 60 },
+                  { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05", x: 160, y: 60, rot: 10, z: 80 },
+                  { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06", x: -60, y: 220, rot: -5, z: 100 }
+                ].map((aula, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.5, x: 0, y: 100, rotateZ: 0 }}
+                    whileInView={{ opacity: 1, scale: 1, x: aula.x, y: aula.y, rotateZ: aula.rot, rotateX: 10, rotateY: idx % 2 === 0 ? -15 : 15, z: aula.z }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1, duration: 1.5, type: "spring", stiffness: 35, damping: 15 }}
+                    className="absolute w-36 aspect-[9/16] rounded-2xl overflow-hidden shadow-[0_40px_80px_rgba(0,0,0,0.8)] border border-white/20 bg-black"
+                    style={{ zIndex: idx, transformStyle: "preserve-3d" }}
+                  >
+                    <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90" loading="lazy" decoding="async" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
           </motion.div>
         </div>
       </section>
