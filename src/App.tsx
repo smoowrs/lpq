@@ -44,12 +44,18 @@ export default function App() {
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] grid grid-cols-3 items-center relative">
           
           {/* Lado esquerdo: Desktop = Links / Mobile = Idioma */}
-          <div className="flex items-center justify-start gap-8 text-[15px] font-medium text-gray-400">
-            {/* Desktop Links */}
-            <div className="hidden lg:flex items-center gap-8">
-              <a href="#recursos" className="hover:text-white transition-colors">Recursos</a>
-              <a href="#rastreio" className="hover:text-white transition-colors">Rastreio</a>
-              <a href="#comunidade" className="hover:text-white transition-colors">Comunidade</a>
+          <div className="flex items-center justify-start gap-4 text-[15px] font-medium text-gray-400">
+            {/* Desktop Idioma Selector (Movido para a esquerda) */}
+            <div className="hidden lg:block relative group/lang">
+              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all">
+                <span className="text-lg">🇧🇷</span>
+                <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-32 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-2xl z-50">
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5">🇺🇸 English</button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 text-white font-bold">🇧🇷 Port (BR) <Check className="w-3.5 h-3.5 text-[#582ef5]" /></button>
+                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5">🇪🇸 Español</button>
+              </div>
             </div>
 
             {/* Mobile Idioma Selector */}
@@ -78,18 +84,6 @@ export default function App() {
 
           {/* Direito: CTAs e Idioma (Desktop) */}
           <div className="flex items-center justify-end gap-2 md:gap-4 font-medium">
-            {/* Desktop Idioma Selector */}
-            <div className="hidden lg:block relative group/lang">
-              <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-all">
-                <span className="text-lg">🇧🇷</span>
-                <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
-              </button>
-              <div className="absolute top-full right-0 mt-2 w-32 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-2xl z-50">
-                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5">🇺🇸 English</button>
-                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5 text-white font-bold">🇧🇷 Port (BR) <Check className="w-3.5 h-3.5 text-[#582ef5]" /></button>
-                <button className="w-full px-4 py-2 flex items-center justify-between text-sm hover:bg-white/5">🇪🇸 Español</button>
-              </div>
-            </div>
 
             <div className="flex items-center gap-1 sm:gap-4">
               <button onClick={() => window.location.href = 'https://app.connectacademy.com.br'} className="text-[11px] sm:text-[14px] md:text-[15px] font-medium text-gray-300 hover:text-white transition-colors px-2 py-2">
