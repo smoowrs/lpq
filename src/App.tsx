@@ -678,67 +678,66 @@ export default function App() {
       </section>
 
       {/* ─── FÁBRICAS ────────────────────────────────────────── */}
-      <section id="fabricas" className="pt-24 md:pt-32 pb-12 md:pb-32 relative overflow-hidden bg-black border-t border-white/5">
-        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
+      <section id="fabricas" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
+        <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
-        {/* Layer de Fundo: Imagem Encaixada (Esquerda no desktop) */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center md:justify-start md:pl-12 lg:pl-24">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2 }}
-            className="relative w-full md:w-1/2 h-full flex items-center justify-center sm:justify-start"
-          >
-             <div className="relative p-0">
-                <img 
-                  src="https://i.postimg.cc/SxvyP1tc/CAIXAS.webp" 
-                  alt="Fábricas" 
-                  className="w-[350px] sm:w-[500px] md:w-[700px] lg:w-[750px] max-w-none relative z-10 transform -translate-x-[5%] md:-translate-x-[15%]"
-                />
-             </div>
-          </motion.div>
-        </div>
-
-        {/* Foreground: Conteúdo Textual (Direita no desktop) */}
-        <div className="max-w-7xl mx-auto px-6 relative z-30 flex flex-col md:flex-row items-center justify-center md:justify-between min-h-[600px] md:min-h-0">
-          <div className="md:w-1/2 hidden md:block" /> 
-          
-          <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left mt-12 md:mt-0">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 lg:gap-32">
+            
+            {/* Lado Esquerdo: Imagem (Caixas) */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col items-center md:items-start w-full max-w-xl"
+              className="w-full md:w-[45%] flex justify-center md:justify-end"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
-                <Factory className="w-3.5 h-3.5 text-[#582ef5]" />
-                <span className="text-gray-300 uppercase tracking-wider">Fábricas</span>
-              </div>
-              
-              <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)] px-4 sm:px-0">
-                Os maiores fabricantes <br />
-                e lojas oficiais <br />
-                <span className="text-gradient-ai">da China</span>
-              </h2>
-              
-              <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-center md:text-left drop-shadow-lg font-medium lg:whitespace-normal">
-                Um painel com fabricantes e fornecedores confiaveis e com extrema agilidade de entrega, crie sua conta grátis e acesse nossas fabricas.
-              </p>
-
-              <motion.button
-                whileHover="hover"
-                initial="initial"
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
-              >
-                Ver fábricas
-                <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                  <ArrowRight className="w-4 h-4" strokeWidth={3} />
-                </motion.div>
-              </motion.button>
+               <div className="relative">
+                  <div className="absolute -inset-10 bg-[#582ef5]/10 rounded-full blur-3xl opacity-30 pointer-events-none" />
+                  <img 
+                    src="https://i.postimg.cc/SxvyP1tc/CAIXAS.webp" 
+                    alt="Fábricas" 
+                    className="w-full max-w-[340px] sm:max-w-[480px] md:max-w-none lg:w-[650px] relative z-10"
+                  />
+               </div>
             </motion.div>
+
+            {/* Lado Direito: Conteúdo Textual */}
+            <div className="w-full md:w-[55%] flex flex-col items-center md:items-start text-center md:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center md:items-start w-full max-w-xl"
+              >
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+                  <Factory className="w-3.5 h-3.5 text-[#582ef5]" />
+                  <span className="text-gray-300 uppercase tracking-wider">Fábricas</span>
+                </div>
+                
+                <h2 className="text-[34px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+                  Os maiores fabricantes <br />
+                  e lojas oficiais <br />
+                  <span className="text-gradient-ai">da China</span>
+                </h2>
+                
+                <p className="text-base md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md font-medium">
+                  Um painel com fabricantes e fornecedores confiaveis e com extrema agilidade de entrega, crie sua conta grátis e acesse nossas fabricas.
+                </p>
+
+                <motion.button
+                  whileHover="hover"
+                  initial="initial"
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                  className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
+                >
+                  Ver fábricas
+                  <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                    <ArrowRight className="w-4 h-4" strokeWidth={3} />
+                  </motion.div>
+                </motion.button>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
