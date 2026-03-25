@@ -210,26 +210,44 @@ export default function App() {
         {/* Glow de fundo atmosférico */}
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto flex flex-row items-center justify-between relative z-10 gap-2 md:gap-20">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center relative z-10 gap-12 md:gap-20">
           
-          {/* Texto (Mobile: Esquerda, Desktop: Direita) */}
+          {/* Celular (Fica em cima no Mobile, Esquerda no Desktop) */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="w-full md:w-1/2 flex justify-center z-20"
+          >
+            <div className="relative z-10 flex justify-center">
+               <img 
+                 src="https://i.postimg.cc/3RkrkCVn/phones.png"
+                 alt="App Comunidade"
+                 className="w-full max-w-[320px] md:max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                 loading="eager"
+                 decoding="async"
+               />
+            </div>
+          </motion.div>
+
+          {/* Texto (Fica embaixo no Mobile, Direita na Desktop) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="w-[55%] lg:w-1/2 relative z-20 text-left order-1 md:order-2"
+            className="w-full md:w-1/2 relative z-20 text-left"
           >
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-white/5 border border-white/10 text-[8px] md:text-[10px] font-bold mb-4 md:mb-8 backdrop-blur-md uppercase tracking-[0.2em] text-gray-400">
-              <Users className="w-3 h-3 md:w-3.5 md:h-3.5 text-[#582ef5]" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold mb-8 backdrop-blur-md uppercase tracking-[0.2em] text-gray-400">
+              <Users className="w-3.5 h-3.5 text-[#582ef5]" />
               <span>COMUNIDADE</span>
             </div>
             
-            <h2 className="text-[20px] sm:text-[28px] md:text-5xl lg:text-[82px] font-bold tracking-tighter mb-4 md:mb-8 leading-[1.05] text-white">
+            <h2 className="text-[38px] md:text-6xl lg:text-[82px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
               A 1ª Rede Social <br />
               <span className="whitespace-nowrap text-inherit">do Importador <span className="text-[0.85em] inline-block align-middle transform translate-y-[-2px]">💙</span></span>
             </h2>
             
-            <p className="text-[10px] sm:text-[12px] md:text-base text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-xl opacity-80">
+            <p className="text-sm md:text-base text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
               Sua nova rede social, uma comunidade exclusiva para importadores e empreendedores, troque informações estratégicas, compartilhe seus resultados e evolua ao lado de quem fala a sua língua.
             </p>
             
@@ -238,29 +256,11 @@ export default function App() {
               initial="initial"
               whileTap={{ scale: 0.95 }}
               onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-              className="btn-primary w-fit px-4 py-2.5 sm:px-6 sm:py-3 md:px-10 md:py-5 text-[10px] sm:text-[12px] md:text-base font-bold flex items-center justify-center gap-2 group rounded-[10px] md:rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
+              className="btn-primary w-fit px-10 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
             >
               Testar comunidade
-              <ArrowRight className="w-3.5 h-3.5 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
             </motion.button>
-          </motion.div>
-
-          {/* Celular (Mobile: Direita, Desktop: Esquerda) */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="w-[45%] lg:w-1/2 flex justify-end md:justify-center z-20 order-2 md:order-1"
-          >
-            <div className="relative z-10 flex justify-end md:justify-center w-full">
-               <img 
-                 src="https://i.postimg.cc/3RkrkCVn/phones.png"
-                 alt="App Comunidade"
-                 className="w-full max-w-[150px] sm:max-w-[190px] md:max-w-[420px] lg:max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-                 loading="eager"
-                 decoding="async"
-               />
-            </div>
           </motion.div>
         </div>
       </section>
