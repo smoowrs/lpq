@@ -932,8 +932,8 @@ export default function App() {
                   </span>
                 </h2>
                 
-                <p className="text-sm md:text-lg text-gray-300 md:text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-md font-medium">
-                  Um painel com fabricantes e fornecedores confiáveis e com extrema agilidade de entrega, crie sua conta grátis e acesse nossas fábricas.
+                <p className="hidden md:block text-sm md:text-lg text-gray-300 md:text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-md font-medium">
+                  {t.fabricas.desc}
                 </p>
 
                 {/* Imagem (Apenas Mobile: Entre Descrição e Botão) */}
