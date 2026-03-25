@@ -1,12 +1,20 @@
 import { motion } from 'motion/react';
 import { 
   Package, Sparkles, Users, ShieldCheck, 
-  ArrowRight, PlayCircle, Menu, CheckCircle2,
-  Clock, MapPin, Globe, Play, Trophy,
-  Crown, Star, Medal, ChevronDown, Check,
+  ArrowRight, PlayCircle, CheckCircle2,
+  Clock, MapPin, Play,
+  Crown, Star, ChevronDown, Check,
   Factory
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
+
+// ─── Dados estáticos fora do componente: sem recriação em cada render ───
+const trackingStages = [
+  { title: "Postado na China", time: "09:41 AM", icon: <Package className="w-4 h-4" /> },
+  { title: "Chegou no Brasil", time: "14:20 PM", icon: <MapPin className="w-4 h-4" /> },
+  { title: "Fiscalização Concluída", time: "10:15 AM", icon: <ShieldCheck className="w-4 h-4" /> },
+  { title: "Saiu para Entrega", time: "08:30 AM", icon: <CheckCircle2 className="w-4 h-4" /> },
+];
 
 export default function App() {
   const [trackingStep, setTrackingStep] = useState(0);
@@ -17,24 +25,6 @@ export default function App() {
     }, 2500);
     return () => clearInterval(interval);
   }, []);
-
-  const carouselImages = [
-    "https://picsum.photos/seed/sneaker/400/400",
-    "https://picsum.photos/seed/watch/400/400",
-    "https://picsum.photos/seed/drone/400/400",
-    "https://picsum.photos/seed/headphones/400/400",
-    "https://picsum.photos/seed/camera/400/400",
-    "https://picsum.photos/seed/bag/400/400",
-    "https://picsum.photos/seed/glasses/400/400",
-    "https://picsum.photos/seed/tech/400/400",
-  ];
-
-  const trackingStages = [
-    { title: "Postado na China", time: "09:41 AM", icon: <Package className="w-4 h-4" /> },
-    { title: "Chegou no Brasil", time: "14:20 PM", icon: <MapPin className="w-4 h-4" /> },
-    { title: "Fiscalização Concluída", time: "10:15 AM", icon: <ShieldCheck className="w-4 h-4" /> },
-    { title: "Saiu para Entrega", time: "08:30 AM", icon: <CheckCircle2 className="w-4 h-4" /> },
-  ];
 
   return (
     <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F7] selection:bg-white/20">
@@ -79,6 +69,8 @@ export default function App() {
               alt="Asas de Importação"
               className="h-5 sm:h-6 md:h-8 object-contain"
               referrerPolicy="no-referrer"
+              fetchPriority="high"
+              decoding="sync"
             />
           </div>
 
@@ -140,6 +132,7 @@ export default function App() {
                       src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b" 
                       className="absolute top-0 left-0 w-full h-full border-0"
                       allowFullScreen
+                      loading="eager"
                     />
                   </div>
                 </div>
@@ -222,6 +215,8 @@ export default function App() {
                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
                  alt="App Comunidade"
                  className="w-full max-w-[320px] md:max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                 loading="eager"
+                 decoding="async"
                />
             </div>
           </motion.div>
@@ -258,271 +253,6 @@ export default function App() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
             </motion.button>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ─── O MINERADOR ────────────────────────────────────────── */}
-      <section id="minerador" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
-        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-y-12 lg:gap-24">
-          {/* Parte 1: Título e Badge */}
-          <div className="lg:col-start-1 lg:row-start-1 text-center lg:text-left flex flex-col items-center lg:items-start order-1">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-6 backdrop-blur-md text-[#582ef5] uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>O MINERADOR</span>
-              </div>
-              
-              <h2 className="text-[36px] sm:text-[42px] md:text-5xl lg:text-[82px] font-black tracking-tighter mb-4 leading-[1] text-white">
-                O Assistente <br />
-                <span className="text-gradient-ai">inteligente 💬</span>
-              </h2>
-            </motion.div>
-          </div>
-
-          {/* Parte 2: Mockup do Chat (No meio no mobile) */}
-          <div className="lg:col-start-2 lg:row-span-2 order-2 lg:order-none flex justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="relative bg-[#0d0d0d] rounded-3xl border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-lg"
-            >
-              {/* Header do Chat */}
-              <div className="bg-white/5 border-b border-white/5 p-4 flex items-center justify-between backdrop-blur-xl">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <div className="w-10 h-10 rounded-full bg-[#582ef5]/20 flex items-center justify-center overflow-hidden border border-[#582ef5]/30">
-                      <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGJzeHd3YTZlbTVhd2x5dHB2eTRtaHR3am5sajFqNW55OWxoMXhmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S5Itfetiqrv3emmx8h/giphy.gif" alt="Minerador" className="w-8 h-8 object-contain" />
-                    </div>
-                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black" />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="text-sm font-bold text-white leading-none mb-1">O Minerador 💙</h4>
-                    <p className="text-[10px] text-green-500 font-medium">IA Online agora</p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <div className="w-2 h-2 rounded-full bg-white/10" />
-                  <div className="w-2 h-2 rounded-full bg-white/10" />
-                  <div className="w-2 h-2 rounded-full bg-white/10" />
-                </div>
-              </div>
-
-              {/* Corpo do Chat */}
-              <div className="p-5 space-y-6">
-                {/* Pergunta do User */}
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="flex flex-col items-end"
-                >
-                  <div className="bg-[#582ef5] text-white px-4 py-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-lg">
-                    Preciso de link de iphone 17 pro max
-                  </div>
-                  <span className="text-[10px] text-gray-500 mt-1.5 mr-1 font-medium italic">Enviado agora</span>
-                </motion.div>
-
-                {/* Resposta do Minerador */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 1.2 }}
-                  className="flex flex-col items-start"
-                >
-                  <div className="bg-white/10 text-gray-200 px-4 py-3 rounded-2xl rounded-tl-none text-sm max-w-[90%] leading-relaxed border border-white/5 backdrop-blur-md text-left">
-                    Encontrei fornecedores verificados com estoque disponível e envio direto! 🚀
-                  </div>
-                </motion.div>
-
-                {/* Product Card Result */}
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ delay: 1.8 }}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer"
-                >
-                  <div className="w-20 sm:w-24 h-20 sm:h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center border border-white/5 flex-shrink-0">
-                    <img src="https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp" alt="iPhone 17" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                  <div className="flex-1 flex flex-col justify-center text-left">
-                    <div className="flex justify-between items-start mb-1">
-                      <h5 className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-tight">iPhone 17 Pro Max</h5>
-                      <span className="bg-green-500/10 text-green-500 text-[8px] sm:text-[9px] px-1 py-0.5 rounded font-bold border border-green-500/20">VERIFICADO</span>
-                    </div>
-                    <div className="flex items-end gap-2 mb-2 sm:mb-3">
-                      <span className="text-sm sm:text-lg font-black text-white">R$7.600</span>
-                      <span className="text-[9px] sm:text-[10px] text-gray-500 line-through mb-0.5 sm:mb-1">R$11.900</span>
-                    </div>
-                    <button className="w-full py-1.5 sm:py-2 bg-[#582ef5] text-white text-[9px] sm:text-[11px] font-black rounded-lg hover:bg-[#4c25e6] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
-                      ACESSAR LINK <ArrowRight className="w-3 h-3" strokeWidth={3} />
-                    </button>
-                  </div>
-                </motion.div>
-                
-                {/* Typing status (fake) */}
-                <div className="flex items-center gap-1.5">
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce" />
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.2s]" />
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.4s]" />
-                </div>
-              </div>
-
-              {/* Barra de Input Fake */}
-              <div className="bg-white/5 border-t border-white/5 p-4 flex items-center gap-3">
-                 <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-[10px] sm:text-xs text-left">
-                    Pergunte ao Minerador...
-                 </div>
-                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/20">
-                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                 </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Parte 3: Descrição e Botão */}
-          <div className="lg:col-start-1 lg:row-start-2 text-center lg:text-left flex flex-col items-center lg:items-start order-3">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="flex flex-col items-center lg:items-start"
-            >
-              <p className="text-sm md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed lg:mx-0">
-                Através de uma base de fábricas confiáveis, nossa IA garante o melhor preço entre diferentes unidades, o sistema automatiza o cálculo de tributos e a emissão de declarações, eliminando definitivamente o risco das taxas abusivas.
-              </p>
-
-              <motion.button
-                whileHover="hover"
-                initial="initial"
-                whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary px-10 py-5 text-base font-bold w-fit flex items-center justify-center gap-2 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
-              >
-                Testar Minerador Agora
-                <Sparkles className="w-5 h-5 fill-white/20" strokeWidth={2.5} />
-              </motion.button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── NÍVEIS E RECOMPENSAS ────────────────────────────────────────── */}
-      <section id="ranking" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[150px] pointer-events-none" />
-        
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row-reverse items-center justify-between gap-12 md:gap-20">
-            
-            {/* Texto (Direita no Desktop) */}
-            <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col items-center md:items-start"
-              >
-                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
-                  <Star className="w-3.5 h-3.5 text-[#582ef5]" />
-                  <span className="text-gray-300 uppercase tracking-wider">Níveis e Recompensas</span>
-                </div>
-                
-                <h2 className="text-3xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
-                  Suba de nível e<br />
-                  <span className="text-gradient-ai">ganhe prêmios</span>
-                </h2>
-
-                <motion.button
-                  whileHover="hover"
-                  initial="initial"
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                  className="btn-primary w-fit px-12 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
-                >
-                  Subir níveis
-                  <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                    <ArrowRight className="w-5 h-5" strokeWidth={3} />
-                  </motion.div>
-                </motion.button>
-              </motion.div>
-            </div>
-
-            {/* Pódio de Ranking (Esquerda no Desktop) */}
-            <div className="md:w-1/2 w-full">
-              <div className="flex flex-row items-end justify-center gap-4 md:gap-8 py-6 scale-90 md:scale-100 lg:scale-110 origin-center">
-                
-                {/* 2º Lugar */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center"
-                >
-                  <div className="relative mb-4">
-                    <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-4 border-[#582ef5]/30 p-1">
-                      <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover grayscale opacity-70" alt="2º Lugar" />
-                    </div>
-                    <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#1a1a1a] border-2 border-[#582ef5]/30 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">2</div>
-                  </div>
-                  <h4 className="font-bold text-sm md:text-base text-white mb-2 text-center">Gabriel</h4>
-                  <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[10px] md:text-[11px] font-bold text-gray-400 mb-4 whitespace-nowrap">620 XP</div>
-                  <div className="w-20 md:w-24 lg:w-28 h-10 md:h-12 lg:h-16 bg-white/5 border border-white/10 rounded-t-xl flex items-center justify-center font-bold text-white/10 text-lg md:text-xl lg:text-2xl">2º</div>
-                </motion.div>
-
-                {/* 1º Lugar */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20, x: 0 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center -translate-y-4 md:-translate-y-6"
-                >
-                  <motion.div 
-                    animate={{ y: [-3, 3, -3] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="mb-2"
-                  >
-                    <Crown className="w-6 h-6 md:w-8 lg:w-10 text-[#582ef5] fill-[#582ef5]/20 drop-shadow-[0_0_10px_rgba(88,46,245,0.5)]" />
-                  </motion.div>
-                  <div className="relative mb-4">
-                    <div className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full border-4 border-[#582ef5] p-1 shadow-[0_0_30px_rgba(88,46,245,0.3)]">
-                      <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover" alt="1º Lugar" />
-                    </div>
-                    <div className="absolute -bottom-1 -right-1 w-8 h-8 md:w-10 md:h-10 bg-[#582ef5] border-2 border-black rounded-full flex items-center justify-center text-xs md:text-sm font-black text-white">1</div>
-                  </div>
-                  <h4 className="font-bold text-base md:text-xl lg:text-2xl text-white mb-2 text-center">Douglas</h4>
-                  <div className="bg-[#582ef5]/10 border border-[#582ef5]/20 px-4 py-1.5 rounded-lg text-[10px] md:text-[11px] font-bold text-[#582ef5] mb-4 shadow-lg whitespace-nowrap">850 XP</div>
-                  <div className="w-24 md:w-32 lg:w-36 h-20 md:h-24 lg:h-28 bg-[#582ef5]/10 border border-[#582ef5]/20 rounded-t-2xl flex items-center justify-center font-bold text-[#582ef5]/40 text-2xl md:text-3xl lg:text-4xl shadow-[inset_0_20px_50px_rgba(88,46,245,0.1)]">1º</div>
-                </motion.div>
-
-                {/* 3º Lugar */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col items-center"
-                >
-                  <div className="relative mb-4">
-                    <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-4 border-[#582ef5]/30 p-1">
-                      <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover grayscale opacity-70" alt="3º Lugar" />
-                    </div>
-                    <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#1a1a1a] border-2 border-[#582ef5]/30 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">3</div>
-                  </div>
-                  <h4 className="font-bold text-sm md:text-base text-white mb-2 text-center">Lucas</h4>
-                  <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[10px] md:text-[11px] font-bold text-gray-400 mb-4 whitespace-nowrap">400 XP</div>
-                  <div className="w-20 md:w-24 lg:w-28 h-6 md:h-8 lg:h-10 bg-white/5 border border-white/10 rounded-t-xl flex items-center justify-center font-bold text-white/5 text-lg md:text-xl lg:text-2xl">3º</div>
-                </motion.div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -579,9 +309,11 @@ export default function App() {
             >
                <div className="relative">
                   <img 
-                    src="https://i.postimg.cc/SxvyP1tc/CAIXAS.webp" 
+                    src="https://i.postimg.cc/nLX55SV5/product.webp" 
                     alt="Fábricas" 
-                    className="w-full max-w-[340px] sm:max-w-[480px] md:max-w-none lg:w-[650px] relative z-10"
+                    className="w-full max-w-[380px] sm:max-w-[520px] md:max-w-none lg:w-[720px] relative z-10"
+                    loading="lazy"
+                    decoding="async"
                   />
                </div>
             </motion.div>
@@ -654,7 +386,7 @@ export default function App() {
                       M{aula.id}
                     </span>
                   </div>
-                  <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90 group-hover/card-aula:brightness-110 transition-all duration-500" />
+                  <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90 group-hover/card-aula:brightness-110 transition-all duration-500" loading="lazy" decoding="async" />
                   
                   {/* Glassmorphism Inner Shadow */}
                   <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl md:rounded-[2.5rem] pointer-events-none" />
@@ -761,7 +493,7 @@ export default function App() {
                 className="absolute w-32 md:w-44 lg:w-48 aspect-[3/4.2] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_rgba(0,0,0,0.8)] bg-[#0d0d0d]"
                 style={{ zIndex: card.z }}
               >
-                <img src={card.img} className="w-full h-full object-cover" alt="" />
+                <img src={card.img} className="w-full h-full object-cover" alt="" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 shadow-[inset_0_0_80px_rgba(0,0,0,0.5)]" />
               </motion.div>
             ))}
@@ -811,9 +543,266 @@ export default function App() {
             </motion.div>
           </div>
 
-          <div className="md:w-1/2 hidden md:block" /> {/* Espaçador à direita no desktop */}
+          <div className="md:w-1/2 hidden md:block" />
         </div>
       </section>
+
+      {/* ─── O MINERADOR ────────────────────────────────────────── */}
+      <section id="minerador" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 items-center gap-y-12 lg:gap-24">
+          {/* Parte 1 & 3 Unificadas (Título, Descrição e Botão) */}
+          <div className="lg:col-start-1 lg:row-span-2 flex flex-col items-center lg:items-start text-center lg:text-left order-1">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col items-center lg:items-start"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-6 backdrop-blur-md text-[#582ef5] uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>O MINERADOR</span>
+              </div>
+              
+              <h2 className="text-[36px] sm:text-[42px] md:text-5xl lg:text-[72px] font-black tracking-tighter mb-4 lg:mb-1 leading-[1] text-white">
+                O Assistente <br />
+                <span className="text-gradient-ai">inteligente 💬</span>
+              </h2>
+
+              <p className="text-sm md:text-base text-gray-400 mb-8 max-w-xl leading-relaxed lg:mx-0">
+                Através de uma base de fábricas confiáveis, nossa IA garante o melhor preço entre diferentes unidades, o sistema automatiza o cálculo de tributos e a emissão de declarações, eliminando definitivamente o risco das taxas abusivas.
+              </p>
+
+              <motion.button
+                whileHover="hover"
+                initial="initial"
+                whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary px-10 py-5 text-base font-bold w-fit flex items-center justify-center gap-2 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)]"
+              >
+                Testar Minerador Agora
+                <Sparkles className="w-5 h-5 fill-white/20" strokeWidth={2.5} />
+              </motion.button>
+            </motion.div>
+          </div>
+
+          {/* Parte 2: Mockup do Chat (No meio no mobile) */}
+          <div className="lg:col-start-2 lg:row-span-2 order-2 lg:order-none flex justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative bg-[#0d0d0d] rounded-3xl border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.5)] overflow-hidden w-full max-w-lg"
+            >
+              {/* Header do Chat */}
+              <div className="bg-white/5 border-b border-white/5 p-4 flex items-center justify-between backdrop-blur-xl">
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <div className="w-10 h-10 rounded-full bg-[#582ef5]/20 flex items-center justify-center overflow-hidden border border-[#582ef5]/30">
+                      <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGJzeHd3YTZlbTVhd2x5dHB2eTRtaHR3am5sajFqNW55OWxoMXhmYSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/S5Itfetiqrv3emmx8h/giphy.gif" alt="Minerador" className="w-8 h-8 object-contain" loading="lazy" decoding="async" />
+                    </div>
+                    <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-black" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className="text-sm font-bold text-white leading-none mb-1">O Minerador 💙</h4>
+                    <p className="text-[10px] text-green-500 font-medium">IA Online agora</p>
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-2 h-2 rounded-full bg-white/10" />
+                  <div className="w-2 h-2 rounded-full bg-white/10" />
+                  <div className="w-2 h-2 rounded-full bg-white/10" />
+                </div>
+              </div>
+
+              {/* Corpo do Chat */}
+              <div className="p-5 space-y-6">
+                {/* Pergunta do User */}
+                <motion.div 
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="flex flex-col items-end"
+                >
+                  <div className="bg-[#582ef5] text-white px-4 py-3 rounded-2xl rounded-tr-none text-sm max-w-[85%] shadow-lg">
+                    Preciso de link de iphone 17 pro max
+                  </div>
+                  <span className="text-[10px] text-gray-500 mt-1.5 mr-1 font-medium italic">Enviado agora</span>
+                </motion.div>
+
+                {/* Resposta do Minerador */}
+                <motion.div 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.2 }}
+                  className="flex flex-col items-start"
+                >
+                  <div className="bg-white/10 text-gray-200 px-4 py-3 rounded-2xl rounded-tl-none text-sm max-w-[90%] leading-relaxed border border-white/5 backdrop-blur-md text-left">
+                    Encontrei fornecedores verificados com estoque disponível e envio direto! 🚀
+                  </div>
+                </motion.div>
+
+                {/* Product Card Result */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ delay: 1.8 }}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-3 flex gap-4 backdrop-blur-xl hover:bg-white/10 transition-colors group cursor-pointer"
+                >
+                  <div className="w-20 sm:w-24 h-20 sm:h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center border border-white/5 flex-shrink-0">
+                    <img src="https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp" alt="iPhone 17" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async" />
+                  </div>
+                  <div className="flex-1 flex flex-col justify-center text-left">
+                    <div className="flex justify-between items-start mb-1">
+                      <h5 className="text-[10px] sm:text-xs font-bold text-white uppercase tracking-tight">iPhone 17 Pro Max</h5>
+                      <span className="bg-green-500/10 text-green-500 text-[8px] sm:text-[9px] px-1 py-0.5 rounded font-bold border border-green-500/20">VERIFICADO</span>
+                    </div>
+                    <div className="flex items-end gap-2 mb-2 sm:mb-3">
+                      <span className="text-sm sm:text-lg font-black text-white">R$7.600</span>
+                      <span className="text-[9px] sm:text-[10px] text-gray-500 line-through mb-0.5 sm:mb-1">R$11.900</span>
+                    </div>
+                    <button className="w-full py-1.5 sm:py-2 bg-[#582ef5] text-white text-[9px] sm:text-[11px] font-black rounded-lg hover:bg-[#4c25e6] transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-[#582ef5]/20">
+                      ACESSAR LINK <ArrowRight className="w-3 h-3" strokeWidth={3} />
+                    </button>
+                  </div>
+                </motion.div>
+                
+                {/* Typing status (fake) */}
+                <div className="flex items-center gap-1.5">
+                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce" />
+                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.2s]" />
+                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.4s]" />
+                </div>
+              </div>
+
+              {/* Barra de Input Fake */}
+              <div className="bg-white/5 border-t border-white/5 p-4 flex items-center gap-3">
+                 <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-[10px] sm:text-xs text-left">
+                    Pergunte ao Minerador...
+                 </div>
+                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/20">
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                 </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── NÍVEIS E RECOMPENSAS ────────────────────────────────────────── */}
+      <section id="ranking" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[150px] pointer-events-none" />
+        
+        <div className="max-w-6xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row-reverse items-center justify-between gap-12 md:gap-20">
+            
+            {/* Texto (Direita no Desktop) */}
+            <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-col items-center md:items-start"
+              >
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
+                  <Star className="w-3.5 h-3.5 text-[#582ef5]" />
+                  <span className="text-gray-300 uppercase tracking-wider">Níveis e Recompensas</span>
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
+                  Suba de nível e<br />
+                  <span className="text-gradient-ai">ganhe prêmios</span>
+                </h2>
+
+                <motion.button
+                  whileHover="hover"
+                  initial="initial"
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                  className="btn-primary w-fit px-12 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
+                >
+                  Subir níveis
+                  <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                    <ArrowRight className="w-5 h-5" strokeWidth={3} />
+                  </motion.div>
+                </motion.button>
+              </motion.div>
+            </div>
+
+            {/* Pódio de Ranking (Esquerda no Desktop) */}
+            <div className="md:w-1/2 w-full">
+              <div className="flex flex-row items-end justify-center gap-4 md:gap-8 py-6 scale-90 md:scale-100 lg:scale-110 origin-center">
+                
+                {/* 2º Lugar */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center"
+                >
+                  <div className="relative mb-4">
+                    <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-4 border-[#582ef5]/30 p-1">
+                      <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover grayscale opacity-70" alt="2º Lugar" loading="lazy" decoding="async" />
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#1a1a1a] border-2 border-[#582ef5]/30 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">2</div>
+                  </div>
+                  <h4 className="font-bold text-sm md:text-base text-white mb-2 text-center">Gabriel</h4>
+                  <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[10px] md:text-[11px] font-bold text-gray-400 mb-4 whitespace-nowrap">620 XP</div>
+                  <div className="w-20 md:w-24 lg:w-28 h-10 md:h-12 lg:h-16 bg-white/5 border border-white/10 rounded-t-xl flex items-center justify-center font-bold text-white/10 text-lg md:text-xl lg:text-2xl">2º</div>
+                </motion.div>
+
+                {/* 1º Lugar */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20, x: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center -translate-y-4 md:-translate-y-6"
+                >
+                  <motion.div 
+                    animate={{ y: [-3, 3, -3] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="mb-2"
+                  >
+                    <Crown className="w-6 h-6 md:w-8 lg:w-10 text-[#582ef5] fill-[#582ef5]/20 drop-shadow-[0_0_10px_rgba(88,46,245,0.5)]" />
+                  </motion.div>
+                  <div className="relative mb-4">
+                    <div className="w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full border-4 border-[#582ef5] p-1 shadow-[0_0_30px_rgba(88,46,245,0.3)]">
+                      <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover" alt="1º Lugar" loading="lazy" decoding="async" />
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-8 h-8 md:w-10 md:h-10 bg-[#582ef5] border-2 border-black rounded-full flex items-center justify-center text-xs md:text-sm font-black text-white">1</div>
+                  </div>
+                  <h4 className="font-bold text-base md:text-xl lg:text-2xl text-white mb-2 text-center">Douglas</h4>
+                  <div className="bg-[#582ef5]/10 border border-[#582ef5]/20 px-4 py-1.5 rounded-lg text-[10px] md:text-[11px] font-bold text-[#582ef5] mb-4 shadow-lg whitespace-nowrap">850 XP</div>
+                  <div className="w-24 md:w-32 lg:w-36 h-20 md:h-24 lg:h-28 bg-[#582ef5]/10 border border-[#582ef5]/20 rounded-t-2xl flex items-center justify-center font-bold text-[#582ef5]/40 text-2xl md:text-3xl lg:text-4xl shadow-[inset_0_20px_50px_rgba(88,46,245,0.1)]">1º</div>
+                </motion.div>
+
+                {/* 3º Lugar */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center"
+                >
+                  <div className="relative mb-4">
+                    <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-4 border-[#582ef5]/30 p-1">
+                      <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover grayscale opacity-70" alt="3º Lugar" />
+                    </div>
+                    <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#1a1a1a] border-2 border-[#582ef5]/30 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">3</div>
+                  </div>
+                  <h4 className="font-bold text-sm md:text-base text-white mb-2 text-center">Lucas</h4>
+                  <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-[10px] md:text-[11px] font-bold text-gray-400 mb-4 whitespace-nowrap">400 XP</div>
+                  <div className="w-20 md:w-24 lg:w-28 h-6 md:h-8 lg:h-10 bg-white/5 border border-white/10 rounded-t-xl flex items-center justify-center font-bold text-white/5 text-lg md:text-xl lg:text-2xl">3º</div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* ─── TRACKING SECTION ─────────────────────────────────── */}
       <section id="rastreio" className="py-32 px-6 relative overflow-hidden">
@@ -1085,7 +1074,7 @@ export default function App() {
       <footer className="border-t border-white/10 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
           <div className="flex items-center justify-center">
-            <img src="https://i.postimg.cc/DZcqskjG/IMG_3713_3.png" alt="Drone Connect Academy" className="h-8 object-contain" referrerPolicy="no-referrer" />
+            <img src="https://i.postimg.cc/DZcqskjG/IMG_3713_3.png" alt="Drone Connect Academy" className="h-8 object-contain" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
           </div>
           <p className="text-sm text-gray-500 text-center">
             © 2026 Connect Academy LTDA Todos os direitos reservados - CNPJ:{' '}
