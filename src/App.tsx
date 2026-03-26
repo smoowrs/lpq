@@ -12,7 +12,7 @@ type Language = 'pt' | 'en' | 'es';
 
 const translations = {
   pt: {
-    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português", community: "Comunidade", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
+    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "A revolução da importação com IA",
       title1: "Economize ou Lucre",
@@ -615,10 +615,13 @@ export default function App() {
 
   const navLinks = [
     { name: t.nav.community, href: '#comunidade' },
-    { name: t.nav.products, href: '#produtos' },
-    { name: t.nav.ai, href: '#ai' },
-    { name: t.nav.tracking, href: '#rastreio' },
-    { name: t.nav.ai === "Connect AI" ? "Planos" : "Plans", href: '#planos' },
+    { name: "O Minerador", href: '#minerador' },
+    { name: "Aulas", href: '#aulas' },
+    { name: "Fábricas", href: '#fabricas' },
+    { name: "Connect AI", href: '#ai' },
+    { name: "Rastreio", href: '#rastreio' },
+    { name: "Planos", href: '#planos' },
+    { name: "Recompensas", href: '#ranking' },
   ];
 
   // ─── Dados estáticos fora do componente: sem recriação em cada render ───
@@ -735,9 +738,25 @@ export default function App() {
             </div>
           </div>
 
-          {/* Coluna 3: Idioma (Desktop) / CTAs (Ambos) */}
-          <div className="flex items-center justify-end gap-4 md:gap-6 z-30">
-            {/* Desktop Idioma Selector */}
+          {/* Coluna 3: CTAs / Idioma (Desktop) */}
+          <div className="flex items-center justify-end gap-2 md:gap-4 z-30">
+            <div className="flex items-center gap-1 sm:gap-4">
+              <button
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="text-[11px] sm:text-[14px] md:text-[15px] font-bold text-gray-400 hover:text-white transition-colors px-2 py-2"
+              >
+                {t.nav.login}
+              </button>
+              <button
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                className="btn-primary px-3 sm:px-6 py-1.5 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] font-bold whitespace-nowrap rounded-full md:rounded-xl shadow-lg shadow-[#582ef5]/20 hover:scale-105 active:scale-95 transition-all"
+              >
+                <span className="hidden sm:inline">{t.nav.create}</span>
+                <span className="sm:hidden">{t.nav.create_short}</span>
+              </button>
+            </div>
+
+            {/* Desktop Idioma Selector (Bem na direita) */}
             <div className="hidden lg:block relative group/lang">
               <button className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg hover:bg-white/5 transition-all text-white/90">
                 <span className="text-lg">{flags[language]}</span>
@@ -761,25 +780,7 @@ export default function App() {
                 ))}
               </div>
             </div>
-
-
-            <div className="flex items-center gap-1 sm:gap-4">
-              <button
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="text-[11px] sm:text-[14px] md:text-[15px] font-bold text-gray-400 hover:text-white transition-colors px-2 py-2"
-              >
-                {t.nav.login}
-              </button>
-              <button
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                className="btn-primary px-3 sm:px-6 py-1.5 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] font-bold whitespace-nowrap rounded-full md:rounded-xl shadow-lg shadow-[#582ef5]/20 hover:scale-105 active:scale-95 transition-all"
-              >
-                <span className="hidden sm:inline">{t.nav.create}</span>
-                <span className="sm:hidden">{t.nav.create_short}</span>
-              </button>
-            </div>
           </div>
-
         </div>
       </nav>
 
