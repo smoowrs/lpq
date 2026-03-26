@@ -855,7 +855,6 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     <input
                                         type="text"
                                         placeholder="Ex: João Silva"
-                                        autoFocus
                                         className={`w-full h-12 bg-slate-50 border rounded-xl px-4 text-sm text-slate-900 placeholder-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all ${guestNameError ? 'border-red-400 bg-red-50' : 'border-slate-200'}`}
                                         value={guestName}
                                         onChange={(e) => { setGuestName(e.target.value); setGuestNameError(''); }}
