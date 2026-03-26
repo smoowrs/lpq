@@ -1944,9 +1944,15 @@ export default function App() {
               { id: 'pro', data: t.planos.pro, color: '#582ef5', secondary: '#2b34f5' },
               { id: 'elite', data: t.planos.elite, color: '#f59e0b', secondary: '#d97706' }
             ].map((plan, idx) => {
-              const price = billingCycle === 'annual' 
-                ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '14,95' : plan.id === 'pro' ? '29,95' : '49,95')
-                : (plan.data.monthlyPrice || plan.data.price);
+              const isBrasil = region === 'brasil';
+              const price = isBrasil
+                ? (billingCycle === 'annual' 
+                  ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '14,95' : plan.id === 'pro' ? '29,95' : '49,95')
+                  : (plan.data.monthlyPrice || plan.data.price))
+                : (billingCycle === 'annual'
+                  ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '4,95' : plan.id === 'pro' ? '9,95' : '19,95')
+                  : (plan.id === 'free' ? '0' : plan.id === 'starter' ? '9,90' : plan.id === 'pro' ? '19,90' : '39,90'));
+              
               const isAnnual = billingCycle === 'annual';
               const [whole, cents] = price.includes(',') ? price.split(',') : [price, '00'];
 
@@ -1977,10 +1983,10 @@ export default function App() {
                   <div className="mb-8">
                     <div className="flex items-baseline gap-1">
                       <div className="flex flex-col">
-                        {plan.id !== 'free' && (
+                        {plan.id !== 'free' && isBrasil && (
                           <span className="text-xs font-black text-[#582ef5] leading-none mb-1">12X</span>
                         )}
-                        <span className="text-xs font-black text-gray-400 leading-none">R$</span>
+                        <span className="text-xs font-black text-gray-400 leading-none">{isBrasil ? 'R$' : '€'}</span>
                       </div>
                       <span className="text-[44px] font-black tracking-tighter text-white leading-none">
                         {whole}
@@ -1990,11 +1996,18 @@ export default function App() {
                       )}
                       <span className="text-sm font-bold text-gray-500 self-end pb-1">{plan.data.period}</span>
                     </div>
-                    {isAnnual && plan.id !== 'starter' && plan.data.info && (
-                      <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">{plan.data.info}</p>
+                    {isAnnual && plan.id !== 'starter' && plan.id !== 'free' && (
+                      <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
+                        {isBrasil 
+                          ? (plan.id === 'pro' ? 'PAGAMENTO ÚNICO DE R$ 359,40' : 'PAGAMENTO ÚNICO DE R$ 599,40')
+                          : (plan.id === 'pro' ? 'PAGO ÚNICO DE € 119,40' : 'PAGO ÚNICO DE € 239,40')
+                        }
+                      </p>
                     )}
                     {isAnnual && plan.id === 'starter' && (
-                      <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">PAGAMENTO ÚNICO DE R$ 179,40</p>
+                      <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
+                        {isBrasil ? 'PAGAMENTO ÚNICO DE R$ 179,40' : 'PAGO ÚNICO DE € 59,40'}
+                      </p>
                     )}
                   </div>
 
