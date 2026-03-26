@@ -1676,10 +1676,6 @@ export default function App() {
               44.292.841/0001-95
             </a>
           </p>
-          <div className="flex gap-6 text-sm text-gray-500">
-            <a href="#" className="hover:text-white transition-colors">{t.footer.terms}</a>
-            <a href="#" className="hover:text-white transition-colors">{t.footer.privacy}</a>
-          </div>
         </div>
       </footer>
     </div>
