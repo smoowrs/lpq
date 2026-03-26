@@ -607,7 +607,7 @@ export default function App() {
   const [trackingStep, setTrackingStep] = useState(0);
   const [language, setLanguage] = useState<Language>('pt');
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('annual');
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
   const [region, setRegion] = useState<'brasil' | 'europa'>('brasil');
   const langMenuRef = useRef<HTMLDivElement>(null);
 
