@@ -124,11 +124,25 @@ const translations = {
         desc: "Acesso básico para começar.",
         price: "0",
         period: "/mês",
+        btnTest: "Testar Grátis",
         items: [
-          { text: "Acesso às fábricas diretas na China.", status: true },
-          { text: "Módulos de aulas exclusivas.", status: true },
+          { text: "Roupas, Tênis & Acessórios (Não inclui produtos Apple e nem eletrônicos).", status: true },
+          { text: "Um painel com produtos atualizados", status: true },
           { text: "Rastreio em tempo real de até 2 envios.", status: true },
-          { text: "Roupas, Tênis e acessório", status: false },
+          { text: "Módulos de aulas", status: true },
+          { text: "Acesso a Apple oficial na China, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global", status: false },
+          { text: "Baixar imagens ilimitadas", status: false },
+          { text: "Painel de fábricas e produtos exclusivos não divulgados publicamente.", status: false },
+          { text: "Gerador de imagens 4K (10 créditos mensais).", status: false },
+          { text: "Inteligência Artificial o Minerador de buscas e perguntas.", status: false },
+          { text: "Acesso aos marketplaces locais na China.", status: false },
+          { text: "Sem limites de rastreios de envios.", status: false },
+          { text: "Acesso à comunidade.", status: false },
+          { text: "Prioridade no suporte (topo da lista).", status: false },
+          { text: "Medalha de destaque na comunidade.", status: false },
+          { text: "Alertas e oportunidades em primeira mão.", status: false },
+          { text: "Sorteios mensais e premiações.", status: false },
+          { text: "Sistema Indique e Ganhe.", status: false },
         ]
       },
       starter: {
@@ -141,6 +155,7 @@ const translations = {
         items: [
           { text: "Acesso às fábricas diretas na China.", status: true },
           { text: "Roupas, Tênis, Relógios, Bonés, Óculos, Meias, Bolsas, Perfumes, Ferramentas, Pesca, Eletrônicos, Periféricos, Acessórios para celular, Iluminação, Casa e Cozinha, Decoração, Brinquedos, Papelaria, Pet, Beleza, Maquiagem, Automotivo, Esporte, Ciclismo, Fitness, Sex Shop, Joias, Jardinagem, Festa e Brindes. (Não inclui produtos Apple e nem eletrônicos).", status: true },
+          { text: "Um painel com produtos atualizados", status: true },
           { text: "O Minerador (Inteligência artificial de buscas e perguntas).", status: true },
           { text: "Gerador de imagens 4K (3 créditos mensais).", status: true },
           { text: "Rastreio em tempo real de até 5 envios.", status: true },
@@ -192,6 +207,7 @@ const translations = {
           { text: "Acesso a Apple oficial na China, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global", status: true },
           { text: "Baixar imagens ilimitadas", status: true },
           { text: "Painel de fábricas e produtos exclusivos não divulgados publicamente.", status: true },
+          { text: "Um painel com produtos atualizados", status: true },
           { text: "Acesso à origem de Eletrônicos, Gamer, Periféricos, Acessórios para Celular, Automotivo, Roupas, Tênis, Relógios, Perfumes, Bolsas, Joias, Óculos, Beleza, Maquiagem, Sex Shop, Fitness, Esporte, Ciclismo, Pesca, Casa e Cozinha, Decoração, Iluminação, Jardinagem, Ferramentas, Brinquedos, Papelaria, Pet, Festa e Brindes.", status: true },
           { text: "Gerador de imagens 4K (10 créditos mensais).", status: true },
           { text: "Inteligência Artificial o Minerador de buscas e perguntas.", status: true },
@@ -1921,14 +1937,15 @@ export default function App() {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
             {[
+              { id: 'free', data: t.planos.free, color: '#444', secondary: '#222' },
               { id: 'starter', data: t.planos.starter, color: '#aaa', secondary: '#555' },
               { id: 'pro', data: t.planos.pro, color: '#582ef5', secondary: '#2b34f5' },
               { id: 'elite', data: t.planos.elite, color: '#f59e0b', secondary: '#d97706' }
             ].map((plan, idx) => {
               const price = billingCycle === 'annual' 
-                ? (plan.id === 'starter' ? '14,95' : plan.id === 'pro' ? '29,95' : '49,95')
+                ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '14,95' : plan.id === 'pro' ? '29,95' : '49,95')
                 : (plan.data.monthlyPrice || plan.data.price);
               const isAnnual = billingCycle === 'annual';
               const [whole, cents] = price.includes(',') ? price.split(',') : [price, '00'];
@@ -2004,11 +2021,13 @@ export default function App() {
                     }}
                     className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${plan.id === 'starter'
                         ? 'bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20'
-                        : 'text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+                        : plan.id === 'free'
+                          ? 'bg-white/5 text-gray-400 border border-white/10'
+                          : 'text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
                       }`}
-                    style={plan.id !== 'starter' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
+                    style={plan.id !== 'starter' && plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
                   >
-                    {plan.id === 'starter' ? t.planos.btnActive : t.planos.btnSelect}
+                    {plan.id === 'starter' ? t.planos.btnActive : plan.id === 'free' ? (t.planos.free.btnTest || "Testar Grátis") : t.planos.btnSelect}
                   </motion.button>
                 </motion.div>
               );
