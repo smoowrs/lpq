@@ -4,7 +4,7 @@ import {
   ArrowRight, PlayCircle, CheckCircle2,
   Clock, MapPin, Play,
   Crown, Star, ChevronDown, Check,
-  Factory
+  Factory, X, Globe
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 
@@ -108,7 +108,91 @@ const translations = {
         btn: "Resgatar cupom",
         badges: ["Imediato", "Única", "VIP Connect"]
     },
-    footer: { rights: "Todos os direitos reservados", terms: "Termos", privacy: "Privacidade" }
+    footer: { rights: "Todos os direitos reservados", terms: "Termos", privacy: "Privacidade" },
+    planos: {
+      tag: "PLANOS DE ACESSO",
+      title: "Escolha o seu plano",
+      monthly: "Mensal",
+      annual: "Anual",
+      annualOff: "-50%",
+      brasil: "BRASIL",
+      europa: "EUROPA",
+      btnActive: "PLANO ATIVO",
+      btnSelect: "ASSINAR ESSE PLANO",
+      free: {
+        name: "GRÁTIS",
+        desc: "Acesso básico para começar.",
+        price: "0",
+        period: "/mês",
+        items: [
+          { text: "Acesso às fábricas diretas na China.", status: true },
+          { text: "Módulos de aulas exclusivas.", status: true },
+          { text: "Rastreio em tempo real de até 2 envios.", status: true },
+          { text: "Roupas, Tênis e acessório", status: false },
+        ]
+      },
+      starter: {
+        name: "STARTER",
+        desc: "Acesso essencial para começar suas importações.",
+        price: "14,95",
+        monthlyPrice: "29,90",
+        period: "/mês",
+        info: "PAGAMENTO ÚNICO DE R$ 179,40",
+        items: [
+          { text: "Acesso às fábricas diretas na China.", status: true },
+          { text: "Roupas, Tênis, Relógios, Bonés...", status: true },
+          { text: "O Minerador (IA de buscas).", status: true },
+          { text: "Gerador de imagens 4K (3 créditos).", status: true },
+          { text: "Rastreio em tempo real de até 5 envios.", status: true },
+          { text: "Módulos de aulas exclusivas.", status: true },
+          { text: "Acesso à comunidade.", status: true },
+          { text: "Sistema Indique e Ganhe.", status: true },
+          { text: "Produtos Apple e Eletrônicos", status: false },
+          { text: "Baixar imagens ilimitadas", status: false },
+        ]
+      },
+      pro: {
+        name: "PRO",
+        desc: "O plano intermediário para quem busca variedade e ferramentas de IA.",
+        price: "29,95",
+        monthlyPrice: "59,90",
+        period: "/mês",
+        info: "PAGAMENTO ÚNICO DE R$ 359,40",
+        items: [
+          { text: "Acesso a fábricas exclusivas na China.", status: true },
+          { text: "Roupas, Tênis, Relógios e Eletrônicos.", status: true },
+          { text: "Gerador de imagens 4K (5 créditos).", status: true },
+          { text: "O Minerador (IA de buscas).", status: true },
+          { text: "Marketplaces locais na China.", status: true },
+          { text: "Rastreio em tempo real de até 10 envios.", status: true },
+          { text: "Módulos de aulas exclusivas.", status: true },
+          { text: "Acesso à comunidade.", status: true },
+          { text: "Alertas e oportunidades.", status: true },
+          { text: "Sorteios mensais e premiações.", status: true },
+          { text: "Acesso a Apple oficial", status: false },
+        ]
+      },
+      elite: {
+        name: "ELITE",
+        desc: "Acesso total e suporte prioritário para escala máxima.",
+        price: "49,95",
+        monthlyPrice: "99,90",
+        period: "/mês",
+        info: "PAGAMENTO ÚNICO DE R$ 599,40",
+        items: [
+          { text: "Acesso a Apple oficial na China.", status: true },
+          { text: "Baixar imagens ilimitadas.", status: true },
+          { text: "Fábricas e produtos exclusivos.", status: true },
+          { text: "Origem de Eletrônicos e Gamer.", status: true },
+          { text: "Gerador de imagens 4K (10 créditos).", status: true },
+          { text: "O Minerador (IA de buscas).", status: true },
+          { text: "Marketplaces locais na China.", status: true },
+          { text: "Sem limites de rastreios.", status: true },
+          { text: "Prioridade no suporte (topo).", status: true },
+          { text: "Medalha de destaque exclusiva.", status: true },
+        ]
+      }
+    }
   },
   en: {
     nav: { login: "Login", create: "Create free account", create_short: "Create account", lang: "English" },
@@ -207,7 +291,80 @@ const translations = {
         btn: "Redeem coupon",
         badges: ["Immediate", "Unique", "Connect VIP"]
     },
-    footer: { rights: "All rights reserved", terms: "Terms", privacy: "Privacy" }
+    footer: { rights: "All rights reserved", terms: "Terms", privacy: "Privacy" },
+    planos: {
+      tag: "ACCESS PLANS",
+      title: "Choose your plan",
+      monthly: "Monthly",
+      annual: "Annual",
+      annualOff: "-50%",
+      brasil: "BRAZIL",
+      europa: "EUROPE",
+      btnActive: "ACTIVE PLAN",
+      btnSelect: "SUBSCRIBE TO THIS PLAN",
+      free: { 
+        name: "FREE", 
+        desc: "Basic access to get started.", 
+        price: "0", 
+        period: "/mo", 
+        items: [
+          { text: "Access to direct factories in China.", status: true },
+          { text: "Exclusive class modules.", status: true },
+          { text: "Real-time tracking of up to 2 shipments.", status: true },
+          { text: "Clothing, Sneakers and accessories", status: false },
+        ]
+      },
+      starter: { 
+        name: "STARTER", 
+        desc: "Essential access for starting your imports.", 
+        price: "14.95", 
+        monthlyPrice: "29.90", 
+        period: "/mo", 
+        items: [
+          { text: "Access to direct factories in China.", status: true },
+          { text: "Clothing, Sneakers, Watches...", status: true },
+          { text: "The Miner (Search AI).", status: true },
+          { text: "4K Image Generator (3 credits).", status: true },
+          { text: "Real-time tracking up to 5 shipments.", status: true },
+          { text: "Exclusive class modules.", status: true },
+          { text: "Community access.", status: true },
+          { text: "Refer and Earn system.", status: true },
+        ]
+      },
+      pro: { 
+        name: "PRO", 
+        desc: "The intermediate plan for more variety and AI tools.", 
+        price: "29.95", 
+        monthlyPrice: "59.90", 
+        period: "/mo", 
+        items: [
+          { text: "Access to exclusive factories.", status: true },
+          { text: "Clothing, Sneakers, Electronics.", status: true },
+          { text: "4K Image Generator (5 credits).", status: true },
+          { text: "The Miner (Search AI).", status: true },
+          { text: "Local marketplaces in China.", status: true },
+          { text: "Real-time tracking up to 10 shipments.", status: true },
+        ]
+      },
+      elite: { 
+        name: "ELITE", 
+        desc: "Full access and priority support for maximum scale.", 
+        price: "49.95", 
+        monthlyPrice: "99.90", 
+        period: "/mo", 
+        items: [
+          { text: "Official Apple access in China.", status: true },
+          { text: "Unlimited image downloads.", status: true },
+          { text: "Exclusive factories and products.", status: true },
+          { text: "Electronics and Gamer origin.", status: true },
+          { text: "4K Image Generator (10 credits).", status: true },
+          { text: "The Miner (Search AI).", status: true },
+          { text: "Local marketplaces in China.", status: true },
+          { text: "Unlimited tracking.", status: true },
+          { text: "Priority support.", status: true },
+        ]
+      }
+    }
   },
   es: {
     nav: { login: "Entrar", create: "Crear cuenta gratis", create_short: "Crear cuenta", lang: "Español" },
@@ -306,7 +463,68 @@ const translations = {
         btn: "Canjear cupón",
         badges: ["Inmediato", "Única", "VIP Connect"]
     },
-    footer: { rights: "Todos los derechos reservados", terms: "Términos", privacy: "Privacidad" }
+    footer: { rights: "Todos los derechos reservados", terms: "Términos", privacy: "Privacidad" },
+    planos: {
+      tag: "PLANES DE ACCESO",
+      title: "Elige tu plan",
+      monthly: "Mensual",
+      annual: "Anual",
+      annualOff: "-50%",
+      brasil: "BRASIL",
+      europa: "EUROPA",
+      btnActive: "PLAN ACTIVO",
+      btnSelect: "SUSCRIBIRSE A ESTE PLAN",
+      free: { 
+        name: "GRATIS", 
+        desc: "Acceso básico.", 
+        price: "0", 
+        period: "/mes", 
+        items: [
+          { text: "Acceso a fábricas directas en China.", status: true },
+          { text: "Módulos de clases exclusivas.", status: true },
+          { text: "Rastreo en tiempo real de hasta 2 envíos.", status: true },
+          { text: "Ropa, Zapatillas y accesorios", status: false },
+        ]
+      },
+      starter: { 
+        name: "STARTER", 
+        desc: "Acceso esencial.", 
+        price: "14.95", 
+        monthlyPrice: "29.90", 
+        period: "/mes", 
+        items: [
+          { text: "Acceso a fábricas directas en China.", status: true },
+          { text: "Ropa, Zapatillas, Relojes...", status: true },
+          { text: "El Minero (IA de búsqueda).", status: true },
+          { text: "Generador de imágenes 4K (3 créditos).", status: true },
+        ]
+      },
+      pro: { 
+        name: "PRO", 
+        desc: "Plan intermedio.", 
+        price: "29.95", 
+        monthlyPrice: "59.90", 
+        period: "/mes", 
+        items: [
+          { text: "Acceso a fábricas exclusivas.", status: true },
+          { text: "Ropa, Zapatillas y Electrónica.", status: true },
+          { text: "Generador de imágenes 4K (5 créditos).", status: true },
+          { text: "El Minero (IA de búsqueda).", status: true },
+        ]
+      },
+      elite: { 
+        name: "ELITE", 
+        desc: "Acceso total.", 
+        price: "49.95", 
+        monthlyPrice: "99.90", 
+        period: "/mes", 
+        items: [
+          { text: "Acceso oficial de Apple en China.", status: true },
+          { text: "Descargas de imágenes ilimitadas.", status: true },
+          { text: "Fábricas y productos exclusivos.", status: true },
+        ]
+      }
+    }
   }
 };
 
@@ -320,6 +538,8 @@ export default function App() {
   const [trackingStep, setTrackingStep] = useState(0);
   const [language, setLanguage] = useState<Language>('pt');
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('annual');
+  const [region, setRegion] = useState<'brasil' | 'europa'>('brasil');
   const langMenuRef = useRef<HTMLDivElement>(null);
 
   const t = translations[language];
@@ -1582,17 +1802,155 @@ export default function App() {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
+      {/* ─── PLANOS DE ACESSO ─────────────────────────────────── */}
+      <section id="planos" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-9 md:order-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#582ef5]/10 border border-[#582ef5]/20 text-xs font-semibold mb-6 backdrop-blur-md text-[#582ef5] uppercase tracking-wider">
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>{t.planos.tag}</span>
+            </div>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-10 text-white">
+              {t.planos.title}
+            </h2>
 
+            {/* Billing Toggle */}
+            <div className="flex flex-col items-center gap-6">
+              <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
+                <button 
+                  onClick={() => setBillingCycle('monthly')}
+                  className={`px-8 py-3 rounded-xl text-sm font-bold transition-all ${billingCycle === 'monthly' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                  {t.planos.monthly}
+                </button>
+                <button 
+                  onClick={() => setBillingCycle('annual')}
+                  className={`px-8 py-3 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${billingCycle === 'annual' ? 'bg-white text-black' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                  {t.planos.annual} 
+                  <span className="bg-black text-white text-[10px] px-1.5 py-0.5 rounded-md">{t.planos.annualOff}</span>
+                </button>
+              </div>
 
+              {/* Region Toggle */}
+              <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
+                <button 
+                  onClick={() => setRegion('brasil')}
+                  className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'brasil' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                  <Globe className="w-3.5 h-3.5" /> {t.planos.brasil}
+                </button>
+                <button 
+                  onClick={() => setRegion('europa')}
+                  className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'europa' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                  <Globe className="w-3.5 h-3.5" /> {t.planos.europa}
+                </button>
+              </div>
+            </div>
+          </motion.div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
+            {[
+              { id: 'free', data: t.planos.free, color: '#444', secondary: '#222' },
+              { id: 'starter', data: t.planos.starter, color: '#aaa', secondary: '#555' },
+              { id: 'pro', data: t.planos.pro, color: '#582ef5', secondary: '#2b34f5' },
+              { id: 'elite', data: t.planos.elite, color: '#f59e0b', secondary: '#d97706' }
+            ].map((plan, idx) => {
+              const price = billingCycle === 'annual' ? plan.data.price : (plan.data.monthlyPrice || plan.data.price);
+              const isAnnual = billingCycle === 'annual';
 
+              return (
+                <motion.div
+                  key={plan.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                  className={`relative group h-full flex flex-col p-8 rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 hover:border-white/10 transition-all duration-500 overflow-hidden ${plan.id === 'pro' ? 'ring-2 ring-[#582ef5]/30' : ''}`}
+                >
+                  {/* Accent Glow */}
+                  <div className="absolute top-0 right-0 w-32 h-32 blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" style={{ backgroundColor: plan.color }} />
+                  
+                  {/* Icon */}
+                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-xl">
+                    <Package className="w-6 h-6" style={{ color: plan.color }} />
+                  </div>
 
+                  {/* Header */}
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-black mb-2 tracking-tight group-hover:scale-105 transition-transform origin-left" style={{ color: plan.id === 'free' ? 'white' : plan.color }}>{plan.data.name}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed font-medium min-h-[40px]">{plan.data.desc}</p>
+                  </div>
 
+                  {/* Price */}
+                  <div className="mb-8">
+                    <div className="flex items-baseline gap-1">
+                      {plan.id !== 'free' && (
+                        <div className="flex flex-col">
+                           <span className="text-xs font-black text-[#582ef5] leading-none mb-1">12X</span>
+                           <span className="text-xs font-black text-gray-400 leading-none">R$</span>
+                        </div>
+                      )}
+                      <span className="text-[44px] font-black tracking-tighter text-white leading-none">
+                        {price}
+                      </span>
+                      <span className="text-sm font-bold text-gray-500">{plan.data.period}</span>
+                    </div>
+                    {isAnnual && plan.data.info && (
+                      <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">{plan.data.info}</p>
+                    )}
+                  </div>
+
+                  {/* Features */}
+                  <ul className="space-y-4 mb-10 flex-1">
+                    {plan.data.items?.map((item: any, i: number) => (
+                      <li key={i} className={`flex items-start gap-3 text-[11px] font-bold leading-relaxed transition-colors ${item.status ? 'text-gray-300' : 'text-gray-600'}`}>
+                        {item.status ? (
+                          <ChevronDown className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" style={{ color: plan.color }} />
+                        ) : (
+                          <X className="w-4 h-4 text-red-500/50 shrink-0" />
+                        )}
+                        <span>{item.text}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                        // Se for o plano grátis ou qualquer outro, mandamos para o app (baseado no feedback do usuário)
+                        // Você pode adicionar parâmetros aqui como ?plan=starter se o seu app suportar
+                        window.location.href = `https://app.connectacademy.com.br/checkout?plan=${plan.id}`;
+                    }}
+                    className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${
+                      plan.id === 'free' 
+                        ? 'bg-white/5 text-gray-400 border border-white/10' 
+                        : 'text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+                    }`}
+                    style={plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
+                  >
+                    {plan.id === 'free' ? t.planos.btnActive : t.planos.btnSelect}
+                  </motion.button>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* ─── CTA (CUPOM DOURADO) ─────────────────────────────────── */}
       <section id="cadastro" className="py-24 md:py-32 px-6 relative overflow-hidden bg-black border-t border-white/5 order-10 md:order-none">
