@@ -720,7 +720,7 @@ export default function App() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-[12px] xl:text-[14px] font-bold text-gray-400 hover:text-white transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+                  className="text-[12px] xl:text-[14px] font-light tracking-wide text-gray-400 hover:text-white transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
                 >
                   {link.name}
                 </a>
