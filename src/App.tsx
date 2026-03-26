@@ -5,7 +5,7 @@ import { Package, Sparkles, Users, ShieldCheck,
   Crown, Star, ChevronDown, Check,
   Factory, X, Globe
 } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { CheckoutModal } from './components/CheckoutModal';
 
@@ -653,6 +653,14 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  const scrollToPlanos = (e?: React.MouseEvent) => {
+    e?.preventDefault();
+    const el = document.getElementById('planos');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
     // Enviar evento de PageView inicial para Pixel e CAPI (Deduplicado)
     import('./utils/fb-events').then(({ trackFBEvent }) => {
@@ -761,7 +769,7 @@ export default function App() {
                 {t.nav.login}
               </button>
               <button
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                onClick={scrollToPlanos}
                 className="btn-primary px-3 sm:px-6 py-1.5 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] font-bold whitespace-nowrap rounded-full md:rounded-xl shadow-lg shadow-[#582ef5]/20 hover:scale-105 active:scale-95 transition-all"
               >
                 <span className="hidden sm:inline">{t.nav.create}</span>
@@ -862,7 +870,7 @@ export default function App() {
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                  onClick={scrollToPlanos}
                   className="btn-primary px-8 py-4.5 text-[15px] sm:text-[16px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.25)]"
                 >
                   {t.hero.btnCreate}
@@ -874,7 +882,7 @@ export default function App() {
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                  onClick={scrollToPlanos}
                   className="btn-secondary px-8 py-4.5 text-[15px] sm:text-[16px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl group whitespace-nowrap border border-white/10 bg-white/5 backdrop-blur-sm"
                 >
                   {t.hero.btnWork}
@@ -965,11 +973,11 @@ export default function App() {
                   {t.comunidade.desc}
                 </p>
                 <button
-                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
-                  className="bg-[#582ef5] hover:bg-[#4a26d4] text-white rounded-[1rem] px-5 py-3 text-[12px] sm:text-[13px] font-bold flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(88,46,245,0.4)] transition-all active:scale-95"
+                  onClick={scrollToPlanos}
+                  className="w-full bg-[#582ef5] text-white py-3 sm:py-4 rounded-xl font-bold text-[13px] sm:text-[15px] flex items-center justify-center gap-2 hover:bg-[#4c25e6] active:scale-[0.98] transition-all"
                 >
                   {t.comunidade.btn}
-                  <ArrowRight className="w-4 h-4" strokeWidth={3} />
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </motion.div>
             </div>
@@ -1216,6 +1224,13 @@ export default function App() {
             <p className="hidden md:block text-sm md:text-base text-gray-300 md:text-gray-400 mb-8 md:mb-10 leading-relaxed max-w-md drop-shadow-lg">
               {t.aulas.desc}
             </p>
+            <button
+              onClick={scrollToPlanos}
+              className="mt-8 md:mt-12 bg-[#582ef5] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center gap-3 hover:translate-y-[-2px] transition-all active:scale-95 shadow-xl shadow-[#582ef5]/30 mx-auto md:mx-0"
+            >
+              Começar agora
+              <ArrowRight className="w-4 h-4" />
+            </button>
 
             <ul className="hidden md:block space-y-5 mb-12 w-full max-w-sm drop-shadow-2xl">
               {t.aulas.items.map((item, i) => (
