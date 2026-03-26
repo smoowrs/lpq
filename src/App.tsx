@@ -788,9 +788,47 @@ export default function App() {
 
       {/* ─── AULAS PASSO A PASSO ────────────────────────────────── */}
       <section id="aulas" className="py-24 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-black order-5 md:order-none">
-        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         
-        <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-20 items-center justify-center min-h-[500px] md:min-h-0">
+        {/* Layer de Fundo: Cards Espalhados (Apenas Mobile) */}
+        <div className="md:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="relative w-full h-full flex items-center justify-center scale-[0.7] opacity-40 transform-gpu">
+            {[
+              { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15 },
+              { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15 },
+              { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03", x: -180, y: 40, rot: -25 },
+              { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04", x: -20, y: -20, rot: 5 },
+              { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05", x: 160, y: 60, rot: 10 },
+              { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06", x: -60, y: 220, rot: -5 }
+            ].map((aula, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.8, x: 0, y: 40, rotateZ: 0 }}
+                whileInView={{ opacity: 1, scale: 1, x: aula.x, y: aula.y, rotateZ: aula.rot }}
+                viewport={{ once: true, margin: "-20px" }}
+                transition={{ 
+                  delay: idx * 0.04, 
+                  duration: 0.8, 
+                  ease: [0.23, 1, 0.32, 1] 
+                }}
+                className="absolute w-36 aspect-[9/16] rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-white/20 bg-black"
+                style={{ 
+                  zIndex: idx,
+                  willChange: "transform, opacity"
+                }}
+              >
+                <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90" loading="lazy" decoding="async" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+              </motion.div>
+            ))}
+          </div>
+          {/* Glow escuro para o texto ler bem no mobile */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-10 pointer-events-none opacity-90" />
+          <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+        </div>
+
+        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none hidden md:block" />
+        
+        <div className="max-w-7xl mx-auto relative z-20 flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-20 items-center justify-center min-h-[400px] md:min-h-0">
           
           {/* CARDS (Apenas Desktop - Lado Esquerdo da Grid) */}
           <div className="hidden md:flex relative z-0 md:z-auto pointer-events-none md:pointer-events-auto inset-0 md:inset-auto h-full items-center justify-center order-2 md:order-1 perspective-[2000px] py-10 md:py-20 md:h-[750px] lg:h-[800px] overflow-hidden md:overflow-visible">
@@ -848,7 +886,7 @@ export default function App() {
                 <span className="text-gradient-ai">{t.aulas.title2}</span>
               </span>
               {/* Versão Mobile (1 linha) */}
-              <span className="md:hidden block whitespace-nowrap">
+              <span className="md:hidden block whitespace-nowrap text-[26px]">
                 {t.aulas.titleMob}
               </span>
             </h2>
@@ -879,44 +917,6 @@ export default function App() {
                 <ArrowRight className="w-5 h-5" strokeWidth={3} />
               </motion.div>
             </motion.button>
-            
-            {/* CARDS (Apenas Mobile - Abaixo do botão) */}
-            <div className="flex md:hidden relative w-full h-[320px] items-center justify-center perspective-[1000px] mt-10 overflow-visible">
-              <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[100px] rounded-full bg-[#582ef5]/20" />
-              </div>
-              <div className="relative w-full h-full flex items-center justify-center scale-[0.7] transform-gpu">
-                {[
-                  { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15 },
-                  { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15 },
-                  { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03", x: -180, y: 40, rot: -25 },
-                  { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04", x: -20, y: -20, rot: 5 },
-                  { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05", x: 160, y: 60, rot: 10 },
-                  { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06", x: -60, y: 220, rot: -5 }
-                ].map((aula, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, scale: 0.8, x: 0, y: 40, rotateZ: 0 }}
-                    whileInView={{ opacity: 1, scale: 1, x: aula.x, y: aula.y, rotateZ: aula.rot }}
-                    viewport={{ once: true, margin: "-20px" }}
-                    transition={{ 
-                      delay: idx * 0.04, 
-                      duration: 0.8, 
-                      ease: [0.23, 1, 0.32, 1] 
-                    }}
-                    className="absolute w-36 aspect-[9/16] rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-white/20 bg-black"
-                    style={{ 
-                      zIndex: idx,
-                      willChange: "transform, opacity"
-                    }}
-                  >
-                    <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90" loading="lazy" decoding="async" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
           </motion.div>
         </div>
       </section>
