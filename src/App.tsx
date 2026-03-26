@@ -134,62 +134,76 @@ const translations = {
       starter: {
         name: "STARTER",
         desc: "Acesso essencial para começar suas importações.",
-        price: "14,95",
+        price: "29,90",
         monthlyPrice: "29,90",
         period: "/mês",
         info: "PAGAMENTO ÚNICO DE R$ 179,40",
         items: [
           { text: "Acesso às fábricas diretas na China.", status: true },
-          { text: "Roupas, Tênis, Relógios, Bonés...", status: true },
-          { text: "O Minerador (IA de buscas).", status: true },
-          { text: "Gerador de imagens 4K (3 créditos).", status: true },
+          { text: "Roupas, Tênis, Relógios, Bonés, Óculos, Meias, Bolsas, Perfumes, Ferramentas, Pesca, Eletrônicos, Periféricos, Acessórios para celular, Iluminação, Casa e Cozinha, Decoração, Brinquedos, Papelaria, Pet, Beleza, Maquiagem, Automotivo, Esporte, Ciclismo, Fitness, Sex Shop, Joias, Jardinagem, Festa e Brindes. (Não inclui produtos Apple e nem eletrônicos).", status: true },
+          { text: "O Minerador (Inteligência artificial de buscas e perguntas).", status: true },
+          { text: "Gerador de imagens 4K (3 créditos mensais).", status: true },
           { text: "Rastreio em tempo real de até 5 envios.", status: true },
           { text: "Módulos de aulas exclusivas.", status: true },
           { text: "Acesso à comunidade.", status: true },
           { text: "Sistema Indique e Ganhe.", status: true },
-          { text: "Produtos Apple e Eletrônicos", status: false },
+          { text: "Acesso a Apple oficial na China, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global", status: false },
           { text: "Baixar imagens ilimitadas", status: false },
+          { text: "Acesso aos marketplaces locais na China", status: false },
+          { text: "Prioridade no suporte (Topo da lista)", status: false },
+          { text: "Medalha de destaque exclusiva na comunidade", status: false },
+          { text: "Alertas e oportunidades em primeira mão", status: false },
+          { text: "Sorteios mensais e premiações", status: false },
         ]
       },
       pro: {
         name: "PRO",
         desc: "O plano intermediário para quem busca variedade e ferramentas de IA.",
-        price: "29,95",
+        price: "59,90",
         monthlyPrice: "59,90",
         period: "/mês",
         info: "PAGAMENTO ÚNICO DE R$ 359,40",
         items: [
           { text: "Acesso a fábricas exclusivas na China.", status: true },
-          { text: "Roupas, Tênis, Relógios e Eletrônicos.", status: true },
-          { text: "Gerador de imagens 4K (5 créditos).", status: true },
-          { text: "O Minerador (IA de buscas).", status: true },
-          { text: "Marketplaces locais na China.", status: true },
+          { text: "Roupas, Tênis, Relógios, Bonés, Óculos, Meias, Bolsas, Perfumes, Ferramentas, Pesca, Eletrônicos, Periféricos, Acessórios para celular, Iluminação, Casa e Cozinha, Decoração, Brinquedos, Papelaria, Pet, Beleza, Maquiagem, Automotivo, Esporte, Ciclismo, Fitness, Sex Shop, Joias, Jardinagem, Festa e Brindes. (Não inclui produtos Apple).", status: true },
+          { text: "Gerador de imagens 4K (5 créditos mensais).", status: true },
+          { text: "Inteligência Artificial o Minerador de buscas e perguntas.", status: true },
+          { text: "Acesso aos marketplaces locais na China.", status: true },
           { text: "Rastreio em tempo real de até 10 envios.", status: true },
           { text: "Módulos de aulas exclusivas.", status: true },
           { text: "Acesso à comunidade.", status: true },
-          { text: "Alertas e oportunidades.", status: true },
+          { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Sorteios mensais e premiações.", status: true },
-          { text: "Acesso a Apple oficial", status: false },
+          { text: "Sistema Indique e Ganhe.", status: true },
+          { text: "Acesso a Apple oficial na China, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global", status: false },
+          { text: "Baixar imagens ilimitadas", status: false },
+          { text: "Prioridade no suporte (Topo da lista)", status: false },
+          { text: "Medalha de destaque exclusiva na comunidade", status: false },
         ]
       },
       elite: {
         name: "ELITE",
         desc: "Acesso total e suporte prioritário para escala máxima.",
-        price: "49,95",
+        price: "99,90",
         monthlyPrice: "99,90",
         period: "/mês",
         info: "PAGAMENTO ÚNICO DE R$ 599,40",
         items: [
-          { text: "Acesso a Apple oficial na China.", status: true },
-          { text: "Baixar imagens ilimitadas.", status: true },
-          { text: "Fábricas e produtos exclusivos.", status: true },
-          { text: "Origem de Eletrônicos e Gamer.", status: true },
-          { text: "Gerador de imagens 4K (10 créditos).", status: true },
-          { text: "O Minerador (IA de buscas).", status: true },
-          { text: "Marketplaces locais na China.", status: true },
-          { text: "Sem limites de rastreios.", status: true },
-          { text: "Prioridade no suporte (topo).", status: true },
-          { text: "Medalha de destaque exclusiva.", status: true },
+          { text: "Acesso a Apple oficial na China, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global", status: true },
+          { text: "Baixar imagens ilimitadas", status: true },
+          { text: "Painel de fábricas e produtos exclusivos não divulgados publicamente.", status: true },
+          { text: "Acesso à origem de Eletrônicos, Gamer, Periféricos, Acessórios para Celular, Automotivo, Roupas, Tênis, Relógios, Perfumes, Bolsas, Joias, Óculos, Beleza, Maquiagem, Sex Shop, Fitness, Esporte, Ciclismo, Pesca, Casa e Cozinha, Decoração, Iluminação, Jardinagem, Ferramentas, Brinquedos, Papelaria, Pet, Festa e Brindes.", status: true },
+          { text: "Gerador de imagens 4K (10 créditos mensais).", status: true },
+          { text: "Inteligência Artificial o Minerador de buscas e perguntas.", status: true },
+          { text: "Acesso aos marketplaces locais na China.", status: true },
+          { text: "Sem limites de rastreios de envios.", status: true },
+          { text: "Módulos de aulas exclusivas.", status: true },
+          { text: "Acesso à comunidade.", status: true },
+          { text: "Prioridade no suporte (topo da lista).", status: true },
+          { text: "Medalha de destaque na comunidade.", status: true },
+          { text: "Alertas e oportunidades em primeira mão.", status: true },
+          { text: "Sorteios mensais e premiações.", status: true },
+          { text: "Sistema Indique e Ganhe.", status: true },
         ]
       }
     }
@@ -363,16 +377,21 @@ const translations = {
         period: "/mo",
         info: "SINGLE PAYMENT OF R$ 599.40",
         items: [
-          { text: "Official Apple access in China.", status: true },
+          { text: "Official Apple access in China (Original, global warranty).", status: true },
           { text: "Download unlimited images.", status: true },
-          { text: "Exclusive factories and products.", status: true },
-          { text: "Electronics and Gamer origin.", status: true },
-          { text: "4K Image Generator (10 credits).", status: true },
-          { text: "The Miner (Search AI).", status: true },
+          { text: "Exclusive factories and products dashboard.", status: true },
+          { text: "Access to Electronics, Gamer, and 25+ product categories.", status: true },
+          { text: "4K Image Generator (10 monthly credits).", status: true },
+          { text: "The Miner AI (Smart search and questions).", status: true },
           { text: "Local marketplaces in China.", status: true },
           { text: "No shipping tracking limits.", status: true },
-          { text: "Priority support (top).", status: true },
+          { text: "Exclusive class modules.", status: true },
+          { text: "Community access.", status: true },
+          { text: "Priority support (Top of the list).", status: true },
           { text: "Exclusive highlight medal.", status: true },
+          { text: "First-hand alerts and opportunities.", status: true },
+          { text: "Monthly sweepstakes and prizes.", status: true },
+          { text: "Refer and Earn system.", status: true },
         ]
       }
     }
@@ -1902,15 +1921,17 @@ export default function App() {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start max-w-5xl mx-auto">
             {[
-              { id: 'free', data: t.planos.free, color: '#444', secondary: '#222' },
               { id: 'starter', data: t.planos.starter, color: '#aaa', secondary: '#555' },
               { id: 'pro', data: t.planos.pro, color: '#582ef5', secondary: '#2b34f5' },
               { id: 'elite', data: t.planos.elite, color: '#f59e0b', secondary: '#d97706' }
             ].map((plan, idx) => {
-              const price = billingCycle === 'annual' ? plan.data.price : (plan.data.monthlyPrice || plan.data.price);
+              const price = billingCycle === 'annual' 
+                ? (plan.id === 'starter' ? '14,95' : plan.id === 'pro' ? '29,95' : '49,95')
+                : (plan.data.monthlyPrice || plan.data.price);
               const isAnnual = billingCycle === 'annual';
+              const [whole, cents] = price.includes(',') ? price.split(',') : [price, '00'];
 
               return (
                 <motion.div
@@ -1945,12 +1966,18 @@ export default function App() {
                         </div>
                       )}
                       <span className="text-[44px] font-black tracking-tighter text-white leading-none">
-                        {price}
+                        {whole}
                       </span>
-                      <span className="text-sm font-bold text-gray-500">{plan.data.period}</span>
+                      {cents !== '00' && (
+                        <span className="text-[20px] font-black text-white/50 leading-none self-end pb-1">,{cents}</span>
+                      )}
+                      <span className="text-sm font-bold text-gray-500 self-end pb-1">{plan.id === 'free' ? '' : plan.data.period}</span>
                     </div>
-                    {isAnnual && plan.data.info && (
+                    {isAnnual && plan.id !== 'starter' && plan.data.info && (
                       <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">{plan.data.info}</p>
+                    )}
+                    {isAnnual && plan.id === 'starter' && (
+                      <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">PAGAMENTO ÚNICO DE R$ 179,40</p>
                     )}
                   </div>
 
@@ -1973,17 +2000,15 @@ export default function App() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => {
-                      // Se for o plano grátis ou qualquer outro, mandamos para o app (baseado no feedback do usuário)
-                      // Você pode adicionar parâmetros aqui como ?plan=starter se o seu app suportar
                       window.location.href = `https://app.connectacademy.com.br/checkout?plan=${plan.id}`;
                     }}
-                    className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${plan.id === 'free'
-                        ? 'bg-white/5 text-gray-400 border border-white/10'
+                    className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${plan.id === 'starter'
+                        ? 'bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20'
                         : 'text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
                       }`}
-                    style={plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
+                    style={plan.id !== 'starter' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
                   >
-                    {plan.id === 'free' ? t.planos.btnActive : t.planos.btnSelect}
+                    {plan.id === 'starter' ? t.planos.btnActive : t.planos.btnSelect}
                   </motion.button>
                 </motion.div>
               );
