@@ -662,10 +662,10 @@ export default function App() {
 
       {/* ─── NAV ──────────────────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
-        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] grid grid-cols-3 items-center relative">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] flex items-center justify-between relative gap-4">
 
           {/* Coluna 1: Logo (Desktop) / Idioma (Mobile) */}
-          <div className="flex items-center justify-start z-30">
+          <div className="flex items-center justify-start z-30 min-w-max">
             {/* Logo Desktop */}
             <div className="hidden lg:block">
               <img
@@ -715,12 +715,12 @@ export default function App() {
           {/* Coluna 2: Links (Desktop) / Logo (Mobile) */}
           <div className="flex items-center justify-center z-10">
             {/* Links Desktop */}
-            <div className="hidden lg:flex items-center gap-8">
+            <div className="hidden lg:flex items-center gap-4 xl:gap-6">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-[15px] font-medium text-gray-400 hover:text-white transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+                  className="text-[12px] xl:text-[14px] font-bold text-gray-400 hover:text-white transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
                 >
                   {link.name}
                 </a>
@@ -728,7 +728,7 @@ export default function App() {
             </div>
 
             {/* Logo Mobile */}
-            <div className="lg:hidden pointer-events-none">
+            <div className="lg:hidden absolute left-1/2 -translate-x-1/2 pointer-events-none">
               <img
                 src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
                 alt="Asas de Importação"
@@ -739,7 +739,7 @@ export default function App() {
           </div>
 
           {/* Coluna 3: CTAs / Idioma (Desktop) */}
-          <div className="flex items-center justify-end gap-2 md:gap-4 z-30">
+          <div className="flex items-center justify-end gap-2 md:gap-4 z-30 min-w-max">
             <div className="flex items-center gap-1 sm:gap-4">
               <button
                 onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
