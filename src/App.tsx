@@ -1976,19 +1976,19 @@ export default function App() {
                   {/* Price */}
                   <div className="mb-8">
                     <div className="flex items-baseline gap-1">
-                      {plan.id !== 'free' && (
-                        <div className="flex flex-col">
+                      <div className="flex flex-col">
+                        {plan.id !== 'free' && (
                           <span className="text-xs font-black text-[#582ef5] leading-none mb-1">12X</span>
-                          <span className="text-xs font-black text-gray-400 leading-none">R$</span>
-                        </div>
-                      )}
+                        )}
+                        <span className="text-xs font-black text-gray-400 leading-none">R$</span>
+                      </div>
                       <span className="text-[44px] font-black tracking-tighter text-white leading-none">
                         {whole}
                       </span>
                       {cents !== '00' && (
                         <span className="text-[20px] font-black text-white/50 leading-none self-end pb-1">,{cents}</span>
                       )}
-                      <span className="text-sm font-bold text-gray-500 self-end pb-1">{plan.id === 'free' ? '' : plan.data.period}</span>
+                      <span className="text-sm font-bold text-gray-500 self-end pb-1">{plan.data.period}</span>
                     </div>
                     {isAnnual && plan.id !== 'starter' && plan.data.info && (
                       <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">{plan.data.info}</p>
