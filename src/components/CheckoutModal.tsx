@@ -211,9 +211,10 @@ const PixPayment = ({ plan, onCancel, onSuccess, guestEmail, guestName, couponCo
                 onSuccess();
                 return true;
             } else if (data?.error) {
-                toast.error("Erro na verificação: " + data.error);
+                // Silently skip if not found — webhook will handle it or wait for manual close
+                console.log("Status check error (silenced):", data.error);
             } else {
-                toast("Pagamento ainda pendente. Aguarde um momento e clique novamente.");
+                // Silently wait for the next check
             }
             return false;
         } catch (err: any) {
@@ -306,19 +307,7 @@ const PixPayment = ({ plan, onCancel, onSuccess, guestEmail, guestName, couponCo
                             {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
                         </span>
                     </div>
-                    <button
-                        onClick={async () => {
-                            const btn = document.getElementById('btn-ja-paguei');
-                            const originalHtml = btn?.innerHTML || 'Já Paguei';
-                            if (btn) btn.innerHTML = '<span class="animate-spin w-4 h-4 border-2 border-primary border-t-transparent rounded-full inline-block"></span> Verificando...';
-                            const approved = await checkPaymentStatus();
-                            if (btn && !approved) btn.innerHTML = originalHtml;
-                        }}
-                        id="btn-ja-paguei"
-                        className="w-full h-11 border-2 border-primary text-primary rounded-xl font-bold text-sm hover:bg-primary hover:text-white transition-all flex items-center justify-center gap-2"
-                    >
-                        Já Paguei
-                    </button>
+                    {/* Botão 'Já Paguei' removido a pedido do usuário */}
                 </>
             ) : (
                 <div className="space-y-6">
