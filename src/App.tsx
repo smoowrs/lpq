@@ -1028,7 +1028,7 @@ export default function App() {
                 whileHover="hover"
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                onClick={scrollToPlanos}
                 className="btn-primary w-fit px-10 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-[1.25rem] md:rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] mt-0"
               >
                 {t.comunidade.btn}
@@ -1103,7 +1103,7 @@ export default function App() {
                 whileHover="hover"
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                onClick={scrollToPlanos}
                 className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
               >
                 {t.produtos.btn}
@@ -1247,7 +1247,7 @@ export default function App() {
               whileHover="hover"
               initial="initial"
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              onClick={scrollToPlanos}
               className="btn-primary w-full max-w-[340px] md:w-auto px-10 py-4 md:py-5 text-[13px] sm:text-[15px] md:text-base font-bold flex items-center justify-center gap-3 group rounded-full md:rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300 pointer-events-auto"
             >
               {t.aulas.btn}
@@ -1310,7 +1310,7 @@ export default function App() {
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                  onClick={scrollToPlanos}
                   className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300 mt-2 md:mt-0"
                 >
                   {t.fabricas.btn}
@@ -1488,7 +1488,7 @@ export default function App() {
                 whileHover="hover"
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                onClick={scrollToPlanos}
                 className="btn-primary w-full md:w-auto px-10 py-5 text-base font-bold flex items-center justify-center gap-2 group rounded-[1.25rem] md:rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] mt-4 lg:mt-0"
               >
                 {t.minerador.btn}
@@ -1629,7 +1629,7 @@ export default function App() {
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                  onClick={scrollToPlanos}
                   className="btn-primary w-fit px-12 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
                 >
                   {t.recompensas.btn}
@@ -1806,7 +1806,7 @@ export default function App() {
               whileHover="hover"
               initial="initial"
               whileTap={{ scale: 0.95 }}
-              onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+              onClick={scrollToPlanos}
               className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-2 group"
             >
               {t.rastreio.btn}
@@ -1867,7 +1867,7 @@ export default function App() {
                 whileHover="hover"
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                onClick={scrollToPlanos}
                 className="btn-primary px-8 py-4 text-sm font-bold flex items-center justify-center gap-3 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] transition-all duration-300"
               >
                 {t.connectAI.btn}
@@ -2161,7 +2161,7 @@ export default function App() {
                 whileHover={{ scale: 1.03, y: -5 }}
                 initial="initial"
                 whileTap={{ scale: 0.98 }}
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
+                onClick={scrollToPlanos}
                 className="bg-white text-[#22c55e] px-12 py-5 text-base sm:text-xl font-black flex items-center justify-center gap-3 w-fit shadow-[0_20px_40px_rgba(0,0,0,0.2)] group rounded-2xl md:rounded-[1.2rem] transition-all duration-300"
               >
                 {t.cupom.btn}

@@ -83,7 +83,8 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
             )}
             <PaymentElement options={{
                 layout: 'tabs',
-                wallets: { applePay: 'auto', googlePay: 'auto' }
+                wallets: { applePay: 'auto', googlePay: 'auto' },
+                link: { email: 'never' }
             }} />
 
             <div className="space-y-4 pt-2">
@@ -923,23 +924,6 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     >
                                         <Icons.Pix className="h-4 w-auto object-contain" />
                                     </button>
-                                )}
-
-                                {/* Apple Pay / Google Pay inline */}
-                                {paymentRequest && (
-                                    <div className="flex-1 h-[44px] min-w-0 rounded-xl overflow-hidden flex items-center justify-center bg-black">
-                                        <div className="w-full h-full mt-[-2px]">
-                                            <Elements stripe={stripePromise}>
-                                                <PaymentRequestButtonElement options={{
-                                                    paymentRequest,
-                                                    style: { paymentRequestButton: { theme: 'dark', height: '46px', type: 'default' } }
-                                                }} />
-                                            </Elements>
-                                        </div>
-                                    </div>
-                                )}
-                                {!paymentRequest && isCheckingPaymentSupport && (
-                                    <div className="flex-1 h-[44px] bg-slate-100 rounded-xl animate-pulse" />
                                 )}
                             </div>
 
