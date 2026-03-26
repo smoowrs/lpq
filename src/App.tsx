@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
-import { 
-  Package, Sparkles, Users, ShieldCheck, 
+import {
+  Package, Sparkles, Users, ShieldCheck,
   ArrowRight, PlayCircle, CheckCircle2,
   Clock, MapPin, Play,
   Crown, Star, ChevronDown, Check,
@@ -12,7 +12,7 @@ type Language = 'pt' | 'en' | 'es';
 
 const translations = {
   pt: {
-    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português" },
+    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português", community: "Comunidade", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "A revolução da importação com IA",
       title1: "Economize ou Lucre",
@@ -44,7 +44,7 @@ const translations = {
       titleMob: "Aprenda importar do zero ✈️",
       desc: "Do primeiro acesso até a chegada dos produtos na porta da sua casa ou da sua loja.",
       btn: "Começar agora",
-      items: ['Configuração de endereço na China','Como comprar de forma segura','Gestão de envios e rastreio','Estratégias para evitar taxas']
+      items: ['Configuração de endereço na China', 'Como comprar de forma segura', 'Gestão de envios e rastreio', 'Estratégias para evitar taxas']
     },
     fabricas: {
       tag: "FÁBRICAS",
@@ -71,10 +71,10 @@ const translations = {
       }
     },
     recompensas: {
-        tag: "NÍVEIS E RECOMPENSAS",
-        title1: "Suba de nível e",
-        title2: "ganhe prêmios",
-        btn: "Subir níveis"
+      tag: "NÍVEIS E RECOMPENSAS",
+      title1: "Suba de nível e",
+      title2: "ganhe prêmios",
+      btn: "Subir níveis"
     },
     rastreio: {
       tag: "LOGÍSTICA INTELIGENTE",
@@ -102,11 +102,11 @@ const translations = {
       btn: "Testar Connect AI"
     },
     cupom: {
-        title1: "REGISTRE-SE e GANHE",
-        title2: "R$660 em CUPONS",
-        desc: "Aproveite essa oferta exclusiva de boas-vindas. Resgate agora seus cupons de desconto exclusivos e economize nas suas primeiras importações.",
-        btn: "Resgatar cupom",
-        badges: ["Imediato", "Única", "VIP Connect"]
+      title1: "REGISTRE-SE e GANHE",
+      title2: "R$660 em CUPONS",
+      desc: "Aproveite essa oferta exclusiva de boas-vindas. Resgate agora seus cupons de desconto exclusivos e economize nas suas primeiras importações.",
+      btn: "Resgatar cupom",
+      badges: ["Imediato", "Única", "VIP Connect"]
     },
     footer: { rights: "Todos os direitos reservados", terms: "Termos", privacy: "Privacidade" },
     planos: {
@@ -195,7 +195,7 @@ const translations = {
     }
   },
   en: {
-    nav: { login: "Login", create: "Create free account", create_short: "Create account", lang: "English" },
+    nav: { login: "Login", create: "Create free account", create_short: "Create account", lang: "English", community: "Community", products: "Products", ai: "Connect AI", tracking: "Tracking" },
     hero: {
       sparkle: "The import revolution with AI",
       title1: "Save or Profit",
@@ -227,7 +227,7 @@ const translations = {
       titleMob: "Learn to import from zero ✈️",
       desc: "From the first access until the products arrive at your doorstep or your store.",
       btn: "Start now",
-      items: ['China address setup','How to buy safely','Shipping and tracking management','Tax avoidance strategies']
+      items: ['China address setup', 'How to buy safely', 'Shipping and tracking management', 'Tax avoidance strategies']
     },
     fabricas: {
       tag: "FACTORIES",
@@ -254,10 +254,10 @@ const translations = {
       }
     },
     recompensas: {
-        tag: "LEVELS AND REWARDS",
-        title1: "Level up and",
-        title2: "win prizes",
-        btn: "Level up"
+      tag: "LEVELS AND REWARDS",
+      title1: "Level up and",
+      title2: "win prizes",
+      btn: "Level up"
     },
     rastreio: {
       tag: "SMART LOGISTICS",
@@ -285,11 +285,11 @@ const translations = {
       btn: "Test Connect AI"
     },
     cupom: {
-        title1: "REGISTER and WIN",
-        title2: "$150 in COUPONS",
-        desc: "Take advantage of this exclusive welcome offer. Redeem your exclusive discount coupons now and save on your first imports.",
-        btn: "Redeem coupon",
-        badges: ["Immediate", "Unique", "Connect VIP"]
+      title1: "REGISTER and WIN",
+      title2: "$150 in COUPONS",
+      desc: "Take advantage of this exclusive welcome offer. Redeem your exclusive discount coupons now and save on your first imports.",
+      btn: "Redeem coupon",
+      badges: ["Immediate", "Unique", "Connect VIP"]
     },
     footer: { rights: "All rights reserved", terms: "Terms", privacy: "Privacy" },
     planos: {
@@ -302,11 +302,11 @@ const translations = {
       europa: "EUROPE",
       btnActive: "ACTIVE PLAN",
       btnSelect: "SUBSCRIBE TO THIS PLAN",
-      free: { 
-        name: "FREE", 
-        desc: "Basic access to get started.", 
-        price: "0", 
-        period: "/mo", 
+      free: {
+        name: "FREE",
+        desc: "Basic access to get started.",
+        price: "0",
+        period: "/mo",
         items: [
           { text: "Access to direct factories in China.", status: true },
           { text: "Exclusive class modules.", status: true },
@@ -314,60 +314,71 @@ const translations = {
           { text: "Clothing, Sneakers and accessories", status: false },
         ]
       },
-      starter: { 
-        name: "STARTER", 
-        desc: "Essential access for starting your imports.", 
-        price: "14.95", 
-        monthlyPrice: "29.90", 
-        period: "/mo", 
+      starter: {
+        name: "STARTER",
+        desc: "Essential access for starting your imports.",
+        price: "14.95",
+        monthlyPrice: "29.90",
+        period: "/mo",
+        info: "SINGLE PAYMENT OF R$ 179.40",
         items: [
           { text: "Access to direct factories in China.", status: true },
-          { text: "Clothing, Sneakers, Watches...", status: true },
+          { text: "Clothing, Sneakers, Watches, Caps...", status: true },
           { text: "The Miner (Search AI).", status: true },
           { text: "4K Image Generator (3 credits).", status: true },
           { text: "Real-time tracking up to 5 shipments.", status: true },
           { text: "Exclusive class modules.", status: true },
           { text: "Community access.", status: true },
           { text: "Refer and Earn system.", status: true },
+          { text: "Apple products and Electronics", status: false },
+          { text: "Download unlimited images", status: false },
         ]
       },
-      pro: { 
-        name: "PRO", 
-        desc: "The intermediate plan for more variety and AI tools.", 
-        price: "29.95", 
-        monthlyPrice: "59.90", 
-        period: "/mo", 
+      pro: {
+        name: "PRO",
+        desc: "The intermediate plan for more variety and AI tools.",
+        price: "29.95",
+        monthlyPrice: "59.90",
+        period: "/mo",
+        info: "SINGLE PAYMENT OF R$ 359.40",
         items: [
-          { text: "Access to exclusive factories.", status: true },
-          { text: "Clothing, Sneakers, Electronics.", status: true },
+          { text: "Access to exclusive factories in China.", status: true },
+          { text: "Clothing, Sneakers, Watches and Electronics.", status: true },
           { text: "4K Image Generator (5 credits).", status: true },
           { text: "The Miner (Search AI).", status: true },
           { text: "Local marketplaces in China.", status: true },
           { text: "Real-time tracking up to 10 shipments.", status: true },
+          { text: "Exclusive class modules.", status: true },
+          { text: "Community access.", status: true },
+          { text: "Alerts and opportunities.", status: true },
+          { text: "Monthly sweepstakes and prizes.", status: true },
+          { text: "Official Apple Access", status: false },
         ]
       },
-      elite: { 
-        name: "ELITE", 
-        desc: "Full access and priority support for maximum scale.", 
-        price: "49.95", 
-        monthlyPrice: "99.90", 
-        period: "/mo", 
+      elite: {
+        name: "ELITE",
+        desc: "Full access and priority support for maximum scale.",
+        price: "49.95",
+        monthlyPrice: "99.90",
+        period: "/mo",
+        info: "SINGLE PAYMENT OF R$ 599.40",
         items: [
           { text: "Official Apple access in China.", status: true },
-          { text: "Unlimited image downloads.", status: true },
+          { text: "Download unlimited images.", status: true },
           { text: "Exclusive factories and products.", status: true },
           { text: "Electronics and Gamer origin.", status: true },
           { text: "4K Image Generator (10 credits).", status: true },
           { text: "The Miner (Search AI).", status: true },
           { text: "Local marketplaces in China.", status: true },
-          { text: "Unlimited tracking.", status: true },
-          { text: "Priority support.", status: true },
+          { text: "No shipping tracking limits.", status: true },
+          { text: "Priority support (top).", status: true },
+          { text: "Exclusive highlight medal.", status: true },
         ]
       }
     }
   },
   es: {
-    nav: { login: "Entrar", create: "Crear cuenta gratis", create_short: "Crear cuenta", lang: "Español" },
+    nav: { login: "Entrar", create: "Crear cuenta gratis", create_short: "Crear cuenta", lang: "Español", community: "Comunidad", products: "Productos", ai: "Connect AI", tracking: "Rastreo" },
     hero: {
       sparkle: "La revolución de la importación con IA",
       title1: "Ahorra o Gana",
@@ -399,7 +410,7 @@ const translations = {
       titleMob: "Aprenda a importar desde cero ✈️",
       desc: "Desde el primer acceso hasta que los productos llegan a tu casa o a tu tienda.",
       btn: "Comenzar ahora",
-      items: ['Configuración de dirección en China','Cómo comprar de forma segura','Gestión de envíos y rastreo','Estrategias para evitar impuestos']
+      items: ['Configuración de dirección en China', 'Cómo comprar de forma segura', 'Gestión de envíos y rastreo', 'Estrategias para evitar impuestos']
     },
     fabricas: {
       tag: "FÁBRICAS",
@@ -426,10 +437,10 @@ const translations = {
       }
     },
     recompensas: {
-        tag: "NIVELES Y RECOMPENSAS",
-        title1: "Sube de nivel y",
-        title2: "gana premios",
-        btn: "Subir niveles"
+      tag: "NIVELES Y RECOMPENSAS",
+      title1: "Sube de nivel y",
+      title2: "gana premios",
+      btn: "Subir niveles"
     },
     rastreio: {
       tag: "LOGÍSTICA INTELIGENTE",
@@ -457,11 +468,11 @@ const translations = {
       btn: "Probar Connect AI"
     },
     cupom: {
-        title1: "REGÍSTRATE y GANA",
-        title2: "$130 en CUPONES",
-        desc: "Aprovecha esta oferta de bienvenida exclusiva. Canjea tus cupones de descuento exclusivos ahora y ahorra en tus primeras importaciones.",
-        btn: "Canjear cupón",
-        badges: ["Inmediato", "Única", "VIP Connect"]
+      title1: "REGÍSTRATE y GANA",
+      title2: "$130 en CUPONES",
+      desc: "Aprovecha esta oferta de bienvenida exclusiva. Canjea tus cupones de descuento exclusivos ahora y ahorra en tus primeras importaciones.",
+      btn: "Canjear cupón",
+      badges: ["Inmediato", "Única", "VIP Connect"]
     },
     footer: { rights: "Todos los derechos reservados", terms: "Términos", privacy: "Privacidad" },
     planos: {
@@ -474,11 +485,11 @@ const translations = {
       europa: "EUROPA",
       btnActive: "PLAN ACTIVO",
       btnSelect: "SUSCRIBIRSE A ESTE PLAN",
-      free: { 
-        name: "GRATIS", 
-        desc: "Acceso básico.", 
-        price: "0", 
-        period: "/mes", 
+      free: {
+        name: "GRATIS",
+        desc: "Acceso básico para comenzar.",
+        price: "0",
+        period: "/mes",
         items: [
           { text: "Acceso a fábricas directas en China.", status: true },
           { text: "Módulos de clases exclusivas.", status: true },
@@ -486,42 +497,65 @@ const translations = {
           { text: "Ropa, Zapatillas y accesorios", status: false },
         ]
       },
-      starter: { 
-        name: "STARTER", 
-        desc: "Acceso esencial.", 
-        price: "14.95", 
-        monthlyPrice: "29.90", 
-        period: "/mes", 
+      starter: {
+        name: "STARTER",
+        desc: "Acceso esencial para comenzar sus importaciones.",
+        price: "14.95",
+        monthlyPrice: "29.90",
+        period: "/mes",
+        info: "PAGO ÚNICO DE R$ 179,40",
         items: [
           { text: "Acceso a fábricas directas en China.", status: true },
-          { text: "Ropa, Zapatillas, Relojes...", status: true },
+          { text: "Ropa, Zapatillas, Relojes, Gorras...", status: true },
           { text: "El Minero (IA de búsqueda).", status: true },
           { text: "Generador de imágenes 4K (3 créditos).", status: true },
+          { text: "Rastreo en tiempo real de hasta 5 envíos.", status: true },
+          { text: "Módulos de clases exclusivas.", status: true },
+          { text: "Acceso a la comunidad.", status: true },
+          { text: "Sistema Recomienda y Gana.", status: true },
+          { text: "Productos Apple y Electrónicos", status: false },
+          { text: "Descargar imágenes ilimitadas", status: false },
         ]
       },
-      pro: { 
-        name: "PRO", 
-        desc: "Plan intermedio.", 
-        price: "29.95", 
-        monthlyPrice: "59.90", 
-        period: "/mes", 
+      pro: {
+        name: "PRO",
+        desc: "El plan intermedio para quienes buscan variedad y herramientas de IA.",
+        price: "29.95",
+        monthlyPrice: "59.90",
+        period: "/mes",
+        info: "PAGO ÚNICO DE R$ 359,40",
         items: [
-          { text: "Acceso a fábricas exclusivas.", status: true },
-          { text: "Ropa, Zapatillas y Electrónica.", status: true },
+          { text: "Acceso a fábricas exclusivas en China.", status: true },
+          { text: "Ropa, Zapatillas, Relojes y Electrónica.", status: true },
           { text: "Generador de imágenes 4K (5 créditos).", status: true },
           { text: "El Minero (IA de búsqueda).", status: true },
+          { text: "Marketplaces locales en China.", status: true },
+          { text: "Rastreo en tiempo real de hasta 10 envíos.", status: true },
+          { text: "Módulos de clases exclusivas.", status: true },
+          { text: "Acceso a la comunidad.", status: true },
+          { text: "Alertas y oportunidades.", status: true },
+          { text: "Sorteos mensuales y premios.", status: true },
+          { text: "Acceso a Apple oficial", status: false },
         ]
       },
-      elite: { 
-        name: "ELITE", 
-        desc: "Acceso total.", 
-        price: "49.95", 
-        monthlyPrice: "99.90", 
-        period: "/mes", 
+      elite: {
+        name: "ELITE",
+        desc: "Acceso total y soporte prioritario para escala máxima.",
+        price: "49.95",
+        monthlyPrice: "99.90",
+        period: "/mes",
+        info: "PAGO ÚNICO DE R$ 599,40",
         items: [
           { text: "Acceso oficial de Apple en China.", status: true },
           { text: "Descargas de imágenes ilimitadas.", status: true },
           { text: "Fábricas y productos exclusivos.", status: true },
+          { text: "Origen de Electrónica y Gamer.", status: true },
+          { text: "Generador de imágenes 4K (10 créditos).", status: true },
+          { text: "El Minero (IA de búsqueda).", status: true },
+          { text: "Marketplaces locales en China.", status: true },
+          { text: "Sin límites de rastreo de envíos.", status: true },
+          { text: "Prioridad en el soporte (superior).", status: true },
+          { text: "Medalla de destaque exclusiva.", status: true },
         ]
       }
     }
@@ -545,10 +579,11 @@ export default function App() {
   const t = translations[language];
 
   const navLinks = [
-    { name: t.nav.community, href: '#community' },
-    { name: t.nav.products, href: '#products' },
+    { name: t.nav.community, href: '#comunidade' },
+    { name: t.nav.products, href: '#produtos' },
     { name: t.nav.ai, href: '#ai' },
-    { name: t.nav.tracking, href: '#tracking' },
+    { name: t.nav.tracking, href: '#rastreio' },
+    { name: t.nav.ai === "Connect AI" ? "Planos" : "Plans", href: '#planos' },
   ];
 
   // ─── Dados estáticos fora do componente: sem recriação em cada render ───
@@ -577,13 +612,20 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    // Enviar evento de PageView inicial para Pixel e CAPI (Deduplicado)
+    import('./utils/fb-events').then(({ trackFBEvent }) => {
+      trackFBEvent('PageView');
+    });
+  }, []);
+
   return (
     <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F7] selection:bg-white/20 flex flex-col">
 
       {/* ─── NAV ──────────────────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] grid grid-cols-3 items-center relative">
-          
+
           {/* Lado esquerdo: Desktop = Links + Idioma / Mobile = Idioma */}
           <div className="flex items-center justify-start gap-4 sm:gap-6 lg:gap-8 text-[15px] font-medium text-gray-400 z-30">
             {/* Desktop Idioma Selector */}
@@ -594,7 +636,7 @@ export default function App() {
               </button>
               <div className="absolute top-full left-0 mt-2 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50">
                 {(['pt', 'en', 'es'] as Language[]).map((lang) => (
-                  <button 
+                  <button
                     key={lang}
                     onClick={(e) => {
                       e.stopPropagation();
@@ -626,7 +668,7 @@ export default function App() {
 
             {/* Mobile Idioma Selector (Corrigido para abrir com clique) */}
             <div className="lg:hidden relative z-50" ref={langMenuRef}>
-              <button 
+              <button
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsLangMenuOpen(!isLangMenuOpen);
@@ -636,11 +678,11 @@ export default function App() {
                 <span className="text-lg leading-none">{flags[language]}</span>
                 <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform duration-300 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
               </button>
-              
+
               {isLangMenuOpen && (
                 <div className="absolute top-[calc(100%+8px)] left-0 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[70] animate-in fade-in zoom-in duration-200 pointer-events-auto">
                   {(['pt', 'en', 'es'] as Language[]).map((lang) => (
-                    <button 
+                    <button
                       key={lang}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -675,14 +717,14 @@ export default function App() {
           {/* Direito: CTAs */}
           <div className="flex items-center justify-end gap-2 md:gap-4 font-medium z-30">
             <div className="flex items-center gap-1 sm:gap-4">
-              <button 
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'} 
+              <button
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
                 className="text-[11px] sm:text-[14px] md:text-[15px] font-bold text-gray-400 hover:text-white transition-colors px-2 py-2"
               >
                 {t.nav.login}
               </button>
-              <button 
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br'} 
+              <button
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
                 className="btn-primary px-3 sm:px-6 py-1.5 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] font-bold whitespace-nowrap rounded-full md:rounded-xl shadow-lg shadow-[#582ef5]/20 hover:scale-105 active:scale-95 transition-all"
               >
                 <span className="hidden sm:inline">{t.nav.create}</span>
@@ -690,7 +732,7 @@ export default function App() {
               </button>
             </div>
           </div>
-          
+
         </div>
       </nav>
 
@@ -698,12 +740,12 @@ export default function App() {
 
       {/* ─── HERO ─────────────────────────────────────────────── */}
       <section className="min-h-screen pt-20 pb-20 px-6 relative overflow-hidden border-b border-white/5 flex items-center justify-center">
-        
+
         {/* Grid Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
-        
+
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 md:gap-8 relative z-10 w-full">
-          
+
           {/* Lado Esquerdo (ou Mobile Top) */}
           <div className="md:w-[45%] flex flex-col items-center md:items-start text-center md:text-left w-full">
             <motion.div
@@ -716,7 +758,7 @@ export default function App() {
                 <Sparkles className="w-3 h-3 text-[#582ef5]" />
                 <span className="text-gray-200">{t.hero.sparkle}</span>
               </div>
-              
+
               <h1 className="text-[28px] md:text-5xl lg:text-[44px] xl:text-[56px] font-black tracking-tight mb-8 leading-[1.05] text-white">
                 {/* Versão Desktop (3 linhas) */}
                 <div className="hidden md:flex flex-col items-start">
@@ -724,7 +766,7 @@ export default function App() {
                   <span className="text-gradient-ai whitespace-nowrap">{t.hero.title2}</span>
                   <span className="whitespace-nowrap">{t.hero.title3}</span>
                 </div>
-                
+
                 {/* Versão Mobile (2 linhas) */}
                 <div className="flex md:hidden flex-col items-center">
                   <span className="whitespace-nowrap">{t.hero.title1}</span>
@@ -740,8 +782,8 @@ export default function App() {
                 </div>
                 <div className="relative z-10 w-full bg-[#0a0a0a] rounded-2xl border border-white/10 shadow-2xl overflow-hidden p-1">
                   <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
-                    <iframe 
-                      src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b" 
+                    <iframe
+                      src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
                       className="absolute top-0 left-0 w-full h-full border-0"
                       allowFullScreen
                       loading="eager"
@@ -749,7 +791,7 @@ export default function App() {
                   </div>
                 </div>
               </div>
-              
+
               <p className="text-[13px] sm:text-[14px] md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed px-4 md:px-0 opacity-80">
                 {t.hero.desc}
               </p>
@@ -797,8 +839,8 @@ export default function App() {
 
             <div className="relative z-10 w-full bg-[#0a0a0a] rounded-[2rem] border border-white/10 shadow-[0_0_80px_rgba(88,46,245,0.2)] overflow-hidden p-1 md:p-2">
               <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center">
-                <iframe 
-                  src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b" 
+                <iframe
+                  src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
                   className="absolute top-0 left-0 w-full h-full border-0"
                   allowFullScreen
                   loading="eager"
@@ -813,35 +855,35 @@ export default function App() {
       <section id="comunidade" className="pt-24 md:pt-32 pb-16 md:pb-40 px-6 relative overflow-hidden bg-black border-t border-white/5 order-2 md:order-none">
         {/* Glow de fundo atmosférico - Apenas Desktop agora */}
         <div className="hidden md:block absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          
+
           {/* --- MOBILE LAYOUT --- */}
           <div className="md:hidden flex flex-col w-full mb-12">
-            
+
             <div className="flex flex-row items-center w-full mt-4">
               {/* Lado Esquerdo: Imagem do Telefone (com animação de flutuação) */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="w-[45%] flex relative items-center justify-center"
               >
-                 <motion.img 
-                   animate={{ y: [0, -10, 0] }}
-                   transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                   src="https://i.postimg.cc/3RkrkCVn/phones.png"
-                   alt="App Comunidade"
-                   className="w-[170px] xl:w-[200px] sm:w-[220px] max-w-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-                   loading="eager"
-                   decoding="async"
-                 />
-                 {/* Degradê para sumir suavemente na base */}
-                 <div className="absolute inset-x-0 -bottom-10 h-32 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
+                <motion.img
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
+                  alt="App Comunidade"
+                  className="w-[170px] xl:w-[200px] sm:w-[220px] max-w-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                  loading="eager"
+                  decoding="async"
+                />
+                {/* Degradê para sumir suavemente na base */}
+                <div className="absolute inset-x-0 -bottom-10 h-32 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
               </motion.div>
-              
+
               {/* Lado Direito: Textos e Botão com animação de surgimento */}
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -853,7 +895,7 @@ export default function App() {
                   <Users className="w-3 h-3 text-[#582ef5]" />
                   <span>{t.comunidade.tag}</span>
                 </div>
-                
+
                 <h2 className="text-[26px] font-bold tracking-tighter mb-4 leading-[1.05] text-white">
                   {t.comunidade.title1} <br />
                   <span className="whitespace-nowrap">{t.comunidade.title2}</span>
@@ -882,13 +924,13 @@ export default function App() {
               className="flex w-1/2 justify-center z-20"
             >
               <div className="relative z-10 flex justify-center">
-                 <img 
-                   src="https://i.postimg.cc/3RkrkCVn/phones.png"
-                   alt="App Comunidade"
-                   className="w-full max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-                   loading="eager"
-                   decoding="async"
-                 />
+                <img
+                  src="https://i.postimg.cc/3RkrkCVn/phones.png"
+                  alt="App Comunidade"
+                  className="w-full max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                  loading="eager"
+                  decoding="async"
+                />
               </div>
             </motion.div>
 
@@ -903,12 +945,12 @@ export default function App() {
                 <Users className="w-3.5 h-3.5 text-[#582ef5]" />
                 <span>{t.comunidade.tag}</span>
               </div>
-              
+
               <h2 className="text-6xl lg:text-[82px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
                 {t.comunidade.title1} <br />
                 <span className="whitespace-nowrap text-inherit">{t.comunidade.title2}</span>
               </h2>
-              
+
               <p className="text-base text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
                 {t.comunidade.desc}
               </p>
@@ -931,7 +973,7 @@ export default function App() {
       {/* ─── PRODUTOS ────────────────────────────────────────── */}
       <section id="produtos" className="pt-24 md:pt-32 pb-12 md:pb-32 relative overflow-hidden bg-black border-t border-white/5 order-4 md:order-none">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
-        
+
         {/* Layer de Fundo: Cards Espalhados */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center md:justify-end md:pr-12 lg:pr-24">
           <motion.div
@@ -1008,7 +1050,7 @@ export default function App() {
 
       {/* ─── AULAS PASSO A PASSO ────────────────────────────────── */}
       <section id="aulas" className="py-24 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-black order-5 md:order-none">
-        
+
         {/* Layer de Fundo: Cards Espalhados (Apenas Mobile) */}
         <div className="md:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="relative w-full h-full flex items-center justify-center scale-[0.7] opacity-60 transform-gpu">
@@ -1025,13 +1067,13 @@ export default function App() {
                 initial={{ opacity: 0, scale: 0.8, x: 0, y: 40, rotateZ: 0 }}
                 whileInView={{ opacity: 1, scale: 1, x: aula.x, y: aula.y, rotateZ: aula.rot }}
                 viewport={{ once: true, margin: "-20px" }}
-                transition={{ 
-                  delay: idx * 0.04, 
-                  duration: 0.8, 
-                  ease: [0.23, 1, 0.32, 1] 
+                transition={{
+                  delay: idx * 0.04,
+                  duration: 0.8,
+                  ease: [0.23, 1, 0.32, 1]
                 }}
                 className="absolute w-36 aspect-[9/16] rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-white/20 bg-black"
-                style={{ 
+                style={{
                   zIndex: idx,
                   willChange: "transform, opacity"
                 }}
@@ -1047,9 +1089,9 @@ export default function App() {
         </div>
 
         <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none hidden md:block" />
-        
+
         <div className="max-w-7xl mx-auto relative z-20 flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-20 items-center justify-center min-h-[400px] md:min-h-0">
-          
+
           {/* CARDS (Apenas Desktop - Lado Esquerdo da Grid) */}
           <div className="hidden md:flex relative z-0 md:z-auto pointer-events-none md:pointer-events-auto inset-0 md:inset-auto h-full items-center justify-center order-2 md:order-1 perspective-[2000px] py-10 md:py-20 md:h-[750px] lg:h-[800px] overflow-hidden md:overflow-visible">
             <div className="absolute inset-0 z-0 pointer-events-none">
@@ -1057,7 +1099,7 @@ export default function App() {
               <div className="absolute top-0 left-0 w-64 h-64 blur-[100px] rounded-full bg-[#582ef5]/15 animate-pulse" />
               <div className="absolute bottom-0 right-0 w-64 h-64 blur-[100px] rounded-full bg-[#2b34f5]/15 animate-pulse [animation-delay:1s]" />
             </div>
-            
+
             <div className="relative w-full h-full flex items-center justify-center md:scale-100 scale-90 sm:scale-100">
               {[
                 { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15, z: 0 },
@@ -1113,7 +1155,7 @@ export default function App() {
             <p className="hidden md:block text-sm md:text-base text-gray-300 md:text-gray-400 mb-8 md:mb-10 leading-relaxed max-w-md drop-shadow-lg">
               {t.aulas.desc}
             </p>
-            
+
             <ul className="hidden md:block space-y-5 mb-12 w-full max-w-sm drop-shadow-2xl">
               {t.aulas.items.map((item, i) => (
                 <li key={i} className="flex items-center gap-3 text-gray-200 md:text-gray-300 font-bold md:font-medium">
@@ -1142,10 +1184,10 @@ export default function App() {
       </section>
 
       <section id="fabricas" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-6 md:order-none">
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 lg:gap-32">
-            
+
             {/* Informações (Esquerda no Desktop) */}
             <div className="w-full md:w-[55%] flex flex-col items-center md:items-start text-center md:text-left order-2 md:order-1">
               <motion.div
@@ -1158,7 +1200,7 @@ export default function App() {
                   <Factory className="w-3.5 h-3.5 text-[#582ef5]" />
                   <span className="text-gray-300 uppercase tracking-wider">{t.fabricas.tag}</span>
                 </div>
-                
+
                 <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-bold tracking-tighter mb-8 leading-[1.1] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                   {/* Versão Desktop */}
                   <span className="hidden md:block">
@@ -1172,16 +1214,16 @@ export default function App() {
                     <span className="text-gradient-ai">e lojas da China 🛒</span>
                   </span>
                 </h2>
-                
+
                 <p className="hidden md:block text-sm md:text-lg text-gray-300 md:text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-md font-medium">
                   {t.fabricas.desc}
                 </p>
 
                 {/* Imagem (Apenas Mobile: Entre Descrição e Botão) */}
                 <div className="flex md:hidden w-full justify-center my-4 relative z-10">
-                  <img 
-                    src="https://i.postimg.cc/nLX55SV5/product.webp" 
-                    alt="Fábricas Mobile" 
+                  <img
+                    src="https://i.postimg.cc/nLX55SV5/product.webp"
+                    alt="Fábricas Mobile"
                     className="w-full max-w-[280px] sm:max-w-[340px] drop-shadow-xl z-10"
                     loading="lazy"
                     decoding="async"
@@ -1210,15 +1252,15 @@ export default function App() {
               viewport={{ once: true }}
               className="hidden md:flex flex-col w-[45%] justify-center items-start order-1 md:order-2"
             >
-               <div className="relative">
-                  <img 
-                    src="https://i.postimg.cc/nLX55SV5/product.webp" 
-                    alt="Fábricas" 
-                    className="w-full max-w-none lg:w-[560px] relative z-10"
-                    loading="lazy"
-                    decoding="async"
-                  />
-               </div>
+              <div className="relative">
+                <img
+                  src="https://i.postimg.cc/nLX55SV5/product.webp"
+                  alt="Fábricas"
+                  className="w-full max-w-none lg:w-[560px] relative z-10"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
             </motion.div>
 
           </div>
@@ -1231,7 +1273,7 @@ export default function App() {
         <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
-          
+
           {/* Coluna esquerda: Título, Descrição e Botão (No mobile, engloba tudo) */}
           <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
             <motion.div
@@ -1244,7 +1286,7 @@ export default function App() {
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>{t.minerador.tag}</span>
               </div>
-              
+
               <h2 className="text-[28px] md:text-5xl lg:text-[72px] font-black tracking-tighter mb-4 lg:mb-1 leading-[1] text-white">
                 {/* Versão Desktop */}
                 <span className="hidden md:block">
@@ -1288,7 +1330,7 @@ export default function App() {
                   {/* Corpo do Chat */}
                   <div className="p-5 space-y-6">
                     {/* Pergunta do User */}
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, x: 20, scale: 0.9 }}
                       whileInView={{ opacity: 1, x: 0, scale: 1 }}
                       viewport={{ once: true, margin: "-50px" }}
@@ -1300,7 +1342,7 @@ export default function App() {
                       </div>
                       <span className="text-[10px] text-gray-500 mt-1.5 mr-1 font-medium italic">Enviado agora</span>
                     </motion.div>
-                    
+
                     {/* Status Digitando (Visual antes da resposta) */}
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -1315,7 +1357,7 @@ export default function App() {
                     </motion.div>
 
                     {/* Resposta do Minerador */}
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, x: -20, scale: 0.9 }}
                       whileInView={{ opacity: 1, x: 0, scale: 1 }}
                       viewport={{ once: true, margin: "-50px" }}
@@ -1328,7 +1370,7 @@ export default function App() {
                     </motion.div>
 
                     {/* Product Card Result */}
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, y: 20, scale: 0.95 }}
                       whileInView={{ opacity: 1, y: 0, scale: 1 }}
                       viewport={{ once: true, margin: "-50px" }}
@@ -1357,10 +1399,10 @@ export default function App() {
                   {/* Barra de Input Fake */}
                   <div className="bg-white/5 border-t border-white/5 p-4 flex items-center gap-3">
                     <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-[10px] sm:text-xs text-left">
-                        {t.minerador.chat.input}
+                      {t.minerador.chat.input}
                     </div>
                     <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/20">
-                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </div>
                   </div>
                 </div>
@@ -1411,7 +1453,7 @@ export default function App() {
               {/* Corpo do Chat */}
               <div className="p-5 space-y-6">
                 {/* Pergunta do User */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 }}
@@ -1424,7 +1466,7 @@ export default function App() {
                 </motion.div>
 
                 {/* Resposta do Minerador */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1.2 }}
@@ -1436,7 +1478,7 @@ export default function App() {
                 </motion.div>
 
                 {/* Product Card Result */}
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ delay: 1.8 }}
@@ -1459,23 +1501,23 @@ export default function App() {
                     </button>
                   </div>
                 </motion.div>
-                
+
                 {/* Typing status (fake) */}
                 <div className="flex items-center gap-1.5">
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce" />
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.2s]" />
-                   <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.4s]" />
+                  <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce" />
+                  <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.2s]" />
+                  <div className="w-1.5 h-1.5 bg-[#582ef5] rounded-full animate-bounce [animation-delay:0.4s]" />
                 </div>
               </div>
 
               {/* Barra de Input Fake */}
               <div className="bg-white/5 border-t border-white/5 p-4 flex items-center gap-3">
-                 <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-[10px] sm:text-xs text-left">
-                    {t.minerador.chat.input}
-                 </div>
-                 <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/20">
-                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                 </div>
+                <div className="flex-1 bg-white/5 border border-white/10 rounded-full px-4 py-2 text-gray-500 text-[10px] sm:text-xs text-left">
+                  {t.minerador.chat.input}
+                </div>
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#582ef5] flex items-center justify-center shadow-lg shadow-[#582ef5]/20">
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                </div>
               </div>
             </motion.div>
           </div>
@@ -1485,10 +1527,10 @@ export default function App() {
       {/* ─── NÍVEIS E RECOMPENSAS ────────────────────────────────────────── */}
       <section id="ranking" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-7 md:order-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[150px] pointer-events-none" />
-        
+
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
-            
+
             {/* Texto (Esquerda no Desktop) */}
             <div className="md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
               <motion.div
@@ -1501,7 +1543,7 @@ export default function App() {
                   <Star className="w-3.5 h-3.5 text-[#582ef5]" />
                   <span className="text-gray-300 uppercase tracking-wider">{t.recompensas.tag}</span>
                 </div>
-                
+
                 <h2 className="text-[28px] md:text-5xl lg:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
                   {t.recompensas.title1}<br />
                   <span className="text-gradient-ai">{t.recompensas.title2}</span>
@@ -1525,7 +1567,7 @@ export default function App() {
             {/* Pódio de Ranking (Esquerda no Desktop) */}
             <div className="md:w-1/2 w-full">
               <div className="flex flex-row items-end justify-center gap-4 md:gap-8 py-6 scale-90 md:scale-100 lg:scale-110 origin-center">
-                
+
                 {/* 2º Lugar */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -1553,7 +1595,7 @@ export default function App() {
                   viewport={{ once: true }}
                   className="flex flex-col items-center -translate-y-4 md:-translate-y-6"
                 >
-                  <motion.div 
+                  <motion.div
                     animate={{ y: [-3, 3, -3] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     className="mb-2"
@@ -1602,7 +1644,7 @@ export default function App() {
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center relative z-10">
-          
+
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -1612,7 +1654,7 @@ export default function App() {
             <div className="glass-card rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 flex flex-col justify-center min-h-[500px] md:min-h-[580px] lg:min-h-[620px]">
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#582ef5]/15 rounded-full blur-3xl opacity-50" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#2b34f5]/10 rounded-full blur-3xl opacity-30" />
-              
+
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-12">
                   <div>
@@ -1632,9 +1674,8 @@ export default function App() {
                         {index < trackingStages.length - 1 && (
                           <div className={`absolute left-[15px] top-10 bottom-[-32px] w-[2px] ${isActive ? 'bg-[#582ef5]' : 'bg-white/10'}`} />
                         )}
-                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 relative z-10 transition-all duration-700 ${
-                          isActive ? 'bg-[#582ef5] text-white shadow-[0_0_25px_rgba(88,46,245,0.5)]' : 'bg-white/5 text-gray-600 border border-white/10'
-                        }`}>
+                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center shrink-0 relative z-10 transition-all duration-700 ${isActive ? 'bg-[#582ef5] text-white shadow-[0_0_25px_rgba(88,46,245,0.5)]' : 'bg-white/5 text-gray-600 border border-white/10'
+                          }`}>
                           {stage.icon}
                         </div>
                         <div className={`pt-1 transition-all duration-700 ${isActive ? 'opacity-100' : 'opacity-30'}`}>
@@ -1702,14 +1743,14 @@ export default function App() {
       </section>
 
       {/* ─── CONNECT AI / IMAGE CAROUSEL ──────────────────────── */}
-      <section className="pt-8 pb-24 md:py-32 border-t border-white/5 bg-black overflow-hidden relative order-9 md:order-none">
+      <section id="ai" className="pt-8 pb-24 md:py-32 border-t border-white/5 bg-black overflow-hidden relative order-9 md:order-none">
         <div className="absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute inset-y-0 left-0 w-24 md:w-48 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-48 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-            
+
             {/* Esquerda: Conteúdo */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -1774,17 +1815,17 @@ export default function App() {
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, x: 200, y: 100, rotateX: 0, rotateY: 0 }}
-                    whileInView={{ 
-                      opacity: 1, 
-                      x: idx * 45, 
-                      y: idx * -20, 
+                    whileInView={{
+                      opacity: 1,
+                      x: idx * 45,
+                      y: idx * -20,
                       rotateX: 10,
                       rotateY: -25
                     }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1, duration: 1, type: "spring", stiffness: 50 }}
                     className="absolute w-40 md:w-56 lg:w-64 aspect-[3/4.5] rounded-xl md:rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-transform hover:z-50 hover:scale-105 duration-500 group/card-3d bg-[#0d0d0d]"
-                    style={{ 
+                    style={{
                       zIndex: idx,
                       transformStyle: "preserve-3d",
                       left: `${idx * 10}%`,
@@ -1807,11 +1848,11 @@ export default function App() {
       </section>
 
       {/* ─── PLANOS DE ACESSO ─────────────────────────────────── */}
-      <section id="planos" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-9 md:order-none">
+      <section id="planos" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-10 md:order-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -1828,30 +1869,30 @@ export default function App() {
             {/* Billing Toggle */}
             <div className="flex flex-col items-center gap-6">
               <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
-                <button 
+                <button
                   onClick={() => setBillingCycle('monthly')}
                   className={`px-8 py-3 rounded-xl text-sm font-bold transition-all ${billingCycle === 'monthly' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
                 >
                   {t.planos.monthly}
                 </button>
-                <button 
+                <button
                   onClick={() => setBillingCycle('annual')}
                   className={`px-8 py-3 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${billingCycle === 'annual' ? 'bg-white text-black' : 'text-gray-500 hover:text-gray-300'}`}
                 >
-                  {t.planos.annual} 
+                  {t.planos.annual}
                   <span className="bg-black text-white text-[10px] px-1.5 py-0.5 rounded-md">{t.planos.annualOff}</span>
                 </button>
               </div>
 
               {/* Region Toggle */}
               <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
-                <button 
+                <button
                   onClick={() => setRegion('brasil')}
                   className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'brasil' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
                 >
                   <Globe className="w-3.5 h-3.5" /> {t.planos.brasil}
                 </button>
-                <button 
+                <button
                   onClick={() => setRegion('europa')}
                   className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'europa' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
                 >
@@ -1882,7 +1923,7 @@ export default function App() {
                 >
                   {/* Accent Glow */}
                   <div className="absolute top-0 right-0 w-32 h-32 blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" style={{ backgroundColor: plan.color }} />
-                  
+
                   {/* Icon */}
                   <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-xl">
                     <Package className="w-6 h-6" style={{ color: plan.color }} />
@@ -1899,8 +1940,8 @@ export default function App() {
                     <div className="flex items-baseline gap-1">
                       {plan.id !== 'free' && (
                         <div className="flex flex-col">
-                           <span className="text-xs font-black text-[#582ef5] leading-none mb-1">12X</span>
-                           <span className="text-xs font-black text-gray-400 leading-none">R$</span>
+                          <span className="text-xs font-black text-[#582ef5] leading-none mb-1">12X</span>
+                          <span className="text-xs font-black text-gray-400 leading-none">R$</span>
                         </div>
                       )}
                       <span className="text-[44px] font-black tracking-tighter text-white leading-none">
@@ -1932,15 +1973,14 @@ export default function App() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => {
-                        // Se for o plano grátis ou qualquer outro, mandamos para o app (baseado no feedback do usuário)
-                        // Você pode adicionar parâmetros aqui como ?plan=starter se o seu app suportar
-                        window.location.href = `https://app.connectacademy.com.br/checkout?plan=${plan.id}`;
+                      // Se for o plano grátis ou qualquer outro, mandamos para o app (baseado no feedback do usuário)
+                      // Você pode adicionar parâmetros aqui como ?plan=starter se o seu app suportar
+                      window.location.href = `https://app.connectacademy.com.br/checkout?plan=${plan.id}`;
                     }}
-                    className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${
-                      plan.id === 'free' 
-                        ? 'bg-white/5 text-gray-400 border border-white/10' 
+                    className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${plan.id === 'free'
+                        ? 'bg-white/5 text-gray-400 border border-white/10'
                         : 'text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
-                    }`}
+                      }`}
                     style={plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
                   >
                     {plan.id === 'free' ? t.planos.btnActive : t.planos.btnSelect}
@@ -1953,7 +1993,7 @@ export default function App() {
       </section>
 
       {/* ─── CTA (CUPOM DOURADO) ─────────────────────────────────── */}
-      <section id="cadastro" className="py-24 md:py-32 px-6 relative overflow-hidden bg-black border-t border-white/5 order-10 md:order-none">
+      <section id="cadastro" className="py-24 md:py-32 px-6 relative overflow-hidden bg-black border-t border-white/5 order-11 md:order-none">
         {/* Efeitos de Fundo Atmosféricos */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#582ef5]/50 to-transparent" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[160px] pointer-events-none" />
@@ -1968,20 +2008,20 @@ export default function App() {
             {/* Efeito de Cupom: Cortes Circulares */}
             <div className="absolute top-[12%] md:top-1/2 -left-5 md:-left-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-r border-white/20 z-20" />
             <div className="absolute top-[12%] md:top-1/2 -right-5 md:-right-6 -translate-y-1/2 w-10 md:w-12 h-10 md:h-12 rounded-full bg-black border-l border-white/20 z-20" />
-            
+
             {/* Linha de Perfuração (Horizontal no Mobile, Vertical no Desktop) */}
             <div className="absolute top-[12%] left-0 right-0 h-px border-t-2 border-dashed border-white/30 md:hidden" />
             <div className="absolute top-0 bottom-0 left-[18%] w-px border-l-2 border-dashed border-white/30 hidden md:block" />
 
             {/* Brilhos Internos */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/20 rounded-full blur-[120px] pointer-events-none" />
-            
+
             <div className="relative z-10 pt-8 md:pt-0 md:pl-[22%] pr-4 md:pr-12">
               <h2 className="text-[28px] md:text-4xl lg:text-6xl font-black tracking-tighter mb-5 leading-[1.1] text-white">
                 <span className="block mb-1 uppercase opacity-90 sm:whitespace-nowrap">{t.cupom.title1}</span>
                 <span className="block drop-shadow-xl sm:whitespace-nowrap">{t.cupom.title2}</span>
               </h2>
-              
+
               <p className="text-white/80 text-sm md:text-lg mb-10 max-w-xl leading-relaxed font-medium">
                 {t.cupom.desc}
               </p>
@@ -1999,18 +2039,18 @@ export default function App() {
 
               {/* Badges de Cupom */}
               <div className="mt-8 md:mt-12 flex flex-row items-center gap-4 md:gap-8 text-white/90">
-                 <div className="flex items-center gap-1.5">
-                   <ShieldCheck className="w-3 md:w-4 h-3 md:h-4" />
-                   <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">{t.cupom.badges[0]}</span>
-                 </div>
-                 <div className="flex items-center gap-1.5">
-                   <Users className="w-3 md:w-4 h-3 md:h-4" />
-                   <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">{t.cupom.badges[1]}</span>
-                 </div>
-                 <div className="flex items-center gap-1.5">
-                   <Sparkles className="w-3 md:w-4 h-3 md:h-4" />
-                   <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">{t.cupom.badges[2]}</span>
-                 </div>
+                <div className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-3 md:w-4 h-3 md:h-4" />
+                  <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">{t.cupom.badges[0]}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Users className="w-3 md:w-4 h-3 md:h-4" />
+                  <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">{t.cupom.badges[1]}</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Sparkles className="w-3 md:w-4 h-3 md:h-4" />
+                  <span className="text-[7.5px] md:text-[10px] uppercase tracking-wider md:tracking-widest font-black">{t.cupom.badges[2]}</span>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -2025,10 +2065,10 @@ export default function App() {
           </div>
           <p className="text-sm text-gray-500 text-center">
             © 2026 Connect Academy LTDA {t.footer.rights} - CNPJ:{' '}
-            <a 
-              href="https://cnpj.biz/44292841000195" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://cnpj.biz/44292841000195"
+              target="_blank"
+              rel="noopener noreferrer"
               className="underline hover:text-gray-300 transition-colors"
             >
               44.292.841/0001-95
