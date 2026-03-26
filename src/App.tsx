@@ -1958,16 +1958,17 @@ export default function App() {
               { id: 'elite', data: t.planos.elite, color: '#f59e0b', secondary: '#d97706' }
             ].map((plan, idx) => {
               const isBrasil = region === 'brasil';
+              const isAnnual = billingCycle === 'annual';
               const price = isBrasil
-                ? (billingCycle === 'annual' 
+                ? (isAnnual 
                   ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '14,95' : plan.id === 'pro' ? '29,95' : '49,95')
                   : (plan.data.monthlyPrice || plan.data.price))
-                : (billingCycle === 'annual'
-                  ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '4,95' : plan.id === 'pro' ? '9,95' : '19,95')
+                : (isAnnual
+                  ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '59,40' : plan.id === 'pro' ? '119,40' : '239,40')
                   : (plan.id === 'free' ? '0' : plan.id === 'starter' ? '9,90' : plan.id === 'pro' ? '19,90' : '39,90'));
               
-              const isAnnual = billingCycle === 'annual';
               const [whole, cents] = price.includes(',') ? price.split(',') : [price, '00'];
+              const period = isBrasil ? plan.data.period : (isAnnual ? '/ ano' : '/ mês');
 
               return (
                 <motion.div
