@@ -2032,15 +2032,13 @@ export default function App() {
                     onClick={() => {
                       window.location.href = `https://app.connectacademy.com.br/checkout?plan=${plan.id}`;
                     }}
-                    className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${plan.id === 'starter'
-                        ? 'bg-[#22c55e]/10 text-[#22c55e] border border-[#22c55e]/20'
-                        : plan.id === 'free'
-                          ? 'bg-white/5 text-gray-400 border border-white/10'
-                          : 'text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+                    className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${plan.id === 'free'
+                        ? 'bg-white/5 text-gray-400 border border-white/10'
+                        : 'text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
                       }`}
-                    style={plan.id !== 'starter' && plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
+                    style={plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
                   >
-                    {plan.id === 'starter' ? t.planos.btnActive : plan.id === 'free' ? (t.planos.free.btnTest || "Testar Grátis") : t.planos.btnSelect}
+                    {plan.id === 'free' ? (t.planos.free.btnTest || "Testar Grátis") : t.planos.btnSelect}
                   </motion.button>
                 </motion.div>
               );
