@@ -661,15 +661,89 @@ export default function App() {
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-16 md:h-[72px] grid grid-cols-3 items-center relative">
 
-          {/* Lado esquerdo: Desktop = Links + Idioma / Mobile = Idioma */}
-          <div className="flex items-center justify-start gap-4 sm:gap-6 lg:gap-8 text-[15px] font-medium text-gray-400 z-30">
+          {/* Coluna 1: Logo (Desktop) / Idioma (Mobile) */}
+          <div className="flex items-center justify-start z-30">
+            {/* Logo Desktop */}
+            <div className="hidden lg:block">
+              <img
+                src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
+                alt="Asas de Importação"
+                className="h-10 object-contain"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+
+            {/* Mobile Idioma Selector */}
+            <div className="lg:hidden relative z-50" ref={langMenuRef}>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsLangMenuOpen(!isLangMenuOpen);
+                }}
+                className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-white/5 border border-white/10 transition-all text-sm active:scale-90"
+              >
+                <span className="text-lg leading-none">{flags[language]}</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform duration-300 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {isLangMenuOpen && (
+                <div className="absolute top-[calc(100%+8px)] left-0 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[70] animate-in fade-in zoom-in duration-200">
+                  {(['pt', 'en', 'es'] as Language[]).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setLanguage(lang);
+                        setIsLangMenuOpen(false);
+                      }}
+                      className={`w-full px-4 py-3.5 flex items-center gap-3 text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
+                    >
+                      <span className="text-lg leading-none">{flags[lang]}</span>
+                      <span>{translations[lang].nav.lang}</span>
+                      <div className="flex-1" />
+                      {language === lang && <Check className="w-3.5 h-3.5 text-[#582ef5]" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Coluna 2: Links (Desktop) / Logo (Mobile) */}
+          <div className="flex items-center justify-center z-10">
+            {/* Links Desktop */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-[15px] font-medium text-gray-400 hover:text-white transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
+
+            {/* Logo Mobile */}
+            <div className="lg:hidden pointer-events-none">
+              <img
+                src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
+                alt="Asas de Importação"
+                className="h-6 sm:h-7 object-contain pointer-events-auto"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </div>
+
+          {/* Coluna 3: Idioma (Desktop) / CTAs (Ambos) */}
+          <div className="flex items-center justify-end gap-4 md:gap-6 z-30">
             {/* Desktop Idioma Selector */}
             <div className="hidden lg:block relative group/lang">
               <button className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg hover:bg-white/5 transition-all text-white/90">
                 <span className="text-lg">{flags[language]}</span>
                 <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover/lang:rotate-180 transition-transform duration-300" />
               </button>
-              <div className="absolute top-full left-0 mt-2 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50">
+              <div className="absolute top-full right-0 mt-2 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50">
                 {(['pt', 'en', 'es'] as Language[]).map((lang) => (
                   <button
                     key={lang}
@@ -688,69 +762,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Links Desktop */}
-            <div className="hidden lg:flex items-center gap-6 lg:gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-gray-400 hover:text-white transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
 
-            {/* Mobile Idioma Selector (Corrigido para abrir com clique) */}
-            <div className="lg:hidden relative z-50" ref={langMenuRef}>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsLangMenuOpen(!isLangMenuOpen);
-                }}
-                className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg bg-white/5 border border-white/10 transition-all text-sm active:scale-90 pointer-events-auto"
-              >
-                <span className="text-lg leading-none">{flags[language]}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform duration-300 ${isLangMenuOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {isLangMenuOpen && (
-                <div className="absolute top-[calc(100%+8px)] left-0 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[70] animate-in fade-in zoom-in duration-200 pointer-events-auto">
-                  {(['pt', 'en', 'es'] as Language[]).map((lang) => (
-                    <button
-                      key={lang}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setLanguage(lang);
-                        setIsLangMenuOpen(false);
-                      }}
-                      className={`w-full px-4 py-3.5 flex items-center gap-3 text-xs hover:bg-white/5 active:bg-white/10 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
-                    >
-                      <span className="text-lg leading-none">{flags[lang]}</span>
-                      <span>{translations[lang].nav.lang}</span>
-                      <div className="flex-1" />
-                      {language === lang && <Check className="w-3.5 h-3.5 text-[#582ef5]" />}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Centro: Logo */}
-          <div className="flex items-center justify-center pointer-events-none z-10">
-            <img
-              src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
-              alt="Asas de Importação"
-              className="h-6 sm:h-7 md:h-10 object-contain pointer-events-auto"
-              referrerPolicy="no-referrer"
-              fetchPriority="high"
-              decoding="sync"
-            />
-          </div>
-
-          {/* Direito: CTAs */}
-          <div className="flex items-center justify-end gap-2 md:gap-4 font-medium z-30">
             <div className="flex items-center gap-1 sm:gap-4">
               <button
                 onClick={() => window.location.href = 'https://app.connectacademy.com.br'}
