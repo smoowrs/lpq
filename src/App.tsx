@@ -530,7 +530,7 @@ export default function App() {
                 </div>
               </div>
               
-              <p className="text-[11px] sm:text-[13px] md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed px-4 md:px-0 opacity-80">
+              <p className="text-[13px] sm:text-[14px] md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed px-4 md:px-0 opacity-80">
                 {t.hero.desc}
               </p>
 
