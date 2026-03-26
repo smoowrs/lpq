@@ -1,12 +1,13 @@
 import { motion } from 'motion/react';
-import {
-  Package, Sparkles, Users, ShieldCheck,
+import { Package, Sparkles, Users, ShieldCheck,
   ArrowRight, PlayCircle, CheckCircle2,
   Clock, MapPin, Play,
   Crown, Star, ChevronDown, Check,
   Factory, X, Globe
 } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
+import { Toaster } from 'react-hot-toast';
+import { CheckoutModal } from './components/CheckoutModal';
 
 type Language = 'pt' | 'en' | 'es';
 
@@ -609,6 +610,8 @@ export default function App() {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
   const [region, setRegion] = useState<'brasil' | 'europa'>('brasil');
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const langMenuRef = useRef<HTMLDivElement>(null);
 
   const t = translations[language];
@@ -659,6 +662,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F7] selection:bg-white/20 flex flex-col">
+      <Toaster position="top-right" />
+      {isCheckoutOpen && selectedPlan && (
+        <CheckoutModal 
+          plan={selectedPlan} 
+          onClose={() => setIsCheckoutOpen(false)}
+          onSuccess={() => {
+            // Sucesso! O modal já mostra a tela de sucesso
+          }}
+        />
+      )}
 
       {/* ─── NAV ──────────────────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
@@ -2044,7 +2057,41 @@ export default function App() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => {
-                      window.location.href = `https://app.connectacademy.com.br/checkout?plan=${plan.id}`;
+                      if (plan.id === 'free') {
+                        window.location.href = 'https://app.connectacademy.com.br';
+                        return;
+                      }
+                      
+                      const regionKey = region === 'brasil' ? 'BR' : 'EU';
+                      const planInfo = {
+                        id: plan.id,
+                        label: plan.data.name,
+                        billingCycle,
+                        region: regionKey,
+                        prices: {
+                          BR: { 
+                            monthly: '59,90', // Default prices logic might need refinement if they change
+                            annual: plan.id === 'pro' ? '359,40' : (plan.id === 'starter' ? '179,40' : '599,40')
+                          },
+                          EU: { 
+                            monthly: '19,90',
+                            annual: plan.id === 'pro' ? '119,40' : (plan.id === 'starter' ? '59,40' : '239,40')
+                          }
+                        },
+                        // Adicionando trial apenas se necessário, mas o modal já checa plan.id
+                      };
+
+                      // Ajuste fino dos preços mensais baseado no plano
+                      if (plan.id === 'starter') {
+                        planInfo.prices.BR.monthly = '29,90';
+                        planInfo.prices.EU.monthly = '9,90';
+                      } else if (plan.id === 'elite') {
+                        planInfo.prices.BR.monthly = '99,90';
+                        planInfo.prices.EU.monthly = '39,90';
+                      }
+                      
+                      setSelectedPlan(planInfo);
+                      setIsCheckoutOpen(true);
                     }}
                     className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${plan.id === 'free'
                         ? 'bg-white/5 text-gray-400 border border-white/10'
