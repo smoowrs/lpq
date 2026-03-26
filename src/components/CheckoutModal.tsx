@@ -83,7 +83,7 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
             )}
             <PaymentElement options={{
                 layout: 'tabs',
-                wallets: { applePay: 'never', googlePay: 'never' }
+                wallets: { applePay: 'auto', googlePay: 'auto' }
             }} />
 
             <div className="space-y-4 pt-2">
@@ -688,8 +688,8 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                 const amountStr = plan.billingCycle === 'annual' ? plan.prices[region].annual : plan.prices[region].monthly;
                 const amount = parseInt(amountStr.replace(/[.,]/g, ''));
                 const pr = stripe.paymentRequest({
-                    country: 'BR',
-                    currency: 'brl',
+                    country: region === 'EU' ? 'PT' : 'BR',
+                    currency: region === 'EU' ? 'eur' : 'brl',
                     total: { label: `Plano ${plan.label} - Connect Academy`, amount },
                     requestPayerName: true,
                     requestPayerEmail: true,
@@ -916,12 +916,14 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     </button>
                                 )}
 
-                                <button
-                                    onClick={() => setMethod('pix')}
-                                    className={`flex-1 h-[44px] px-2 rounded-xl flex items-center justify-center transition-all border ${method === 'pix' ? 'border-primary bg-primary/5' : 'border-slate-200 bg-white hover:bg-slate-50 opacity-80'}`}
-                                >
-                                    <Icons.Pix className="h-4 w-auto object-contain" />
-                                </button>
+                                {plan.region !== 'EU' && (
+                                    <button
+                                        onClick={() => setMethod('pix')}
+                                        className={`flex-1 h-[44px] px-2 rounded-xl flex items-center justify-center transition-all border ${method === 'pix' ? 'border-primary bg-primary/5' : 'border-slate-200 bg-white hover:bg-slate-50 opacity-80'}`}
+                                    >
+                                        <Icons.Pix className="h-4 w-auto object-contain" />
+                                    </button>
+                                )}
 
                                 {/* Apple Pay / Google Pay inline */}
                                 {paymentRequest && (

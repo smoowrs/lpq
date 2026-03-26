@@ -115,9 +115,9 @@ const translations = {
       title: "Escolha o seu plano",
       monthly: "Mensal",
       annual: "Anual",
-      annualOff: "-50%",
-      brasil: "BRASIL",
-      europa: "EUROPA",
+      annualOff: "50% OFF",
+      brasil: "Brasil",
+      europa: "Europa",
       btnActive: "PLANO ATIVO",
       btnSelect: "ASSINAR ESSE PLANO",
       free: {
@@ -1956,7 +1956,7 @@ export default function App() {
                   className={`px-8 py-3 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${billingCycle === 'annual' ? 'bg-white text-black' : 'text-gray-500 hover:text-gray-300'}`}
                 >
                   {t.planos.annual}
-                  <span className="bg-black text-white text-[10px] px-1.5 py-0.5 rounded-md">{t.planos.annualOff}</span>
+                  <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-md font-black">{t.planos.annualOff}</span>
                 </button>
               </div>
 
@@ -2078,32 +2078,32 @@ export default function App() {
                       }
                       
                       const regionKey = region === 'brasil' ? 'BR' : 'EU';
+                      const prices = {
+                        BR: {
+                          starter: { monthly: '29,90', annual: '179,40' },
+                          pro: { monthly: '59,90', annual: '359,40' },
+                          elite: { monthly: '99,90', annual: '599,40' }
+                        },
+                        EU: {
+                          starter: { monthly: '9,90', annual: '59,40' },
+                          pro: { monthly: '19,90', annual: '119,40' },
+                          elite: { monthly: '39,90', annual: '239,40' }
+                        }
+                      };
+
+                      const currentPrices = prices[regionKey][plan.id as 'starter' | 'pro' | 'elite'] || prices[regionKey].starter;
+
                       const planInfo = {
                         id: plan.id,
                         label: plan.data.name,
                         billingCycle,
                         region: regionKey,
                         prices: {
-                          BR: { 
-                            monthly: '59,90', // Default prices logic might need refinement if they change
-                            annual: plan.id === 'pro' ? '359,40' : (plan.id === 'starter' ? '179,40' : '599,40')
-                          },
-                          EU: { 
-                            monthly: '19,90',
-                            annual: plan.id === 'pro' ? '119,40' : (plan.id === 'starter' ? '59,40' : '239,40')
-                          }
+                          BR: prices.BR[plan.id as 'starter' | 'pro' | 'elite'] || prices.BR.starter,
+                          EU: prices.EU[plan.id as 'starter' | 'pro' | 'elite'] || prices.EU.starter
                         },
-                        // Adicionando trial apenas se necessário, mas o modal já checa plan.id
+                        trialDays: plan.id === 'pro' || plan.id === 'elite' ? 7 : 0
                       };
-
-                      // Ajuste fino dos preços mensais baseado no plano
-                      if (plan.id === 'starter') {
-                        planInfo.prices.BR.monthly = '29,90';
-                        planInfo.prices.EU.monthly = '9,90';
-                      } else if (plan.id === 'elite') {
-                        planInfo.prices.BR.monthly = '99,90';
-                        planInfo.prices.EU.monthly = '39,90';
-                      }
                       
                       setSelectedPlan(planInfo);
                       setIsCheckoutOpen(true);
