@@ -791,7 +791,7 @@ export default function App() {
         
         {/* Layer de Fundo: Cards Espalhados (Apenas Mobile) */}
         <div className="md:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="relative w-full h-full flex items-center justify-center scale-[0.7] opacity-40 transform-gpu">
+          <div className="relative w-full h-full flex items-center justify-center scale-[0.7] opacity-60 transform-gpu">
             {[
               { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15 },
               { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15 },
@@ -821,9 +821,9 @@ export default function App() {
               </motion.div>
             ))}
           </div>
-          {/* Glow escuro para o texto ler bem no mobile */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-10 pointer-events-none opacity-90" />
-          <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+          {/* Glow escuro para o texto ler bem no mobile (Ajustado para mais visibilidade) */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-10 pointer-events-none opacity-70" />
+          <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
         </div>
 
         <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none hidden md:block" />
