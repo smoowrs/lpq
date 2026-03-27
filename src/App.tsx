@@ -1224,13 +1224,6 @@ export default function App() {
             <p className="hidden md:block text-sm md:text-base text-gray-300 md:text-gray-400 mb-8 md:mb-10 leading-relaxed max-w-md drop-shadow-lg">
               {t.aulas.desc}
             </p>
-            <button
-              onClick={scrollToPlanos}
-              className="mt-8 md:mt-12 bg-[#582ef5] text-white px-8 sm:px-12 py-3 sm:py-4 rounded-2xl font-black text-sm uppercase tracking-widest flex items-center gap-3 hover:translate-y-[-2px] transition-all active:scale-95 shadow-xl shadow-[#582ef5]/30 mx-auto md:mx-0"
-            >
-              Começar agora
-              <ArrowRight className="w-4 h-4" />
-            </button>
 
             <ul className="hidden md:block space-y-5 mb-12 w-full max-w-sm drop-shadow-2xl">
               {t.aulas.items.map((item, i) => (
