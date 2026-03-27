@@ -74,15 +74,7 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent, paymentRequest }
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
 
-            {paymentRequest && (
-                <div className="mb-6">
-                    <PaymentRequestButtonElement options={{ paymentRequest, style: { paymentRequestButton: { height: '54px', type: 'buy', theme: 'dark' } } }} />
-                    <div className="relative mt-6 flex items-center justify-center">
-                        <div className="absolute inset-x-0 h-px bg-slate-200" />
-                        <span className="relative bg-white px-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Ou pagar com cartão</span>
-                    </div>
-                </div>
-            )}
+
             <PaymentElement options={{
                 layout: 'tabs',
                 wallets: { applePay: 'auto', googlePay: 'auto' },
@@ -118,6 +110,98 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent, paymentRequest }
                 </button>
             </div>
         </form>
+    );
+};
+
+const ApplePayForm = ({ onSuccess, clientSecret, paymentRequest, stripePromise }: any) => {
+    const [loading, setLoading] = useState(false);
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
+
+    useEffect(() => {
+        if (!paymentRequest || !clientSecret) return;
+
+        const handlePaymentMethod = async (ev: any) => {
+            setLoading(true);
+            try {
+                const stripe = await stripePromise;
+                if (!stripe) throw new Error("Stripe not init");
+
+                const confirmFn = clientSecret.startsWith('seti_') 
+                    ? stripe.confirmCardSetup 
+                    : stripe.confirmCardPayment;
+
+                const { error } = await confirmFn(clientSecret, {
+                    payment_method: ev.paymentMethod.id
+                });
+                
+                if (error) {
+                    ev.complete('fail');
+                    toast.error(error.message || 'Erro no pagamento');
+                } else {
+                    ev.complete('success');
+                    onSuccess();
+                }
+            } catch (err: any) {
+                ev.complete('fail');
+                toast.error(err.message || 'Erro inesperado');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        paymentRequest.on('paymentmethod', handlePaymentMethod);
+        
+        return () => {
+             // cleanup not strictly standard on pr, but standard pattern
+        };
+    }, [paymentRequest, clientSecret, stripePromise, onSuccess]);
+
+    return (
+        <div className="space-y-6">
+            <div className="bg-primary/5 rounded-2xl p-6 border border-primary/10 text-center">
+                <div className="w-12 h-12 bg-black text-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-slate-100">
+                    <Icons.Apple className="w-6 h-6" />
+                </div>
+                <h4 className="text-sm font-bold text-slate-900 mb-1">Apple Pay / Google Pay</h4>
+                <p className="text-[11px] text-slate-500 leading-relaxed max-w-[250px] mx-auto">
+                    Toque no botão abaixo para concluir o pagamento de forma segura.
+                </p>
+            </div>
+
+            <div className="space-y-4 pt-2">
+                <label className="flex items-start gap-3 cursor-pointer group text-left">
+                    <div className="relative flex items-center mt-1">
+                        <input
+                            type="checkbox"
+                            className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-slate-200 transition-all checked:bg-primary checked:border-primary"
+                            checked={agreedToTerms}
+                            onChange={(e) => setAgreedToTerms(e.target.checked)}
+                        />
+                        <Icons.Check className="absolute h-3.5 w-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-0.5" />
+                    </div>
+                    <span className="text-[11px] text-slate-500 leading-tight">
+                        Concordo com os <span className="underline decoration-slate-300 font-medium">Termos de Serviço</span> e a <span className="underline decoration-slate-300 font-medium">Política de Privacidade</span> da empresa <span className="text-slate-900 font-bold">Connect Academy LTDA.</span>
+                    </span>
+                </label>
+
+                {agreedToTerms ? (
+                    <div className="w-full h-[54px] rounded-xl overflow-hidden shadow-lg shadow-black/20">
+                        <PaymentRequestButtonElement options={{ paymentRequest, style: { paymentRequestButton: { height: '54px', type: 'buy', theme: 'dark' } } }} />
+                    </div>
+                ) : (
+                    <div className="w-full h-[54px] bg-slate-100 text-slate-400 rounded-xl font-black text-sm flex items-center justify-center gap-2 cursor-not-allowed">
+                        <Icons.LockClosed className="w-4 h-4" />
+                        Aceite os termos para pagar
+                    </div>
+                )}
+            </div>
+            
+            {loading && (
+                <div className="absolute inset-0 bg-white/50 backdrop-blur-sm flex items-center justify-center z-10 rounded-xl">
+                     <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            )}
+        </div>
     );
 };
 
@@ -513,7 +597,7 @@ const AppmaxCCPayment = ({ plan, onCancel, onSuccess }: any) => {
 export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose: () => void, onSuccess: () => void }) => {
     const isAnnual = plan.billingCycle === 'annual';
     const currencySymbol = plan.region === 'EU' ? '€' : 'R$';
-    const [method, setMethod] = useState<'cc' | 'pix' | 'cc_appmax'>(plan.defaultMethod || (isAnnual ? 'cc_appmax' : 'cc'));
+    const [method, setMethod] = useState<'cc' | 'pix' | 'cc_appmax' | 'apple_pay'>(plan.defaultMethod || (isAnnual ? 'cc_appmax' : 'cc'));
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [stripeError, setStripeError] = useState<string | null>(null);
@@ -925,6 +1009,16 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                         <Icons.Pix className="h-4 w-auto object-contain" />
                                     </button>
                                 )}
+
+                                {paymentRequest && (
+                                    <button
+                                        onClick={() => { setMethod('apple_pay'); fetchClientSecret(); }}
+                                        className={`flex-1 h-[44px] rounded-xl flex items-center justify-center gap-1.5 transition-all border ${method === 'apple_pay' ? 'ring-2 ring-primary/50 text-white bg-black' : 'border-slate-200 text-white bg-black hover:bg-slate-900'}`}
+                                    >
+                                        <Icons.Apple className="w-[14px] h-[14px] -mt-[2px]" />
+                                        <span className="font-semibold text-[14px] tracking-tight">Pay</span>
+                                    </button>
+                                )}
                             </div>
 
                             {/* Payment Content */}
@@ -974,11 +1068,33 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                         <p className="text-slate-600 font-medium text-xs">Carregando...</p>
                                     </div>
                                 )
-                            ) : method === 'cc_appmax' ? (
-                                <AppmaxCCPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} />
-                            ) : (
-                                <PixPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} couponCode={couponCode} />
-                            )}
+                            ) : method === 'apple_pay' ? (
+                                stripeError ? (
+                                        <div className="py-6 text-center">
+                                            <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-3">
+                                                <Icons.X className="w-5 h-5 text-red-500" />
+                                            </div>
+                                            <p className="text-slate-700 font-bold text-sm mb-1">Erro no checkout</p>
+                                            <p className="text-slate-500 text-xs mb-4 px-2">{stripeError}</p>
+                                            <button onClick={fetchClientSecret} className="px-4 py-2 bg-primary text-white rounded-lg font-bold text-xs hover:bg-primary/90 transition-colors">
+                                                Tentar Novamente
+                                            </button>
+                                        </div>
+                                    ) : clientSecret ? (
+                                        <Elements stripe={stripePromise} options={{ clientSecret }}>
+                                            <ApplePayForm onSuccess={handleLocalSuccess} clientSecret={clientSecret} paymentRequest={paymentRequest} stripePromise={stripePromise} />
+                                        </Elements>
+                                    ) : (
+                                        <div className="py-12 text-center">
+                                            <div className="w-8 h-8 border-2 border-primary border-t-transparent flex mx-auto rounded-full animate-spin mb-3"></div>
+                                            <p className="text-slate-600 font-medium text-xs">Carregando...</p>
+                                        </div>
+                                    )
+                                ) : method === 'cc_appmax' ? (
+                                    <AppmaxCCPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} />
+                                ) : (
+                                    <PixPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} couponCode={couponCode} />
+                                )}
                         </div>
                     )}
                 </div>
