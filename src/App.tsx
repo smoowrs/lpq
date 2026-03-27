@@ -2018,7 +2018,7 @@ export default function App() {
                   <div className="mb-8">
                     <div className="flex items-baseline gap-1">
                       <div className="flex flex-col">
-                        {plan.id !== 'free' && isBrasil && (
+                        {plan.id !== 'free' && isBrasil && isAnnual && (
                           <span className="text-xs font-black text-[#582ef5] leading-none mb-1">12X</span>
                         )}
                         <span className="text-xs font-black text-gray-400 leading-none">{isBrasil ? 'R$' : '€'}</span>
