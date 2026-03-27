@@ -113,24 +113,25 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent, paymentRequest }
     );
 };
 
-const ApplePayForm = ({ onSuccess, clientSecret, paymentRequest, stripePromise }: any) => {
-    const [loading, setLoading] = useState(false);
-    const [agreedToTerms, setAgreedToTerms] = useState(false);
-
+const ApplePayTabButton = ({ paymentRequest, stripePromise, fetchSecret, onSuccess, onClick }: any) => {
     useEffect(() => {
-        if (!paymentRequest || !clientSecret) return;
+        if (!paymentRequest) return;
 
         const handlePaymentMethod = async (ev: any) => {
-            setLoading(true);
             try {
                 const stripe = await stripePromise;
                 if (!stripe) throw new Error("Stripe not init");
 
-                const confirmFn = clientSecret.startsWith('seti_') 
+                const secret = await fetchSecret(); // Always fetch latest
+                if (!secret) {
+                    throw new Error("Falha ao gerar o token de pagamento.");
+                }
+
+                const confirmFn = secret.startsWith('seti_') 
                     ? stripe.confirmCardSetup 
                     : stripe.confirmCardPayment;
 
-                const { error } = await confirmFn(clientSecret, {
+                const { error } = await confirmFn(secret, {
                     payment_method: ev.paymentMethod.id
                 });
                 
@@ -144,64 +145,25 @@ const ApplePayForm = ({ onSuccess, clientSecret, paymentRequest, stripePromise }
             } catch (err: any) {
                 ev.complete('fail');
                 toast.error(err.message || 'Erro inesperado');
-            } finally {
-                setLoading(false);
             }
         };
 
         paymentRequest.on('paymentmethod', handlePaymentMethod);
-        
         return () => {
-             // cleanup not strictly standard on pr, but standard pattern
+             // Let it remain bound or assume 1 instance
         };
-    }, [paymentRequest, clientSecret, stripePromise, onSuccess]);
+    }, [paymentRequest, stripePromise, fetchSecret, onSuccess]);
 
     return (
-        <div className="space-y-6">
-            <div className="bg-primary/5 rounded-2xl p-6 border border-primary/10 text-center">
-                <div className="w-12 h-12 bg-black text-white rounded-xl shadow-sm flex items-center justify-center mx-auto mb-4 border border-slate-100">
-                    <Icons.Apple className="w-6 h-6" />
-                </div>
-                <h4 className="text-sm font-bold text-slate-900 mb-1">Apple Pay / Google Pay</h4>
-                <p className="text-[11px] text-slate-500 leading-relaxed max-w-[250px] mx-auto">
-                    Toque no botão abaixo para concluir o pagamento de forma segura.
-                </p>
-            </div>
-
-            <div className="space-y-4 pt-2">
-                <label className="flex items-start gap-3 cursor-pointer group text-left">
-                    <div className="relative flex items-center mt-1">
-                        <input
-                            type="checkbox"
-                            className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-slate-200 transition-all checked:bg-primary checked:border-primary"
-                            checked={agreedToTerms}
-                            onChange={(e) => setAgreedToTerms(e.target.checked)}
-                        />
-                        <Icons.Check className="absolute h-3.5 w-3.5 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-0.5" />
-                    </div>
-                    <span className="text-[11px] text-slate-500 leading-tight">
-                        Concordo com os <span className="underline decoration-slate-300 font-medium">Termos de Serviço</span> e a <span className="underline decoration-slate-300 font-medium">Política de Privacidade</span> da empresa <span className="text-slate-900 font-bold">Connect Academy LTDA.</span>
-                    </span>
-                </label>
-
-                {agreedToTerms ? (
-                    <div className="w-full h-[54px] rounded-xl overflow-hidden shadow-lg shadow-black/20">
-                        <PaymentRequestButtonElement options={{ paymentRequest, style: { paymentRequestButton: { height: '54px', type: 'buy', theme: 'dark' } } }} />
-                    </div>
-                ) : (
-                    <div className="w-full h-[54px] bg-slate-100 text-slate-400 rounded-xl font-black text-sm flex items-center justify-center gap-2 cursor-not-allowed">
-                        <Icons.LockClosed className="w-4 h-4" />
-                        Aceite os termos para pagar
-                    </div>
-                )}
-            </div>
-            
-            {loading && (
-                <div className="absolute inset-0 bg-white/50 backdrop-blur-sm flex items-center justify-center z-10 rounded-xl">
-                     <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-                </div>
-            )}
-        </div>
+        <Elements stripe={stripePromise}>
+            <PaymentRequestButtonElement 
+                onClick={onClick}
+                options={{ 
+                    paymentRequest, 
+                    style: { paymentRequestButton: { height: '44px', type: 'plain', theme: 'dark' } } 
+                }} 
+            />
+        </Elements>
     );
 };
 
@@ -728,7 +690,6 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
             if (data?.error) throw new Error(data.error || 'Erro ao iniciar checkout');
             if (!data?.clientSecret) throw new Error('Client secret não retornado');
             setClientSecret(data.clientSecret);
-            
             if (data?.appliedCoupon) {
                 setAppliedCouponInfo(data.appliedCoupon);
                 toast.success(`Cupom ${data.appliedCoupon.code} aplicado com sucesso!`);
@@ -736,9 +697,11 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                 setAppliedCouponInfo(null);
                 if (couponCode) toast.error("Cupom inválido ou não encontrado.");
             }
+            return data.clientSecret;
         } catch (err: any) {
             setStripeError(err.message || 'Erro desconhecido');
             toast.error("Erro ao iniciar checkout: " + (err.message || 'Erro desconhecido'));
+            return null;
         } finally {
             setLoading(false);
         }
@@ -1011,13 +974,15 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                 )}
 
                                 {paymentRequest && (
-                                    <button
-                                        onClick={() => { setMethod('apple_pay'); fetchClientSecret(); }}
-                                        className={`flex-1 h-[44px] rounded-xl flex items-center justify-center gap-1.5 transition-all border ${method === 'apple_pay' ? 'ring-2 ring-primary/50 text-white bg-black' : 'border-slate-200 text-white bg-black hover:bg-slate-900'}`}
-                                    >
-                                        <Icons.Apple className="w-[14px] h-[14px] -mt-[2px]" />
-                                        <span className="font-semibold text-[14px] tracking-tight">Pay</span>
-                                    </button>
+                                    <div className={`flex-1 h-[44px] rounded-xl overflow-hidden transition-all border ${method === 'apple_pay' ? 'ring-2 ring-primary/50 border-black' : 'border-slate-200'}`}>
+                                        <ApplePayTabButton 
+                                            paymentRequest={paymentRequest}
+                                            stripePromise={stripePromise}
+                                            fetchSecret={fetchClientSecret}
+                                            onSuccess={handleLocalSuccess}
+                                            onClick={() => setMethod('apple_pay')}
+                                        />
+                                    </div>
                                 )}
                             </div>
 
@@ -1069,28 +1034,16 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     </div>
                                 )
                             ) : method === 'apple_pay' ? (
-                                stripeError ? (
-                                        <div className="py-6 text-center">
-                                            <div className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-3">
-                                                <Icons.X className="w-5 h-5 text-red-500" />
-                                            </div>
-                                            <p className="text-slate-700 font-bold text-sm mb-1">Erro no checkout</p>
-                                            <p className="text-slate-500 text-xs mb-4 px-2">{stripeError}</p>
-                                            <button onClick={fetchClientSecret} className="px-4 py-2 bg-primary text-white rounded-lg font-bold text-xs hover:bg-primary/90 transition-colors">
-                                                Tentar Novamente
-                                            </button>
-                                        </div>
-                                    ) : clientSecret ? (
-                                        <Elements stripe={stripePromise} options={{ clientSecret }}>
-                                            <ApplePayForm onSuccess={handleLocalSuccess} clientSecret={clientSecret} paymentRequest={paymentRequest} stripePromise={stripePromise} />
-                                        </Elements>
-                                    ) : (
-                                        <div className="py-12 text-center">
-                                            <div className="w-8 h-8 border-2 border-primary border-t-transparent flex mx-auto rounded-full animate-spin mb-3"></div>
-                                            <p className="text-slate-600 font-medium text-xs">Carregando...</p>
-                                        </div>
-                                    )
-                                ) : method === 'cc_appmax' ? (
+                                <div className="py-12 flex flex-col items-center text-center">
+                                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center mb-4">
+                                        <Icons.Apple className="w-5 h-5 text-white" />
+                                    </div>
+                                    <p className="text-slate-800 font-bold mb-1">Aguardando Pagamento</p>
+                                    <p className="text-[12px] text-slate-500 max-w-[200px] mx-auto leading-relaxed">
+                                        Complete a transação na janela do Apple Pay / Google Pay que foi aberta na sua tela.
+                                    </p>
+                                </div>
+                            ) : method === 'cc_appmax' ? (
                                     <AppmaxCCPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} />
                                 ) : (
                                     <PixPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} couponCode={couponCode} />
