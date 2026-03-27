@@ -2073,7 +2073,7 @@ export default function App() {
                     whileTap={{ scale: 0.98 }}
                     onClick={() => {
                       if (plan.id === 'free') {
-                        window.location.href = 'https://app.connectacademy.com.br';
+                        window.location.href = 'https://app.connectacademy.com.br/cadastro';
                         return;
                       }
                       
