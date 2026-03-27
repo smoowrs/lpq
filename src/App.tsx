@@ -2095,7 +2095,7 @@ export default function App() {
                           BR: prices.BR[plan.id as 'starter' | 'pro' | 'elite'] || prices.BR.starter,
                           EU: prices.EU[plan.id as 'starter' | 'pro' | 'elite'] || prices.EU.starter
                         },
-                        trialDays: plan.id === 'pro' || plan.id === 'elite' ? 7 : 0
+                        trialDays: 0
                       };
                       
                       setSelectedPlan(planInfo);

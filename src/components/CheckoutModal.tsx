@@ -33,7 +33,7 @@ async function invokeFn(fnName: string, body: any, token: string): Promise<any> 
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_live_51Q50BUCWGI5d7s18Jd0BDDrzEC1zsFjNuUdD2l1kpKYNQLk3RhvT1y4GvDfRWqr06ANPDgKh0NeTsIOw0jhaHWW600HjVSKT37');
 
-const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
+const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent, paymentRequest }: any) => {
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false);
@@ -73,12 +73,14 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
-            {isSetupIntent && (
-                <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
-                    <span className="text-emerald-500 text-lg">🎁</span>
-                    <p className="text-[11px] text-emerald-700 font-bold leading-tight">
-                        7 dias grátis — seu cartão só será cobrado após o período de teste.
-                    </p>
+
+            {paymentRequest && (
+                <div className="mb-6">
+                    <PaymentRequestButtonElement options={{ paymentRequest, style: { paymentRequestButton: { height: '54px', type: 'buy', theme: 'dark' } } }} />
+                    <div className="relative mt-6 flex items-center justify-center">
+                        <div className="absolute inset-x-0 h-px bg-slate-200" />
+                        <span className="relative bg-white px-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Ou pagar com cartão</span>
+                    </div>
                 </div>
             )}
             <PaymentElement options={{
@@ -110,8 +112,6 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
                 >
                     {loading ? (
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    ) : isSetupIntent ? (
-                        <>Ativar 7 dias grátis <Icons.ArrowRight className="w-4 h-4" /></>
                     ) : (
                         <>Assinar <Icons.ArrowRight className="w-4 h-4" /></>
                     )}
@@ -960,7 +960,13 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                             }
                                         }
                                     }}>
-                                        <StripeForm plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} isSetupIntent={clientSecret?.startsWith('seti_')} />
+                                        <StripeForm 
+                                            plan={plan} 
+                                            onCancel={onClose} 
+                                            onSuccess={handleLocalSuccess} 
+                                            isSetupIntent={clientSecret?.startsWith('seti_')} 
+                                            paymentRequest={paymentRequest}
+                                        />
                                     </Elements>
                                 ) : (
                                     <div className="py-12 text-center">
