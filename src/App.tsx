@@ -975,34 +975,47 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('pt');
   const [hasDetectedRegion, setHasDetectedRegion] = useState(false);
 
-  // Auto-detect region (EU/Euro)
+  // Auto-detect region & language
   useEffect(() => {
     if (hasDetectedRegion) return;
     
     const detect = async () => {
+      let isEurope = false;
       try {
-        // Use ipapi.co (free, no account req for small usage)
         const res = await fetch('https://ipapi.co/json/');
         const data = await res.json();
         if (data.continent_code === 'EU') {
-          setRegion('europa');
-          // If in EU but not PT, maybe English? Let's stick to EU=Euro first.
-          if (data.country_code !== 'BR' && data.country_code !== 'PT' && language === 'pt') {
-            setLanguage('en');
-          }
+          isEurope = true;
         }
       } catch (err) {
-        // Fallback: Timezone check (Safe & zero delay)
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         if (tz && (tz.startsWith('Europe/') || tz.startsWith('Africa/'))) {
-          setRegion('europa');
+          isEurope = true;
         }
       } finally {
+        const navLang = navigator.language.toLowerCase();
+        
+        if (isEurope) {
+          setRegion('europa');
+          if (navLang.startsWith('es')) setLanguage('es');
+          else if (navLang.startsWith('fr')) setLanguage('fr');
+          else if (navLang === 'pt-pt' || navLang === 'pt_pt') setLanguage('pt-PT');
+          else if (navLang.startsWith('pt')) setLanguage('pt'); // BR users in Europe keep PT-BR translation but pay in EUR
+          else setLanguage('en'); // Defaults to English for other European countries
+        } else {
+          // If out of Europe, detect based purely on language
+          if (navLang.startsWith('es')) { setLanguage('es'); setRegion('europa'); }
+          else if (navLang.startsWith('fr')) { setLanguage('fr'); setRegion('europa'); }
+          else if (navLang === 'pt-pt' || navLang === 'pt_pt') { setLanguage('pt-PT'); setRegion('europa'); }
+          else if (navLang.startsWith('en')) { setLanguage('en'); setRegion('europa'); }
+          else { setLanguage('pt'); setRegion('brasil'); }
+        }
+        
         setHasDetectedRegion(true);
       }
     };
     detect();
-  }, [hasDetectedRegion, language]);
+  }, [hasDetectedRegion]);
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
@@ -1108,7 +1121,7 @@ export default function App() {
               </button>
 
               {isLangMenuOpen && (
-                <div className="absolute top-[calc(100%+8px)] left-0 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[70] animate-in fade-in zoom-in duration-200">
+                <div className="absolute top-[calc(100%+8px)] left-0 w-52 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[70] animate-in fade-in zoom-in duration-200">
                   {(['pt', 'pt-PT', 'en', 'es', 'fr'] as Language[]).map((lang) => (
                     <button
                       key={lang}
@@ -1121,7 +1134,7 @@ export default function App() {
                       className={`w-full px-4 py-3.5 flex items-center gap-3 text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
                     >
                       <span className="text-lg leading-none">{flags[lang]}</span>
-                      <span>{translations[lang].nav.lang}</span>
+                      <span className="whitespace-nowrap">{translations[lang].nav.lang}</span>
                       <div className="flex-1" />
                       {language === lang && <Check className="w-3.5 h-3.5 text-[#582ef5]" />}
                     </button>
@@ -1181,7 +1194,7 @@ export default function App() {
                 <span className="text-lg">{flags[language]}</span>
                 <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover/lang:rotate-180 transition-transform duration-300" />
               </button>
-              <div className="absolute top-full right-0 mt-2 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50">
+              <div className="absolute top-full right-0 mt-2 w-52 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50">
                 {(['pt', 'pt-PT', 'en', 'es', 'fr'] as Language[]).map((lang) => (
                   <button
                     key={lang}
@@ -1193,7 +1206,7 @@ export default function App() {
                     className={`w-full px-4 py-3 flex items-center gap-3 text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
                   >
                     <span className="text-lg leading-none">{flags[lang]}</span>
-                    <span>{translations[lang].nav.lang}</span>
+                    <span className="whitespace-nowrap">{translations[lang].nav.lang}</span>
                     <div className="flex-1" />
                     {language === lang && <Check className="w-3.5 h-3.5 text-[#582ef5]" />}
                   </button>
