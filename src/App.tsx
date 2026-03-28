@@ -2640,36 +2640,43 @@ export default function App() {
                         {language.startsWith('pt') ? 'Cancele quando quiser.' : language === 'es' ? 'Cancela cuando quieras.' : language === 'fr' ? 'Annulez à tout moment.' : 'Cancel anytime.'}
                       </p>
 
-                      <div className="flex items-center justify-center gap-3 mt-0.5 opacity-85">
-                        {/* Mastercard */}
-                        <svg viewBox="0 0 32 20" className="h-[14px] w-auto">
-                          <circle cx="10" cy="10" r="10" fill="#EB001B"/>
-                          <circle cx="22" cy="10" r="10" fill="#F79E1B"/>
-                          <path d="M 16 2 A 10 10 0 0 0 16 18 A 10 10 0 0 0 16 2 Z" fill="#FF5F00"/>
-                        </svg>
-                        {/* Visa — clean italic text */}
-                        <span className="text-[13px] font-black italic text-white tracking-tight leading-none" style={{ fontFamily: 'serif', letterSpacing: '-0.02em' }}>VISA</span>
-                        {/* G Pay */}
-                        <div className="flex items-center justify-center gap-[2px]">
-                          <svg viewBox="0 0 48 48" className="h-[13px] w-auto">
-                            <path fill="#4285F4" d="M47.6,24.5c0-1.6-0.1-3.1-0.4-4.6H24v8.5h13.4c-0.6,2.9-2.3,5.4-4.8,7.1v5.9h7.7C44.8,37.1,47.6,31.2,47.6,24.5z" />
-                            <path fill="#34A853" d="M24,48c6.6,0,12.2-2.2,16.2-5.9l-7.7-5.9c-2.2,1.5-5,2.4-8.5,2.4c-6.5,0-12-4.4-14-10.3h-8v6.1C8.2,42.7,15.5,48,24,48z" />
-                            <path fill="#FBBC05" d="M10,28.3c-0.5-1.5-0.8-3.1-0.8-4.8s0.3-3.3,0.8-4.8v-6.1h-8C0.7,15.7,0,19.8,0,24s0.7,8.3,2,11.5L10,28.3z" />
-                            <path fill="#EA4335" d="M24,9.5c3.6,0,6.8,1.2,9.3,3.7l6.9-6.9C36.2,2.4,30.6,0,24,0C15.5,0,8.2,5.3,4,12.9l8,6.1C14,13.9,19.5,9.5,24,9.5z" />
+                      <div className="flex items-center justify-center gap-4 mt-1 flex-wrap">
+                        {/* VISA — bold italic blue, official style */}
+                        <span className="text-[15px] font-black italic leading-none" style={{ color: '#1A1F71', fontFamily: 'Arial, sans-serif', letterSpacing: '-0.5px' }}>VISA</span>
+
+                        {/* Mastercard — circles + label */}
+                        <div className="flex flex-col items-center gap-[1px]">
+                          <svg viewBox="0 0 38 24" className="h-[16px] w-auto">
+                            <circle cx="13" cy="12" r="11" fill="#EB001B"/>
+                            <circle cx="25" cy="12" r="11" fill="#F79E1B"/>
+                            <path d="M19 4.8 A11 11 0 0 1 19 19.2 A11 11 0 0 1 19 4.8 Z" fill="#FF5F00"/>
                           </svg>
-                          <span className="text-[12px] font-medium text-white leading-none">Pay</span>
+                          <span className="text-[6px] font-semibold text-white leading-none tracking-wide">mastercard</span>
                         </div>
-                        {/* Apple Pay */}
-                        <div className="flex items-center justify-center gap-[2px]">
-                          <svg className="h-[12px] w-auto fill-white" viewBox="0 0 384 512">
+
+                        {/* Google Pay — colored G icon + white Pay */}
+                        <div className="flex items-center gap-[2px]">
+                          <svg viewBox="0 0 48 48" className="h-[15px] w-auto">
+                            <path fill="#4285F4" d="M47.6,24.5c0-1.6-0.1-3.1-0.4-4.6H24v8.5h13.4c-0.6,2.9-2.3,5.4-4.8,7.1v5.9h7.7C44.8,37.1,47.6,31.2,47.6,24.5z"/>
+                            <path fill="#34A853" d="M24,48c6.6,0,12.2-2.2,16.2-5.9l-7.7-5.9c-2.2,1.5-5,2.4-8.5,2.4c-6.5,0-12-4.4-14-10.3h-8v6.1C8.2,42.7,15.5,48,24,48z"/>
+                            <path fill="#FBBC05" d="M10,28.3c-0.5-1.5-0.8-3.1-0.8-4.8s0.3-3.3,0.8-4.8v-6.1h-8C0.7,15.7,0,19.8,0,24s0.7,8.3,2,11.5L10,28.3z"/>
+                            <path fill="#EA4335" d="M24,9.5c3.6,0,6.8,1.2,9.3,3.7l6.9-6.9C36.2,2.4,30.6,0,24,0C15.5,0,8.2,5.3,4,12.9l8,6.1C14,13.9,19.5,9.5,24,9.5z"/>
+                          </svg>
+                          <span className="text-[13px] font-medium text-white leading-none">Pay</span>
+                        </div>
+
+                        {/* Apple Pay — apple icon white + Pay white */}
+                        <div className="flex items-center gap-[3px]">
+                          <svg className="h-[14px] w-auto fill-white" viewBox="0 0 384 512">
                             <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.3 48.6-.7 90.4-82.5 104.8-125.2-46.7-19-63.5-59-63.9-85.4zM201.2 45.4c2.8-4.6 5.3-9.4 7.3-14.4 2-5 3.6-10.2 4.8-15.6 1.1-5.3 1.7-10.8 1.9-16.3-5.2 .2-10.6 1.3-15.8 3.2-5.2 1.9-10.1 4.5-14.7 7.7-4.6 3.2-8.8 7-12.5 11.2-3.7 4.2-6.9 8.9-9.5 13.9-2.6 5-4.8 10.3-6.4 15.9-1.6 5.6-2.7 11.3-3.2 17.2 5.5-.3 11-.9 16.3-1.9 5.3-1 10.5-2.5 15.5-4.5 5-2 9.8-4.5 14.3-7.5z"/>
                           </svg>
-                          <span className="text-[12px] font-medium text-white leading-none">Pay</span>
+                          <span className="text-[13px] font-medium text-white leading-none">Pay</span>
                         </div>
-                        {/* Pix — Brasil only, icon + text */}
+
+                        {/* Pix — Brasil only */}
                         {isBrasil && (
-                          <div className="flex items-center justify-center gap-[3px]">
-                            <svg viewBox="0 0 512 512" className="h-[12px] w-auto">
+                          <div className="flex items-center gap-[3px]">
+                            <svg viewBox="0 0 512 512" className="h-[13px] w-auto">
                               <path fill="#32BCAD" d="M383.7 285.9l-80.3-80.4 45.2-45.2 80.3 80.4c12.5 12.5 12.5 32.8 0 45.2l-80.3 80.3-45.2-45.2 80.3-80.1zm-255.4 0l80.3 80.3 45.2-45.2-80.3-80.3-12.5-12.5 12.5-12.5 80.3-80.4-45.2-45.2-80.3 80.4c-12.5 12.4-12.5 32.8 0 45.4zm127.8-23.9l33.9-33.9-33.9-33.9-33.9 33.9 33.9 33.9zm96.7-118.9L300 191.4l-44-44.1 52.9-52.9c24.9-24.9 65.2-24.9 90.2 0l53.7 53.7-45.2 45.2-54.8-54.1zm-193.6 0L106.4 196l-52.9-52.9c-24.9-24.9-24.9-65.3 0-90.2l53.7-53.7 45.2 45.2-53.7 53.7 56.5 56.5-42.7 42.5zM300 320.7l52.9 52.9-45.2 45.2-53.7-53.7c-24.9-24.9-24.9-65.3 0-90.2l52.9-52.9 45.2 45.2-52.1 53.5zm-88 0l-52.9 52.9 45.2 45.2 53.7-53.7c24.9-24.9 24.9-65.3 0-90.2l-52.9-52.9-45.2 45.2 52.1 53.5z"/>
                             </svg>
                             <span className="text-[12px] font-medium text-[#32BCAD] leading-none">Pix</span>
