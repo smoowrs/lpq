@@ -37,6 +37,14 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent, paymentRequest }
     const elements = useElements();
     const [loading, setLoading] = useState(false);
     const [agreedToTerms, setAgreedToTerms] = useState(false);
+    const hasFiredAddPaymentInfo = React.useRef(false);
+
+    const handlePaymentElementChange = () => {
+        if (!hasFiredAddPaymentInfo.current) {
+            hasFiredAddPaymentInfo.current = true;
+            try { trackAddPaymentInfo(plan?.label || plan?.id || 'unknown'); } catch {}
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -73,11 +81,14 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent, paymentRequest }
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
             {/* Disable built-in wallets to avoid duplication with our custom Apple Pay tab */}
-            <PaymentElement options={{
-                layout: 'tabs',
-                wallets: { applePay: 'never', googlePay: 'never' },
-                link: { email: 'never' }
-            }} />
+            <PaymentElement
+                onChange={handlePaymentElementChange}
+                options={{
+                    layout: 'tabs',
+                    wallets: { applePay: 'never', googlePay: 'never' },
+                    link: { email: 'never' }
+                }}
+            />
 
             <div className="space-y-4 pt-2">
                 <label className="flex items-start gap-3 cursor-pointer group">
@@ -161,6 +172,15 @@ const PixPayment = ({ plan, onCancel, onSuccess, guestEmail, guestName, couponCo
     const [agreedToTerms, setAgreedToTerms] = useState(false);
     const [cpf, setCpf] = useState('');
     const [copiedMessage, setCopiedMessage] = useState(false);
+    const hasFiredAddPaymentInfo = React.useRef(false);
+
+    const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCpf(e.target.value);
+        if (!hasFiredAddPaymentInfo.current && e.target.value.length > 0) {
+            hasFiredAddPaymentInfo.current = true;
+            try { trackAddPaymentInfo('PIX'); } catch {}
+        }
+    };
 
     useEffect(() => {
         if (!pixData) return;
@@ -361,7 +381,7 @@ const PixPayment = ({ plan, onCancel, onSuccess, guestEmail, guestName, couponCo
                                 className="w-full h-11 bg-slate-50 border border-slate-200 rounded-lg px-3 text-sm text-slate-900 placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                                 placeholder="000.000.000-00"
                                 value={cpf}
-                                onChange={(e) => setCpf(e.target.value)}
+                                onChange={handleCpfChange}
                                 maxLength={14}
                             />
                         </div>
