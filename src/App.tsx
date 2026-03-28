@@ -121,8 +121,8 @@ const translations = {
       btnActive: "PLANO ATIVO",
       btnSelect: "ASSINAR ESSE PLANO",
       free: {
-        name: "GRÁTIS",
-        desc: "Acesso básico para começar.",
+        name: "Experience",
+        desc: "Uma forma simples de conhecer a estrutura por dentro e entender se faz sentido para você antes de seguir para a experiência completa.",
         price: "0",
         period: "/mês",
         btnTest: "Testar Grátis",
@@ -334,8 +334,8 @@ const translations = {
       btnActive: "ACTIVE PLAN",
       btnSelect: "SUBSCRIBE TO THIS PLAN",
       free: {
-        name: "FREE",
-        desc: "Basic access to get started.",
+        name: "Experience",
+        desc: "A simple way to discover the platform from the inside and understand if it makes sense for you before moving to the full experience.",
         price: "0",
         period: "/mo",
         items: [
@@ -522,8 +522,8 @@ const translations = {
       btnActive: "PLAN ACTIVO",
       btnSelect: "SUSCRIBIRSE A ESTE PLAN",
       free: {
-        name: "GRATIS",
-        desc: "Acceso básico para comenzar.",
+        name: "Experience",
+        desc: "Una forma sencilla de conocer la plataforma por dentro y entender si tiene sentido para ti antes de pasar a la experiencia completa.",
         price: "0",
         period: "/mes",
         items: [
