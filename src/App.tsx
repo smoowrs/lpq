@@ -8,9 +8,7 @@ import { Package, Sparkles, Users, ShieldCheck,
 import React, { useState, useEffect, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { CheckoutModal } from './components/CheckoutModal';
-
-type Language = 'pt' | 'en' | 'es';
-
+type Language = 'pt' | 'en' | 'es' | 'fr';
 const translations = {
   pt: {
     nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
@@ -595,13 +593,197 @@ const translations = {
         ]
       }
     }
+  },
+  fr: {
+    nav: { login: "Connexion", create: "Créer un compte", create_short: "Créer un compte", lang: "Français", community: "Communauté", products: "Produits", ai: "Connect AI", tracking: "Suivi" },
+    hero: {
+      sparkle: "La révolution de l'importation avec l'IA",
+      title1: "Économisez ou Profitez",
+      title2: "En participant aux Produits",
+      title3: "Directement de Chine 🌏",
+      titleMob: "Importer de Chine 🌏",
+      desc: "Créez votre compte gratuit et apprenez à importer de Chine! Accédez à des cours exclusifs, au suivi en temps réel, au générateur d'images et au Minerador (IA développée pour éviter les taxes). Rejoignez notre communauté de réseautage et utilisez nos outils.",
+      btnCreate: "Créer un compte",
+      btnWork: "Voir comment ça marche"
+    },
+    comunidade: {
+      tag: "COMMUNAUTÉ",
+      title1: "Le 1er Réseau Social",
+      title2: "de l'Importateur 💙",
+      desc: "Votre nouveau réseau social, une communauté exclusive pour les importateurs et entrepreneurs. Échangez des informations stratégiques et évoluez aux côtés de ceux qui parlent votre langue.",
+      btn: "Tester la communauté"
+    },
+    produtos: {
+      tag: "PRODUITS",
+      title1: "Les meilleurs produits",
+      title2: "qualité et prix 🔥",
+      desc: "Accédez gratuitement à un panel rempli de produits incroyables.",
+      btn: "Voir les produits"
+    },
+    aulas: {
+      tag: "COURS ÉTAPE PAR ÉTAPE",
+      title1: "Apprenez à",
+      title2: "importer de zéro.",
+      titleMob: "Apprendre à importer de zéro ✈️",
+      desc: "Du premier accès jusqu'à l'arrivée des produits à votre porte.",
+      btn: "Commencer maintenant",
+      items: ["Configuration de l'adresse en Chine", "Comment acheter en toute sécurité", "Gestion des expéditions et suivi", "Stratégies pour éviter les taxes"]
+    },
+    fabricas: {
+      tag: "USINES",
+      title1: "Les plus grands",
+      title2: "fabricants et magasins",
+      title3: "de Chine",
+      titleMob1: "Les plus grands fabricants",
+      titleMob2: "et magasins de Chine 🛒",
+      desc: "Un panel de fabricants et de fournisseurs fiables avec une livraison rapide. Créez votre compte gratuit et accédez à nos usines.",
+      btn: "Voir les usines"
+    },
+    minerador: {
+      tag: "LE MINEUR",
+      title1: "L'Assistant",
+      title2: "intelligent 💬",
+      desc: "Notre IA vous aide à trouver les meilleures usines parmi nos partenaires de confiance et automatise les déclarations.",
+      btn: "Tester le Mineur",
+      chat: {
+        status: "IA En ligne",
+        q: "J'ai besoin d'un lien pour l'iPhone 17 pro max",
+        a: "J'ai trouvé des fournisseurs vérifiés avec du stock et une expédition directe! 🚀",
+        btn: "ACCÉDER AU LIEN",
+        input: "Demandez au Mineur..."
+      }
+    },
+    recompensas: {
+      tag: "NIVEAUX ET RÉCOMPENSES",
+      title1: "Montez de niveau et",
+      title2: "gagnez des prix",
+      btn: "Monter de niveau"
+    },
+    rastreio: {
+      tag: "LOGISTIQUE INTELLIGENTE",
+      title1: "Suivi en",
+      title2: "Temps Réel.",
+      titleMob: "Suivi en Temps Réel 🗺️",
+      desc: "Notre système se connecte directement aux transporteurs pour vous donner des mises à jour précises et automatiques.",
+      btn: "Tester le suivi gratuit",
+      status: "Statut de la commande",
+      moving: "En transit",
+      items: ["Notifications push à chaque mouvement", "Prédiction de livraison par IA", "Alerte de taxe automatisée"],
+      stages: [
+        { title: "Posté en Chine", time: "09:41 AM" },
+        { title: "Arrivée", time: "14:20 PM" },
+        { title: "Dédouanement terminé", time: "10:15 AM" },
+        { title: "En cours de livraison", time: "08:30 AM" }
+      ]
+    },
+    connectAI: {
+      tag: "CONNECT AI",
+      title1: "Créez des images qui",
+      title2: "vendent plus.",
+      desc: "Avec Connect AI, vous transformez les simples photos de fournisseurs en images qui génèrent de l'intérêt pour votre boutique.",
+      items: ["Images en 4K", "Moins de 30s", "Haute Conversion"],
+      btn: "Tester Connect AI"
+    },
+    cupom: {
+      title1: "INSCRIVEZ-VOUS ET GAGNEZ",
+      title2: "130€ DE COUPONS",
+      desc: "Profitez de cette offre de bienvenue exclusive et économisez sur vos premières importations.",
+      btn: "Utiliser un coupon",
+      badges: ["Immédiat", "Unique", "VIP Connect"]
+    },
+    footer: { rights: "Tous droits réservés", terms: "Termes", privacy: "Confidentialité" },
+    planos: {
+      tag: "PLANS D'ACCÈS",
+      title: "Choisissez votre plan",
+      monthly: "Mensuel",
+      annual: "Annuel",
+      annualOff: "-50%",
+      brasil: "BRÉSIL",
+      europa: "EUROPE",
+      btnActive: "PLAN ACTIF",
+      btnSelect: "S'ABONNER",
+      free: {
+        name: "Experience 💙",
+        desc: "Une façon simple de découvrir la plateforme de l'intérieur.",
+        price: "0",
+        period: "/mois",
+        items: [
+          { text: "Accès aux usines directes en Chine.", status: true },
+          { text: "Modules de cours exclusifs.", status: true },
+          { text: "Suivi en temps réel de 2 envois.", status: true },
+          { text: "Vêtements, chaussures et accessoires", status: false },
+        ]
+      },
+      starter: {
+        name: "STARTER 🪙",
+        desc: "Accès essentiel pour commencer vos importations.",
+        price: "14.95",
+        monthlyPrice: "29.90",
+        period: "/mois",
+        info: "PAIEMENT UNIQUE DE 59,40 EUR",
+        items: [
+          { text: "Accès aux usines directes en Chine.", status: true },
+          { text: "Vêtements, Baskets, Montres...", status: true },
+          { text: "Le Mineur (IA de recherche).", status: true },
+          { text: "Générateur d'images 4K (3 crédits).", status: true },
+          { text: "Suivi en temps réel de 5 envois.", status: true },
+          { text: "Modules de cours exclusifs.", status: true },
+          { text: "Accès à la communauté.", status: true },
+          { text: "Lien de parrainage.", status: true },
+          { text: "Produits Apple et Électroniques", status: false },
+          { text: "Téléchargement d'images illimité", status: false },
+        ]
+      },
+      pro: {
+        name: "PRO 🌏",
+        desc: "Le plan pour découvrir les outils d'IA.",
+        price: "29.95",
+        monthlyPrice: "59.90",
+        period: "/mois",
+        info: "PAIEMENT UNIQUE DE 119,40 EUR",
+        items: [
+          { text: "Accès à des usines exclusives en Chine.", status: true },
+          { text: "Vêtements, Baskets et Électronique.", status: true },
+          { text: "Générateur d'images 4K (5 crédits).", status: true },
+          { text: "Le Mineur (IA de recherche).", status: true },
+          { text: "Marketplaces locales en Chine.", status: true },
+          { text: "Suivi en temps réel de 10 envois.", status: true },
+          { text: "Modules de cours exclusifs.", status: true },
+          { text: "Accès à la communauté.", status: true },
+          { text: "Alertes et opportunités.", status: true },
+          { text: "Tirages au sort mensuels.", status: true },
+          { text: "Accès officiel Apple", status: false },
+        ]
+      },
+      elite: {
+        name: "ELITE 🥇",
+        desc: "Accès total et support prioritaire.",
+        price: "49.95",
+        monthlyPrice: "99.90",
+        period: "/mois",
+        info: "PAIEMENT UNIQUE DE 239,40 EUR",
+        items: [
+          { text: "Accès officiel d'Apple en Chine.", status: true },
+          { text: "Téléchargements d'images illimités.", status: true },
+          { text: "Usines et produits exclusifs.", status: true },
+          { text: "Origine d'Électronique.", status: true },
+          { text: "Générateur d'images 4K (10 crédits).", status: true },
+          { text: "Le Mineur (IA).", status: true },
+          { text: "Marketplaces en Chine.", status: true },
+          { text: "Aucune limite de suivi.", status: true },
+          { text: "Support prioritaire.", status: true },
+          { text: "Médaille d'honneur.", status: true },
+        ]
+      }
+    }
   }
 };
 
 const flags: Record<Language, string> = {
   pt: "🇧🇷",
   en: "🇺🇸",
-  es: "🇪🇸"
+  es: "🇪🇸",
+  fr: "🇫🇷"
 };
 
 export default function App() {
@@ -743,12 +925,13 @@ export default function App() {
 
               {isLangMenuOpen && (
                 <div className="absolute top-[calc(100%+8px)] left-0 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[70] animate-in fade-in zoom-in duration-200">
-                  {(['pt', 'en', 'es'] as Language[]).map((lang) => (
+                  {(['pt', 'en', 'es', 'fr'] as Language[]).map((lang) => (
                     <button
                       key={lang}
                       onClick={(e) => {
                         e.stopPropagation();
                         setLanguage(lang);
+                        setRegion(lang === 'pt' ? 'brasil' : 'europa');
                         setIsLangMenuOpen(false);
                       }}
                       className={`w-full px-4 py-3.5 flex items-center gap-3 text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
@@ -815,12 +998,13 @@ export default function App() {
                 <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover/lang:rotate-180 transition-transform duration-300" />
               </button>
               <div className="absolute top-full right-0 mt-2 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50">
-                {(['pt', 'en', 'es'] as Language[]).map((lang) => (
+                {(['pt', 'en', 'es', 'fr'] as Language[]).map((lang) => (
                   <button
                     key={lang}
                     onClick={(e) => {
                       e.stopPropagation();
                       setLanguage(lang);
+                      setRegion(lang === 'pt' ? 'brasil' : 'europa');
                     }}
                     className={`w-full px-4 py-3 flex items-center gap-3 text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
                   >
@@ -1968,23 +2152,7 @@ export default function App() {
 
             {/* Toggles Container */}
             <div className="flex flex-col items-center gap-4">
-              {/* Region Toggle (Mover para cima) */}
-              <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
-                <button
-                  onClick={() => setRegion('brasil')}
-                  className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'brasil' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  <Globe className="w-3.5 h-3.5" /> {t.planos.brasil}
-                </button>
-                <button
-                  onClick={() => setRegion('europa')}
-                  className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'europa' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  <Globe className="w-3.5 h-3.5" /> {t.planos.europa}
-                </button>
-              </div>
-
-              {/* Billing Toggle (Mover para baixo) */}
+              {/* Billing Toggle */}
               <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
                 <button
                   onClick={() => setBillingCycle('monthly')}
