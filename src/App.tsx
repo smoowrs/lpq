@@ -2416,6 +2416,17 @@ export default function App() {
                   {/* Price - hidden for free plan */}
                   {plan.id !== 'free' && (
                   <div className="mb-8">
+                    {/* Crossed out original price for EUR Annual */}
+                    {!isBrasil && isAnnual && (
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-sm font-bold text-gray-500 line-through">
+                          € {plan.id === 'starter' ? '118,80' : plan.id === 'pro' ? '238,80' : '478,80'}
+                        </span>
+                        <span className="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-black">
+                          -50%
+                        </span>
+                      </div>
+                    )}
                     <div className="flex items-baseline gap-1">
                       <div className="flex flex-col">
                         {isBrasil && isAnnual && (
@@ -2433,17 +2444,14 @@ export default function App() {
                         {!isBrasil && isAnnual ? '/ano' : plan.data.period}
                       </span>
                     </div>
-                    {isAnnual && plan.id !== 'starter' && (
+                    {isAnnual && isBrasil && plan.id !== 'starter' && (
                       <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
-                        {isBrasil 
-                          ? (plan.id === 'pro' ? 'PAGAMENTO ÚNICO DE R$ 359,40' : 'PAGAMENTO ÚNICO DE R$ 599,40')
-                          : (plan.id === 'pro' ? 'ECONOMIZE € 119,40' : 'ECONOMIZE € 239,40')
-                        }
+                        {plan.id === 'pro' ? 'PAGAMENTO ÚNICO DE R$ 359,40' : 'PAGAMENTO ÚNICO DE R$ 599,40'}
                       </p>
                     )}
-                    {isAnnual && plan.id === 'starter' && (
+                    {isAnnual && isBrasil && plan.id === 'starter' && (
                       <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
-                        {isBrasil ? 'PAGAMENTO ÚNICO DE R$ 179,40' : 'ECONOMIZE € 59,40'}
+                        PAGAMENTO ÚNICO DE R$ 179,40
                       </p>
                     )}
                   </div>
