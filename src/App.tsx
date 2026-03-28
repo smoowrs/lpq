@@ -147,7 +147,7 @@ const translations = {
         ]
       },
       starter: {
-        name: "STARTER",
+        name: "STARTER 🪙",
         desc: "Acesso essencial para começar suas importações.",
         price: "29,90",
         monthlyPrice: "29,90",
@@ -173,7 +173,7 @@ const translations = {
         ]
       },
       pro: {
-        name: "PRO",
+        name: "PRO 🌏",
         desc: "O plano intermediário para quem busca variedade e ferramentas de IA.",
         price: "59,90",
         monthlyPrice: "59,90",
@@ -198,7 +198,7 @@ const translations = {
         ]
       },
       elite: {
-        name: "ELITE",
+        name: "ELITE 🥇",
         desc: "Acesso total e suporte prioritário para escala máxima.",
         price: "99,90",
         monthlyPrice: "99,90",
@@ -346,7 +346,7 @@ const translations = {
         ]
       },
       starter: {
-        name: "STARTER",
+        name: "STARTER 🪙",
         desc: "Essential access for starting your imports.",
         price: "14.95",
         monthlyPrice: "29.90",
@@ -366,7 +366,7 @@ const translations = {
         ]
       },
       pro: {
-        name: "PRO",
+        name: "PRO 🌏",
         desc: "The intermediate plan for more variety and AI tools.",
         price: "29.95",
         monthlyPrice: "59.90",
@@ -387,7 +387,7 @@ const translations = {
         ]
       },
       elite: {
-        name: "ELITE",
+        name: "ELITE 🥇",
         desc: "Full access and priority support for maximum scale.",
         price: "49.95",
         monthlyPrice: "99.90",
@@ -534,7 +534,7 @@ const translations = {
         ]
       },
       starter: {
-        name: "STARTER",
+        name: "STARTER 🪙",
         desc: "Acceso esencial para comenzar sus importaciones.",
         price: "14.95",
         monthlyPrice: "29.90",
@@ -554,7 +554,7 @@ const translations = {
         ]
       },
       pro: {
-        name: "PRO",
+        name: "PRO 🌏",
         desc: "El plan intermedio para quienes buscan variedad y herramientas de IA.",
         price: "29.95",
         monthlyPrice: "59.90",
@@ -575,7 +575,7 @@ const translations = {
         ]
       },
       elite: {
-        name: "ELITE",
+        name: "ELITE 🥇",
         desc: "Acceso total y soporte prioritario para escala máxima.",
         price: "49.95",
         monthlyPrice: "99.90",
