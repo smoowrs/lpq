@@ -2642,17 +2642,14 @@ export default function App() {
 
                       <div className="flex items-center justify-center gap-4 mt-1 flex-wrap">
                         {/* VISA — bold italic blue, official style */}
-                        <span className="text-[15px] font-black italic leading-none" style={{ color: '#1A1F71', fontFamily: 'Arial, sans-serif', letterSpacing: '-0.5px' }}>VISA</span>
+                        <span className="text-[15px] font-black italic leading-none text-white" style={{ fontFamily: 'Arial, sans-serif', letterSpacing: '-0.5px' }}>VISA</span>
 
                         {/* Mastercard — circles + label */}
-                        <div className="flex flex-col items-center gap-[1px]">
-                          <svg viewBox="0 0 38 24" className="h-[16px] w-auto">
-                            <circle cx="13" cy="12" r="11" fill="#EB001B"/>
-                            <circle cx="25" cy="12" r="11" fill="#F79E1B"/>
-                            <path d="M19 4.8 A11 11 0 0 1 19 19.2 A11 11 0 0 1 19 4.8 Z" fill="#FF5F00"/>
-                          </svg>
-                          <span className="text-[6px] font-semibold text-white leading-none tracking-wide">mastercard</span>
-                        </div>
+                        <svg viewBox="0 0 38 24" className="h-[16px] w-auto">
+                          <circle cx="13" cy="12" r="11" fill="#EB001B"/>
+                          <circle cx="25" cy="12" r="11" fill="#F79E1B"/>
+                          <path d="M19 4.8 A11 11 0 0 1 19 19.2 A11 11 0 0 1 19 4.8 Z" fill="#FF5F00"/>
+                        </svg>
 
                         {/* Google Pay — colored G icon + white Pay */}
                         <div className="flex items-center gap-[2px]">
