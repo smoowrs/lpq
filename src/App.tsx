@@ -2532,7 +2532,7 @@ export default function App() {
                       <div className="flex items-center gap-1.5 mt-1 opacity-70">
                         <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                         <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-wide">
-                          {language.startsWith('pt') ? 'Comissionamento Seguro' : language === 'es' ? 'Pago Seguro' : language === 'fr' ? 'Paiement Sécurisé' : 'Secure Payment'}
+                          {language.startsWith('pt') ? 'Pagamento Seguro' : language === 'es' ? 'Pago Seguro' : language === 'fr' ? 'Paiement Sécurisé' : 'Secure Payment'}
                         </span>
                       </div>
                     </div>
