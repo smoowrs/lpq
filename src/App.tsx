@@ -2003,10 +2003,12 @@ export default function App() {
                   {/* Accent Glow */}
                   <div className="absolute top-0 right-0 w-32 h-32 blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" style={{ backgroundColor: plan.color }} />
 
-                  {/* Icon */}
-                  <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-xl">
-                    <Package className="w-6 h-6" style={{ color: plan.color }} />
-                  </div>
+                  {/* Icon - hidden for free plan */}
+                  {plan.id !== 'free' && (
+                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-8 shadow-xl">
+                      <Package className="w-6 h-6" style={{ color: plan.color }} />
+                    </div>
+                  )}
 
                   {/* Header */}
                   <div className="mb-8">
