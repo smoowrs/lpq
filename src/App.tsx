@@ -8,10 +8,10 @@ import { Package, Sparkles, Users, ShieldCheck,
 import React, { useState, useEffect, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { CheckoutModal } from './components/CheckoutModal';
-type Language = 'pt' | 'en' | 'es' | 'fr';
+type Language = 'pt' | 'pt-PT' | 'en' | 'es' | 'fr';
 const translations = {
   pt: {
-    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
+    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (BR)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "A revolução da importação com IA",
       title1: "Economize ou Lucre",
@@ -219,6 +219,189 @@ const translations = {
           { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Sorteios mensais e premiações.", status: true },
           { text: "Sistema Indique e Ganhe.", status: true },
+        ]
+      }
+    }
+  },
+  'pt-PT': {
+    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (PT)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
+    hero: {
+      sparkle: "A revolução da importação com IA",
+      title1: "Economize ou Lucre",
+      title2: "Importando Produtos",
+      title3: "Direto da China 🌏",
+      titleMob: "Importando da China 🌏",
+      desc: "Crie a sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe da nossa comunidade de networking e utilize diversas outras ferramentas",
+      btnCreate: "Criar conta grátis",
+      btnWork: "Ver como funciona"
+    },
+    comunidade: {
+      tag: "COMUNIDADE",
+      title1: "A 1ª Rede Social",
+      title2: "do Importador 💙",
+      desc: "A sua nova rede social, uma comunidade exclusiva para importadores e empreendedores, troque informações estratégicas, partilhe os seus resultados e evolua ao lado de quem fala a sua língua.",
+      btn: "Testar comunidade"
+    },
+    produtos: {
+      tag: "PRODUTOS",
+      title1: "Os melhores produtos",
+      title2: "qualidades e preços 🔥",
+      desc: "Tenha acesso grátis a um painel cheio de produtos incríveis.",
+      btn: "Ver produtos"
+    },
+    aulas: {
+      tag: "AULAS PASSO A PASSO",
+      title1: "Aprenda a",
+      title2: "importer do zero.",
+      titleMob: "Aprenda a importar do zero ✈️",
+      desc: "Do primeiro acesso até a chegada dos produtos à porta da sua casa ou da sua loja.",
+      btn: "Começar agora",
+      items: ['Configuração de morada na China', 'Como comprar de forma segura', 'Gestão de envios e rastreio', 'Estratégias para evitar taxas']
+    },
+    fabricas: {
+      tag: "FÁBRICAS",
+      title1: "Os maiores",
+      title2: "fabricantes e lojas",
+      title3: "da China",
+      titleMob1: "Os maiores fabricantes",
+      titleMob2: "e lojas da China 🛒",
+      desc: "Um painel com fabricantes e fornecedores de confiança e com extrema agilidade de entrega, crie a sua conta grátis e acesse as nossas fábricas.",
+      btn: "Ver fábricas"
+    },
+    minerador: {
+      tag: "O MINERADOR",
+      title1: "O Assistente",
+      title2: "inteligente 💬",
+      desc: "A nossa IA ajuda a encontrar as melhores fábricas no nosso painel de parceiros de confiança e automatiza todas as declarações, livrando-o de taxas surpresa.",
+      btn: "Testar Minerador Agora",
+      chat: {
+        status: "IA Online agora",
+        q: "Preciso de um link do iphone 17 pro max",
+        a: "Encontrei fornecedores verificados com stock disponível e envio direto! 🚀",
+        btn: "ACESSAR LINK",
+        input: "Pergunte ao Minerador..."
+      }
+    },
+    recompensas: {
+      tag: "NÍVEIS E RECOMPENSAS",
+      title1: "Suba de nível e",
+      title2: "ganhe prémios",
+      btn: "Subir níveis"
+    },
+    rastreio: {
+      tag: "LOGÍSTICA INTELIGENTE",
+      title1: "Rastreio em",
+      title2: "Tempo Real.",
+      titleMob: "Rastreio em Tempo Real 🗺️",
+      desc: "O nosso sistema liga-se diretamente com as transportadoras internacionais para dar atualizações precisas e automáticas.",
+      btn: "Testar rastreio grátis",
+      status: "Estado do Pedido",
+      moving: "Em trânsito",
+      items: ['Notificações push a cada movimentação', 'Previsão de entrega com IA', 'Alerta automático de taxas'],
+      stages: [
+        { title: "Postado na China", time: "09:41 AM" },
+        { title: "Chegou a Portugal", time: "14:20 PM" },
+        { title: "Desalfandegamento Concluído", time: "10:15 AM" },
+        { title: "Saiu para Entrega", time: "08:30 AM" }
+      ]
+    },
+    connectAI: {
+      tag: "CONNECT AI",
+      title1: "Crie imagens que",
+      title2: "vendem mais.",
+      desc: "Com o uso da Connect AI transforma fotos simples de fornecedores em imagens que realmente geram interesse e um visual incrível na sua loja.",
+      items: ['Imagens em 4K', 'Menos de 30s', 'Alta Conversão'],
+      btn: "Testar Connect AI"
+    },
+    cupom: {
+      title1: "REGISTE-SE e GANHE",
+      title2: "130€ em CUPÕES",
+      desc: "Aproveite esta oferta exclusiva de boas-vindas. Resgate agora os seus cupões de desconto exclusivos e economize nas suas primeiras importações.",
+      btn: "Resgatar cupão",
+      badges: ["Imediato", "Único", "VIP Connect"]
+    },
+    footer: { rights: "Todos os direitos reservados", terms: "Termos", privacy: "Privacidade" },
+    planos: {
+      tag: "PLANOS DE ACESSO",
+      title: "Escolha o seu plano",
+      monthly: "Mensal",
+      annual: "Anual",
+      annualOff: "50% OFF",
+      brasil: "Brasil",
+      europa: "Europa",
+      btnActive: "PLANO ATIVO",
+      btnSelect: "ASSINAR ESTE PLANO",
+      free: {
+        name: "Experience 💙",
+        desc: "Uma forma simples de conhecer a estrutura por dentro e perceber se faz sentido para si antes de seguir para a experiência completa.",
+        price: "0",
+        period: "/mês",
+        items: [
+          { text: "Acesso às fábricas diretas na China.", status: true },
+          { text: "Módulos de aulas exclusivas.", status: true },
+          { text: "Rastreio em tempo real de até 2 envios.", status: true },
+          { text: "Roupas, Ténis & Acessórios", status: false },
+        ]
+      },
+      starter: {
+        name: "STARTER 🪙",
+        desc: "Acesso essencial para começar as suas importações.",
+        price: "14.95",
+        monthlyPrice: "29.90",
+        period: "/mês",
+        info: "PAGAMENTO ÚNICO DE 59,40 EUR",
+        items: [
+          { text: "Acesso às fábricas diretas na China.", status: true },
+          { text: "Roupas, Ténis, Relógios, Bonés...", status: true },
+          { text: "O Minerador (IA de pesquisa).", status: true },
+          { text: "Gerador de imagens 4K (3 créditos).", status: true },
+          { text: "Rastreio em tempo real até 5 envios.", status: true },
+          { text: "Módulos de aulas exclusivas.", status: true },
+          { text: "Acesso à comunidade.", status: true },
+          { text: "Sistema Indique e Ganhe.", status: true },
+          { text: "Produtos Apple e Eletrónicos", status: false },
+          { text: "Descarregar imagens de forma ilimitada", status: false },
+        ]
+      },
+      pro: {
+        name: "PRO 🌏",
+        desc: "O plano intermédio para quem procura variedade e ferramentas de IA.",
+        price: "29.95",
+        monthlyPrice: "59.90",
+        period: "/mês",
+        info: "PAGAMENTO ÚNICO DE 119,40 EUR",
+        items: [
+          { text: "Acesso a fábricas exclusivas na China.", status: true },
+          { text: "Roupas, Ténis, Relógios e Eletrónica.", status: true },
+          { text: "Gerador de imagens 4K (5 créditos).", status: true },
+          { text: "O Minerador (IA de pesquisa).", status: true },
+          { text: "Marketplaces locais na China.", status: true },
+          { text: "Rastreio em tempo real até 10 envios.", status: true },
+          { text: "Módulos de aulas exclusivas.", status: true },
+          { text: "Acesso à comunidade.", status: true },
+          { text: "Alertas e oportunidades exclusivas.", status: true },
+          { text: "Sorteios mensais e prémios.", status: true },
+          { text: "Acesso a Apple oficial", status: false },
+        ]
+      },
+      elite: {
+        name: "ELITE 🥇",
+        desc: "Acesso total e suporte prioritário para escala máxima.",
+        price: "49.95",
+        monthlyPrice: "99.90",
+        period: "/mês",
+        info: "PAGAMENTO ÚNICO DE 239,40 EUR",
+        items: [
+          { text: "Acesso oficial Apple na China.", status: true },
+          { text: "Download ilimitado de imagens.", status: true },
+          { text: "Painel de fábricas e produtos exclusivos.", status: true },
+          { text: "Acesso a Eletrónica, Gamer.", status: true },
+          { text: "Gerador de imagens 4K (10 créditos mensais).", status: true },
+          { text: "O Minerador IA (buscas inteligentes).", status: true },
+          { text: "Marketplaces locais na China.", status: true },
+          { text: "Sem limites de rastreio de envios.", status: true },
+          { text: "Prioridade no suporte (início da fila).", status: true },
+          { text: "Medalha de destaque exclusiva.", status: true },
         ]
       }
     }
@@ -781,6 +964,7 @@ const translations = {
 
 const flags: Record<Language, string> = {
   pt: "🇧🇷",
+  'pt-PT': "🇵🇹",
   en: "🇺🇸",
   es: "🇪🇸",
   fr: "🇫🇷"
@@ -925,7 +1109,7 @@ export default function App() {
 
               {isLangMenuOpen && (
                 <div className="absolute top-[calc(100%+8px)] left-0 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-[70] animate-in fade-in zoom-in duration-200">
-                  {(['pt', 'en', 'es', 'fr'] as Language[]).map((lang) => (
+                  {(['pt', 'pt-PT', 'en', 'es', 'fr'] as Language[]).map((lang) => (
                     <button
                       key={lang}
                       onClick={(e) => {
@@ -998,7 +1182,7 @@ export default function App() {
                 <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover/lang:rotate-180 transition-transform duration-300" />
               </button>
               <div className="absolute top-full right-0 mt-2 w-44 bg-[#0d0d0d] border border-white/10 rounded-xl py-2 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50">
-                {(['pt', 'en', 'es', 'fr'] as Language[]).map((lang) => (
+                {(['pt', 'pt-PT', 'en', 'es', 'fr'] as Language[]).map((lang) => (
                   <button
                     key={lang}
                     onClick={(e) => {
