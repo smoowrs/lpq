@@ -607,6 +607,37 @@ const flags: Record<Language, string> = {
 export default function App() {
   const [trackingStep, setTrackingStep] = useState(0);
   const [language, setLanguage] = useState<Language>('pt');
+  const [hasDetectedRegion, setHasDetectedRegion] = useState(false);
+
+  // Auto-detect region (EU/Euro)
+  useEffect(() => {
+    if (hasDetectedRegion) return;
+    
+    const detect = async () => {
+      try {
+        // Use ipapi.co (free, no account req for small usage)
+        const res = await fetch('https://ipapi.co/json/');
+        const data = await res.json();
+        if (data.continent_code === 'EU') {
+          setRegion('europa');
+          // If in EU but not PT, maybe English? Let's stick to EU=Euro first.
+          if (data.country_code !== 'BR' && data.country_code !== 'PT' && language === 'pt') {
+            setLanguage('en');
+          }
+        }
+      } catch (err) {
+        // Fallback: Timezone check (Safe & zero delay)
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (tz && (tz.startsWith('Europe/') || tz.startsWith('Africa/'))) {
+          setRegion('europa');
+        }
+      } finally {
+        setHasDetectedRegion(true);
+      }
+    };
+    detect();
+  }, [hasDetectedRegion, language]);
+
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
   const [region, setRegion] = useState<'brasil' | 'europa'>('brasil');
