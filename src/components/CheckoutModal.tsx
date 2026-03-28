@@ -6,7 +6,6 @@ import { loadStripe } from '@stripe/stripe-js';
 import {
     Elements,
     PaymentElement,
-    PaymentRequestButtonElement,
     useStripe,
     useElements,
 } from '@stripe/react-stripe-js';
@@ -73,11 +72,10 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent, paymentRequest }
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
-
-
+            {/* Disable built-in wallets to avoid duplication with our custom Apple Pay tab */}
             <PaymentElement options={{
                 layout: 'tabs',
-                wallets: { applePay: 'auto', googlePay: 'auto' },
+                wallets: { applePay: 'never', googlePay: 'never' },
                 link: { email: 'never' }
             }} />
 
@@ -113,7 +111,8 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent, paymentRequest }
     );
 };
 
-const ApplePayTabButton = ({ paymentRequest, stripePromise, fetchSecret, onSuccess, onClick }: any) => {
+// Invisible hook: listens to Apple Pay payment events and confirms via Stripe
+const ApplePayHandler = ({ paymentRequest, stripePromise, fetchSecret, onSuccess }: any) => {
     useEffect(() => {
         if (!paymentRequest) return;
 
@@ -122,19 +121,17 @@ const ApplePayTabButton = ({ paymentRequest, stripePromise, fetchSecret, onSucce
                 const stripe = await stripePromise;
                 if (!stripe) throw new Error("Stripe not init");
 
-                const secret = await fetchSecret(); // Always fetch latest
-                if (!secret) {
-                    throw new Error("Falha ao gerar o token de pagamento.");
-                }
+                const secret = await fetchSecret();
+                if (!secret) throw new Error("Falha ao gerar o token de pagamento.");
 
-                const confirmFn = secret.startsWith('seti_') 
-                    ? stripe.confirmCardSetup 
-                    : stripe.confirmCardPayment;
+                const confirmFn = secret.startsWith('seti_')
+                    ? stripe.confirmCardSetup.bind(stripe)
+                    : stripe.confirmCardPayment.bind(stripe);
 
                 const { error } = await confirmFn(secret, {
                     payment_method: ev.paymentMethod.id
                 });
-                
+
                 if (error) {
                     ev.complete('fail');
                     toast.error(error.message || 'Erro no pagamento');
@@ -149,22 +146,10 @@ const ApplePayTabButton = ({ paymentRequest, stripePromise, fetchSecret, onSucce
         };
 
         paymentRequest.on('paymentmethod', handlePaymentMethod);
-        return () => {
-             // Let it remain bound or assume 1 instance
-        };
-    }, [paymentRequest, stripePromise, fetchSecret, onSuccess]);
+        return () => { paymentRequest.off?.('paymentmethod', handlePaymentMethod); };
+    }, [paymentRequest]);
 
-    return (
-        <Elements stripe={stripePromise}>
-            <PaymentRequestButtonElement 
-                onClick={onClick}
-                options={{ 
-                    paymentRequest, 
-                    style: { paymentRequestButton: { height: '44px', type: 'plain', theme: 'dark' } } 
-                }} 
-            />
-        </Elements>
-    );
+    return null;
 };
 
 const PixPayment = ({ plan, onCancel, onSuccess, guestEmail, guestName, couponCode }: any) => {
@@ -812,6 +797,16 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                      </div>
                  )}
 
+                {/* Apple Pay invisible handler - listens & confirms payment after native sheet */}
+                {paymentRequest && (
+                    <ApplePayHandler
+                        paymentRequest={paymentRequest}
+                        stripePromise={stripePromise}
+                        fetchSecret={fetchClientSecret}
+                        onSuccess={handleLocalSuccess}
+                    />
+                )}
+
                 {/* Close Button */}
                 <button
                     onClick={onClose}
@@ -974,15 +969,20 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                 )}
 
                                 {paymentRequest && (
-                                    <div className={`flex-1 h-[44px] rounded-xl overflow-hidden transition-all border ${method === 'apple_pay' ? 'ring-2 ring-primary/50 border-black' : 'border-slate-200'}`}>
-                                        <ApplePayTabButton 
-                                            paymentRequest={paymentRequest}
-                                            stripePromise={stripePromise}
-                                            fetchSecret={fetchClientSecret}
-                                            onSuccess={handleLocalSuccess}
-                                            onClick={() => setMethod('apple_pay')}
-                                        />
-                                    </div>
+                                    <button
+                                        onClick={() => {
+                                            setMethod('apple_pay');
+                                            paymentRequest.show();
+                                        }}
+                                        className={`flex-1 h-[44px] rounded-xl flex items-center justify-center gap-2 transition-all font-bold text-sm border ${
+                                            method === 'apple_pay'
+                                                ? 'bg-black border-black text-white'
+                                                : 'bg-black border-black text-white hover:opacity-90'
+                                        }`}
+                                    >
+                                        <Icons.Apple className="w-4 h-4" />
+                                        Pay
+                                    </button>
                                 )}
                             </div>
 
