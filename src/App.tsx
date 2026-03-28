@@ -2113,7 +2113,7 @@ export default function App() {
                       }`}
                     style={plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
                   >
-                    {plan.id === 'free' ? 'VISUALIZAR APLICATIVO' : t.planos.btnSelect}
+                    {plan.id === 'free' ? 'CRIAR CONTA GRÁTIS' : t.planos.btnSelect}
                   </motion.button>
                 </motion.div>
               );
