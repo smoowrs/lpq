@@ -2521,26 +2521,6 @@ export default function App() {
                         {language.startsWith('pt') ? 'Cancele quando quiser.' : language === 'es' ? 'Cancela cuando quieras.' : language === 'fr' ? 'Annulez à tout moment.' : 'Cancel anytime.'}
                       </p>
                       
-                      <div className="flex items-center justify-center gap-1.5 opacity-60">
-                        <div className="px-1.5 py-0.5 rounded bg-white/10 border border-white/5 flex items-center justify-center">
-                          <span className="text-[8px] font-black text-white">VISA</span>
-                        </div>
-                        <div className="px-1.5 py-0.5 rounded bg-white/10 border border-white/5 flex items-center justify-center">
-                          <span className="text-[8px] font-black text-white px-0.5 text-center leading-none">MASTER<br/>CARD</span>
-                        </div>
-                        <div className="px-1.5 py-0.5 rounded bg-white/10 border border-white/5 flex items-center justify-center">
-                          <span className="text-[8px] font-black text-white">PIX</span>
-                        </div>
-                        <div className="px-1.5 py-0.5 rounded bg-white/10 border border-white/5 flex items-center justify-center h-[20px]">
-                          <svg className="w-2 h-2 fill-white mr-0.5" viewBox="0 0 384 512">
-                            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.3 48.6-.7 90.4-82.5 104.8-125.2-46.7-19-63.5-59-63.9-85.4zM201.2 45.4c2.8-4.6 5.3-9.4 7.3-14.4 2-5 3.6-10.2 4.8-15.6 1.1-5.3 1.7-10.8 1.9-16.3-5.2 .2-10.6 1.3-15.8 3.2-5.2 1.9-10.1 4.5-14.7 7.7-4.6 3.2-8.8 7-12.5 11.2-3.7 4.2-6.9 8.9-9.5 13.9-2.6 5-4.8 10.3-6.4 15.9-1.6 5.6-2.7 11.3-3.2 17.2 5.5-.3 11-.9 16.3-1.9 5.3-1 10.5-2.5 15.5-4.5 5-2 9.8-4.5 14.3-7.5z"/>
-                          </svg>
-                          <span className="text-[8px] font-black text-white tracking-widest">Pay</span>
-                        </div>
-                        <div className="px-1.5 py-0.5 rounded bg-white/10 border border-white/5 flex items-center justify-center">
-                          <span className="text-[8px] font-black text-white whitespace-nowrap">G Pay</span>
-                        </div>
-                      </div>
                       <div className="flex items-center gap-1.5 mt-1 opacity-70">
                         <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                         <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-wide">
