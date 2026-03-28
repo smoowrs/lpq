@@ -121,7 +121,7 @@ const translations = {
       btnActive: "PLANO ATIVO",
       btnSelect: "ASSINAR ESSE PLANO",
       free: {
-        name: "Experience",
+        name: "Experience 💙",
         desc: "Uma forma simples de conhecer a estrutura por dentro e entender se faz sentido para você antes de seguir para a experiência completa.",
         price: "0",
         period: "/mês",
@@ -334,7 +334,7 @@ const translations = {
       btnActive: "ACTIVE PLAN",
       btnSelect: "SUBSCRIBE TO THIS PLAN",
       free: {
-        name: "Experience",
+        name: "Experience 💙",
         desc: "A simple way to discover the platform from the inside and understand if it makes sense for you before moving to the full experience.",
         price: "0",
         period: "/mo",
@@ -522,7 +522,7 @@ const translations = {
       btnActive: "PLAN ACTIVO",
       btnSelect: "SUSCRIBIRSE A ESTE PLAN",
       free: {
-        name: "Experience",
+        name: "Experience 💙",
         desc: "Una forma sencilla de conocer la plataforma por dentro y entender si tiene sentido para ti antes de pasar a la experiencia completa.",
         price: "0",
         period: "/mes",
@@ -2014,11 +2014,12 @@ export default function App() {
                     <p className="text-sm text-gray-500 leading-relaxed font-medium min-h-[40px]">{plan.data.desc}</p>
                   </div>
 
-                  {/* Price */}
+                  {/* Price - hidden for free plan */}
+                  {plan.id !== 'free' && (
                   <div className="mb-8">
                     <div className="flex items-baseline gap-1">
                       <div className="flex flex-col">
-                        {plan.id !== 'free' && isBrasil && isAnnual && (
+                        {isBrasil && isAnnual && (
                           <span className="text-xs font-black text-[#582ef5] leading-none mb-1">12X</span>
                         )}
                         <span className="text-xs font-black text-gray-400 leading-none">{isBrasil ? 'R$' : '€'}</span>
@@ -2031,7 +2032,7 @@ export default function App() {
                       )}
                       <span className="text-sm font-bold text-gray-500 self-end pb-1">{plan.data.period}</span>
                     </div>
-                    {isAnnual && plan.id !== 'starter' && plan.id !== 'free' && (
+                    {isAnnual && plan.id !== 'starter' && (
                       <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
                         {isBrasil 
                           ? (plan.id === 'pro' ? 'PAGAMENTO ÚNICO DE R$ 359,40' : 'PAGAMENTO ÚNICO DE R$ 599,40')
@@ -2045,8 +2046,10 @@ export default function App() {
                       </p>
                     )}
                   </div>
+                  )}
 
-                  {/* Features */}
+                  {/* Features - hidden for free plan */}
+                  {plan.id !== 'free' && (
                   <ul className="space-y-4 mb-10 flex-1">
                     {plan.data.items?.map((item: any, i: number) => (
                       <li key={i} className={`flex items-start gap-3 text-[11px] font-bold leading-relaxed transition-colors ${item.status ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -2059,6 +2062,7 @@ export default function App() {
                       </li>
                     ))}
                   </ul>
+                  )}
 
                   {/* Button */}
                   <motion.button
@@ -2107,7 +2111,7 @@ export default function App() {
                       }`}
                     style={plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
                   >
-                    {plan.id === 'free' ? (t.planos.free.btnTest || "Testar Grátis") : t.planos.btnSelect}
+                    {plan.id === 'free' ? 'VISUALIZAR APLICATIVO' : t.planos.btnSelect}
                   </motion.button>
                 </motion.div>
               );
