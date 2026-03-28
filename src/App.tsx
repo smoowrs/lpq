@@ -1966,8 +1966,25 @@ export default function App() {
               {t.planos.title}
             </h2>
 
-            {/* Billing Toggle */}
-            <div className="flex flex-col items-center gap-6">
+            {/* Toggles Container */}
+            <div className="flex flex-col items-center gap-4">
+              {/* Region Toggle (Mover para cima) */}
+              <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
+                <button
+                  onClick={() => setRegion('brasil')}
+                  className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'brasil' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                  <Globe className="w-3.5 h-3.5" /> {t.planos.brasil}
+                </button>
+                <button
+                  onClick={() => setRegion('europa')}
+                  className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'europa' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
+                >
+                  <Globe className="w-3.5 h-3.5" /> {t.planos.europa}
+                </button>
+              </div>
+
+              {/* Billing Toggle (Mover para baixo) */}
               <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
                 <button
                   onClick={() => setBillingCycle('monthly')}
@@ -1981,22 +1998,6 @@ export default function App() {
                 >
                   {t.planos.annual}
                   <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-md font-black">{t.planos.annualOff}</span>
-                </button>
-              </div>
-
-              {/* Region Toggle */}
-              <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
-                <button
-                  onClick={() => setRegion('brasil')}
-                  className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'brasil' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  <Globe className="w-3.5 h-3.5" /> {t.planos.brasil}
-                </button>
-                <button
-                  onClick={() => setRegion('europa')}
-                  className={`px-4 py-2.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-2 ${region === 'europa' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  <Globe className="w-3.5 h-3.5" /> {t.planos.europa}
                 </button>
               </div>
             </div>
