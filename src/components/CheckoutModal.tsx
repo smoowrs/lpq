@@ -498,53 +498,26 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
     // Prevent body scroll and forcefully make Safari bars white
     useEffect(() => {
-        const style = document.createElement('style');
-        style.innerHTML = `
-            html, body {
-                background-color: #ffffff !important;
-                overscroll-behavior-y: none !important;
-                overflow: hidden !important;
-                height: 100% !important;
-                position: fixed !important;
-                width: 100% !important;
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Apple & Theme color meta tags
-        const metaTags = [
-            { name: 'theme-color', content: '#ffffff' },
-            { name: 'apple-mobile-web-app-capable', content: 'yes' },
-            { name: 'apple-mobile-web-app-status-bar-style', content: 'default' }
-        ];
-
-        const originalMetaValues: any = {};
-        metaTags.forEach(tag => {
-            let el = document.querySelector(`meta[name="${tag.name}"]`);
-            if (el) {
-                originalMetaValues[tag.name] = el.getAttribute('content');
-                el.setAttribute('content', tag.content);
-            } else {
-                el = document.createElement('meta');
-                el.setAttribute('name', tag.name);
-                el.setAttribute('content', tag.content);
-                document.head.appendChild(el);
-                originalMetaValues[tag.name] = null;
-            }
-        });
+        document.documentElement.classList.add('checkout-open');
+        
+        let metaTheme = document.querySelector('meta[name="theme-color"]');
+        let originalThemeColor: string | null = null;
+        if (metaTheme) {
+            originalThemeColor = metaTheme.getAttribute('content');
+            metaTheme.setAttribute('content', '#ffffff');
+        } else {
+            metaTheme = document.createElement('meta');
+            metaTheme.setAttribute('name', 'theme-color');
+            metaTheme.setAttribute('content', '#ffffff');
+            document.head.appendChild(metaTheme);
+        }
 
         return () => { 
-            style.remove();
-            metaTags.forEach(tag => {
-                const el = document.querySelector(`meta[name="${tag.name}"]`);
-                if (el) {
-                    if (originalMetaValues[tag.name]) {
-                        el.setAttribute('content', originalMetaValues[tag.name]);
-                    } else {
-                        el.remove();
-                    }
-                }
-            });
+            document.documentElement.classList.remove('checkout-open');
+            if (metaTheme) {
+                if (originalThemeColor) metaTheme.setAttribute('content', originalThemeColor);
+                else metaTheme.remove();
+            }
         };
     }, []);
 
@@ -728,8 +701,8 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
             </div>
 
             {/* ── MAIN CONTENT ── */}
-            <div className="flex-1">
-                <div className="max-w-lg mx-auto px-5 pt-6 pb-[calc(24px+env(safe-area-inset-bottom,0px))]">
+            <div className="flex-1 overflow-y-auto">
+                <div className="max-w-lg mx-auto px-5 pt-6 pb-24 md:pb-32">
 
                     {/* Step indicator */}
                     {!isAuthenticated && (
@@ -973,6 +946,8 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                     </div>
                 </div>
             </div>
+            {/* White Footer for Safe Area Tints */}
+            <div className="h-[env(safe-area-inset-bottom,40px)] bg-white w-full border-t border-slate-50 shrink-0" />
         </div>,
         document.body
     );

@@ -238,3 +238,14 @@ html, body {
     font-size: 16px !important;
   }
 }
+
+/* Fix para o Checkout Modal */
+html.checkout-open,
+html.checkout-open body {
+  background-color: #ffffff !important;
+  overscroll-behavior: none !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  overflow: hidden !important;
+  width: 100vw !important;
+}
