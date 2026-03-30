@@ -116,8 +116,11 @@ const ApplePayHandler = ({ paymentRequest, stripePromise, fetchSecret, onSuccess
             try {
                 const stripe = await stripePromise;
                 if (!stripe) throw new Error("Stripe not init");
-                const secret = await fetchSecret();
+                
+                // Pass payer info derived from Apple Pay to the backend if needed
+                const secret = await fetchSecret(ev.payerEmail, ev.payerName);
                 if (!secret) throw new Error("Falha ao gerar o token de pagamento.");
+                
                 const confirmFn = secret.startsWith('seti_')
                     ? stripe.confirmCardSetup.bind(stripe)
                     : stripe.confirmCardPayment.bind(stripe);
@@ -292,7 +295,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, couponCode }: any)
                 <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">CPF do Titular</label>
                 <input
                     type="text"
-                    className="w-full h-12 bg-slate-50 border border-slate-200 rounded-xl px-4 text-sm text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all"
+                    className="w-full h-12 bg-slate-50 border border-slate-200 rounded-xl px-4 text-base text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all"
                     placeholder="000.000.000-00"
                     value={cpf}
                     onChange={handleCpfChange}
@@ -354,7 +357,7 @@ const AppmaxCCPayment = ({ plan, onSuccess }: any) => {
         } finally { setLoading(false); }
     };
 
-    const inputClass = "w-full h-12 bg-slate-50 border border-slate-200 rounded-xl px-4 text-sm text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all";
+    const inputClass = "w-full h-12 bg-slate-50 border border-slate-200 rounded-xl px-4 text-base text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all";
     const labelClass = "block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5";
 
     return (
@@ -493,7 +496,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
         if (step === 2 && method === 'cc') { fetchClientSecret(); }
     }, [step, method]);
 
-    // Prevent body scroll and forcefully make Safari bottom bar white
+    // Prevent body scroll and forcefully make Safari bars white
     useEffect(() => {
         const style = document.createElement('style');
         style.innerHTML = `
@@ -501,29 +504,47 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                 background-color: #ffffff !important;
                 overscroll-behavior-y: none !important;
                 overflow: hidden !important;
+                height: 100% !important;
+                position: fixed !important;
+                width: 100% !important;
             }
         `;
         document.head.appendChild(style);
 
-        let metaTheme = document.querySelector('meta[name="theme-color"]');
-        let originalThemeColor: string | null = null;
-        if (metaTheme) {
-            originalThemeColor = metaTheme.getAttribute('content');
-            metaTheme.setAttribute('content', '#ffffff');
-        } else {
-            metaTheme = document.createElement('meta');
-            metaTheme.setAttribute('name', 'theme-color');
-            metaTheme.setAttribute('content', '#ffffff');
-            document.head.appendChild(metaTheme);
-        }
+        // Apple & Theme color meta tags
+        const metaTags = [
+            { name: 'theme-color', content: '#ffffff' },
+            { name: 'apple-mobile-web-app-capable', content: 'yes' },
+            { name: 'apple-mobile-web-app-status-bar-style', content: 'default' }
+        ];
+
+        const originalMetaValues: any = {};
+        metaTags.forEach(tag => {
+            let el = document.querySelector(`meta[name="${tag.name}"]`);
+            if (el) {
+                originalMetaValues[tag.name] = el.getAttribute('content');
+                el.setAttribute('content', tag.content);
+            } else {
+                el = document.createElement('meta');
+                el.setAttribute('name', tag.name);
+                el.setAttribute('content', tag.content);
+                document.head.appendChild(el);
+                originalMetaValues[tag.name] = null;
+            }
+        });
 
         return () => { 
             style.remove();
-            if (metaTheme && originalThemeColor) {
-                metaTheme.setAttribute('content', originalThemeColor);
-            } else if (metaTheme && !originalThemeColor) {
-                metaTheme.remove();
-            }
+            metaTags.forEach(tag => {
+                const el = document.querySelector(`meta[name="${tag.name}"]`);
+                if (el) {
+                    if (originalMetaValues[tag.name]) {
+                        el.setAttribute('content', originalMetaValues[tag.name]);
+                    } else {
+                        el.remove();
+                    }
+                }
+            });
         };
     }, []);
 
@@ -546,20 +567,36 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
         }
     }, [plan]);
 
-    const fetchClientSecret = async () => {
+    const fetchClientSecret = async (emailOverride?: string | any, nameOverride?: string | any) => {
         setLoading(true); setClientSecret(null); setStripeError(null);
         try {
             const { data: { session } } = await supabase.auth.getSession();
             const isCredits = plan.id.startsWith('cred_');
             const isOneTime = isCredits || plan.id === 'vitalicio';
             const functionName = isOneTime ? 'create-stripe-payment-intent' : 'create-stripe-subscription';
+            
+            // Safety check: if called as event handler, arguments might be event objects
+            const emailFromArg = typeof emailOverride === 'string' ? emailOverride : undefined;
+            const nameFromArg = typeof nameOverride === 'string' ? nameOverride : undefined;
+
+            // Prefer the email from overrides (e.g. Apple Pay), then the logged-in session, then the manual input
+            const finalEmail = emailFromArg || session?.user?.email || guestEmail;
+            const finalName = nameFromArg || session?.user?.user_metadata?.full_name || guestName || 'Usuário';
+
             const payload = isOneTime ? {
-                planId: plan.id, email: guestEmail, name: guestName,
+                planId: plan.id, 
+                email: finalEmail, 
+                name: finalName,
                 amount: isAnnual ? plan.prices[region].annual : plan.prices[region].monthly,
                 region, coupon: couponCode || undefined
             } : {
-                planId: plan.id, billingCycle: plan.billingCycle, trialDays: plan.trialDays,
-                email: guestEmail, name: guestName, region, coupon: couponCode || undefined
+                planId: plan.id, 
+                billingCycle: plan.billingCycle, 
+                trialDays: plan.trialDays,
+                email: finalEmail, 
+                name: finalName || finalEmail.split('@')[0], // Fallback name
+                region, 
+                coupon: couponCode || undefined
             };
             const data = await invokeFn(functionName, payload, session?.access_token || 'null');
             if (data?.error) throw new Error(data.error || 'Erro ao iniciar checkout');
@@ -588,7 +625,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
     return createPortal(
         /* Fullscreen overlay — matches app style */
-        <div className="fixed inset-0 z-[300] bg-white flex flex-col" style={{ overflowY: 'auto', minHeight: '100dvh' }}>
+        <div className="fixed inset-0 z-[300] bg-white flex flex-col" style={{ overflowY: 'auto', height: '100dvh' }}>
 
             {/* Success Screen */}
             {isPaymentApproved && (
@@ -692,7 +729,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
             {/* ── MAIN CONTENT ── */}
             <div className="flex-1">
-                <div className="max-w-lg mx-auto px-5 py-6">
+                <div className="max-w-lg mx-auto px-5 pt-6 pb-[calc(24px+env(safe-area-inset-bottom,0px))]">
 
                     {/* Step indicator */}
                     {!isAuthenticated && (
@@ -726,7 +763,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     <input
                                         type="text"
                                         placeholder="Ex: João Silva"
-                                        className={`w-full h-12 bg-white border rounded-xl px-4 text-sm text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all shadow-sm ${guestNameError ? 'border-red-400 bg-red-50' : 'border-slate-200'}`}
+                                        className={`w-full h-12 bg-white border rounded-xl px-4 text-base text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all shadow-sm ${guestNameError ? 'border-red-400 bg-red-50' : 'border-slate-200'}`}
                                         value={guestName}
                                         onChange={(e) => { setGuestName(e.target.value); setGuestNameError(''); }}
                                         onKeyDown={(e) => e.key === 'Enter' && handleStep1Continue()}
@@ -738,7 +775,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     <input
                                         type="email"
                                         placeholder="exemplo@email.com"
-                                        className={`w-full h-12 bg-white border rounded-xl px-4 text-sm text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all shadow-sm ${guestEmailError ? 'border-red-400 bg-red-50' : 'border-slate-200'}`}
+                                        className={`w-full h-12 bg-white border rounded-xl px-4 text-base text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all shadow-sm ${guestEmailError ? 'border-red-400 bg-red-50' : 'border-slate-200'}`}
                                         value={guestEmail}
                                         onChange={(e) => { setGuestEmail(e.target.value); setGuestEmailError(''); }}
                                         onKeyDown={(e) => e.key === 'Enter' && handleStep1Continue()}
@@ -826,7 +863,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                             </div>
                                             <p className="text-slate-800 font-bold mb-1">Erro no checkout</p>
                                             <p className="text-slate-500 text-sm mb-4">{stripeError}</p>
-                                            <button onClick={fetchClientSecret} className="px-5 py-2.5 bg-[#4D5BFF] text-white rounded-xl font-bold text-sm">
+                                            <button onClick={() => fetchClientSecret()} className="px-5 py-2.5 bg-[#4D5BFF] text-white rounded-xl font-bold text-sm">
                                                 Tentar Novamente
                                             </button>
                                         </div>
