@@ -117,7 +117,7 @@ const translations = {
       brasil: "Brasil",
       europa: "Europa",
       btnActive: "PLANO ATIVO",
-      btnSelect: "ASSINAR ESSE PLANO",
+      btnSelect: "COMPRAR AGORA",
       free: {
         name: "Experience 💙",
         desc: "Uma forma simples de conhecer a estrutura por dentro e entender se faz sentido para você antes de seguir para a experiência completa.",
@@ -330,7 +330,7 @@ const translations = {
       brasil: "Brasil",
       europa: "Europa",
       btnActive: "PLANO ATIVO",
-      btnSelect: "ASSINAR ESTE PLANO",
+      btnSelect: "COMPRAR AGORA",
       free: {
         name: "Experience 💙",
         desc: "Uma forma simples de conhecer a estrutura por dentro e perceber se faz sentido para si antes de seguir para a experiência completa.",
@@ -542,7 +542,7 @@ const translations = {
       brasil: "BRAZIL",
       europa: "EUROPE",
       btnActive: "ACTIVE PLAN",
-      btnSelect: "SUBSCRIBE TO THIS PLAN",
+      btnSelect: "BUY NOW",
       free: {
         name: "Experience 💙",
         desc: "A simple way to discover the platform from the inside and understand if it makes sense for you before moving to the full experience.",
@@ -754,7 +754,7 @@ const translations = {
       brasil: "BRASIL",
       europa: "EUROPA",
       btnActive: "PLAN ACTIVO",
-      btnSelect: "SUSCRIBIRSE A ESTE PLAN",
+      btnSelect: "COMPRAR AHORA",
       free: {
         name: "Experience 💙",
         desc: "Una forma sencilla de conocer la plataforma por dentro y entender si tiene sentido para ti antes de pasar a la experiencia completa.",
@@ -966,7 +966,7 @@ const translations = {
       brasil: "BRÉSIL",
       europa: "EUROPE",
       btnActive: "PLAN ACTIF",
-      btnSelect: "S'ABONNER",
+      btnSelect: "ACHETER MAINTENANT",
       free: {
         name: "Experience 💙",
         desc: "Une façon simple de découvrir la plateforme de l'intérieur.",
@@ -1802,8 +1802,8 @@ export default function App() {
                   </span>
                   {/* Versão Mobile (2 linhas) */}
                   <span className="md:hidden text-center md:text-left block">
-                    Os maiores fábricantes <br />
-                    <span className="text-gradient-ai">e lojas da China 🛒</span>
+                    {t.fabricas.titleMob1} <br />
+                    <span className="text-gradient-ai">{t.fabricas.titleMob2}</span>
                   </span>
                 </h2>
 
@@ -2250,10 +2250,10 @@ export default function App() {
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-12">
                   <div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">Status do Pedido</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-2">{t.rastreio.status}</h3>
                   </div>
                   <div className="px-5 py-2 bg-[#582ef5] text-white rounded-xl text-[10px] md:text-[11px] font-extrabold border border-white/20 uppercase tracking-widest shadow-[0_0_25px_rgba(88,46,245,0.4)] animate-pulse">
-                    Em trânsito
+                    {t.rastreio.moving}
                   </div>
                 </div>
 
@@ -2631,7 +2631,7 @@ export default function App() {
                       }`}
                     style={plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
                   >
-                    {plan.id === 'free' ? 'CRIAR CONTA GRÁTIS' : t.planos.btnSelect}
+                    {plan.id === 'free' ? t.nav.create.toUpperCase() : t.planos.btnSelect}
                   </motion.button>
                   
                   {plan.id !== 'free' && (

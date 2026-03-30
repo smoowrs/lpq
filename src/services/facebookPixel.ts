@@ -1,71 +1,61 @@
 // Facebook Pixel Event Helpers
 // Pixel ID: 1207575821540865
 
-declare global {
-  interface Window {
-    fbq?: (...args: any[]) => void;
-  }
-}
-
-const fbq = (...args: any[]) => {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq(...args);
-  }
-};
+import { trackFBEvent } from '../utils/fb-events';
 
 /** Disparo padrão de PageView (já feito no index.html, mas pode chamar em SPAs) */
 export const trackPageView = () => {
-  fbq('track', 'PageView');
+  trackFBEvent('PageView');
 };
 
 /** Quando o usuário visualiza um plano / abre o checkout */
-export const trackViewContent = (planName: string, value: number, currency = 'BRL') => {
-  fbq('track', 'ViewContent', {
+export const trackViewContent = (planName: string, value: number, currency = 'BRL', userData?: any) => {
+  trackFBEvent('ViewContent', {
     content_name: planName,
     content_category: 'Plano',
     value,
     currency,
-  });
+  }, userData);
 };
 
 /** Quando o usuário clica em "Assinar" / inicia o checkout */
-export const trackInitiateCheckout = (planName: string, value: number, currency = 'BRL') => {
-  fbq('track', 'InitiateCheckout', {
+export const trackInitiateCheckout = (planName: string, value: number, currency = 'BRL', userData?: any) => {
+  trackFBEvent('InitiateCheckout', {
     content_name: planName,
     value,
     currency,
     num_items: 1,
-  });
+  }, userData);
 };
 
 /** Quando o usuário adiciona info de pagamento (CPF + concordou) */
-export const trackAddPaymentInfo = (planName: string) => {
-  fbq('track', 'AddPaymentInfo', {
+export const trackAddPaymentInfo = (planName: string, userData?: any) => {
+  trackFBEvent('AddPaymentInfo', {
     content_name: planName,
-  });
+  }, userData);
 };
 
 /** Quando o pagamento é APROVADO */
-export const trackPurchase = (planName: string, value: number, currency = 'BRL', orderId?: string) => {
-  fbq('track', 'Purchase', {
+export const trackPurchase = (planName: string, value: number, currency = 'BRL', orderId?: string, userData?: any) => {
+  trackFBEvent('Purchase', {
     value,
     currency,
     content_name: planName,
     content_type: 'product',
     ...(orderId ? { order_id: orderId } : {}),
-  });
+  }, userData);
 };
 
 /** Quando o usuário completa o cadastro (SignUp) */
-export const trackCompleteRegistration = (method = 'email') => {
-  fbq('track', 'CompleteRegistration', {
+export const trackCompleteRegistration = (method = 'email', userData?: any) => {
+  trackFBEvent('CompleteRegistration', {
     method,
-  });
+  }, userData);
 };
 
 /** Quando o usuário faz login */
-export const trackLead = (planName?: string) => {
-  fbq('track', 'Lead', {
+export const trackLead = (planName?: string, userData?: any) => {
+  trackFBEvent('Lead', {
     ...(planName ? { content_name: planName } : {}),
-  });
+  }, userData);
 };
