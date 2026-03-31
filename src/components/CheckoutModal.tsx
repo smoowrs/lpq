@@ -702,7 +702,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
             {/* ── MAIN CONTENT ── */}
             <div className="flex-1 overflow-y-auto">
-                <div className="max-w-lg mx-auto px-5 pt-6 pb-40">
+                <div className="max-w-lg mx-auto px-5 pt-6 pb-6">
 
                     {/* Step indicator */}
                     {!isAuthenticated && (
@@ -725,7 +725,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
                     {/* ── STEP 1: IDENTIFICATION ── */}
                     {step === 1 && !isAuthenticated && (
-                        <div className="space-y-5">
+                        <div className="space-y-4">
                             <div>
                                 <h2 className="text-2xl font-black text-slate-900 mb-1">Crie sua Conta</h2>
                                 <p className="text-sm text-slate-500">Você receberá seus dados de acesso por e-mail.</p>
@@ -756,18 +756,12 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     {guestEmailError && <p className="text-[11px] text-red-500 mt-1 font-medium">{guestEmailError}</p>}
                                 </div>
                             </div>
-                            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3.5 flex gap-3 items-start">
+                            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-3 items-start">
                                 <svg className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
                                 <p className="text-[12px] text-blue-700 leading-snug">
                                     Após o pagamento, você receberá um <strong>e-mail com seus dados de acesso</strong> para definir sua senha.
                                 </p>
                             </div>
-                            <button
-                                onClick={handleStep1Continue}
-                                className="w-full h-14 bg-[#4D5BFF] hover:bg-[#3A48FF] text-white rounded-2xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#4D5BFF]/20 transition-all"
-                            >
-                                Continuar para Pagamento <Icons.ArrowRight className="w-4 h-4" />
-                            </button>
                         </div>
                     )}
 
@@ -910,6 +904,20 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                     )}
                 </div>
             </div>
+
+            {/* ── STEP 1 STICKY CTA — always visible at bottom ── */}
+            {step === 1 && !isAuthenticated && (
+                <div className="bg-white border-t border-slate-100 px-5 py-3" style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}>
+                    <div className="max-w-lg mx-auto">
+                        <button
+                            onClick={handleStep1Continue}
+                            className="w-full h-14 bg-[#4D5BFF] hover:bg-[#3A48FF] text-white rounded-2xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#4D5BFF]/20 transition-all active:scale-[0.98]"
+                        >
+                            Continuar para Pagamento <Icons.ArrowRight className="w-4 h-4" />
+                        </button>
+                    </div>
+                </div>
+            )}
 
             {/* ── FOOTER ── */}
             <div className="bg-white border-t border-slate-100 py-3" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
