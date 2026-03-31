@@ -42,7 +42,7 @@
       s.src = 'https://connect.facebook.net/en_US/fbevents.js';
       s.onload = function() {
         fbq('init', '1207575821540865');
-        fbq('track', 'PageView');
+        // PageView will be tracked by the App component to ensure CAPI coverage
       };
       document.head.appendChild(s);
     });

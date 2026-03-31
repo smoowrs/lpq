@@ -8,6 +8,7 @@ import { Package, Sparkles, Users, ShieldCheck,
 import React, { useState, useEffect, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { CheckoutModal } from './components/CheckoutModal';
+import { trackPageView } from './services/facebookPixel';
 import { translations } from "./translations";
 type Language = 'pt' | 'pt-PT' | 'en' | 'es' | 'fr';
 
@@ -23,6 +24,10 @@ export default function App() {
   const [trackingStep, setTrackingStep] = useState(0);
   const [language, setLanguage] = useState<Language>('pt');
   const [hasDetectedRegion, setHasDetectedRegion] = useState(false);
+
+  useEffect(() => {
+    trackPageView();
+  }, []);
 
   // Auto-detect region & language
   useEffect(() => {

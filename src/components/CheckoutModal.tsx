@@ -10,7 +10,7 @@ import {
 } from '@stripe/react-stripe-js';
 import { supabase } from '../services/supabase';
 import { toast } from 'react-hot-toast';
-import { trackInitiateCheckout, trackPurchase, trackAddPaymentInfo } from '../services/facebookPixel';
+import { trackInitiateCheckout, trackPurchase, trackAddPaymentInfo, trackLead } from '../services/facebookPixel';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://auth.connectacademy.com.br';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmeWZ6cGppdmVzcmJjeGlsbXpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2NTE1ODUsImV4cCI6MjA4NjIyNzU4NX0.4q3uB1PrFPbaH4lunmQ6wZU0jNABg2D0i45JRHXo_K0';
@@ -588,7 +588,18 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
         let hasError = false;
         if (!guestName.trim() || guestName.trim().length < 2) { setGuestNameError('Informe seu nome completo'); hasError = true; } else { setGuestNameError(''); }
         if (!guestEmail.includes('@') || !guestEmail.includes('.')) { setGuestEmailError('Informe um e-mail válido'); hasError = true; } else { setGuestEmailError(''); }
-        if (!hasError) setStep(2);
+        
+        if (!hasError) {
+            try {
+                const priceStr = isAnnual ? plan.prices?.[region]?.annual : plan.prices?.[region]?.monthly;
+                const value = priceStr ? parseFloat(priceStr.replace(',', '.')) : 0;
+                trackLead(plan.label || plan.id, value, region === 'EU' ? 'EUR' : 'BRL', { 
+                    email: guestEmail, 
+                    firstName: guestName ? guestName.split(' ')[0] : undefined 
+                });
+            } catch {}
+            setStep(2);
+        }
     };
 
     const billingLabel = isAnnual ? (plan.id === 'vitalicio' ? 'Pagamento Único' : 'Anual') : 'Mensal';

@@ -28,6 +28,15 @@ export const trackInitiateCheckout = (planName: string, value: number, currency 
   }, userData);
 };
 
+/** Quando o usuário completa o Step 1 (Lead) */
+export const trackLead = (planName: string, value: number, currency = 'BRL', userData?: any) => {
+  trackFBEvent('Lead', {
+    content_name: planName,
+    value,
+    currency,
+  }, userData);
+};
+
 /** Quando o usuário adiciona info de pagamento (CPF + concordou) */
 export const trackAddPaymentInfo = (planName: string, userData?: any) => {
   trackFBEvent('AddPaymentInfo', {
@@ -43,19 +52,5 @@ export const trackPurchase = (planName: string, value: number, currency = 'BRL',
     content_name: planName,
     content_type: 'product',
     ...(orderId ? { order_id: orderId } : {}),
-  }, userData);
-};
-
-/** Quando o usuário completa o cadastro (SignUp) */
-export const trackCompleteRegistration = (method = 'email', userData?: any) => {
-  trackFBEvent('CompleteRegistration', {
-    method,
-  }, userData);
-};
-
-/** Quando o usuário faz login */
-export const trackLead = (planName?: string, userData?: any) => {
-  trackFBEvent('Lead', {
-    ...(planName ? { content_name: planName } : {}),
   }, userData);
 };
