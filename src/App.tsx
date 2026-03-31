@@ -153,6 +153,9 @@ export default function App() {
                 alt="Asas de Importação"
                 className="h-10 object-contain"
                 referrerPolicy="no-referrer"
+                fetchpriority="high"
+                width="160"
+                height="40"
               />
             </div>
 
@@ -215,6 +218,9 @@ export default function App() {
                 alt="Asas de Importação"
                 className="h-6 sm:h-7 object-contain pointer-events-auto"
                 referrerPolicy="no-referrer"
+                fetchpriority="high"
+                width="120"
+                height="28"
               />
             </div>
           </div>
@@ -405,8 +411,10 @@ export default function App() {
                   src="https://i.postimg.cc/3RkrkCVn/phones.png"
                   alt="App Comunidade"
                   className="w-[170px] xl:w-[200px] sm:w-[220px] max-w-none object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-                  loading="eager"
+                  loading="lazy"
                   decoding="async"
+                  width="220"
+                  height="440"
                 />
                 {/* Degradê para sumir suavemente na base */}
                 <div className="absolute inset-x-0 -bottom-10 h-32 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
@@ -458,8 +466,10 @@ export default function App() {
                   src="https://i.postimg.cc/3RkrkCVn/phones.png"
                   alt="App Comunidade"
                   className="w-full max-w-[520px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-                  loading="eager"
+                  loading="lazy"
                   decoding="async"
+                  width="520"
+                  height="1040"
                 />
               </div>
             </motion.div>
@@ -1153,7 +1163,7 @@ export default function App() {
                 >
                   <div className="relative mb-4">
                     <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full border-4 border-[#582ef5]/30 p-1">
-                      <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover grayscale opacity-70" alt="3º Lugar" />
+                      <img src="https://i.postimg.cc/7YzQQpvt/IMG_5699_2.png" className="w-full h-full rounded-full object-cover grayscale opacity-70" alt="3º Lugar" loading="lazy" decoding="async" />
                     </div>
                     <div className="absolute -bottom-1 -right-1 w-6 h-6 md:w-8 md:h-8 bg-[#1a1a1a] border-2 border-[#582ef5]/30 rounded-full flex items-center justify-center text-[10px] md:text-sm font-bold text-gray-400">3</div>
                   </div>
@@ -1367,7 +1377,7 @@ export default function App() {
                         {card.id}
                       </span>
                     </div>
-                    <img src={card.img} alt={`Connect AI ${card.id}`} className="w-full h-full object-cover brightness-90 group-hover/card-3d:brightness-110 transition-all" />
+                    <img src={card.img} alt={`Connect AI ${card.id}`} className="w-full h-full object-cover brightness-90 group-hover/card-3d:brightness-110 transition-all" loading="lazy" decoding="async" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 pointer-events-none" />
                   </motion.div>
                 ))}
@@ -1694,7 +1704,7 @@ export default function App() {
       <footer className="border-t border-white/10 py-12 px-6 order-11 md:order-none">
         <div className="max-w-7xl mx-auto flex flex-col items-center justify-center gap-6">
           <div className="flex items-center justify-center">
-            <img src="https://i.postimg.cc/DZcqskjG/IMG_3713_3.png" alt="Drone Connect Academy" className="h-8 object-contain" referrerPolicy="no-referrer" loading="lazy" decoding="async" />
+            <img src="https://i.postimg.cc/DZcqskjG/IMG_3713_3.png" alt="Drone Connect Academy" className="h-8 object-contain" referrerPolicy="no-referrer" loading="lazy" decoding="async" width="120" height="32" />
           </div>
           <p className="text-sm text-gray-500 text-center">
             © 2026 Connect Academy LTDA {t.footer.rights} - CNPJ:{' '}

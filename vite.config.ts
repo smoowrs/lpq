@@ -20,11 +20,18 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       target: 'es2020',
-      chunkSizeWarningLimit: 600,
+      chunkSizeWarningLimit: 500,
       minify: 'esbuild',
+      cssCodeSplit: true,
       rollupOptions: {
         output: {
-          // Defaults are safer for production stability
+          manualChunks: {
+            'vendor-react': ['react', 'react-dom'],
+            'vendor-motion': ['motion'],
+            'vendor-stripe': ['@stripe/react-stripe-js', '@stripe/stripe-js'],
+            'vendor-supabase': ['@supabase/supabase-js'],
+            'vendor-ui': ['lucide-react', 'react-hot-toast'],
+          },
         },
       },
     },
