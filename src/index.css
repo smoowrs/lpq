@@ -1,27 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-@import "tailwindcss";
-
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-primary: #582ef5;
-}
-
+/* Base Styles */
 html, body {
   background-color: #04050D;
   color: #FFFFFF;
-  font-family: "Inter", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
   overflow-x: hidden;
   width: 100%;
-  --bg-primary: #000000;
-  --bg-surface: #000000;
-  --text-primary: rgba(255, 255, 255, 0.9);
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --color-primary: #582ef5;
 }
+
 
 /* ── Buttons ───────────────────────────────────────────────── */
 .btn-primary {
@@ -123,6 +112,8 @@ html, body {
   width: max-content;
   animation: marquee 30s linear infinite;
   gap: 1rem;
+  will-change: transform;
+  transform: translateZ(0);
 }
 .animate-marquee:hover {
   animation-play-state: paused;
@@ -161,10 +152,10 @@ html, body {
   100% { background: radial-gradient(ellipse, rgba(120,0,255,0.75) 0%, transparent 70%); }
 }
 
-.ambilight-tl { animation: ambilight-tl 6s ease-in-out infinite; }
-.ambilight-tr { animation: ambilight-tr 7s ease-in-out infinite; }
-.ambilight-bl { animation: ambilight-bl 8s ease-in-out infinite; }
-.ambilight-br { animation: ambilight-br 5s ease-in-out infinite; }
+.ambilight-tl { animation: ambilight-tl 6s ease-in-out infinite; will-change: background; transform: translateZ(0); }
+.ambilight-tr { animation: ambilight-tr 7s ease-in-out infinite; will-change: background; transform: translateZ(0); }
+.ambilight-bl { animation: ambilight-bl 8s ease-in-out infinite; will-change: background; transform: translateZ(0); }
+.ambilight-br { animation: ambilight-br 5s ease-in-out infinite; will-change: background; transform: translateZ(0); }
 
 /* ── Utilities ─────────────────────────────────────────────── */
 .no-scrollbar::-webkit-scrollbar {
@@ -249,3 +240,17 @@ html.checkout-open body {
   overflow: hidden !important;
   width: 100vw !important;
 }
+
+/* ── Gradient text (usado em títulos de seções) ────────────── */
+.text-gradient-ai {
+  background: linear-gradient(135deg, #7c5ef7 0%, #a78bfa 40%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ── Performance: paint isolation apenas para nav/overlay fixa ── */
+/* Nota: contain: layout/style NÃO pode ser aplicado em sections com
+   filhos absolutely positioned (glows, overlays) — quebra o layout */
+

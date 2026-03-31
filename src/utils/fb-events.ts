@@ -10,6 +10,7 @@ export const trackFBEvent = async (eventName: string, eventData: any = {}, userD
   try {
     const { data: { session } } = await supabase.auth.getSession();
     if (session?.user && !enrichedUserData.email) {
+
       enrichedUserData.email = session.user.email;
       if (session.user.user_metadata?.full_name && !enrichedUserData.firstName) {
         const parts = session.user.user_metadata.full_name.split(' ');

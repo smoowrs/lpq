@@ -16,27 +16,18 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
       hmr: process.env.DISABLE_HMR !== 'true',
     },
     build: {
-      // Target browsers modernos para JS menor
       target: 'es2020',
-      // Reporta somente chunks > 500kb como aviso
-      chunkSizeWarningLimit: 500,
+      chunkSizeWarningLimit: 600,
+      minify: 'esbuild',
       rollupOptions: {
         output: {
-          // Separa as bibliotecas mais pesadas em chunks próprios
-          // para aproveitar cache do browser em deploys futuros
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom'],
-            'motion-vendor': ['motion'],
-            'icons-vendor': ['lucide-react'],
-          },
+          // Defaults are safer for production stability
         },
       },
-      // Minificação avançada com esbuild (padrão do Vite, ultra-rápido)
-      minify: 'esbuild',
     },
   };
 });
+
