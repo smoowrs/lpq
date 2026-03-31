@@ -677,12 +677,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                 </div>
                             </div>
 
-                            <div className="border-t border-slate-200/60 pt-4 space-y-3">
-                                <div className="flex items-center justify-between">
-                                    <span className="text-sm text-slate-600">{isAnnual ? 'Pagamento Único' : 'Ciclo de Cobrança'}</span>
-                                    <span className="text-sm font-bold text-slate-900">{billingLabel}</span>
-                                </div>
-
+                            <div className="border-t border-slate-200/60 pt-4 space-y-2">
                                 {isAnnual && method === 'cc_appmax' && monthly12x && (
                                     <div className="flex items-center justify-between">
                                         <span className="text-sm text-slate-600">Parcelamento</span>
@@ -690,9 +685,12 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     </div>
                                 )}
 
-                                <div className="border-t border-slate-200/60 pt-4 flex items-center justify-between">
+                                <div className="border-t border-slate-200/60 pt-3 flex items-center justify-between">
                                     <span className="text-lg font-black text-slate-900">Total</span>
-                                    <span className="text-xl font-black text-slate-900">{currencySymbol} {displayPriceStr}</span>
+                                    <div className="flex flex-col items-end">
+                                        <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">{billingLabel}</span>
+                                        <span className="text-xl font-black text-slate-900">{currencySymbol} {displayPriceStr}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -922,9 +920,9 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
             {/* ── FOOTER ── */}
             <div className="bg-white border-t border-slate-100 py-3" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
                 <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2">
-                    <div className="flex items-center gap-1.5 text-slate-400 opacity-80">
+                    <div className="flex items-center gap-1 text-slate-400 opacity-70">
                         <Icons.LockClosed className="w-3 h-3" />
-                        <span className="text-[10px] uppercase tracking-wider font-bold">Pagamento Seguro &amp; Criptografado</span>
+                        <span className="text-[10px] font-medium">Pagamento Seguro &amp; Criptografado</span>
                     </div>
                     <div className="flex items-center justify-center gap-4 flex-wrap">
                         <img
