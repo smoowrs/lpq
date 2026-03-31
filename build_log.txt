@@ -1,0 +1,31 @@
+
+> react-example@0.0.0 build
+> vite build
+
+vite v6.4.1 building for production...
+transforming...
+✓ 16 modules transformed.
+✗ Build failed in 294ms
+error during build:
+[vite:esbuild] Transform failed with 1 error:
+/Users/thg/Downloads/lpq-main/lpq/src/sections/Minerador.tsx:120:31: ERROR: Expected "{" but found "\\"
+file: /Users/thg/Downloads/lpq-main/lpq/src/sections/Minerador.tsx:120:31
+
+Expected "{" but found "\\"
+118|                    >
+119|                      <div className="w-20 sm:w-24 h-20 sm:h-24 bg-black/40 rounded-xl overflow-hidden flex items-center justify-center border border-white/5 flex-shrink-0">
+120|                        <img src=\"https://i.postimg.cc/d1G9Gyg2/connect_ai_1774346079071.webp\" alt=\"iPhone 17\" className=\"w-full h-full object-cover group-hover:scale-110 transition-transform duration-500\" loading=\"lazy\" decoding=\"async\" />
+   |                                 ^
+121|                      </div>
+122|                      <div className="flex-1 flex flex-col justify-center text-left">
+
+    at failureErrorWithLog (/Users/thg/Downloads/lpq-main/lpq/node_modules/vite/node_modules/esbuild/lib/main.js:1467:15)
+    at /Users/thg/Downloads/lpq-main/lpq/node_modules/vite/node_modules/esbuild/lib/main.js:736:50
+    at responseCallbacks.<computed> (/Users/thg/Downloads/lpq-main/lpq/node_modules/vite/node_modules/esbuild/lib/main.js:603:9)
+    at handleIncomingPacket (/Users/thg/Downloads/lpq-main/lpq/node_modules/vite/node_modules/esbuild/lib/main.js:658:12)
+    at Socket.readFromStdout (/Users/thg/Downloads/lpq-main/lpq/node_modules/vite/node_modules/esbuild/lib/main.js:581:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)

@@ -19,15 +19,19 @@ export default defineConfig(({ mode }) => {
       hmr: process.env.DISABLE_HMR !== 'true',
     },
     build: {
-      target: 'es2020',
-      chunkSizeWarningLimit: 600,
+      target: 'esnext',
+      chunkSizeWarningLimit: 1000,
       minify: 'esbuild',
+      cssMinify: true,
       rollupOptions: {
         output: {
-          // Defaults are safer for production stability
+          manualChunks: {
+            'vendor-react': ['react', 'react-dom'],
+            'vendor-motion': ['motion/react'],
+            'vendor-icons': ['lucide-react'],
+          },
         },
       },
     },
   };
 });
-
