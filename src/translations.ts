@@ -210,25 +210,6 @@ export const translations = {
           { text: "Sistema Indique e Ganhe.", status: true },
         ]
       }
-    },
-    faq: {
-      title: "PERGUNTAS FREQUENTES",
-      subtitle: "Sua dúvida pode estar aqui",
-      q1: "Como o Minerador funciona?",
-      a1: "Nossa IA exclusiva analisa milhares de produtos e fornecedores em tempo real para encontrar as opções mais seguras e com menor risco de taxação, automatizando também as declarações de importação.",
-      q2: "O LPQ é um curso?",
-      a2: "O LPQ é muito mais que um curso. Somos uma plataforma completa com ferramentas de IA, rastreio inteligente, gerador de imagens e uma comunidade ativa de importadores, além de aulas passo a passo.",
-      q3: "É seguro importar direto das fábricas?",
-      a3: "Sim! Em nosso painel de fábricas selecionamos apenas fornecedores verificados e com histórico positivo de entrega global, garantindo que você receba exatamente o que comprou.",
-      q4: "Como faço para evitar taxas abusivas?",
-      a4: "Utilizando o Minerador e seguindo as estratégias de declaração inteligente ensinadas em nosso painel, você minimiza drasticamente os riscos de cobranças indevidas na alfândega.",
-      q5: "Quais são as formas de pagamento?",
-      a5: "Aceitamos diversas formas de pagamento, incluindo PIX e Cartão de Crédito com parcelamento. O acesso é liberado imediatamente após a confirmação do pagamento.",
-      q6: "Como acesso a comunidade exclusiva?",
-      a6: "Após criar sua conta e adquirir um dos planos que incluem a rede social, você terá acesso imediato ao painel da comunidade para fazer networking e trocar experiências.",
-      supportTitle: "Ainda tem dúvidas?",
-      supportDesc: "Fale com nosso team de especialistas pelo WhatsApp.",
-      supportBtn: "FALAR COM SUPORTE"
     }
   },
   'pt-PT': {
@@ -441,25 +422,6 @@ export const translations = {
           { text: "Sistema Indique e Ganhe.", status: true },
         ]
       }
-    },
-    faq: {
-      title: "PERGUNTAS FREQUENTES",
-      subtitle: "Sua dúvida pode estar aqui",
-      q1: "Como o Minerador funciona?",
-      a1: "Nossa IA exclusiva analisa milhares de produtos e fornecedores em tempo real para encontrar as opções mais seguras e com menor risco de taxação, automatizando também as declarações de importação.",
-      q2: "O LPQ é um curso?",
-      a2: "O LPQ é muito mais que um curso. Somos uma plataforma completa com ferramentas de IA, rastreio inteligente, gerador de imagens e uma comunidade ativa de importadores, além de aulas passo a passo.",
-      q3: "É seguro importar direto das fábricas?",
-      a3: "Sim! Em nosso painel de fábricas selecionamos apenas fornecedores verificados e com histórico positivo de entrega global, garantindo que você receba exatamente o que comprou.",
-      q4: "Como faço para evitar taxas abusivas?",
-      a4: "Utilizando o Minerador e seguindo as estratégias de declaração inteligente ensinadas em nosso painel, você minimiza drasticamente os riscos de cobranças indevidas na alfândega.",
-      q5: "Quais são as formas de pagamento?",
-      a5: "Aceitamos diversas formas de pagamento, incluindo Cartão de Crédito com parcelamento. O acesso é liberado imediatamente após a confirmação do pagamento.",
-      q6: "Como acesso a comunidade exclusiva?",
-      a6: "Após criar sua conta e adquirir um dos planos que incluem a rede social, você terá acesso imediato ao painel da comunidade para fazer networking e trocar experiências.",
-      supportTitle: "Ainda tem dúvidas?",
-      supportDesc: "Fale com o nosso atendimento pelo WhatsApp.",
-      supportBtn: "FALAR COM SUPORTE"
     }
   },
   en: {
@@ -672,25 +634,6 @@ export const translations = {
           { text: "Refer and Earn system.", status: true },
         ]
       }
-    },
-    faq: {
-      title: "FREQUENTLY ASKED QUESTIONS",
-      subtitle: "Your questions might be here",
-      q1: "How does the Miner work?",
-      a1: "Our exclusive AI analyzes thousands of products and suppliers in real-time to find the safest options with the lowest risk of taxation, also automating import declarations.",
-      q2: "Is LPQ a course?",
-      a2: "LPQ is much more than a course. We are a complete platform with AI tools, smart tracking, image generator and an active community of importers, plus step-by-step classes.",
-      q3: "Is it safe to import direct from factories?",
-      a3: "Yes! In our factory panel we select only verified suppliers with a positive history of global delivery, ensuring that you receive exactly what you bought.",
-      q4: "How do I avoid abusive taxes?",
-      a4: "By using the Miner and following the smart declaration strategies taught in our panel, you drastically minimize the risks of undue charges at customs.",
-      q5: "What are the payment methods?",
-      a5: "We accept several forms of payment, including Credit Cards with installments. Access is released immediately after payment confirmation.",
-      q6: "How do I access the exclusive community?",
-      a6: "After creating your account and acquiring one of the plans that include the social network, you will have immediate access to the community board to network and exchange experiences.",
-      supportTitle: "Still have questions?",
-      supportDesc: "Talk to our team of specialists via WhatsApp.",
-      supportBtn: "TALK TO SUPPORT"
     }
   },
   es: {
@@ -903,25 +846,6 @@ export const translations = {
           { text: "Sistema Recomienda y Gana.", status: true },
         ]
       }
-    },
-    faq: {
-      title: "PREGUNTAS FRECUENTES",
-      subtitle: "Tu duda puede estar aquí",
-      q1: "¿Cómo funciona el Minero?",
-      a1: "Nuestra IA exclusiva analiza miles de productos y proveedores en tiempo real para encontrar las opciones más seguras y con menor riesgo de impuestos, automatizando también las declaraciones de importación.",
-      q2: "¿El LPQ es un curso?",
-      a2: "El LPQ es mucho más que un curso. Somos una plataforma completa con herramientas de IA, rastreo inteligente, generador de imágenes y una comunidad activa de importadores, además de clases paso a paso.",
-      q3: "¿Es seguro importar directo de las fábricas?",
-      a3: "¡Sí! En nuestro panel de fábricas seleccionamos solo proveedores verificados y con historial positivo de entrega global, garantizando que recibas exactamente lo que compraste.",
-      q4: "¿Cómo hago para evitar impuestos abusivos?",
-      a4: "Utilizando el Minero y siguiendo las estrategias de declaración inteligente enseñadas en nuestro panel, minimizas drásticamente los riesgos de cobros indebidos en aduana.",
-      q5: "¿Cuáles son las formas de pago?",
-      a5: "Aceptamos diversas formas de pago, incluyendo tarjetas de crédito con cuotas. El acceso se libera inmediatamente después de la confirmación del pago.",
-      q6: "¿Cómo accedo a la comunidad exclusiva?",
-      a6: "Después de crear tu cuenta y adquirir uno de los planes que incluyen la red social, tendrás acceso inmediato al panel de la comunidad para hacer networking e intercambiar experiencias.",
-      supportTitle: "¿Aún tienes dudas?",
-      supportDesc: "Habla con nuestro equipo de especialistas por WhatsApp.",
-      supportBtn: "HABLAR CON SOPORTE"
     }
   },
   fr: {
@@ -1079,7 +1003,7 @@ export const translations = {
           { text: "Accès àos marketplaces locais na China", status: false },
           { text: "Prioridade no support (Topo da lista)", status: false },
           { text: "Medalha de destaque exclusiva na communauté", status: false },
-          { text: "Alertas e oportunidades em première mão", status: false },
+          { text: "Alertas e oportunidades em primeira mão", status: false },
           { text: "Tirages au sort mensuels et prix", status: false },
         ]
       },
@@ -1099,7 +1023,7 @@ export const translations = {
           { text: "Rastreio em tempo real de até 10 envios.", status: true },
           { text: "Modules de cours exclusivas.", status: true },
           { text: "Acesso à communauté.", status: true },
-          { text: "Alertas e oportunidades em première mão.", status: true },
+          { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Tirages au sort mensuels et prix.", status: true },
           { text: "Système Parrainez et Gagnez.", status: true },
           { text: "Accès à Apple officiel en Chine, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global", status: false },
@@ -1120,7 +1044,7 @@ export const translations = {
           { text: "Télécharger imagens ilimitadas", status: true },
           { text: "Tableau de fábricas e produtos exclusivos não divulgados publicamente.", status: true },
           { text: "Un painel com produtos mis à jour", status: true },
-          { text: "Acesso à origem de Eletrônicos, Gamer, Periféricos, Acessórios para Celular, Automotivo, Vêtements, Baskets, Montres, Perfumes, Sacs, Joias, Lunettes, Beleza, Maquiagem, Sex Shop, Fitness, Esporte, Ciclismo, Pesca, Casa e Cozinha, Décoration, Éclairage, Jardinage, Outils, Jouets, Papeterie, Pet, Fête et Cadeaux.", status: true },
+          { text: "Acesso à origem de Eletrônicos, Gamer, Periféricos, Acessórios para Celular, Automotivo, Vêtements, Baskets, Montres, Perfumes, Sacs, Joias, Lunettes, Beleza, Maquiagem, Sex Shop, Fitness, Esporte, Ciclismo, Pesca, Casa e Cozinha, Decoração, Iluminação, Jardinagem, Ferramentas, Jouets, Papelaria, Pet, Festa e Brindes.", status: true },
           { text: "Gerador de imagens 4K (10 créditos mensais).", status: true },
           { text: "Inteligência Artificial o Minerador de buscas e perguntas.", status: true },
           { text: "Accès àos marketplaces locais na China.", status: true },
@@ -1129,30 +1053,11 @@ export const translations = {
           { text: "Acesso à communauté.", status: true },
           { text: "Prioridade no support (topo da lista).", status: true },
           { text: "Medalha de destaque na communauté.", status: true },
-          { text: "Alertas e oportunidades em première mão.", status: true },
+          { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Tirages au sort mensuels et prix.", status: true },
           { text: "Système Parrainez et Gagnez.", status: true },
         ]
       }
-    },
-    faq: {
-      title: "FOIRE AUX QUESTIONS",
-      subtitle: "Votre question est peut-être ici",
-      q1: "Comment fonctionne le Mineur ?",
-      a1: "Notre IA exclusive analyse des milliers de produits et de fournisseurs en temps réel pour trouver les options les plus sûres avec le moins de risques de taxation, automatisant également les déclarations d'importation.",
-      q2: "LPQ est-il un cours ?",
-      a2: "LPQ est bien plus qu'un cours. Nous sommes une plateforme complète avec des outils d'IA, un suivi intelligent, un générateur d'images et une communauté d'importateurs actifs, en plus de cours étape par étape.",
-      q3: "Est-il sûr d'importer directement des usines ?",
-      a3: "Oui ! Dans notre panel d'usines, nous ne sélectionnons que des fournisseurs vérifiés avec une expérience positive de livraison mondiale, garantissant que vous receviez exactement ce que vous avez acheté.",
-      q4: "Comment éviter les taxes abusives ?",
-      a4: "En utilisant le Mineur et en suivant les stratégies de déclaration intelligente enseignées dans notre panel, vous minimisez considérablement les risques de frais indus à la douane.",
-      q5: "Quels sont les modes de paiement ?",
-      a5: "Nous acceptons plusieurs modes de paiement, y compris les cartes de crédit avec échelonnement. L'accès est accordé immédiatement après confirmation du paiement.",
-      q6: "Comment accéder à la communauté exclusive ?",
-      a6: "Après avoir créé votre compte et acquis l'un des plans incluant le réseau social, vous aurez un accès immédiat au tableau de bord de la communauté pour réseauter et échanger des expériences.",
-      supportTitle: "Vous avez encore des questions ?",
-      supportDesc: "Discutez avec notre équipe de spécialistes via WhatsApp.",
-      supportBtn: "PARLER AU SUPPORT"
     }
   }
 };
