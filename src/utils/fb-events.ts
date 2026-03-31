@@ -9,9 +9,13 @@ export const trackFBEvent = async (eventName: string, eventData: any = {}, userD
   let enrichedUserData = { ...(userData || {}) };
   try {
     const { data: { session } } = await supabase.auth.getSession();
-    if (session?.user && !enrichedUserData.email) {
-
-      enrichedUserData.email = session.user.email;
+    if (session?.user) {
+      if (!enrichedUserData.external_id) {
+        enrichedUserData.external_id = session.user.id;
+      }
+      if (!enrichedUserData.email) {
+        enrichedUserData.email = session.user.email;
+      }
       if (session.user.user_metadata?.full_name && !enrichedUserData.firstName) {
         const parts = session.user.user_metadata.full_name.split(' ');
         enrichedUserData.firstName = parts[0];
