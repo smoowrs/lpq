@@ -702,7 +702,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
             {/* ── MAIN CONTENT ── */}
             <div className="flex-1 overflow-y-auto">
-                <div className="max-w-lg mx-auto px-5 pt-6 pb-24 md:pb-32">
+                <div className="max-w-lg mx-auto px-5 pt-6 pb-40">
 
                     {/* Step indicator */}
                     {!isAuthenticated && (
@@ -912,35 +912,35 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
             </div>
 
             {/* ── FOOTER ── */}
-            <div className="bg-white border-t border-slate-100 py-5" style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom))' }}>
-                <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-3">
+            <div className="bg-white border-t border-slate-100 py-3" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
+                <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2">
                     <div className="flex items-center gap-1.5 text-slate-400 opacity-80">
                         <Icons.LockClosed className="w-3 h-3" />
                         <span className="text-[10px] uppercase tracking-wider font-bold">Pagamento Seguro &amp; Criptografado</span>
                     </div>
-                    <div className="flex items-center justify-center gap-5 flex-wrap">
+                    <div className="flex items-center justify-center gap-4 flex-wrap">
                         <img
                             src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
                             alt="Apple Pay"
-                            className="h-[36px] w-auto object-contain"
+                            className="h-[22px] w-auto object-contain"
                             style={{ filter: 'grayscale(100%) opacity(0.28)' }}
                         />
                         <img
                             src="https://i.postimg.cc/zXzwVd3x/Google-Pay-Logo-svg.png"
                             alt="Google Pay"
-                            className="h-[20px] w-auto object-contain"
+                            className="h-[16px] w-auto object-contain"
                             style={{ filter: 'grayscale(100%) opacity(0.4)' }}
                         />
                         <img
                             src="https://i.postimg.cc/y60cfh4L/Stripe_Logo_revised_2016_svg.png"
                             alt="Stripe"
-                            className="h-[16px] w-auto object-contain"
+                            className="h-[13px] w-auto object-contain"
                             style={{ filter: 'grayscale(100%) opacity(0.4)' }}
                         />
                         <img
                             src="https://i.postimg.cc/CMbkvCTv/APPMAX_LOGO_LIL%C3%81S_2_png.webp"
                             alt="Appmax"
-                            className="h-[20px] w-auto object-contain"
+                            className="h-[16px] w-auto object-contain"
                             style={{ filter: 'grayscale(100%) opacity(0.4)' }}
                         />
                     </div>
