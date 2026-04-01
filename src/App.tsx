@@ -1485,7 +1485,7 @@ export default function App() {
                     </div>
                     
                     <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
-                      PAGAMENTO ÚNICO DE {isBrasil ? 'R$' : '€'} {price}
+                      {plan.id === 'starter' ? '3 meses de acesso' : plan.id === 'pro' ? '1 ano de acesso' : 'acesso para sempre'}
                     </p>
                   </div>
                   )}
