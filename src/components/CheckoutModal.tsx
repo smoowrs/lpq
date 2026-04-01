@@ -934,7 +934,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                         <img
                             src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
                             alt="Apple Pay"
-                            className="h-[22px] w-auto object-contain"
+                            className="h-[26px] w-auto object-contain"
                             style={{ filter: 'grayscale(100%) opacity(0.28)' }}
                         />
                         <img
