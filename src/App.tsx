@@ -302,16 +302,16 @@ export default function App() {
 
               <h1 className="text-[28px] md:text-5xl lg:text-[44px] xl:text-[56px] font-black tracking-tight mb-8 leading-[1.05] text-white">
                 {/* Versão Desktop (3 linhas) */}
-                <div className="hidden md:flex flex-col items-start">
+                <div className="hidden md:flex flex-col items-start text-white">
                   <span className="whitespace-nowrap">{t.hero.title1}</span>
-                  <span className="text-gradient-ai whitespace-nowrap">{t.hero.title2}</span>
+                  <span className="whitespace-nowrap">{t.hero.title2}</span>
                   <span className="whitespace-nowrap">{t.hero.title3}</span>
                 </div>
 
                 {/* Versão Mobile (2 linhas) */}
-                <div className="flex md:hidden flex-col items-center">
+                <div className="flex md:hidden flex-col items-center text-white">
                   <span className="whitespace-nowrap">{t.hero.title1}</span>
-                  <span className="text-gradient-ai whitespace-nowrap">{t.hero.titleMob}</span>
+                  <span className="whitespace-nowrap">{t.hero.titleMob}</span>
                 </div>
               </h1>
 
@@ -441,7 +441,7 @@ export default function App() {
 
                 <h2 className="text-[26px] font-bold tracking-tighter mb-4 leading-[1.05] text-white">
                   {t.comunidade.title1} <br />
-                  <span className="whitespace-nowrap">{t.comunidade.title2}</span>
+                  <span className="whitespace-nowrap text-white">{t.comunidade.title2}</span>
                 </h2>
                 <p className="text-[11px] sm:text-[13px] text-gray-400 mb-6 leading-relaxed opacity-80">
                   {t.comunidade.desc}
@@ -493,7 +493,7 @@ export default function App() {
 
               <h2 className="text-6xl lg:text-[82px] font-bold tracking-tighter mb-8 leading-[1.05] text-white">
                 {t.comunidade.title1} <br />
-                <span className="whitespace-nowrap text-inherit">{t.comunidade.title2}</span>
+                <span className="whitespace-nowrap text-white">{t.comunidade.title2}</span>
               </h2>
 
               <p className="text-base text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
@@ -570,7 +570,7 @@ export default function App() {
               </div>
               <h2 className="text-[28px] md:text-5xl lg:text-7xl font-bold tracking-tighter mb-4 md:mb-8 leading-[1.05] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                 {t.produtos.title1} <br />
-                <span className="text-gradient-ai">{t.produtos.title2}</span>
+                <span className="text-white">{t.produtos.title2}</span>
               </h2>
               <p className="hidden md:block text-sm md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-left drop-shadow-lg">
                 {t.produtos.desc}
@@ -686,11 +686,11 @@ export default function App() {
               <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300 uppercase tracking-wider">{t.aulas.tag}</span>
             </div>
-            <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 md:mb-8 leading-[1.1] drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
+            <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 md:mb-8 leading-[1.1] drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)] text-white">
               {/* Versão Desktop */}
               <span className="hidden md:block">
                 {t.aulas.title1} <br />
-                <span className="text-gradient-ai">{t.aulas.title2}</span>
+                <span className="text-white">{t.aulas.title2}</span>
               </span>
               {/* Versão Mobile (1 linha) */}
               <span className="md:hidden block whitespace-nowrap text-[26px]">
@@ -749,14 +749,13 @@ export default function App() {
                 <h2 className="text-[28px] md:text-[40px] lg:text-[52px] font-bold tracking-tighter mb-8 leading-[1.1] text-white drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)]">
                   {/* Versão Desktop */}
                   <span className="hidden md:block">
-                    {t.fabricas.title1} <br />
-                    {t.fabricas.title2} <br />
-                    <span className="text-gradient-ai">{t.fabricas.title3}</span>
+                    {t.fabricas.title1} {t.fabricas.title2} <br />
+                    <span className="text-white">{t.fabricas.title3}</span>
                   </span>
                   {/* Versão Mobile (2 linhas) */}
                   <span className="md:hidden text-center md:text-left block">
                     {t.fabricas.titleMob1} <br />
-                    <span className="text-gradient-ai">{t.fabricas.titleMob2}</span>
+                    <span className="text-white">{t.fabricas.titleMob2}</span>
                   </span>
                 </h2>
 
@@ -834,13 +833,12 @@ export default function App() {
 
               <h2 className="text-[28px] md:text-5xl lg:text-[72px] font-black tracking-tighter mb-4 lg:mb-1 leading-[1] text-white">
                 {/* Versão Desktop */}
-                <span className="hidden md:block">
-                  {t.minerador.title1} <br />
-                  <span className="text-gradient-ai">{t.minerador.title2}</span>
+                <span className="hidden md:block text-white">
+                  {t.minerador.title1} {t.minerador.title2}
                 </span>
                 {/* Versão Mobile (1 linha) */}
                 <span className="md:hidden block whitespace-nowrap text-[26px]">
-                  {t.minerador.title1} <span className="text-gradient-ai">{t.minerador.title2}</span>
+                  {t.minerador.title1} <span className="text-white">{t.minerador.title2}</span>
                 </span>
               </h2>
 
@@ -1091,9 +1089,9 @@ export default function App() {
                   <span className="text-gray-300 uppercase tracking-wider">{t.recompensas.tag}</span>
                 </div>
 
-                <h2 className="text-[28px] md:text-5xl lg:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
-                  {t.recompensas.title1}<br />
-                  <span className="text-gradient-ai">{t.recompensas.title2}</span>
+                <h2 className="text-[28px] md:text-6xl font-bold tracking-tighter mb-6 leading-[1.1] text-white text-center md:text-left">
+                  {t.recompensas.title1} <br />
+                  <span className="text-white">{t.recompensas.title2}</span>
                 </h2>
 
                 <motion.button
@@ -1249,11 +1247,11 @@ export default function App() {
               <Package className="w-3.5 h-3.5 text-[#582ef5]" />
               <span className="text-gray-300 uppercase tracking-wider">{t.rastreio.tag}</span>
             </div>
-            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1]">
+            <h2 className="text-[28px] md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 leading-[1.1] text-white">
               {/* Versão Desktop */}
               <span className="hidden md:block">
                 {t.rastreio.title1} <br />
-                <span className="text-gradient-ai">{t.rastreio.title2}</span>
+                <span className="text-white">{t.rastreio.title2}</span>
               </span>
               {/* Versão Mobile */}
               <span className="md:hidden block whitespace-nowrap text-[26px]">
