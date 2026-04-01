@@ -424,7 +424,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
     const currencySymbol = plan.region === 'EU' ? '€' : 'R$';
     const region = plan.region || 'BR';
 
-    const [method, setMethod] = useState<'cc' | 'pix' | 'cc_appmax' | 'apple_pay'>(plan.defaultMethod || (isAnnual ? 'cc_appmax' : 'cc'));
+    const [method, setMethod] = useState<'cc' | 'pix' | 'cc_appmax' | 'apple_pay'>(plan.defaultMethod || (region === 'BR' ? 'cc_appmax' : 'cc'));
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [stripeError, setStripeError] = useState<string | null>(null);
@@ -443,20 +443,18 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
     const [paymentRequest, setPaymentRequest] = useState<any>(null);
 
     /* Price calculations */
-    const annualTotal = plan.prices?.[region]?.annual || '0';
-    const monthlyTotal = plan.prices?.[region]?.monthly || '0';
-    const annualTotalNum = parseFloat(annualTotal.replace(',', '.'));
-    const monthlyTotalNum = parseFloat(monthlyTotal.replace(',', '.'));
-    const finalAnnualNum = appliedCouponInfo?.percentOff ? annualTotalNum * (1 - appliedCouponInfo.percentOff / 100) : annualTotalNum;
-    const finalMonthlyNum = appliedCouponInfo?.percentOff ? monthlyTotalNum * (1 - appliedCouponInfo.percentOff / 100) : monthlyTotalNum;
-    const displayPrice = isAnnual ? finalAnnualNum : finalMonthlyNum;
+    const baseTotal = plan.prices?.[region]?.annual || plan.prices?.[region]?.monthly || '0';
+    const baseTotalNum = parseFloat(baseTotal.replace(',', '.'));
+    const finalPriceNum = appliedCouponInfo?.percentOff ? baseTotalNum * (1 - appliedCouponInfo.percentOff / 100) : baseTotalNum;
+    
+    const displayPrice = finalPriceNum;
     const displayPriceStr = displayPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const monthly12x = isAnnual ? (finalAnnualNum / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : null;
+    const monthly12x = region === 'BR' ? (finalPriceNum / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : null;
 
     const handleLocalSuccess = async () => {
         setIsPaymentApproved(true);
         try {
-            const priceStr = isAnnual ? plan.prices?.[region]?.annual : plan.prices?.[region]?.monthly;
+            const priceStr = baseTotal;
             const value = priceStr ? parseFloat(priceStr.replace(',', '.')) : 0;
             const userData = {
                 email: guestEmail,
@@ -487,7 +485,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
             if (session) setStep(2);
         });
         try {
-            const priceStr = isAnnual ? plan.prices?.[region]?.annual : plan.prices?.[region]?.monthly;
+            const priceStr = plan.prices?.[region]?.annual || plan.prices?.[region]?.monthly;
             const value = priceStr ? parseFloat(priceStr.replace(',', '.')) : 0;
             trackInitiateCheckout(plan.label || plan.id, value, region === 'EU' ? 'EUR' : 'BRL');
         } catch {}
@@ -527,7 +525,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
         if (stripePromise) {
             stripePromise.then(stripe => {
                 if (!stripe) return;
-                const amountStr = isAnnual ? plan.prices[region].annual : plan.prices[region].monthly;
+                const amountStr = plan.prices[region].annual || plan.prices[region].monthly;
                 const amount = parseInt(amountStr.replace(/[.,]/g, ''));
                 const pr = stripe.paymentRequest({
                     country: region === 'EU' ? 'PT' : 'BR',
@@ -546,7 +544,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
         try {
             const { data: { session } } = await supabase.auth.getSession();
             const isCredits = plan.id.startsWith('cred_');
-            const isOneTime = isCredits || plan.id === 'vitalicio';
+            const isOneTime = isCredits || plan.id === 'vitalicio' || plan.id === 'elite' || plan.billingCycle === 'one-time';
             const functionName = isOneTime ? 'create-stripe-payment-intent' : 'create-stripe-subscription';
             
             // Safety check: if called as event handler, arguments might be event objects
@@ -561,7 +559,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                 planId: plan.id, 
                 email: finalEmail, 
                 name: finalName,
-                amount: isAnnual ? plan.prices[region].annual : plan.prices[region].monthly,
+                amount: plan.prices[region].annual || plan.prices[region].monthly,
                 region, coupon: couponCode || undefined
             } : {
                 planId: plan.id, 
@@ -592,7 +590,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
         
         if (!hasError) {
             try {
-                const priceStr = isAnnual ? plan.prices?.[region]?.annual : plan.prices?.[region]?.monthly;
+                const priceStr = plan.prices?.[region]?.annual || plan.prices?.[region]?.monthly;
                 const value = priceStr ? parseFloat(priceStr.replace(',', '.')) : 0;
                 trackLead(plan.label || plan.id, value, region === 'EU' ? 'EUR' : 'BRL', { 
                     email: guestEmail, 
@@ -603,7 +601,12 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
         }
     };
 
-    const billingLabel = isAnnual ? (plan.id === 'vitalicio' ? 'Pagamento Único' : 'Anual') : 'Mensal';
+    const billingLabelMap: Record<string, string> = {
+        'trimestral': 'Trimestral',
+        'annual': 'Anual',
+        'one-time': 'Pagamento Único'
+    };
+    const billingLabel = billingLabelMap[plan.billingCycle] || 'Assinatura';
 
     // Strip emojis from plan label
     const cleanLabel = (plan.label || '').replace(/[\u{1F300}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F900}-\u{1F9FF}🥇🌏🪙💙]/gu, '').trim();
@@ -696,9 +699,9 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                 </div>
                             </div>
 
-                            {isAnnual && method === 'cc_appmax' && monthly12x && (
+                            {region === 'BR' && method === 'cc_appmax' && monthly12x && (
                                 <div className="mt-3 border-t border-slate-200/60 pt-2 flex items-center justify-between">
-                                    <span className="text-[11px] text-slate-500">Parcelamento</span>
+                                    <span className="text-[11px] text-slate-500">Parcelamento Appmax</span>
                                     <span className="text-[11px] font-bold text-slate-900">12x {currencySymbol} {monthly12x}</span>
                                 </div>
                             )}
@@ -806,7 +809,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     Cartão
                                 </button>
 
-                                {isAnnual && (
+                                {region === 'BR' && (
                                     <button
                                         onClick={() => setMethod('cc_appmax')}
                                         className={`flex-1 h-12 rounded-xl flex items-center justify-center gap-2 transition-all text-sm font-semibold border-2 ${method === 'cc_appmax' ? 'border-[#4D5BFF] text-[#4D5BFF] bg-white shadow-sm' : 'border-slate-200 text-slate-600 bg-white hover:border-slate-300'}`}

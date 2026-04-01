@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from './utils/motion-gsap';
 import { Package, Sparkles, Users, ShieldCheck,
   ArrowRight, PlayCircle, CheckCircle2,
   Clock, MapPin, Play,
@@ -9,6 +9,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { CheckoutModal } from './components/CheckoutModal';
 import { trackPageView } from './services/facebookPixel';
+import { trackFBEvent } from './utils/fb-events';
 import { translations } from "./translations";
 type Language = 'pt' | 'pt-PT' | 'en' | 'es' | 'fr';
 
@@ -72,7 +73,6 @@ export default function App() {
   }, [hasDetectedRegion]);
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
   const [region, setRegion] = useState<'brasil' | 'europa'>('brasil');
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
@@ -127,9 +127,7 @@ export default function App() {
 
   useEffect(() => {
     // Enviar evento de PageView inicial para Pixel e CAPI (Deduplicado)
-    import('./utils/fb-events').then(({ trackFBEvent }) => {
-      trackFBEvent('PageView');
-    });
+    trackFBEvent('PageView');
   }, []);
 
   return (
@@ -1411,25 +1409,7 @@ export default function App() {
               {t.planos.title}
             </h2>
 
-            {/* Toggles Container */}
-            <div className="flex flex-col items-center gap-4">
-              {/* Billing Toggle */}
-              <div className="bg-[#111] p-1.5 rounded-2xl border border-white/10 flex items-center gap-1 shadow-2xl">
-                <button
-                  onClick={() => setBillingCycle('monthly')}
-                  className={`px-8 py-3 rounded-xl text-sm font-bold transition-all ${billingCycle === 'monthly' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  {t.planos.monthly}
-                </button>
-                <button
-                  onClick={() => setBillingCycle('annual')}
-                  className={`px-8 py-3 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${billingCycle === 'annual' ? 'bg-white text-black' : 'text-gray-500 hover:text-gray-300'}`}
-                >
-                  {t.planos.annual}
-                  <span className="bg-emerald-500 text-white text-[10px] px-1.5 py-0.5 rounded-md font-black">{t.planos.annualOff}</span>
-                </button>
-              </div>
-            </div>
+            {/* Toggles removidos: os planos já possuem ciclos fixos */}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
@@ -1440,17 +1420,20 @@ export default function App() {
               { id: 'elite', data: t.planos.elite, color: '#f59e0b', secondary: '#d97706' }
             ].map((plan, idx) => {
               const isBrasil = region === 'brasil';
-              const isAnnual = billingCycle === 'annual';
-              const price = isBrasil
-                ? (isAnnual 
-                  ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '14,95' : plan.id === 'pro' ? '29,95' : '49,95')
-                  : (plan.data.monthlyPrice || plan.data.price))
-                : (isAnnual
-                  ? (plan.id === 'free' ? '0' : plan.id === 'starter' ? '59,40' : plan.id === 'pro' ? '119,40' : '239,40')
-                  : (plan.id === 'free' ? '0' : plan.id === 'starter' ? '9,90' : plan.id === 'pro' ? '19,90' : '39,90'));
+              
+              const pricesMap: Record<string, { BR: string; EU: string; oldBR: string; oldEU: string }> = {
+                free: { BR: "0", EU: "0", oldBR: "0", oldEU: "0" },
+                starter: { BR: "58,20", EU: "9,60", oldBR: "97,00", oldEU: "16,00" },
+                pro: { BR: "118,20", EU: "19,20", oldBR: "197,00", oldEU: "32,00" },
+                elite: { BR: "233,40", EU: "38,40", oldBR: "389,00", oldEU: "64,00" }
+              };
+              
+              const pData = pricesMap[plan.id as keyof typeof pricesMap];
+              const price = isBrasil ? pData.BR : pData.EU;
+              const originalPrice = isBrasil ? pData.oldBR : pData.oldEU;
               
               const [whole, cents] = price.includes(',') ? price.split(',') : [price, '00'];
-              const period = isBrasil ? plan.data.period : (isAnnual ? '/ ano' : '/ mês');
+              const period = plan.data.periodLabel || plan.data.period;
 
               return (
                 <motion.div
@@ -1479,25 +1462,17 @@ export default function App() {
 
                   {/* Price - hidden for free plan */}
                   {plan.id !== 'free' && (
-                  <div className="mb-8">
-                    {/* Crossed out original price for EUR Annual */}
-                    {!isBrasil && isAnnual && (
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-bold text-gray-500 line-through">
-                          € {plan.id === 'starter' ? '118,80' : plan.id === 'pro' ? '238,80' : '478,80'}
-                        </span>
-                        <span className="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-black">
-                          -50%
-                        </span>
-                      </div>
-                    )}
-                    <div className="flex items-baseline gap-1">
-                      <div className="flex flex-col">
-                        {isBrasil && isAnnual && (
-                          <span className="text-xs font-black text-[#582ef5] leading-none mb-1">12X</span>
-                        )}
-                        <span className="text-xs font-black text-gray-400 leading-none">{isBrasil ? 'R$' : '€'}</span>
-                      </div>
+                  <div className="mb-8 flex flex-col items-start text-left">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-sm font-bold text-gray-500 line-through">
+                        {isBrasil ? 'R$' : '€'} {originalPrice}
+                      </span>
+                      <span className="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-black uppercase tracking-wide">
+                        {plan.data.discount || '40% OFF'}
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-1 mt-1">
+                      <span className="text-xs font-black text-gray-400 leading-none self-start mt-2.5">{isBrasil ? 'R$' : '€'}</span>
                       <span className="text-[44px] font-black tracking-tighter text-white leading-none">
                         {whole}
                       </span>
@@ -1505,19 +1480,13 @@ export default function App() {
                         <span className="text-[20px] font-black text-white/50 leading-none self-end pb-1">,{cents}</span>
                       )}
                       <span className="text-sm font-bold text-gray-500 self-end pb-1">
-                        {!isBrasil && isAnnual ? '/ano' : plan.data.period}
+                        {period?.toLowerCase()}
                       </span>
                     </div>
-                    {isAnnual && isBrasil && plan.id !== 'starter' && (
-                      <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
-                        {plan.id === 'pro' ? 'PAGAMENTO ÚNICO DE R$ 359,40' : 'PAGAMENTO ÚNICO DE R$ 599,40'}
-                      </p>
-                    )}
-                    {isAnnual && isBrasil && plan.id === 'starter' && (
-                      <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
-                        PAGAMENTO ÚNICO DE R$ 179,40
-                      </p>
-                    )}
+                    
+                    <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
+                      PAGAMENTO ÚNICO DE {isBrasil ? 'R$' : '€'} {price}
+                    </p>
                   </div>
                   )}
 
@@ -1548,29 +1517,22 @@ export default function App() {
                       }
                       
                       const regionKey = region === 'brasil' ? 'BR' : 'EU';
-                      const prices = {
-                        BR: {
-                          starter: { monthly: '29,90', annual: '179,40' },
-                          pro: { monthly: '59,90', annual: '359,40' },
-                          elite: { monthly: '99,90', annual: '599,40' }
-                        },
-                        EU: {
-                          starter: { monthly: '9,90', annual: '59,40' },
-                          pro: { monthly: '19,90', annual: '119,40' },
-                          elite: { monthly: '39,90', annual: '239,40' }
-                        }
+                      
+                      const cycleMap: Record<string, string> = {
+                        starter: 'trimestral',
+                        pro: 'annual',
+                        elite: 'one-time'
                       };
-
-                      const currentPrices = prices[regionKey][plan.id as 'starter' | 'pro' | 'elite'] || prices[regionKey].starter;
 
                       const planInfo = {
                         id: plan.id,
                         label: plan.data.name,
-                        billingCycle,
+                        billingCycle: cycleMap[plan.id] || 'annual',
                         region: regionKey,
+                        priceValue: pData,
                         prices: {
-                          BR: prices.BR[plan.id as 'starter' | 'pro' | 'elite'] || prices.BR.starter,
-                          EU: prices.EU[plan.id as 'starter' | 'pro' | 'elite'] || prices.EU.starter
+                          BR: { monthly: pData.BR, annual: pData.BR },
+                          EU: { monthly: pData.EU, annual: pData.EU }
                         },
                         trialDays: 0
                       };
