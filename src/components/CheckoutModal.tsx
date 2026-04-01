@@ -677,33 +677,30 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
                     {showOrderDetails && (
                         <div className="px-5 pb-5">
-                            {/* Plan row */}
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 rounded-xl bg-white border border-slate-200/60 shadow-sm flex items-center justify-center shrink-0">
-                                    <img src="https://i.postimg.cc/Cx0Wn1pW/drone.webp" alt="" className="w-10 h-10 object-contain" />
+                            {/* Consolidated Plan & Price row */}
+                            <div className="flex items-center justify-between gap-4">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-xl bg-white border border-slate-200/60 shadow-sm flex items-center justify-center shrink-0">
+                                        <img src="https://i.postimg.cc/Cx0Wn1pW/drone.webp" alt="" className="w-8 h-8 object-contain" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">RESUMO DO PEDIDO</p>
+                                        <p className="text-sm font-black text-slate-900">Plano {cleanLabel}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">RESUMO DO PEDIDO</p>
-                                    <p className="text-base font-black text-slate-900">Plano {cleanLabel}</p>
+
+                                <div className="flex flex-col items-end">
+                                    <span className="text-[9px] font-bold text-[#4D5BFF] uppercase tracking-wide leading-none mb-1">{billingLabel}</span>
+                                    <span className="text-lg font-black text-slate-900 leading-none">{currencySymbol} {displayPriceStr}</span>
                                 </div>
                             </div>
 
-                            <div className="pt-2 space-y-2">
-                                {isAnnual && method === 'cc_appmax' && monthly12x && (
-                                    <div className="flex items-center justify-between">
-                                        <span className="text-sm text-slate-600">Parcelamento</span>
-                                        <span className="text-sm font-bold text-slate-900">12x {currencySymbol} {monthly12x}</span>
-                                    </div>
-                                )}
-
-                                <div className="border-t border-slate-200/60 pt-3 flex items-center justify-between">
-                                    <span className="text-lg font-black text-slate-900">Total</span>
-                                    <div className="flex flex-col items-end">
-                                        <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">{billingLabel}</span>
-                                        <span className="text-xl font-black text-slate-900">{currencySymbol} {displayPriceStr}</span>
-                                    </div>
+                            {isAnnual && method === 'cc_appmax' && monthly12x && (
+                                <div className="mt-3 border-t border-slate-200/60 pt-2 flex items-center justify-between">
+                                    <span className="text-[11px] text-slate-500">Parcelamento</span>
+                                    <span className="text-[11px] font-bold text-slate-900">12x {currencySymbol} {monthly12x}</span>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     )}
                 </div>
@@ -740,13 +737,6 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                 <p className="text-sm text-slate-500">Você receberá seus dados de acesso por e-mail.</p>
                             </div>
 
-                            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-3 items-start">
-                                <svg className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
-                                <p className="text-[12px] text-blue-700 leading-snug">
-                                    Após o pagamento, você receberá um <strong>e-mail com seus dados de acesso</strong> para definir sua senha.
-                                </p>
-                            </div>
-
                             <div className="space-y-3">
                                 <div>
                                     <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Seu Nome Completo</label>
@@ -772,6 +762,13 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     />
                                     {guestEmailError && <p className="text-[11px] text-red-500 mt-1 font-medium">{guestEmailError}</p>}
                                 </div>
+                            </div>
+
+                            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-3 items-start">
+                                <svg className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+                                <p className="text-[12px] text-blue-700 leading-snug">
+                                    Após o pagamento, você receberá um <strong>e-mail com seus dados de acesso</strong> para definir sua senha.
+                                </p>
                             </div>
                         </div>
                     )}
