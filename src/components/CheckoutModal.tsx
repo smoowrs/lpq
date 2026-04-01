@@ -919,8 +919,45 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                         </div>
                     )}
 
-                    <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2 pb-12 pt-4">
-                        <div className="flex items-center justify-center gap-4 flex-wrap">
+                    {/* ── FOOTER LOGOS — SCROLLABLE (Step 2 only) ── */}
+                    {step === 2 && (
+                        <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2 pb-12 pt-4">
+                            <div className="flex items-center justify-center gap-4 flex-wrap">
+                                <img
+                                    src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
+                                    alt="Apple Pay"
+                                    className="h-[34px] w-auto object-contain"
+                                    style={{ filter: 'grayscale(100%) opacity(0.28)' }}
+                                />
+                                <img
+                                    src="https://i.postimg.cc/zXzwVd3x/Google-Pay-Logo-svg.png"
+                                    alt="Google Pay"
+                                    className="h-[16px] w-auto object-contain"
+                                    style={{ filter: 'grayscale(100%) opacity(0.4)' }}
+                                />
+                                <img
+                                    src="https://i.postimg.cc/y60cfh4L/Stripe_Logo_revised_2016_svg.png"
+                                    alt="Stripe"
+                                    className="h-[13px] w-auto object-contain"
+                                    style={{ filter: 'grayscale(100%) opacity(0.4)' }}
+                                />
+                                <img
+                                    src="https://i.postimg.cc/CMbkvCTv/APPMAX_LOGO_LIL%C3%81S_2_png.webp"
+                                    alt="Appmax"
+                                    className="h-[16px] w-auto object-contain"
+                                    style={{ filter: 'grayscale(100%) opacity(0.4)' }}
+                                />
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* ── FIXED FOOTER LOGOS — STICKY (Step 1 only) ── */}
+            {step === 1 && (
+                <div className="bg-white border-t border-slate-100 py-3 scroll-hidden" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 20px))' }}>
+                    <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2">
+                        <div className="flex items-center justify-center gap-4 flex-wrap mt-1">
                             <img
                                 src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
                                 alt="Apple Pay"
@@ -948,8 +985,11 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="h-[env(safe-area-inset-bottom,40px)] bg-white w-full border-t border-slate-50 shrink-0" />
+            )}
+
+            {step === 2 && (
+                <div className="h-[env(safe-area-inset-bottom,40px)] bg-white w-full border-t border-slate-50 shrink-0" />
+            )}
         </div>,
         document.body
     );
