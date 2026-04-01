@@ -688,7 +688,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                 </div>
                             </div>
 
-                            <div className="border-t border-slate-200/60 pt-4 space-y-2">
+                            <div className="pt-2 space-y-2">
                                 {isAnnual && method === 'cc_appmax' && monthly12x && (
                                     <div className="flex items-center justify-between">
                                         <span className="text-sm text-slate-600">Parcelamento</span>
@@ -739,6 +739,14 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                 <h2 className="text-2xl font-black text-slate-900 mb-1">Crie sua Conta</h2>
                                 <p className="text-sm text-slate-500">Você receberá seus dados de acesso por e-mail.</p>
                             </div>
+
+                            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-3 items-start">
+                                <svg className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+                                <p className="text-[12px] text-blue-700 leading-snug">
+                                    Após o pagamento, você receberá um <strong>e-mail com seus dados de acesso</strong> para definir sua senha.
+                                </p>
+                            </div>
+
                             <div className="space-y-3">
                                 <div>
                                     <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Seu Nome Completo</label>
@@ -764,12 +772,6 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     />
                                     {guestEmailError && <p className="text-[11px] text-red-500 mt-1 font-medium">{guestEmailError}</p>}
                                 </div>
-                            </div>
-                            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-3 items-start">
-                                <svg className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
-                                <p className="text-[12px] text-blue-700 leading-snug">
-                                    Após o pagamento, você receberá um <strong>e-mail com seus dados de acesso</strong> para definir sua senha.
-                                </p>
                             </div>
                         </div>
                     )}
@@ -931,11 +933,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
             {/* ── FOOTER ── */}
             <div className="bg-white border-t border-slate-100 py-3" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
                 <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2">
-                    <div className="flex items-center gap-1 text-slate-400 opacity-70">
-                        <Icons.LockClosed className="w-3 h-3" />
-                        <span className="text-[10px] font-medium">Pagamento Seguro &amp; Criptografado</span>
-                    </div>
-                    <div className="flex items-center justify-center gap-4 flex-wrap">
+                    <div className="flex items-center justify-center gap-4 flex-wrap mt-1">
                         <img
                             src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
                             alt="Apple Pay"
