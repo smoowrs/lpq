@@ -73,7 +73,8 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
                 options={{
                     layout: 'tabs',
                     wallets: { applePay: 'never', googlePay: 'never' },
-                    link: { email: 'never' }
+                    link: { email: 'never' },
+                    terms: { card: 'never' }
                 }}
             />
 
@@ -88,7 +89,9 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
                     />
                     <Icons.Check className="absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-0.5" />
                 </div>
-                <span className="text-[12px] font-bold text-slate-500 hover:text-slate-700">Li e aceito os termos.</span>
+                <span className="text-[12px] text-slate-500 leading-snug">
+                    Ao fornecer os seus dados, você permite que a Stripe faça a cobrança no seu cartão de acordo com os seus termos.
+                </span>
             </label>
 
             <button
@@ -312,7 +315,9 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, couponCode }: any)
                     />
                     <Icons.Check className="absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-0.5" />
                 </div>
-                <span className="text-[12px] font-bold text-slate-500 hover:text-slate-700">Li e aceito os termos.</span>
+                <span className="text-[12px] text-slate-500 leading-snug">
+                    Ao fornecer os seus dados, você permite que realizemos a cobrança de acordo com os nossos termos.
+                </span>
             </label>
 
             <button
