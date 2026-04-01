@@ -78,8 +78,8 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
             />
 
             {/* Terms */}
-            <label className="flex items-start gap-3 cursor-pointer">
-                <div className="relative flex items-center mt-0.5 shrink-0">
+            <label className="flex items-center gap-3 cursor-pointer py-1">
+                <div className="relative flex items-center shrink-0">
                     <input
                         type="checkbox"
                         className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-slate-300 transition-all checked:bg-[#2934FF] checked:border-[#2934FF]"
@@ -88,9 +88,7 @@ const StripeForm = ({ plan, onCancel, onSuccess, isSetupIntent }: any) => {
                     />
                     <Icons.Check className="absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-0.5" />
                 </div>
-                <span className="text-[12px] text-slate-500 leading-snug">
-                    Ao fornecer os seus dados, você permite que a Stripe faça a cobrança no seu cartão de acordo com os seus termos.
-                </span>
+                <span className="text-[12px] font-bold text-slate-500 hover:text-slate-700">Li e aceito os termos.</span>
             </label>
 
             <button
@@ -304,8 +302,8 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, couponCode }: any)
             </div>
 
             {/* Terms */}
-            <label className="flex items-start gap-3 cursor-pointer">
-                <div className="relative flex items-center mt-0.5 shrink-0">
+            <label className="flex items-center gap-3 cursor-pointer py-1">
+                <div className="relative flex items-center shrink-0">
                     <input
                         type="checkbox"
                         className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-slate-300 transition-all checked:bg-[#2934FF] checked:border-[#2934FF]"
@@ -314,9 +312,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, couponCode }: any)
                     />
                     <Icons.Check className="absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-0.5" />
                 </div>
-                <span className="text-[12px] text-slate-500 leading-snug">
-                    Ao fornecer os seus dados, você permite que realizemos a cobrança de acordo com os nossos termos.
-                </span>
+                <span className="text-[12px] font-bold text-slate-500 hover:text-slate-700">Li e aceito os termos.</span>
             </label>
 
             <button
@@ -770,6 +766,13 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                     Após o pagamento, você receberá um <strong>e-mail com seus dados de acesso</strong> para definir sua senha.
                                 </p>
                             </div>
+
+                            <button
+                                onClick={handleStep1Continue}
+                                className="w-full h-14 bg-[#4D5BFF] hover:bg-[#3A48FF] text-white rounded-2xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#4D5BFF]/20 transition-all active:scale-[0.98]"
+                            >
+                                Continuar para Pagamento <Icons.ArrowRight className="w-4 h-4" />
+                            </button>
                         </div>
                     )}
 
@@ -913,19 +916,6 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                 </div>
             </div>
 
-            {/* ── STEP 1 STICKY CTA — always visible at bottom ── */}
-            {step === 1 && !isAuthenticated && (
-                <div className="bg-white border-t border-slate-100 px-5 py-3" style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}>
-                    <div className="max-w-lg mx-auto">
-                        <button
-                            onClick={handleStep1Continue}
-                            className="w-full h-14 bg-[#4D5BFF] hover:bg-[#3A48FF] text-white rounded-2xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#4D5BFF]/20 transition-all active:scale-[0.98]"
-                        >
-                            Continuar para Pagamento <Icons.ArrowRight className="w-4 h-4" />
-                        </button>
-                    </div>
-                </div>
-            )}
 
             {/* ── FOOTER ── */}
             <div className="bg-white border-t border-slate-100 py-3" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
@@ -934,7 +924,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                         <img
                             src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
                             alt="Apple Pay"
-                            className="h-[26px] w-auto object-contain"
+                            className="h-[34px] w-auto object-contain"
                             style={{ filter: 'grayscale(100%) opacity(0.28)' }}
                         />
                         <img
