@@ -704,7 +704,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
                             {region === 'BR' && method === 'cc_appmax' && monthly12x && (
                                 <div className="mt-3 border-t border-slate-200/60 pt-2 flex items-center justify-between">
-                                    <span className="text-[11px] text-slate-500">Parcelamento Appmax</span>
+                                    <span className="text-[11px] text-slate-500">Parcelamento</span>
                                     <span className="text-[11px] font-bold text-slate-900">12x {currencySymbol} {monthly12x}</span>
                                 </div>
                             )}
