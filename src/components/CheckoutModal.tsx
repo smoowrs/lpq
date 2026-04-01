@@ -694,7 +694,10 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                                 </div>
 
                                 <div className="flex flex-col items-end">
-                                    <span className="text-[9px] font-bold text-[#4D5BFF] uppercase tracking-wide leading-none mb-1">{billingLabel}</span>
+                                    <div className="flex items-center gap-1.5 mb-1">
+                                        <span className="bg-[#22c55e]/10 text-[#22c55e] text-[9px] px-1.5 py-0.5 rounded font-black border border-[#22c55e]/20">40% OFF</span>
+                                        <span className="text-[9px] font-bold text-[#4D5BFF] uppercase tracking-wide leading-none">{billingLabel}</span>
+                                    </div>
                                     <span className="text-lg font-black text-slate-900 leading-none">{currencySymbol} {displayPriceStr}</span>
                                 </div>
                             </div>
@@ -927,28 +930,9 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                         <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2 pb-12 pt-4">
                             <div className="flex items-center justify-center gap-4 flex-wrap">
                                 <img
-                                    src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
-                                    alt="Apple Pay"
-                                    className="h-[34px] w-auto object-contain"
-                                    style={{ filter: 'grayscale(100%) opacity(0.28)' }}
-                                />
-                                <img
-                                    src="https://i.postimg.cc/zXzwVd3x/Google-Pay-Logo-svg.png"
-                                    alt="Google Pay"
-                                    className="h-[16px] w-auto object-contain"
-                                    style={{ filter: 'grayscale(100%) opacity(0.4)' }}
-                                />
-                                <img
-                                    src="https://i.postimg.cc/y60cfh4L/Stripe_Logo_revised_2016_svg.png"
-                                    alt="Stripe"
-                                    className="h-[13px] w-auto object-contain"
-                                    style={{ filter: 'grayscale(100%) opacity(0.4)' }}
-                                />
-                                <img
-                                    src="https://i.postimg.cc/CMbkvCTv/APPMAX_LOGO_LIL%C3%81S_2_png.webp"
-                                    alt="Appmax"
-                                    className="h-[16px] w-auto object-contain"
-                                    style={{ filter: 'grayscale(100%) opacity(0.4)' }}
+                                    src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png"
+                                    alt="Payment Methods"
+                                    className="h-[30px] w-auto object-contain opacity-50 grayscale"
                                 />
                             </div>
                         </div>
@@ -962,28 +946,9 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
                     <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2">
                         <div className="flex items-center justify-center gap-4 flex-wrap mt-1">
                             <img
-                                src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
-                                alt="Apple Pay"
-                                className="h-[34px] w-auto object-contain"
-                                style={{ filter: 'grayscale(100%) opacity(0.28)' }}
-                            />
-                            <img
-                                src="https://i.postimg.cc/zXzwVd3x/Google-Pay-Logo-svg.png"
-                                alt="Google Pay"
-                                className="h-[16px] w-auto object-contain"
-                                style={{ filter: 'grayscale(100%) opacity(0.4)' }}
-                            />
-                            <img
-                                src="https://i.postimg.cc/y60cfh4L/Stripe_Logo_revised_2016_svg.png"
-                                alt="Stripe"
-                                className="h-[13px] w-auto object-contain"
-                                style={{ filter: 'grayscale(100%) opacity(0.4)' }}
-                            />
-                            <img
-                                src="https://i.postimg.cc/CMbkvCTv/APPMAX_LOGO_LIL%C3%81S_2_png.webp"
-                                alt="Appmax"
-                                className="h-[16px] w-auto object-contain"
-                                style={{ filter: 'grayscale(100%) opacity(0.4)' }}
+                                src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png"
+                                alt="Payment Methods"
+                                className="h-[30px] w-auto object-contain opacity-50 grayscale"
                             />
                         </div>
                     </div>
