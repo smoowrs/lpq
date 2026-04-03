@@ -55,14 +55,10 @@ export default function App() {
           if (navLang.startsWith('es')) setLanguage('es');
           else if (navLang.startsWith('fr')) setLanguage('fr');
           else if (navLang === 'pt-pt' || navLang === 'pt_pt') setLanguage('pt-PT');
-          else setLanguage('pt'); // Default consistent with Brazil
+          else setLanguage('pt');
         } else {
           setRegion('brasil');
-          if (navLang === 'pt-pt' || navLang === 'pt_pt') setLanguage('pt-PT');
-          else if (navLang.startsWith('es')) setLanguage('es');
-          else if (navLang.startsWith('fr')) setLanguage('fr');
-          else if (navLang.startsWith('en')) setLanguage('en');
-          else setLanguage('pt');
+          setLanguage('pt'); // Force BR Portuguese for everyone not strictly in Europe
         }
         
         setHasDetectedRegion(true);
