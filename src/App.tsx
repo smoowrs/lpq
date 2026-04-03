@@ -55,15 +55,16 @@ export default function App() {
           if (navLang.startsWith('es')) setLanguage('es');
           else if (navLang.startsWith('fr')) setLanguage('fr');
           else if (navLang === 'pt-pt' || navLang === 'pt_pt') setLanguage('pt-PT');
-          else if (navLang.startsWith('pt')) setLanguage('pt'); // BR users in Europe keep PT-BR translation but pay in EUR
-          else setLanguage('en'); // Defaults to English for other European countries
+          else if (navLang.startsWith('pt')) setLanguage('pt'); 
+          else setLanguage('en');
         } else {
-          // If out of Europe, detect based purely on language
-          if (navLang.startsWith('es')) { setLanguage('es'); setRegion('europa'); }
-          else if (navLang.startsWith('fr')) { setLanguage('fr'); setRegion('europa'); }
-          else if (navLang === 'pt-pt' || navLang === 'pt_pt') { setLanguage('pt-PT'); setRegion('europa'); }
-          else if (navLang.startsWith('en')) { setLanguage('en'); setRegion('europa'); }
-          else { setLanguage('pt'); setRegion('brasil'); }
+          // Defaults to brasil region and detects language from navigator
+          setRegion('brasil');
+          if (navLang.startsWith('es')) setLanguage('es');
+          else if (navLang.startsWith('fr')) setLanguage('fr');
+          else if (navLang === 'pt-pt' || navLang === 'pt_pt') setLanguage('pt-PT');
+          else if (navLang.startsWith('en')) setLanguage('en');
+          else setLanguage('pt');
         }
         
         setHasDetectedRegion(true);
