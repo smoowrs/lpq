@@ -118,7 +118,6 @@ const ApplePayHandler = ({ paymentRequest, stripePromise, fetchSecret, onSuccess
                 const stripe = await stripePromise;
                 if (!stripe) throw new Error("Stripe not init");
                 
-                // Pass payer info derived from Apple Pay to the backend if needed
                 const secret = await fetchSecret(ev.payerEmail, ev.payerName);
                 if (!secret) throw new Error("Falha ao gerar o token de pagamento.");
                 
@@ -278,7 +277,6 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, couponCode }: any)
 
     return (
         <div className="space-y-5">
-            {/* PIX info card */}
             <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex flex-col items-center text-center gap-3">
                 <div className="w-14 h-14 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center">
                     <Icons.Pix className="w-9 h-9 object-contain" />
@@ -291,7 +289,6 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, couponCode }: any)
                 </div>
             </div>
 
-            {/* CPF */}
             <div>
                 <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">CPF do Titular</label>
                 <input
@@ -304,7 +301,6 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, couponCode }: any)
                 />
             </div>
 
-            {/* Terms */}
             <label className="flex items-center gap-3 cursor-pointer py-1">
                 <div className="relative flex items-center shrink-0">
                     <input
@@ -420,7 +416,6 @@ const AppmaxCCPayment = ({ plan, onSuccess }: any) => {
 
 /* ─── MAIN CHECKOUT COMPONENT ──────────────────────────────────── */
 export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose: () => void, onSuccess: () => void }) => {
-    const isAnnual = plan.billingCycle === 'annual';
     const currencySymbol = plan.region === 'EU' ? '€' : 'R$';
     const region = plan.region || 'BR';
 
@@ -429,7 +424,6 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [stripeError, setStripeError] = useState<string | null>(null);
     const [isPaymentApproved, setIsPaymentApproved] = useState(false);
-    const [showOrderDetails, setShowOrderDetails] = useState(true);
 
     const [step, setStep] = useState<1 | 2>(1);
     const [guestEmail, setGuestEmail] = useState('');
@@ -454,21 +448,15 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
     const handleLocalSuccess = async () => {
         setIsPaymentApproved(true);
         try {
-            const priceStr = baseTotal;
-            const value = priceStr ? parseFloat(priceStr.replace(',', '.')) : 0;
-            const userData = {
-                email: guestEmail,
-                firstName: guestName ? guestName.split(' ')[0] : undefined,
-                lastName: guestName ? guestName.split(' ').slice(1).join(' ') : undefined,
-            };
-            trackPurchase(plan.label || plan.id, value, region === 'EU' ? 'EUR' : 'BRL', undefined, userData);
+            const userData = { email: guestEmail, firstName: guestName ? guestName.split(' ')[0] : undefined };
+            trackPurchase(plan.label || plan.id, finalPriceNum, region === 'EU' ? 'EUR' : 'BRL', undefined, userData);
         } catch {}
 
         try {
             const { data: { session } } = await supabase.auth.getSession();
             const token = session?.access_token || SUPABASE_ANON_KEY;
             const activatePayload: any = { plan: plan.id, billingCycle: plan.billingCycle || 'monthly', grantCredits: true };
-            if (session?.user?.id) { activatePayload.userId = session.user.id; }
+            if (session?.user?.id) activatePayload.userId = session.user.id;
             else { activatePayload.email = guestEmail; activatePayload.name = guestName; }
             await fetch(`${SUPABASE_URL}/functions/v1/activate-user`, {
                 method: 'POST',
@@ -484,49 +472,23 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
             setIsAuthenticated(!!session);
             if (session) setStep(2);
         });
-        try {
-            const priceStr = plan.prices?.[region]?.annual || plan.prices?.[region]?.monthly;
-            const value = priceStr ? parseFloat(priceStr.replace(',', '.')) : 0;
-            trackInitiateCheckout(plan.label || plan.id, value, region === 'EU' ? 'EUR' : 'BRL');
-        } catch {}
+        trackInitiateCheckout(plan.label || plan.id, finalPriceNum, region === 'EU' ? 'EUR' : 'BRL');
     }, []);
 
     useEffect(() => {
-        if (step === 2 && method === 'cc') { fetchClientSecret(); }
+        if (step === 2 && method === 'cc') fetchClientSecret();
     }, [step, method]);
 
-    // Prevent body scroll and forcefully make Safari bars white
     useEffect(() => {
         document.documentElement.classList.add('checkout-open');
-        
-        let metaTheme = document.querySelector('meta[name="theme-color"]');
-        let originalThemeColor: string | null = null;
-        if (metaTheme) {
-            originalThemeColor = metaTheme.getAttribute('content');
-            metaTheme.setAttribute('content', '#ffffff');
-        } else {
-            metaTheme = document.createElement('meta');
-            metaTheme.setAttribute('name', 'theme-color');
-            metaTheme.setAttribute('content', '#ffffff');
-            document.head.appendChild(metaTheme);
-        }
-
-        return () => { 
-            document.documentElement.classList.remove('checkout-open');
-            if (metaTheme) {
-                if (originalThemeColor) metaTheme.setAttribute('content', originalThemeColor);
-                else metaTheme.remove();
-            }
-        };
+        return () => { document.documentElement.classList.remove('checkout-open'); };
     }, []);
 
-    // Apple Pay paymentRequest
     useEffect(() => {
         if (stripePromise) {
             stripePromise.then(stripe => {
                 if (!stripe) return;
-                const amountStr = plan.prices[region].annual || plan.prices[region].monthly;
-                const amount = parseInt(amountStr.replace(/[.,]/g, ''));
+                const amount = parseInt(baseTotal.replace(/[.,]/g, ''));
                 const pr = stripe.paymentRequest({
                     country: region === 'EU' ? 'PT' : 'BR',
                     currency: region === 'EU' ? 'eur' : 'brl',
@@ -539,7 +501,7 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
         }
     }, [plan]);
 
-    const fetchClientSecret = async (emailOverride?: string | any, nameOverride?: string | any) => {
+    const fetchClientSecret = async (emailOverride?: string, nameOverride?: string) => {
         setLoading(true); setClientSecret(null); setStripeError(null);
         try {
             const { data: { session } } = await supabase.auth.getSession();
@@ -547,32 +509,18 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
             const isOneTime = isCredits || plan.id === 'vitalicio' || plan.id === 'elite' || plan.billingCycle === 'one-time';
             const functionName = isOneTime ? 'create-stripe-payment-intent' : 'create-stripe-subscription';
             
-            // Safety check: if called as event handler, arguments might be event objects
-            const emailFromArg = typeof emailOverride === 'string' ? emailOverride : undefined;
-            const nameFromArg = typeof nameOverride === 'string' ? nameOverride : undefined;
-
-            // Prefer the email from overrides (e.g. Apple Pay), then the logged-in session, then the manual input
-            const finalEmail = emailFromArg || session?.user?.email || guestEmail;
-            const finalName = nameFromArg || session?.user?.user_metadata?.full_name || guestName || 'Usuário';
+            const finalEmail = emailOverride || session?.user?.email || guestEmail;
+            const finalName = nameOverride || session?.user?.user_metadata?.full_name || guestName || 'Usuário';
 
             const payload = isOneTime ? {
-                planId: plan.id, 
-                email: finalEmail, 
-                name: finalName,
-                amount: plan.prices[region].annual || plan.prices[region].monthly,
-                region, coupon: couponCode || undefined
+                planId: plan.id, email: finalEmail, name: finalName,
+                amount: baseTotal, region, coupon: couponCode || undefined
             } : {
-                planId: plan.id, 
-                billingCycle: plan.billingCycle, 
-                trialDays: plan.trialDays,
-                email: finalEmail, 
-                name: finalName || finalEmail.split('@')[0], // Fallback name
-                region, 
-                coupon: couponCode || undefined
+                planId: plan.id, billingCycle: plan.billingCycle, trialDays: plan.trialDays,
+                email: finalEmail, name: finalName || finalEmail.split('@')[0], region, coupon: couponCode || undefined
             };
             const data = await invokeFn(functionName, payload, session?.access_token || 'null');
             if (data?.error) throw new Error(data.error || 'Erro ao iniciar checkout');
-            if (!data?.clientSecret) throw new Error('Client secret não retornado');
             setClientSecret(data.clientSecret);
             if (data?.appliedCoupon) { setAppliedCouponInfo(data.appliedCoupon); toast.success(`Cupom aplicado!`); }
             return data.clientSecret;
@@ -585,379 +533,130 @@ export const CheckoutModal = ({ plan, onClose, onSuccess }: { plan: any, onClose
 
     const handleStep1Continue = () => {
         let hasError = false;
-        if (!guestName.trim() || guestName.trim().length < 2) { setGuestNameError('Informe seu nome completo'); hasError = true; } else { setGuestNameError(''); }
-        if (!guestEmail.includes('@') || !guestEmail.includes('.')) { setGuestEmailError('Informe um e-mail válido'); hasError = true; } else { setGuestEmailError(''); }
-        
+        if (!guestName.trim() || guestName.trim().length < 2) { setGuestNameError('Informe seu nome completo'); hasError = true; }
+        if (!guestEmail.includes('@') || !guestEmail.includes('.')) { setGuestEmailError('Informe um e-mail válido'); hasError = true; }
         if (!hasError) {
-            try {
-                const priceStr = plan.prices?.[region]?.annual || plan.prices?.[region]?.monthly;
-                const value = priceStr ? parseFloat(priceStr.replace(',', '.')) : 0;
-                trackLead(plan.label || plan.id, value, region === 'EU' ? 'EUR' : 'BRL', { 
-                    email: guestEmail, 
-                    firstName: guestName ? guestName.split(' ')[0] : undefined 
-                });
-            } catch {}
+            trackLead(plan.label || plan.id, finalPriceNum, region === 'EU' ? 'EUR' : 'BRL', { email: guestEmail, firstName: guestName.split(' ')[0] });
             setStep(2);
         }
     };
 
-    const billingLabelMap: Record<string, string> = {
-        'trimestral': 'Trimestral',
-        'annual': 'Anual',
-        'one-time': 'Pagamento Único'
-    };
+    const billingLabelMap: Record<string, string> = { 'trimestral': 'Trimestral', 'annual': 'Anual', 'one-time': 'Pagamento Único' };
     const billingLabel = billingLabelMap[plan.billingCycle] || 'Assinatura';
-
-    // Strip emojis from plan label
     const cleanLabel = (plan.label || '').replace(/[\u{1F300}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{FE00}-\u{FE0F}\u{1F900}-\u{1F9FF}🥇🌏🪙💙]/gu, '').trim();
 
     return createPortal(
-        /* Fullscreen overlay — matches app style */
-        <div className="fixed inset-0 z-[300] bg-white flex flex-col" style={{ overflowY: 'auto', height: '100dvh' }}>
-
-            {/* Success Screen */}
-            {isPaymentApproved && (
-                <div className="absolute inset-0 bg-white z-[100] flex flex-col items-center justify-center p-8 text-center">
-                    <div className="w-20 h-20 mb-6">
-                        <img src="https://i.postimg.cc/8CypNtWj/IMG-3409.gif" className="w-full h-full object-contain" alt="Success" />
-                    </div>
-                    <h2 className="text-2xl font-black text-slate-900 mb-2">Pagamento Aprovado!</h2>
-                    <p className="text-sm text-slate-500 font-medium mb-8">
-                        {!isAuthenticated
-                            ? 'Sua conta foi criada! Verifique seu e-mail para obter os dados de acesso.'
-                            : (plan.id.startsWith('cred_') ? 'Seus créditos foram adicionados.' : 'Sua assinatura foi ativada com sucesso!')
-                        }
-                    </p>
-                    <button
-                        onClick={() => {
-                            onSuccess(); onClose();
-                            if (isAuthenticated) window.location.hash = plan.id.startsWith('cred_') ? '#ai' : '#profile';
-                            else window.location.hash = '#login';
-                        }}
-                        className="h-14 px-10 bg-[#4D5BFF] text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all"
-                    >
-                        {isAuthenticated ? 'Começar Agora' : 'Fazer Login'}
+        <div className="fixed inset-0 z-[300] bg-white flex flex-col md:flex-row overflow-hidden" style={{ height: '100dvh' }}>
+            {/* Left Side: Summary */}
+            <div className="w-full md:w-[40%] bg-[#F8FAFC] md:bg-[#4D5BFF] border-b md:border-b-0 md:border-r border-slate-100 flex flex-col overflow-y-auto shrink-0">
+                <div className="p-6 md:p-12 md:mt-4">
+                    <button onClick={onClose} className="mb-8 hidden md:flex items-center gap-2 text-white/70 hover:text-white transition-colors font-bold text-sm">
+                        <Icons.ChevronLeft className="w-5 h-5" /> Voltar
                     </button>
-                </div>
-            )}
-
-            {/* Apple Pay handler */}
-            {paymentRequest && (
-                <ApplePayHandler paymentRequest={paymentRequest} stripePromise={stripePromise} fetchSecret={fetchClientSecret} onSuccess={handleLocalSuccess} />
-            )}
-
-            {/* ── STICKY HEADER ── */}
-            <div className="sticky top-0 z-20 bg-white border-b border-slate-100 shadow-sm">
-                {/* Top bar */}
-                <div className="max-w-lg mx-auto px-5 h-14 flex items-center justify-between relative">
-                    <button
-                        onClick={onClose}
-                        className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-50 transition-colors text-slate-400"
-                    >
-                        <Icons.ChevronLeft className="w-5 h-5" />
-                    </button>
-
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
-                        <img 
-                            src="https://i.postimg.cc/Wz5JsrXh/LOGONE_2.png" 
-                            alt="Connect Academy" 
-                            className="h-[22px] object-contain"
-                        />
-                    </div>
-
-                </div>
-            </div>
-
-            {/* ── ORDER SUMMARY ── */}
-            <div className="bg-[#F8FAFC] border-b border-slate-100">
-                <div className="max-w-lg mx-auto">
-                    <button
-                        onClick={() => setShowOrderDetails(v => !v)}
-                        className="w-full flex items-center justify-center gap-2 py-3 text-[10px] font-bold text-slate-500 uppercase tracking-widest hover:text-slate-700 transition-colors"
-                    >
-                        {showOrderDetails ? 'OCULTAR DETALHES' : 'MOSTRAR DETALHES'}
-                        <svg className={`w-3 h-3 transition-transform ${showOrderDetails ? 'rotate-180' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 15l-6-6-6 6" /></svg>
-                    </button>
-
-                    {showOrderDetails && (
-                        <div className="px-5 pb-5">
-                            {/* Consolidated Plan & Price row */}
-                            <div className="flex items-center justify-between gap-4">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-white border border-slate-200/60 shadow-sm flex items-center justify-center shrink-0">
-                                        <img src="https://i.postimg.cc/Cx0Wn1pW/drone.webp" alt="" className="w-8 h-8 object-contain" />
-                                    </div>
-                                    <div>
-                                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">RESUMO DO PEDIDO</p>
-                                        <p className="text-sm font-black text-slate-900">Plano {cleanLabel}</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex flex-col items-end">
-                                    <div className="flex items-center gap-1.5 mb-1">
-                                        <span className="bg-[#22c55e]/10 text-[#22c55e] text-[9px] px-1.5 py-0.5 rounded font-black border border-[#22c55e]/20">40% OFF</span>
-                                        <span className="text-[9px] font-bold text-[#4D5BFF] uppercase tracking-wide leading-none">{billingLabel}</span>
-                                    </div>
-                                    <span className="text-lg font-black text-slate-900 leading-none">{currencySymbol} {displayPriceStr}</span>
-                                </div>
-                            </div>
-
-                            {region === 'BR' && method === 'cc_appmax' && monthly12x && (
-                                <div className="mt-3 border-t border-slate-200/60 pt-2 flex items-center justify-between">
-                                    <span className="text-[11px] text-slate-500">Parcelamento</span>
-                                    <span className="text-[11px] font-bold text-slate-900">12x {currencySymbol} {monthly12x}</span>
-                                </div>
-                            )}
+                    <div className="flex md:flex-col items-center md:items-start justify-between md:justify-start gap-4 mb-8">
+                        <div className="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-white shadow-xl flex items-center justify-center shrink-0">
+                            <img src="https://i.postimg.cc/Cx0Wn1pW/drone.webp" alt="" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
                         </div>
-                    )}
+                        <div className="flex-1 md:mt-4">
+                            <p className="text-[10px] font-bold text-slate-400 md:text-white/50 uppercase tracking-widest leading-none mb-1">PLANO ESCOLHIDO</p>
+                            <h2 className="text-xl md:text-3xl font-black text-slate-900 md:text-white">Plano {cleanLabel}</h2>
+                        </div>
+                    </div>
+                    <div className="bg-white p-6 md:bg-white/10 rounded-2xl border border-slate-200 md:border-white/20 shadow-sm md:shadow-none">
+                        <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-100 md:border-white/10">
+                            <span className="text-sm font-medium text-slate-500 md:text-white/70">Subtotal</span>
+                            <span className="text-base font-black text-slate-900 md:text-white">{currencySymbol} {displayPriceStr}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                            <div className="flex flex-col">
+                                <span className="text-sm font-black text-slate-900 md:text-white">Total hoje</span>
+                                <span className="text-[10px] font-bold text-[#4D5BFF] md:text-emerald-400 uppercase tracking-wide">{billingLabel}</span>
+                            </div>
+                            <div className="flex flex-col items-end text-right">
+                                <span className="text-2xl md:text-3xl font-black text-slate-900 md:text-white">{currencySymbol} {displayPriceStr}</span>
+                                <span className="text-[10px] font-bold text-[#22c55e] uppercase">40% OFF Aplicado</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="mt-8 hidden md:block">
+                        <p className="text-xs text-white/50 font-medium leading-relaxed opacity-80">
+                            Acesso imediato à plataforma com todas as ferramentas e aulas inclusas.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            {/* ── MAIN CONTENT ── */}
-            <div className="flex-1 overflow-y-auto">
-                <div className="max-w-lg mx-auto px-5 pt-6 pb-6">
+            {/* Right Side: Forms */}
+            <div className="flex-1 flex flex-col bg-white overflow-y-auto relative">
+                {isPaymentApproved && (
+                    <div className="absolute inset-0 bg-white z-[100] flex flex-col items-center justify-center p-8 text-center animate-in fade-in zoom-in duration-300">
+                        <div className="w-20 h-20 mb-6"><img src="https://i.postimg.cc/8CypNtWj/IMG-3409.gif" className="w-full h-full object-contain" alt="Success" /></div>
+                        <h2 className="text-2xl font-black text-slate-900 mb-2">Pagamento Aprovado!</h2>
+                        <p className="text-sm text-slate-500 font-medium mb-8">Sua conta foi ativada! Verifique seu e-mail para acessar.</p>
+                        <button onClick={() => { onSuccess(); onClose(); window.location.hash = '#login'; }} className="h-14 px-10 bg-[#4D5BFF] text-white rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg hover:scale-105 transition-all">Começar Agora</button>
+                    </div>
+                )}
 
-                    {/* Step indicator */}
+                <div className="md:hidden sticky top-0 z-20 bg-white border-b border-slate-100 flex items-center h-14 px-5 shrink-0">
+                    <button onClick={onClose} className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-slate-50 transition-colors text-slate-400"><Icons.ChevronLeft className="w-5 h-5" /></button>
+                    <div className="flex-1 flex justify-center mr-9"><img src="https://i.postimg.cc/Wz5JsrXh/LOGONE_2.png" alt="Connect Academy" className="h-[18px] object-contain" /></div>
+                </div>
+
+                <div className="w-full max-w-xl mx-auto px-6 md:px-16 py-8 md:py-20 flex-1">
                     {!isAuthenticated && (
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className={`flex items-center gap-2 ${step === 1 ? 'text-[#4D5BFF]' : 'text-slate-400'}`}>
-                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all ${step > 1 ? 'border-[#4D5BFF] bg-[#4D5BFF] text-white' : step === 1 ? 'border-[#4D5BFF] bg-[#4D5BFF] text-white' : 'border-slate-200 text-slate-400'}`}>
-                                    {step > 1 ? <Icons.Check className="w-3.5 h-3.5" /> : '1'}
-                                </div>
-                                <span className="text-sm font-semibold">Criar sua Conta</span>
+                        <div className="flex items-center gap-3 mb-10">
+                            <div className="flex items-center gap-2 text-[#4D5BFF]">
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black border-2 border-[#4D5BFF] ${step > 1 ? 'bg-[#4D5BFF] text-white' : 'bg-white text-[#4D5BFF]'}`}>{step > 1 ? <Icons.Check className="w-4 h-4" /> : '1'}</div>
+                                <span className="text-sm font-bold">Identificação</span>
                             </div>
-                            <div className="flex-1 h-px bg-slate-200 mx-1" />
-                            <div className={`flex items-center gap-2 ${step === 2 ? 'text-[#4D5BFF]' : 'text-slate-400'}`}>
-                                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-black border-2 transition-all ${step === 2 ? 'border-[#4D5BFF] bg-[#4D5BFF] text-white' : 'border-slate-200 text-slate-400'}`}>
-                                    2
-                                </div>
-                                <span className="text-sm font-semibold">Pagamento</span>
+                            <div className="flex-1 h-px bg-slate-100" />
+                            <div className={`flex items-center gap-2 ${step === 2 ? 'text-[#4D5BFF]' : 'text-slate-300'}`}>
+                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black border-2 ${step === 2 ? 'border-[#4D5BFF] text-[#4D5BFF]' : 'border-slate-200 text-slate-300'}`}>2</div>
+                                <span className="text-sm font-bold">Pagamento</span>
                             </div>
                         </div>
                     )}
 
-                    {/* ── STEP 1: IDENTIFICATION ── */}
-                    {step === 1 && !isAuthenticated && (
-                        <div className="space-y-4">
-                            <div>
-                                <h2 className="text-2xl font-black text-slate-900 mb-1">Crie sua Conta</h2>
-                                <p className="text-sm text-slate-500">Você receberá seus dados de acesso por e-mail.</p>
+                    {step === 1 && !isAuthenticated ? (
+                        <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
+                            <div><h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">Crie sua conta</h2><p className="text-sm text-slate-500">Informe seus dados para receber o acesso.</p></div>
+                            <div className="space-y-4">
+                                <div><label className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Nome Completo</label><input type="text" placeholder="João Silva" className={`w-full h-14 bg-slate-50 border rounded-2xl px-5 text-base text-slate-900 outline-none transition-all ${guestNameError ? 'border-red-400' : 'border-slate-200 focus:border-[#4D5BFF]'}`} value={guestName} onChange={e => {setGuestName(e.target.value); setGuestNameError('')}} /></div>
+                                <div><label className="block text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">E-mail</label><input type="email" placeholder="exemplo@email.com" className={`w-full h-14 bg-slate-50 border rounded-2xl px-5 text-base text-slate-900 outline-none transition-all ${guestEmailError ? 'border-red-400' : 'border-slate-200 focus:border-[#4D5BFF]'}`} value={guestEmail} onChange={e => {setGuestEmail(e.target.value); setGuestEmailError('')}} /></div>
                             </div>
-
-                            <div className="space-y-3">
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Seu Nome Completo</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Ex: João Silva"
-                                        className={`w-full h-12 bg-white border rounded-xl px-4 text-base text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all shadow-sm ${guestNameError ? 'border-red-400 bg-red-50' : 'border-slate-200'}`}
-                                        value={guestName}
-                                        onChange={(e) => { setGuestName(e.target.value); setGuestNameError(''); }}
-                                        onKeyDown={(e) => e.key === 'Enter' && handleStep1Continue()}
-                                    />
-                                    {guestNameError && <p className="text-[11px] text-red-500 mt-1 font-medium">{guestNameError}</p>}
-                                </div>
-                                <div>
-                                    <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1.5">Seu E-mail</label>
-                                    <input
-                                        type="email"
-                                        placeholder="exemplo@email.com"
-                                        className={`w-full h-12 bg-white border rounded-xl px-4 text-base text-slate-900 placeholder-slate-400 focus:border-[#4D5BFF] focus:ring-2 focus:ring-[#4D5BFF]/10 outline-none transition-all shadow-sm ${guestEmailError ? 'border-red-400 bg-red-50' : 'border-slate-200'}`}
-                                        value={guestEmail}
-                                        onChange={(e) => { setGuestEmail(e.target.value); setGuestEmailError(''); }}
-                                        onKeyDown={(e) => e.key === 'Enter' && handleStep1Continue()}
-                                    />
-                                    {guestEmailError && <p className="text-[11px] text-red-500 mt-1 font-medium">{guestEmailError}</p>}
-                                </div>
-                            </div>
-
-                            <div className="bg-blue-50 border border-blue-100 rounded-xl p-3 flex gap-3 items-start">
-                                <svg className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
-                                <p className="text-[12px] text-blue-700 leading-snug">
-                                    Após o pagamento, você receberá um <strong>e-mail com seus dados de acesso</strong> para definir sua senha.
-                                </p>
-                            </div>
-
-                            <button
-                                onClick={handleStep1Continue}
-                                className="w-full h-14 bg-[#4D5BFF] hover:bg-[#3A48FF] text-white rounded-2xl font-bold text-base flex items-center justify-center gap-2 shadow-lg shadow-[#4D5BFF]/20 transition-all active:scale-[0.98]"
-                            >
-                                Continuar para Pagamento <Icons.ArrowRight className="w-4 h-4" />
-                            </button>
+                            <button onClick={handleStep1Continue} className="w-full h-16 bg-[#4D5BFF] hover:bg-[#3A48FF] text-white rounded-2xl font-bold text-lg flex items-center justify-center gap-2 shadow-xl shadow-[#4D5BFF]/20 transition-all active:scale-[0.98]">Próximo Passo <Icons.ArrowRight className="w-5 h-5" /></button>
                         </div>
-                    )}
-
-                    {/* ── STEP 2: PAYMENT ── */}
-                    {step === 2 && (
-                        <div className="space-y-6">
-                            {/* Back button for guests */}
-                            {!isAuthenticated && (
-                                <button onClick={() => setStep(1)} className="flex items-center gap-1.5 text-[12px] font-bold text-slate-400 hover:text-slate-700 transition-colors -mt-2">
-                                    <Icons.ChevronLeft className="w-4 h-4" /> Voltar
-                                </button>
-                            )}
-
-                            <div>
-                                <h2 className="text-2xl font-black text-slate-900 mb-1">Método de Pagamento</h2>
-                                <p className="text-sm text-slate-500">Escolha como deseja pagar.</p>
-                            </div>
-
-                            {/* Payment method tabs */}
+                    ) : (
+                        <div className="space-y-8 animate-in fade-in slide-in-from-right-4 duration-500">
+                            {!isAuthenticated && <button onClick={() => setStep(1)} className="text-xs font-bold text-slate-400 hover:text-slate-600 flex items-center gap-1"><Icons.ChevronLeft className="w-3.5 h-3.5" /> Voltar para identificação</button>}
+                            <div><h2 className="text-2xl md:text-3xl font-black text-slate-900 mb-2">Pagamento</h2><p className="text-sm text-slate-500">Escolha o método de sua preferência.</p></div>
+                            
                             <div className="flex gap-2">
-                                <button
-                                    onClick={() => { setMethod('cc'); fetchClientSecret(); }}
-                                    className={`flex-1 h-12 rounded-xl flex items-center justify-center gap-2 transition-all text-sm font-semibold border-2 ${method === 'cc' ? 'border-[#4D5BFF] text-[#4D5BFF] bg-white shadow-sm' : 'border-slate-200 text-slate-600 bg-white hover:border-slate-300'}`}
-                                >
-                                    <Icons.CreditCard className="w-4 h-4" />
-                                    Cartão
-                                </button>
-
-                                {region === 'BR' && (
-                                    <button
-                                        onClick={() => setMethod('cc_appmax')}
-                                        className={`flex-1 h-12 rounded-xl flex items-center justify-center gap-2 transition-all text-sm font-semibold border-2 ${method === 'cc_appmax' ? 'border-[#4D5BFF] text-[#4D5BFF] bg-white shadow-sm' : 'border-slate-200 text-slate-600 bg-white hover:border-slate-300'}`}
-                                    >
-                                        <Icons.CreditCard className="w-4 h-4" />
-                                        12x
-                                    </button>
-                                )}
-
-                                {plan.region !== 'EU' && (
-                                    <button
-                                        onClick={() => setMethod('pix')}
-                                        className={`flex-1 h-12 rounded-xl flex items-center justify-center transition-all border-2 ${method === 'pix' ? 'border-[#4D5BFF] bg-white shadow-sm' : 'border-slate-200 bg-white hover:border-slate-300'}`}
-                                    >
-                                        <Icons.Pix className="h-5 w-auto object-contain" />
-                                    </button>
-                                )}
-
-                                {paymentRequest && (
-                                    <button
-                                        onClick={() => { setMethod('apple_pay'); paymentRequest.show(); }}
-                                        className="flex-1 h-12 rounded-xl flex items-center justify-center gap-1.5 bg-black text-white font-bold text-sm transition-all hover:opacity-90 border-2 border-black"
-                                    >
-                                        <Icons.Apple className="w-4 h-4" />
-                                        Pay
-                                    </button>
-                                )}
+                                <button onClick={() => {setMethod('cc'); fetchClientSecret();}} className={`flex-1 h-12 rounded-xl flex items-center justify-center gap-2 text-sm font-bold border-2 transition-all ${method === 'cc' ? 'border-[#4D5BFF] text-[#4D5BFF] bg-white' : 'border-slate-100 text-slate-400 bg-slate-50'}`}><Icons.CreditCard className="w-4 h-4" /> Cartão</button>
+                                {region === 'BR' && <button onClick={() => setMethod('cc_appmax')} className={`flex-1 h-12 rounded-xl flex items-center justify-center gap-2 text-sm font-bold border-2 transition-all ${method === 'cc_appmax' ? 'border-[#4D5BFF] text-[#4D5BFF] bg-white' : 'border-slate-100 text-slate-400 bg-slate-50'}`}><Icons.CreditCard className="w-4 h-4" /> 12x</button>}
+                                {region === 'BR' && <button onClick={() => setMethod('pix')} className={`flex-1 h-12 rounded-xl flex items-center justify-center border-2 transition-all ${method === 'pix' ? 'border-[#4D5BFF] bg-white shadow-sm' : 'border-slate-100 bg-slate-50'}`}><Icons.Pix className="h-5 w-auto object-contain grayscale opacity-60" /></button>}
+                                {paymentRequest && <button onClick={() => {setMethod('apple_pay'); paymentRequest.show();}} className="flex-1 h-12 rounded-xl flex items-center justify-center bg-black text-white hover:opacity-90"><Icons.Apple className="w-5 h-5" /></button>}
                             </div>
 
-                            {/* Payment content area */}
-                            <div>
+                            <div className="pt-2">
                                 {method === 'cc' ? (
-                                    stripeError ? (
-                                        <div className="py-8 text-center">
-                                            <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center mx-auto mb-3">
-                                                <Icons.X className="w-6 h-6 text-red-500" />
-                                            </div>
-                                            <p className="text-slate-800 font-bold mb-1">Erro no checkout</p>
-                                            <p className="text-slate-500 text-sm mb-4">{stripeError}</p>
-                                            <button onClick={() => fetchClientSecret()} className="px-5 py-2.5 bg-[#4D5BFF] text-white rounded-xl font-bold text-sm">
-                                                Tentar Novamente
-                                            </button>
-                                        </div>
-                                    ) : clientSecret ? (
-                                        <Elements stripe={stripePromise} options={{
-                                            clientSecret,
-                                            appearance: {
-                                                theme: 'stripe',
-                                                variables: {
-                                                    colorPrimary: '#4D5BFF',
-                                                    colorBackground: '#ffffff',
-                                                    colorText: '#0f172a',
-                                                    borderRadius: '12px',
-                                                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-                                                    spacingUnit: '4px',
-                                                    fontSizeBase: '15px',
-                                                },
-                                                rules: {
-                                                    '.Input': {
-                                                        borderColor: '#e2e8f0',
-                                                        padding: '12px 14px',
-                                                        fontSize: '15px',
-                                                        backgroundColor: '#f8fafc',
-                                                        boxShadow: 'none',
-                                                    },
-                                                    '.Input:focus': {
-                                                        borderColor: '#4D5BFF',
-                                                        boxShadow: '0 0 0 3px rgba(77,91,255,0.12)',
-                                                    },
-                                                    '.Label': {
-                                                        fontSize: '11px',
-                                                        fontWeight: '700',
-                                                        textTransform: 'uppercase',
-                                                        letterSpacing: '0.08em',
-                                                        color: '#64748b',
-                                                        marginBottom: '6px',
-                                                    }
-                                                }
-                                            }
-                                        }}>
-                                            <StripeForm
-                                                plan={plan}
-                                                onCancel={onClose}
-                                                onSuccess={handleLocalSuccess}
-                                                isSetupIntent={clientSecret?.startsWith('seti_')}
-                                            />
+                                    clientSecret ? (
+                                        <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe', variables: { colorPrimary: '#4D5BFF', borderRadius: '12px' } } }}>
+                                            <StripeForm plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} isSetupIntent={clientSecret?.startsWith('seti_')} />
                                         </Elements>
-                                    ) : (
-                                        <div className="py-12 text-center">
-                                            <div className="w-8 h-8 border-2 border-[#4D5BFF] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-                                            <p className="text-slate-500 text-sm">Carregando...</p>
-                                        </div>
-                                    )
-                                ) : method === 'apple_pay' ? (
-                                    <div className="py-12 flex flex-col items-center text-center">
-                                        <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mb-4">
-                                            <Icons.Apple className="w-8 h-8 text-white" />
-                                        </div>
-                                        <p className="text-slate-900 font-bold mb-2">Aguardando Apple Pay</p>
-                                        <p className="text-sm text-slate-500 max-w-[200px] leading-relaxed">
-                                            Complete a transação na janela que foi aberta na sua tela.
-                                        </p>
-                                    </div>
-                                ) : method === 'cc_appmax' ? (
-                                    <AppmaxCCPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} />
-                                ) : (
-                                    <PixPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} couponCode={couponCode} />
-                                )}
+                                    ) : <div className="py-12 text-center animate-pulse"><div className="w-8 h-8 border-2 border-[#4D5BFF] border-t-transparent rounded-full animate-spin mx-auto mb-3" /><p className="text-slate-400 text-xs">Preparando checkout seguro...</p></div>
+                                ) : method === 'cc_appmax' ? <AppmaxCCPayment plan={plan} onCancel={onClose} onSuccess={handleLocalSuccess} /> 
+                                  : <PixPayment plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} couponCode={couponCode} />}
                             </div>
-                        </div>
-                    )}
 
-                    {/* ── FOOTER LOGOS — SCROLLABLE (Step 2 only) ── */}
-                    {step === 2 && (
-                        <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2 pb-12 pt-4">
-                            <div className="flex items-center justify-center gap-4 flex-wrap">
-                                <img
-                                    src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png"
-                                    alt="Payment Methods"
-                                    className="h-[30px] w-auto object-contain opacity-50 grayscale"
-                                />
+                            <div className="flex flex-col items-center gap-6 pt-10 opacity-40 grayscale pointer-events-none">
+                                <img src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png" alt="Segurança" className="h-[24px] object-contain" />
+                                <div className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest"><Icons.Lock className="w-3 h-3" /> Pagamento 100% Seguro & Criptografado</div>
                             </div>
                         </div>
                     )}
                 </div>
             </div>
-
-            {/* ── FIXED FOOTER LOGOS — STICKY (Step 1 only) ── */}
-            {step === 1 && (
-                <div className="bg-white border-t border-slate-100 py-3 scroll-hidden" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom, 20px))' }}>
-                    <div className="max-w-lg mx-auto px-5 flex flex-col items-center gap-2">
-                        <div className="flex items-center justify-center gap-4 flex-wrap mt-1">
-                            <img
-                                src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png"
-                                alt="Payment Methods"
-                                className="h-[30px] w-auto object-contain opacity-50 grayscale"
-                            />
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {step === 2 && (
-                <div className="h-[env(safe-area-inset-bottom,40px)] bg-white w-full border-t border-slate-50 shrink-0" />
-            )}
         </div>,
         document.body
     );
