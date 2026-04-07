@@ -107,17 +107,23 @@ const stripePromise = loadStripe(
 );
 
 /* ─── STRIPE CARD FORM ─────────────────────────────────────────── */
-const StripeForm = ({ plan, onSuccess, isSetupIntent, guestEmail, guestName }: any) => {
+const StripeForm = ({ plan, onSuccess, isSetupIntent, guestEmail, guestName, guestPhone }: any) => {
     const stripe = useStripe();
     const elements = useElements();
     const [loading, setLoading] = useState(false);
     const [agreedToTerms, setAgreedToTerms] = useState(false);
     const hasFiredAddPaymentInfo = useRef(false);
 
-    const handlePaymentElementChange = () => {
-        if (!hasFiredAddPaymentInfo.current) {
+    const handlePaymentElementChange = (e: any) => {
+        if (!hasFiredAddPaymentInfo.current && e.complete) {
             hasFiredAddPaymentInfo.current = true;
-            try { trackAddPaymentInfo(plan?.label || plan?.id || 'unknown'); } catch {}
+            try { 
+                trackAddPaymentInfo(plan?.label || plan?.id || 'unknown', {
+                    email: guestEmail,
+                    firstName: guestName?.split(' ')[0],
+                    phone: guestPhone?.replace(/\D/g, '')
+                }); 
+            } catch {}
         }
     };
 
@@ -291,7 +297,13 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone }: any)
         setCpf(e.target.value);
         if (!hasFiredAddPaymentInfo.current && e.target.value.length > 0) {
             hasFiredAddPaymentInfo.current = true;
-            try { trackAddPaymentInfo('PIX'); } catch {}
+            try { 
+                trackAddPaymentInfo('PIX', {
+                    email: guestEmail,
+                    firstName: guestName?.split(' ')[0],
+                    phone: guestPhone?.replace(/\D/g, '')
+                }); 
+            } catch {}
         }
     };
 
@@ -1106,7 +1118,7 @@ export const CheckoutModal = ({
                                                     },
                                                 }}
                                             >
-                                                <StripeForm plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} />
+                                                <StripeForm plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone} />
                                             </Elements>
                                         ) : (
                                             <div className="py-12 text-center">
