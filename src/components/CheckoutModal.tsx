@@ -278,7 +278,7 @@ const ApplePayButton = ({
 };
 
 /* ─── PIX PAYMENT ─────────────────────────────────────────────── */
-const PixPayment = ({ plan, onSuccess, guestEmail, guestName }: any) => {
+const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone }: any) => {
     const [pixData, setPixData] = useState<any>(null);
     const [loading, setLoading] = useState(false);
     const [timeLeft, setTimeLeft] = useState(1800);
@@ -315,7 +315,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName }: any) => {
                     'Authorization': session ? `Bearer ${session.access_token}` : `Bearer ${SUPABASE_ANON_KEY}`,
                     'apikey': SUPABASE_ANON_KEY,
                 },
-                body: JSON.stringify({ plan, cpf, email: guestEmail, name: guestName }),
+                body: JSON.stringify({ plan, cpf, email: guestEmail, name: guestName, phone: guestPhone }),
             });
             const data = await res.json();
             if (data?.error) throw new Error(data.error);
@@ -413,7 +413,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName }: any) => {
 };
 
 /* ─── APPMAX CC ─────────────────────────────────────────────────── */
-const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, onInstallmentChange }: any) => {
+const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guestPhone, onInstallmentChange }: any) => {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({ card_number: '', card_name: '', card_expiry: '', card_cvv: '', cpf: '', installments: '1', country: 'BR' });
     const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -461,7 +461,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, onIns
             const { data: { session } } = await supabase.auth.getSession();
             const data = await invokeFn('process-appmax-cc', { 
                 plan, 
-                paymentData: { ...formData, email: guestEmail, name: guestName } 
+                paymentData: { ...formData, email: guestEmail, name: guestName, phone: guestPhone } 
             }, session?.access_token || null);
             if (data?.success) onSuccess();
             else throw new Error(data?.message || 'Erro ao processar pagamento');
@@ -707,6 +707,7 @@ export const CheckoutModal = ({
     const [selectedInstallment, setSelectedInstallment] = useState<{ n: number; info: { value: string; total: string } | null }>({ n: 1, info: INSTALLMENTS[plan.id]?.[0] || null });
     const [guestEmail, setGuestEmail] = useState('');
     const [guestName, setGuestName] = useState('');
+    const [guestPhone, setGuestPhone] = useState('');
     const [clientSecret, setClientSecret] = useState<string | null>(null);
 
     const priceNum = parseFloat((plan.prices?.[region]?.annual || '0').replace(',', '.'));
@@ -735,6 +736,7 @@ export const CheckoutModal = ({
         trackPurchase(plan.label || plan.id, priceNum, region === 'EU' ? 'EUR' : 'BRL', undefined, {
             email: guestEmail,
             firstName: guestName.split(' ')[0],
+            phone: guestPhone.replace(/\D/g, ''),
         });
         try {
             const { data: { session } } = await supabase.auth.getSession();
@@ -817,6 +819,7 @@ export const CheckoutModal = ({
         trackLead(plan.label || plan.id, priceNum, region === 'EU' ? 'EUR' : 'BRL', {
             email: guestEmail,
             firstName: guestName.split(' ')[0],
+            phone: guestPhone.replace(/\D/g, ''),
         });
         setStep(2);
     };
@@ -983,6 +986,19 @@ export const CheckoutModal = ({
                                             onChange={e => setGuestEmail(e.target.value)}
                                         />
                                     </div>
+                                    <div className="space-y-1.5">
+                                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                            SEU WHATSAPP
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            className="w-full h-14 bg-white border border-slate-200 rounded-xl px-4 text-[15px] font-medium text-slate-800 outline-none focus:border-[#4D5BFF] transition-all placeholder:text-slate-300 shadow-sm"
+                                            placeholder="(11) 99999-9999"
+                                            value={guestPhone}
+                                            onChange={e => setGuestPhone(e.target.value)}
+                                            maxLength={15}
+                                        />
+                                    </div>
                                 </div>
 
                                 {/* Info box */}
@@ -1072,6 +1088,7 @@ export const CheckoutModal = ({
                                             region={region} 
                                             guestEmail={guestEmail} 
                                             guestName={guestName} 
+                                            guestPhone={guestPhone}
                                         />
                                     ) : method === 'cc' ? (
                                         clientSecret ? (
@@ -1100,7 +1117,7 @@ export const CheckoutModal = ({
                                             </div>
                                         )
                                     ) : method === 'pix' ? (
-                                        <PixPayment plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} />
+                                        <PixPayment plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone} />
                                     ) : null /* apple_pay is handled natively, no extra UI */}
                                 </div>
                             </div>
