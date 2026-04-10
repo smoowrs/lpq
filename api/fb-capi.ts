@@ -56,6 +56,12 @@ export default async function handler(
           ...(userData?.firstName ? { fn: hash(userData.firstName) } : {}),
           ...(userData?.lastName ? { ln: hash(userData.lastName) } : {}),
           ...(userData?.cpf ? { external_id: hash(userData.cpf.replace(/[^\d]/g, '')) } : {}),
+          ...(userData?.phone ? (() => {
+            // Normalize to E.164 format: +55XXXXXXXXXXX
+            const digits = userData.phone.replace(/\D/g, '');
+            const e164 = digits.startsWith('55') ? `+${digits}` : `+55${digits}`;
+            return { ph: hash(e164) };
+          })() : {}),
         },
         custom_data: clientData || {},
       }

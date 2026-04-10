@@ -178,7 +178,6 @@ export default function App() {
                       onClick={(e) => {
                         e.stopPropagation();
                         setLanguage(lang);
-                        setRegion(lang === 'pt' ? 'brasil' : 'europa');
                         setIsLangMenuOpen(false);
                       }}
                       className={`w-full px-4 py-3.5 flex items-center gap-3 text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
@@ -254,7 +253,6 @@ export default function App() {
                     onClick={(e) => {
                       e.stopPropagation();
                       setLanguage(lang);
-                      setRegion(lang === 'pt' ? 'brasil' : 'europa');
                     }}
                     className={`w-full px-4 py-3 flex items-center gap-3 text-xs hover:bg-white/5 transition-colors ${language === lang ? 'text-white font-bold bg-white/5' : 'text-gray-400'}`}
                   >
@@ -1416,11 +1414,11 @@ export default function App() {
             ].map((plan, idx) => {
               const isBrasil = region === 'brasil';
               
-              const pricesMap: Record<string, { BR: string; EU: string; oldBR: string; oldEU: string }> = {
+              const pricesMap: Record<string, { BR: string; EU: string; oldBR: string; oldEU: string; parcelBR?: string }> = {
                 free: { BR: "0", EU: "0", oldBR: "0", oldEU: "0" },
-                starter: { BR: "58,20", EU: "9,60", oldBR: "97,00", oldEU: "16,00" },
-                pro: { BR: "118,20", EU: "19,20", oldBR: "197,00", oldEU: "32,00" },
-                elite: { BR: "233,40", EU: "38,40", oldBR: "389,00", oldEU: "64,00" }
+                starter: { BR: "58,20", EU: "9,60", oldBR: "97,00", oldEU: "16,00", parcelBR: "6,30" },
+                pro: { BR: "118,20", EU: "19,20", oldBR: "197,00", oldEU: "32,00", parcelBR: "12,79" },
+                elite: { BR: "233,40", EU: "38,40", oldBR: "389,00", oldEU: "16,00", parcelBR: "25,33" }
               };
               
               const pData = pricesMap[plan.id as keyof typeof pricesMap];
@@ -1451,7 +1449,12 @@ export default function App() {
 
                   {/* Header */}
                   <div className="mb-8">
-                    <h3 className="text-2xl font-black mb-2 tracking-tight group-hover:scale-105 transition-transform origin-left" style={{ color: plan.id === 'free' ? 'white' : plan.color }}>{plan.data.name}</h3>
+                    <h3 className="text-2xl font-black mb-1 tracking-tight group-hover:scale-105 transition-transform origin-left" style={{ color: plan.id === 'free' ? 'white' : plan.color }}>{plan.data.name}</h3>
+                    {plan.id !== 'free' && (
+                      <p className="text-[10px] font-black text-[#22c55e] uppercase tracking-wide mb-2">
+                        {plan.id === 'starter' ? '3 meses de acesso' : plan.id === 'pro' ? '1 ano de acesso' : 'Acesso para sempre'}
+                      </p>
+                    )}
                     <p className="text-sm text-gray-500 leading-relaxed font-medium min-h-[40px]">{plan.data.desc}</p>
                   </div>
 
@@ -1478,10 +1481,15 @@ export default function App() {
                         {period?.toLowerCase()}
                       </span>
                     </div>
+
+                    {isBrasil && pData.parcelBR && (
+                      <div className="mt-1">
+                        <span className="text-[13px] font-black text-white/90">
+                          ou 12x de R$ {pData.parcelBR}
+                        </span>
+                      </div>
+                    )}
                     
-                    <p className="text-[10px] font-black text-[#22c55e] mt-2 uppercase tracking-wide">
-                      {plan.id === 'starter' ? '3 meses de acesso' : plan.id === 'pro' ? '1 ano de acesso' : 'acesso para sempre'}
-                    </p>
                   </div>
                   )}
 

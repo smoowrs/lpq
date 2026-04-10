@@ -101,6 +101,29 @@ async function invokeFn(fnName: string, body: any, token: string | null): Promis
     return res.json();
 }
 
+function getTrackingData() {
+    const params = new URLSearchParams(window.location.search);
+    const tracking: any = {};
+    const keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'xcod', 'sck', 'src'];
+    
+    keys.forEach(key => {
+        const val = params.get(key);
+        if (val) tracking[key] = val;
+    });
+
+    try {
+        keys.forEach(key => {
+            if (!tracking[key]) {
+                const lsVal = localStorage.getItem(key);
+                if (lsVal) tracking[key] = lsVal;
+            }
+        });
+    } catch {}
+
+    return Object.keys(tracking).length > 0 ? tracking : undefined;
+}
+
+
 const stripePromise = loadStripe(
     import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
     'pk_live_51Q50BUCWGI5d7s18Jd0BDDrzEC1zsFjNuUdD2l1kpKYNQLk3RhvT1y4GvDfRWqr06ANPDgKh0NeTsIOw0jhaHWW600HjVSKT37'
@@ -118,9 +141,10 @@ const StripeForm = ({ plan, onSuccess, isSetupIntent, guestEmail, guestName, gue
         if (!hasFiredAddPaymentInfo.current && e.complete) {
             hasFiredAddPaymentInfo.current = true;
             try { 
+                const parts = guestName?.split(' ') || [];
                 trackAddPaymentInfo(plan?.label || plan?.id || 'unknown', {
                     email: guestEmail,
-                    firstName: guestName?.split(' ')[0],
+                    firstName: parts[0] || '',
                     phone: guestPhone?.replace(/\D/g, '')
                 }); 
             } catch {}
@@ -298,9 +322,10 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone }: any)
         if (!hasFiredAddPaymentInfo.current && e.target.value.length > 0) {
             hasFiredAddPaymentInfo.current = true;
             try { 
+                const parts = guestName?.split(' ') || [];
                 trackAddPaymentInfo('PIX', {
                     email: guestEmail,
-                    firstName: guestName?.split(' ')[0],
+                    firstName: parts[0] || '',
                     phone: guestPhone?.replace(/\D/g, '')
                 }); 
             } catch {}
@@ -327,7 +352,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone }: any)
                     'Authorization': session ? `Bearer ${session.access_token}` : `Bearer ${SUPABASE_ANON_KEY}`,
                     'apikey': SUPABASE_ANON_KEY,
                 },
-                body: JSON.stringify({ plan, cpf, email: guestEmail, name: guestName, phone: guestPhone }),
+                body: JSON.stringify({ plan, cpf, email: guestEmail, name: guestName, phone: guestPhone, tracking: getTrackingData() }),
             });
             const data = await res.json();
             if (data?.error) throw new Error(data.error);
@@ -429,6 +454,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({ card_number: '', card_name: '', card_expiry: '', card_cvv: '', cpf: '', installments: '1', country: 'BR' });
     const [agreedToTerms, setAgreedToTerms] = useState(false);
+    const hasFiredAddPaymentInfo = useRef(false);
 
     const planInstallments = INSTALLMENTS[plan.id] || [];
     const selectedIdx = parseInt(formData.installments) - 1;
@@ -459,6 +485,19 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
         }
 
         setFormData(p => ({ ...p, [name]: formatted }));
+        
+        if (!hasFiredAddPaymentInfo.current && formatted.length > 0) {
+            hasFiredAddPaymentInfo.current = true;
+            try {
+                const parts = guestName?.split(' ') || [];
+                trackAddPaymentInfo(plan?.label || plan?.id || 'Appmax CC', {
+                    email: guestEmail,
+                    firstName: parts[0] || '',
+                    phone: guestPhone?.replace(/\D/g, '')
+                });
+            } catch {}
+        }
+
         if (name === 'installments' && onInstallmentChange) {
             const idx = parseInt(value) - 1;
             onInstallmentChange(INSTALLMENTS[plan.id]?.[idx] || null, parseInt(value));
@@ -473,7 +512,8 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
             const { data: { session } } = await supabase.auth.getSession();
             const data = await invokeFn('process-appmax-cc', { 
                 plan, 
-                paymentData: { ...formData, email: guestEmail, name: guestName, phone: guestPhone } 
+                paymentData: { ...formData, email: guestEmail, name: guestName, phone: guestPhone?.replace(/\D/g, '') },
+                tracking: getTrackingData()
             }, session?.access_token || null);
             if (data?.success) onSuccess();
             else throw new Error(data?.message || 'Erro ao processar pagamento');
@@ -657,44 +697,27 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
 };
 
 /* ─── ORDER SUMMARY SECTION ────────────────────────────────────── */
-const OrderSummary = ({ plan, priceStr, monthly12x, currencySymbol, planPeriodLabel, planDisplayName, selectedInstallment, planAccessDuration }: any) => {
-    const [expanded, setExpanded] = useState(true);
-
+const OrderSummary = ({ plan, priceStr, monthly12x, currencySymbol, planDisplayName, selectedInstallment, planAccessDuration, oldPriceStr }: any) => {
     return (
         <div className="w-full bg-white border-b border-slate-100">
-            {/* Toggle */}
-            <div className="flex justify-center py-2.5">
-                <button
-                    onClick={() => setExpanded(!expanded)}
-                    className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500 uppercase tracking-widest"
-                >
-                    OCULTAR DETALHES
-                    <Icons.ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${expanded ? '' : 'rotate-180'}`} />
-                </button>
-            </div>
-
-            {/* Collapsible product row */}
-            <div className={`overflow-hidden transition-all duration-300 ${expanded ? 'max-h-32' : 'max-h-0'}`}>
-                <div className="flex items-center gap-3 px-5 pb-3">
-                    <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
-                        <img src="https://i.postimg.cc/Cx0Wn1pW/drone.webp" alt="Plano" className="w-10 h-10 object-contain" />
+            <div className="flex items-center gap-3 px-5 py-3">
+                <div className="w-14 h-14 rounded-xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
+                    <img src="https://i.postimg.cc/Cx0Wn1pW/drone.webp" alt="Plano" className="w-10 h-10 object-contain" />
+                </div>
+                <div className="flex-1 min-w-0">
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-0.5">RESUMO DO PEDIDO</p>
+                    <p className="text-[16px] font-black text-slate-900 leading-tight">{planDisplayName}</p>
+                    <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}</p>
+                </div>
+                <div className="flex flex-col items-end shrink-0">
+                    <div className="flex items-center gap-1.5 mb-1">
+                        <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-md font-black border border-emerald-200 uppercase tracking-wide">40% OFF</span>
+                        <span className="text-[11px] text-slate-400 font-medium line-through">{currencySymbol} {oldPriceStr}</span>
                     </div>
-                    <div className="flex-1 min-w-0">
-                        <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-0.5">RESUMO DO PEDIDO</p>
-                        <p className="text-[16px] font-black text-slate-900 leading-tight">{planDisplayName}</p>
-                        <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}</p>
-                    </div>
-                    <div className="flex flex-col items-end shrink-0">
-                        <div className="flex items-center gap-1.5 mb-1">
-                            <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-md font-black border border-emerald-200 uppercase tracking-wide">40% OFF</span>
-                            <span className="text-[9px] text-[#4D5BFF] font-black uppercase tracking-wide">{planPeriodLabel}</span>
-                        </div>
-                        <span className="text-[17px] font-black text-slate-900">{currencySymbol} {priceStr}</span>
-                        <span className="text-[10px] text-slate-400 font-medium opacity-90 mt-0.5">Ou 12x de {currencySymbol} {monthly12x}</span>
-                    </div>
+                    <span className="text-[17px] font-black text-slate-900">{currencySymbol} {priceStr}</span>
+                    <span className="text-[10px] text-slate-400 font-medium opacity-90 mt-0.5">Ou 12x de {currencySymbol} {monthly12x}</span>
                 </div>
             </div>
-
         </div>
     );
 };
@@ -721,9 +744,12 @@ export const CheckoutModal = ({
     const [guestName, setGuestName] = useState('');
     const [guestPhone, setGuestPhone] = useState('');
     const [clientSecret, setClientSecret] = useState<string | null>(null);
+    const [mounted, setMounted] = useState(false);
 
     const priceNum = parseFloat((plan.prices?.[region]?.annual || '0').replace(',', '.'));
     const priceStr = priceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    const oldPriceNum = Math.round(priceNum / 0.6);
+    const oldPriceStr = oldPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     let monthly12x = (priceNum / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     if (region === 'BR' && INSTALLMENTS[plan.id]?.[11]) {
         monthly12x = INSTALLMENTS[plan.id][11].value;
@@ -745,9 +771,10 @@ export const CheckoutModal = ({
 
     const handleLocalSuccess = async () => {
         setIsPaymentApproved(true);
+        const nameParts = guestName?.split(' ') || [];
         trackPurchase(plan.label || plan.id, priceNum, region === 'EU' ? 'EUR' : 'BRL', undefined, {
             email: guestEmail,
-            firstName: guestName.split(' ')[0],
+            firstName: nameParts[0] || '',
             phone: guestPhone.replace(/\D/g, ''),
         });
         try {
@@ -794,6 +821,7 @@ export const CheckoutModal = ({
                 setGuestEmail(session.user.email || '');
             }
         });
+        setMounted(true);
         trackInitiateCheckout(plan.label || plan.id, priceNum, region === 'EU' ? 'EUR' : 'BRL');
         document.documentElement.classList.add('checkout-open');
         return () => { document.documentElement.classList.remove('checkout-open'); };
@@ -828,13 +856,16 @@ export const CheckoutModal = ({
             toast.error('Preencha os dados corretamente');
             return;
         }
+        const nameParts = guestName?.split(' ') || [];
         trackLead(plan.label || plan.id, priceNum, region === 'EU' ? 'EUR' : 'BRL', {
             email: guestEmail,
-            firstName: guestName.split(' ')[0],
+            firstName: nameParts[0] || '',
             phone: guestPhone.replace(/\D/g, ''),
         });
         setStep(2);
     };
+
+    if (!mounted) return null;
 
     return createPortal(
         <div className="fixed inset-0 z-[300] bg-white flex flex-col md:flex-row overflow-hidden font-sans text-slate-900">
@@ -862,7 +893,7 @@ export const CheckoutModal = ({
                                     <h2 className="text-[18px] font-black text-slate-900 leading-tight">{planDisplayName}</h2>
                                     <div className="flex items-center gap-1.5 shrink-0">
                                         <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full font-black border border-emerald-100 uppercase">40% OFF</span>
-                                        <span className="text-[9px] text-slate-400 font-black uppercase">{planPeriodLabel}</span>
+                                        <span className="text-[11px] text-slate-400 font-medium line-through">{currencySymbol} {oldPriceStr}</span>
                                     </div>
                                 </div>
                                 <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}</p>
@@ -918,7 +949,7 @@ export const CheckoutModal = ({
                         priceStr={priceStr}
                         monthly12x={monthly12x}
                         currencySymbol={currencySymbol}
-                        planPeriodLabel={planPeriodLabel}
+                        oldPriceStr={oldPriceStr}
                         planDisplayName={planDisplayName}
                         selectedInstallment={selectedInstallment}
                         planAccessDuration={planAccessDuration}
@@ -1007,8 +1038,19 @@ export const CheckoutModal = ({
                                             className="w-full h-14 bg-white border border-slate-200 rounded-xl px-4 text-[15px] font-medium text-slate-800 outline-none focus:border-[#4D5BFF] transition-all placeholder:text-slate-300 shadow-sm"
                                             placeholder="(11) 99999-9999"
                                             value={guestPhone}
-                                            onChange={e => setGuestPhone(e.target.value)}
-                                            maxLength={15}
+                                            onChange={e => {
+                                                const digits = e.target.value.replace(/\D/g, '').slice(0, 11);
+                                                let masked = digits;
+                                                if (digits.length > 6) {
+                                                    masked = `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+                                                } else if (digits.length > 2) {
+                                                    masked = `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+                                                } else if (digits.length > 0) {
+                                                    masked = `(${digits}`;
+                                                }
+                                                setGuestPhone(masked);
+                                            }}
+                                            maxLength={16}
                                         />
                                     </div>
                                 </div>
@@ -1101,6 +1143,7 @@ export const CheckoutModal = ({
                                             guestEmail={guestEmail} 
                                             guestName={guestName} 
                                             guestPhone={guestPhone}
+                                            onInstallmentChange={(info: any, n: number) => setSelectedInstallment({ n, info })}
                                         />
                                     ) : method === 'cc' ? (
                                         clientSecret ? (

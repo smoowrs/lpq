@@ -161,6 +161,7 @@ export const translations = {
           { text: "Medalha de destaque exclusiva na comunidade", status: false },
           { text: "Alertas e oportunidades em primeira mão", status: false },
           { text: "Sorteios mensais e premiações", status: false },
+          { text: "Grupo de Networking no WhatsApp", status: false },
         ]
       },
       pro: {
@@ -190,6 +191,7 @@ export const translations = {
           { text: "Baixar imagens ilimitadas", status: false },
           { text: "Prioridade no suporte (Topo da lista)", status: false },
           { text: "Medalha de destaque exclusiva na comunidade", status: false },
+          { text: "Grupo de Networking no WhatsApp", status: false },
         ]
       },
       elite: {
@@ -220,6 +222,7 @@ export const translations = {
           { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Sorteios mensais e premiações.", status: true },
           { text: "Sistema Indique e Ganhe.", status: true },
+          { text: "Grupo de Networking no WhatsApp", status: true },
         ]
       }
     },
@@ -400,6 +403,7 @@ export const translations = {
           { text: "Medalha de destaque exclusiva na comunidade", status: false },
           { text: "Alertas e oportunidades em primeira mão", status: false },
           { text: "Sorteios mensais e premiações", status: false },
+          { text: "Grupo de Networking no WhatsApp", status: false },
         ]
       },
       pro: {
@@ -425,6 +429,7 @@ export const translations = {
           { text: "Baixar imagens ilimitadas", status: false },
           { text: "Prioridade no suporte (Topo da lista)", status: false },
           { text: "Medalha de destaque exclusiva na comunidade", status: false },
+          { text: "Grupo de Networking no WhatsApp", status: false },
         ]
       },
       elite: {
@@ -451,6 +456,7 @@ export const translations = {
           { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Sorteios mensais e premiações.", status: true },
           { text: "Sistema Indique e Ganhe.", status: true },
+          { text: "Grupo de Networking no WhatsApp", status: true },
         ]
       }
     },
@@ -631,6 +637,7 @@ export const translations = {
           { text: "Medalha de destaque exclusiva na community", status: false },
           { text: "Alertas e oportunidades em primeira mão", status: false },
           { text: "Monthly sweepstakes and prizes", status: false },
+          { text: "WhatsApp Networking Group", status: false },
         ]
       },
       pro: {
@@ -656,6 +663,7 @@ export const translations = {
           { text: "Download imagens ilimitadas", status: false },
           { text: "Prioridade no support (Topo da lista)", status: false },
           { text: "Medalha de destaque exclusiva na community", status: false },
+          { text: "WhatsApp Networking Group", status: false },
         ]
       },
       elite: {
@@ -682,6 +690,7 @@ export const translations = {
           { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Monthly sweepstakes and prizes.", status: true },
           { text: "Refer and Earn system.", status: true },
+          { text: "WhatsApp Networking Group", status: true },
         ]
       }
     },
@@ -862,6 +871,7 @@ export const translations = {
           { text: "Medalha de destaque exclusiva na comunidad", status: false },
           { text: "Alertas e oportunidades em primeira mão", status: false },
           { text: "Sorteos mensuales y premios", status: false },
+          { text: "Grupo de Networking en WhatsApp", status: false },
         ]
       },
       pro: {
@@ -887,6 +897,7 @@ export const translations = {
           { text: "Descargar imagens ilimitadas", status: false },
           { text: "Prioridade no soporte (Topo da lista)", status: false },
           { text: "Medalha de destaque exclusiva na comunidad", status: false },
+          { text: "Grupo de Networking en WhatsApp", status: false },
         ]
       },
       elite: {
@@ -913,6 +924,7 @@ export const translations = {
           { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Sorteos mensuales y premios.", status: true },
           { text: "Sistema Recomienda y Gana.", status: true },
+          { text: "Grupo de Networking en WhatsApp", status: true },
         ]
       }
     },
@@ -1093,6 +1105,7 @@ export const translations = {
           { text: "Medalha de destaque exclusiva na communauté", status: false },
           { text: "Alertas e oportunidades em primeira mão", status: false },
           { text: "Tirages au sort mensuels et prix", status: false },
+          { text: "Groupe de Networking sur WhatsApp", status: false },
         ]
       },
       pro: {
@@ -1118,6 +1131,7 @@ export const translations = {
           { text: "Télécharger imagens ilimitadas", status: false },
           { text: "Prioridade no support (Topo da lista)", status: false },
           { text: "Medalha de destaque exclusiva na communauté", status: false },
+          { text: "Groupe de Networking sur WhatsApp", status: false },
         ]
       },
       elite: {
@@ -1144,6 +1158,7 @@ export const translations = {
           { text: "Alertas e oportunidades em primeira mão.", status: true },
           { text: "Tirages au sort mensuels et prix.", status: true },
           { text: "Système Parrainez et Gagnez.", status: true },
+          { text: "Groupe de Networking sur WhatsApp", status: true },
         ]
       }
     },
