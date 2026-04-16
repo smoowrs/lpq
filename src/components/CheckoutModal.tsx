@@ -319,7 +319,7 @@ const ApplePayButton = ({
 };
 
 /* ─── PIX PAYMENT ─────────────────────────────────────────────── */
-const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone }: any) => {
+const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderBump, orderBumpPrice }: any) => {
     const [pixData, setPixData] = useState<any>(null);
     const [loading, setLoading] = useState(false);
     const [timeLeft, setTimeLeft] = useState(1800);
@@ -363,7 +363,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone }: any)
                     'Authorization': session ? `Bearer ${session.access_token}` : `Bearer ${SUPABASE_ANON_KEY}`,
                     'apikey': SUPABASE_ANON_KEY,
                 },
-                body: JSON.stringify({ plan, cpf, email: guestEmail, name: guestName, phone: guestPhone, tracking: getTrackingData() }),
+                body: JSON.stringify({ plan, cpf, email: guestEmail, name: guestName, phone: guestPhone, tracking: getTrackingData(), orderBump: orderBump || false, orderBumpPrice: orderBump ? orderBumpPrice : 0 }),
             });
             const data = await res.json();
             if (data?.error) throw new Error(data.error);
@@ -461,7 +461,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone }: any)
 };
 
 /* ─── APPMAX CC ─────────────────────────────────────────────────── */
-const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guestPhone, onInstallmentChange }: any) => {
+const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guestPhone, orderBump, orderBumpPrice, onInstallmentChange }: any) => {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({ card_number: '', card_name: '', card_expiry: '', card_cvv: '', cpf: '', installments: '1', country: 'BR' });
     const [agreedToTerms, setAgreedToTerms] = useState(false);
@@ -524,7 +524,9 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
             const data = await invokeFn('process-appmax-cc', { 
                 plan, 
                 paymentData: { ...formData, email: guestEmail, name: guestName, phone: guestPhone?.replace(/\D/g, '') },
-                tracking: getTrackingData()
+                tracking: getTrackingData(),
+                orderBump: orderBump || false,
+                orderBumpPrice: orderBump ? orderBumpPrice : 0,
             }, session?.access_token || null);
             if (data?.success) onSuccess();
             else throw new Error(data?.message || 'Erro ao processar pagamento');
@@ -708,7 +710,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
 };
 
 /* ─── ORDER SUMMARY SECTION ────────────────────────────────────── */
-const OrderSummary = ({ plan, priceStr, monthly12x, currencySymbol, planDisplayName, selectedInstallment, planAccessDuration, oldPriceStr }: any) => {
+const OrderSummary = ({ plan, region, priceStr, monthly12x, currencySymbol, planDisplayName, selectedInstallment, planAccessDuration, oldPriceStr }: any) => {
     return (
         <div className="w-full bg-white border-b border-slate-100">
             <div className="flex items-center gap-3 px-5 py-3">
@@ -751,6 +753,9 @@ export const CheckoutModal = ({
     const [step, setStep] = useState<1 | 2>(1);
     const [isPaymentApproved, setIsPaymentApproved] = useState(false);
     const [selectedInstallment, setSelectedInstallment] = useState<{ n: number; info: { value: string; total: string } | null }>({ n: 1, info: INSTALLMENTS[plan.id]?.[0] || null });
+    const [orderBump, setOrderBump] = useState(false);
+    const showOrderBump = region === 'BR' && ['starter', 'pro'].includes(plan.id?.toLowerCase());
+    const ORDER_BUMP_PRICE = 29.90;
     const [guestEmail, setGuestEmail] = useState('');
     const [guestName, setGuestName] = useState('');
     const [guestPhone, setGuestPhone] = useState('');
@@ -761,6 +766,8 @@ export const CheckoutModal = ({
     const priceStr = priceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     const oldPriceNum = region === 'BR' ? Math.round(priceNum / 0.7) : Math.round(priceNum / 0.6);
     const oldPriceStr = oldPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    const totalPriceNum = priceNum + (orderBump ? ORDER_BUMP_PRICE : 0);
+    const totalPriceStr = totalPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     let monthly12x = (priceNum / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     if (region === 'BR' && INSTALLMENTS[plan.id]?.[11]) {
         monthly12x = INSTALLMENTS[plan.id][11].value;
@@ -903,18 +910,30 @@ export const CheckoutModal = ({
                                 <div className="flex items-center justify-between gap-2">
                                     <h2 className="text-[18px] font-black text-slate-900 leading-tight">{planDisplayName}</h2>
                                     <div className="flex items-center gap-1.5 shrink-0">
-                                        <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full font-black border border-emerald-100 uppercase">40% OFF</span>
+                                        <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full font-black border border-emerald-100 uppercase">{region === 'BR' ? '30% OFF' : '40% OFF'}</span>
                                         <span className="text-[11px] text-slate-400 font-medium line-through">{currencySymbol} {oldPriceStr}</span>
                                     </div>
                                 </div>
                                 <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}</p>
-                                <p className="text-[18px] font-black text-slate-900 mt-1">{currencySymbol} {selectedInstallment.info?.total || priceStr}</p>
+                                <p className="text-[18px] font-black text-slate-900 mt-1">{currencySymbol} {selectedInstallment.info?.total || totalPriceStr}</p>
                             </div>
                         </div>
                         <div className="pt-4 border-t border-slate-50 flex justify-between items-center">
                             <span className="text-[12px] font-bold text-slate-400">Parcelamento</span>
                             <span className="text-[13px] font-black text-slate-900">{selectedInstallment.n}x {currencySymbol} {selectedInstallment.info?.value || monthly12x}</span>
                         </div>
+                        {orderBump && (
+                            <div className="pt-3 border-t border-slate-50 flex justify-between items-center">
+                                <span className="text-[12px] font-bold text-slate-400">Grupo de Networking</span>
+                                <span className="text-[13px] font-black text-emerald-600">+ R$ 29,90</span>
+                            </div>
+                        )}
+                        {orderBump && (
+                            <div className="pt-3 border-t border-slate-50 flex justify-between items-center">
+                                <span className="text-[12px] font-black text-slate-900">Total</span>
+                                <span className="text-[15px] font-black text-slate-900">{currencySymbol} {totalPriceStr}</span>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -957,6 +976,7 @@ export const CheckoutModal = ({
                 <div className="md:hidden">
                     <OrderSummary
                         plan={plan}
+                        region={region}
                         priceStr={priceStr}
                         monthly12x={monthly12x}
                         currencySymbol={currencySymbol}
@@ -1102,6 +1122,46 @@ export const CheckoutModal = ({
                                     <p className="text-[14px] text-slate-400 font-medium">Escolha como deseja pagar.</p>
                                 </div>
 
+                                {/* ── ORDER BUMP ── */}
+                                {showOrderBump && (
+                                    <label
+                                        htmlFor="order-bump-checkbox"
+                                        className={`flex items-start gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
+                                            orderBump
+                                                ? 'border-[#4D5BFF] bg-[#EEF0FF]'
+                                                : 'border-slate-200 bg-slate-50 hover:border-slate-300'
+                                        }`}
+                                    >
+                                        {/* Checkbox */}
+                                        <div className="relative flex items-center shrink-0 mt-0.5">
+                                            <input
+                                                id="order-bump-checkbox"
+                                                type="checkbox"
+                                                className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-slate-300 transition-all checked:bg-[#4D5BFF] checked:border-[#4D5BFF]"
+                                                checked={orderBump}
+                                                onChange={e => setOrderBump(e.target.checked)}
+                                            />
+                                            <Icons.Check className="absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-1" />
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="flex-1 min-w-0">
+                                            <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
+                                                <span className="text-[10px] font-black bg-[#4D5BFF] text-white px-2 py-0.5 rounded-full uppercase tracking-wide">
+                                                    Oferta Especial
+                                                </span>
+                                                <span className="text-[13px] font-black text-slate-900">+ R$ 29,90</span>
+                                            </div>
+                                            <p className="text-[14px] font-black text-slate-900 leading-snug mb-1">
+                                                Grupo de Networking exclusivo no WhatsApp
+                                            </p>
+                                            <p className="text-[12px] text-slate-500 leading-relaxed">
+                                                Além de todo nosso aplicativo, você participa exclusivamente do nosso grupo de Networking, converse diretamente e diariamente com quem está no mesmo caminho que você.
+                                            </p>
+                                        </div>
+                                    </label>
+                                )}
+
                                 {/* ── payment method buttons — separate, close together ── */}
                                 <div className="flex gap-2">
                                     {/* Cartão */}
@@ -1154,6 +1214,8 @@ export const CheckoutModal = ({
                                             guestEmail={guestEmail} 
                                             guestName={guestName} 
                                             guestPhone={guestPhone}
+                                            orderBump={orderBump}
+                                            orderBumpPrice={ORDER_BUMP_PRICE}
                                             onInstallmentChange={(info: any, n: number) => setSelectedInstallment({ n, info })}
                                         />
                                     ) : method === 'cc' ? (
@@ -1183,7 +1245,7 @@ export const CheckoutModal = ({
                                             </div>
                                         )
                                     ) : method === 'pix' ? (
-                                        <PixPayment plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone} />
+                                        <PixPayment plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone} orderBump={orderBump} orderBumpPrice={ORDER_BUMP_PRICE} />
                                     ) : null /* apple_pay is handled natively, no extra UI */}
                                 </div>
                             </div>
