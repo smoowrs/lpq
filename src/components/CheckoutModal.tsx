@@ -710,7 +710,8 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
 };
 
 /* ─── ORDER SUMMARY SECTION ────────────────────────────────────── */
-const OrderSummary = ({ plan, region, priceStr, monthly12x, currencySymbol, planDisplayName, selectedInstallment, planAccessDuration, oldPriceStr }: any) => {
+const OrderSummary = ({ plan, region, priceStr, totalPriceStr, orderBump, monthly12x, currencySymbol, planDisplayName, selectedInstallment, planAccessDuration, oldPriceStr }: any) => {
+    const displayPrice = orderBump ? totalPriceStr : priceStr;
     return (
         <div className="w-full bg-white border-b border-slate-100">
             <div className="flex items-center gap-3 px-5 py-3">
@@ -720,15 +721,16 @@ const OrderSummary = ({ plan, region, priceStr, monthly12x, currencySymbol, plan
                 <div className="flex-1 min-w-0">
                     <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-0.5">RESUMO DO PEDIDO</p>
                     <p className="text-[16px] font-black text-slate-900 leading-tight">{planDisplayName}</p>
-                    <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}</p>
+                    <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}{orderBump ? ' + Networking' : ''}</p>
                 </div>
                 <div className="flex flex-col items-end shrink-0">
                     <div className="flex items-center gap-1.5 mb-1">
                         <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-md font-black border border-emerald-200 uppercase tracking-wide">{region === 'BR' ? '30% OFF' : '40% OFF'}</span>
                         <span className="text-[11px] text-slate-400 font-medium line-through">{currencySymbol} {oldPriceStr}</span>
                     </div>
-                    <span className="text-[17px] font-black text-slate-900">{currencySymbol} {priceStr}</span>
-                    <span className="text-[10px] text-slate-400 font-medium opacity-90 mt-0.5">Ou 12x de {currencySymbol} {monthly12x}</span>
+                    <span className="text-[17px] font-black text-slate-900 transition-all duration-300">{currencySymbol} {displayPrice}</span>
+                    {!orderBump && <span className="text-[10px] text-slate-400 font-medium opacity-90 mt-0.5">Ou 12x de {currencySymbol} {monthly12x}</span>}
+                    {orderBump && <span className="text-[10px] text-emerald-600 font-black mt-0.5">Inclui Grupo de Networking</span>}
                 </div>
             </div>
         </div>
@@ -978,6 +980,8 @@ export const CheckoutModal = ({
                         plan={plan}
                         region={region}
                         priceStr={priceStr}
+                        totalPriceStr={totalPriceStr}
+                        orderBump={orderBump}
                         monthly12x={monthly12x}
                         currencySymbol={currencySymbol}
                         oldPriceStr={oldPriceStr}
@@ -1194,7 +1198,7 @@ export const CheckoutModal = ({
                                     {/* Apple Pay — native sheet */}
                                     <ApplePayButton
                                         plan={plan}
-                                        priceNum={priceNum}
+                                        priceNum={totalPriceNum}
                                         region={region}
                                         guestEmail={guestEmail}
                                         guestName={guestName}
