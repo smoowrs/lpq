@@ -88,6 +88,50 @@
 
       setBackRedirect(link);
     </script>
+    
+    <!-- Configuração de Parcelamento Appmax (Repasse de Juros) -->
+    <script>
+      (function() {
+        try {
+          if (typeof window === 'undefined') return;
+          
+          function applyAppmaxSettings(CheckoutObj) {
+            if (!CheckoutObj) return;
+            try {
+              if (typeof CheckoutObj === 'function') {
+                CheckoutObj('config', { max_interest_free: 1 });
+              } else if (typeof CheckoutObj.config === 'function') {
+                CheckoutObj.config({ max_interest_free: 1 });
+              }
+            } catch (e) {
+              console.warn("Erro ao configurar max_interest_free na Appmax", e);
+            }
+          }
+
+          // Seguranca: garante que o objeto AppmaxCheckout exite sem quebrar rotina
+          if (typeof window.AppmaxCheckout === 'undefined') {
+            window.AppmaxCheckout = function() {
+              (window.AppmaxCheckout.q = window.AppmaxCheckout.q || []).push(arguments);
+            };
+            applyAppmaxSettings(window.AppmaxCheckout);
+          } else {
+            applyAppmaxSettings(window.AppmaxCheckout);
+          }
+
+          // Interceptar configuracao no objeto global, caso o script Appmax o recrie depois e resete definicoes
+          let _OriginalAppmaxCheckout = window.AppmaxCheckout;
+          Object.defineProperty(window, 'AppmaxCheckout', {
+            get: function() { return _OriginalAppmaxCheckout; },
+            set: function(val) {
+              _OriginalAppmaxCheckout = val;
+              applyAppmaxSettings(_OriginalAppmaxCheckout);
+            }
+          });
+        } catch (err) {
+          console.warn('Protecao de objeto Appmax falhou:', err);
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

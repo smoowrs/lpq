@@ -533,12 +533,24 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
         setLoading(true);
         try {
             const { data: { session } } = await supabase.auth.getSession();
+
+            // Calculate the total amount WITH interest from the installments table
+            // so the buyer pays the interest, not the seller
+            const instIdx = parseInt(formData.installments) - 1;
+            const instInfo = adjustedInstallments[instIdx];
+            // PT-BR format: dots are thousands separators, comma is decimal → "1.234,56" → 1234.56
+            const totalWithInterest = instInfo
+                ? parseFloat(instInfo.total.replace(/\./g, '').replace(',', '.'))
+                : undefined;
+
             const data = await invokeFn('process-appmax-cc', { 
                 plan, 
                 paymentData: { ...formData, email: guestEmail, name: guestName, phone: guestPhone?.replace(/\D/g, '') },
                 tracking: getTrackingData(),
                 orderBump: orderBump || false,
                 orderBumpPrice: orderBump ? orderBumpPrice : 0,
+                // Send total WITH interest so Appmax charges the buyer correctly
+                amount: totalWithInterest,
             }, session?.access_token || null);
             if (data?.success) onSuccess();
             else throw new Error(data?.message || 'Erro ao processar pagamento');
