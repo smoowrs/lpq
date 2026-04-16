@@ -315,7 +315,7 @@ export default function App() {
                 <div className="relative z-10 w-full bg-[#0a0a0a] rounded-2xl border border-white/10 shadow-2xl overflow-hidden p-1">
                   <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-black">
                     <iframe
-                      src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
+                      src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=0b95370e-45d5-40d2-9c30-5c152ac60f49"
                       className="absolute top-0 left-0 w-full h-full border-0"
                       allowFullScreen
                       loading="eager"
@@ -372,7 +372,7 @@ export default function App() {
             <div className="relative z-10 w-full bg-[#0a0a0a] rounded-[2rem] border border-white/10 shadow-[0_0_80px_rgba(88,46,245,0.2)] overflow-hidden p-1 md:p-2">
               <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center">
                 <iframe
-                  src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=79d4adef-2ea8-45f0-8ed4-bdfb4a2d954b"
+                  src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=0b95370e-45d5-40d2-9c30-5c152ac60f49"
                   className="absolute top-0 left-0 w-full h-full border-0"
                   allowFullScreen
                   loading="eager"
