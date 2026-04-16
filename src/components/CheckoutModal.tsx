@@ -468,8 +468,20 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
     const hasFiredAddPaymentInfo = useRef(false);
 
     const planInstallments = INSTALLMENTS[plan.id] || [];
+
+    // Recalculate installment values if order bump is active
+    const adjustedInstallments = planInstallments.map((inst: any, i: number) => {
+        if (!orderBump || !orderBumpPrice) return inst;
+        const n = i + 1;
+        const baseValue = parseFloat(inst.value.replace(',', '.'));
+        const baseTotal = parseFloat(inst.total.replace(',', '.'));
+        const newValue = (baseValue + orderBumpPrice / n).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const newTotal = (baseTotal + orderBumpPrice).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return { value: newValue, total: newTotal };
+    });
+
     const selectedIdx = parseInt(formData.installments) - 1;
-    const selectedInfo = planInstallments[selectedIdx];
+    const selectedInfo = adjustedInstallments[selectedIdx];
 
     const handleInputChange = (e: any) => {
         const { name, value } = e.target;
@@ -511,7 +523,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
 
         if (name === 'installments' && onInstallmentChange) {
             const idx = parseInt(value) - 1;
-            onInstallmentChange(INSTALLMENTS[plan.id]?.[idx] || null, parseInt(value));
+            onInstallmentChange(adjustedInstallments[idx] || null, parseInt(value));
         }
     };
 
@@ -644,7 +656,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                     <label className={labelStyle}>PARCELAS</label>
                     <div className="relative">
                         <select name="installments" className={`${inputStyle} appearance-none pr-10`} value={formData.installments} onChange={handleInputChange}>
-                            {planInstallments.map((inst, i) => {
+                            {adjustedInstallments.map((inst: any, i: number) => {
                                 const n = i + 1;
                                 return (
                                     <option key={n} value={n}>
@@ -652,7 +664,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                                     </option>
                                 );
                             })}
-                            {planInstallments.length === 0 && Array.from({ length: 21 }, (_, i) => (
+                            {adjustedInstallments.length === 0 && Array.from({ length: 21 }, (_, i) => (
                                 <option key={i + 1} value={i + 1}>{i + 1}x</option>
                             ))}
                         </select>
