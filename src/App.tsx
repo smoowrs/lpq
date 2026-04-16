@@ -1416,9 +1416,9 @@ export default function App() {
               
               const pricesMap: Record<string, { BR: string; EU: string; oldBR: string; oldEU: string; parcelBR?: string }> = {
                 free: { BR: "0", EU: "0", oldBR: "0", oldEU: "0" },
-                starter: { BR: "58,20", EU: "9,60", oldBR: "97,00", oldEU: "16,00", parcelBR: "6,30" },
-                pro: { BR: "118,20", EU: "19,20", oldBR: "197,00", oldEU: "32,00", parcelBR: "12,79" },
-                elite: { BR: "233,40", EU: "38,40", oldBR: "389,00", oldEU: "16,00", parcelBR: "25,33" }
+                starter: { BR: "67,90", EU: "9,60", oldBR: "97,00", oldEU: "16,00", parcelBR: "7,69" },
+                pro: { BR: "137,90", EU: "19,20", oldBR: "197,00", oldEU: "32,00", parcelBR: "14,92" },
+                elite: { BR: "272,30", EU: "38,40", oldBR: "389,00", oldEU: "16,00", parcelBR: "29,47" }
               };
               
               const pData = pricesMap[plan.id as keyof typeof pricesMap];
@@ -1466,7 +1466,7 @@ export default function App() {
                         {isBrasil ? 'R$' : '€'} {originalPrice}
                       </span>
                       <span className="bg-emerald-500/20 text-emerald-400 text-[10px] px-2 py-0.5 rounded font-black uppercase tracking-wide">
-                        {plan.data.discount || '40% OFF'}
+                        {isBrasil ? '30% OFF' : (plan.data.discount || '40% OFF')}
                       </span>
                     </div>
                     <div className="flex items-baseline gap-1 mt-1">

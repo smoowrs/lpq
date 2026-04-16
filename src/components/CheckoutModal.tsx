@@ -18,73 +18,73 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // ── Tabela de parcelas exatas da Appmax por plano ──
 const INSTALLMENTS: Record<string, { value: string; total: string }[]> = {
     starter: [
-        { value: '58,20', total: '58,20' },
-        { value: '30,84', total: '61,68' },
-        { value: '21,14', total: '63,42' },
-        { value: '16,29', total: '65,16' },
-        { value: '13,38', total: '66,90' },
-        { value: '11,44', total: '68,64' },
-        { value: '10,05', total: '70,38' },
-        { value: '9,02',  total: '72,12' },
-        { value: '8,21',  total: '73,86' },
-        { value: '7,56',  total: '75,60' },
-        { value: '7,03',  total: '77,34' },
-        { value: '6,59',  total: '79,08' },
-        { value: '6,22',  total: '80,82' },
-        { value: '5,90',  total: '82,56' },
-        { value: '5,62',  total: '84,30' },
-        { value: '5,38',  total: '86,04' },
-        { value: '5,16',  total: '87,78' },
-        { value: '4,97',  total: '89,52' },
-        { value: '4,80',  total: '91,26' },
-        { value: '4,65',  total: '93,00' },
-        { value: '4,51',  total: '94,74' },
+        { value: '67,90', total: '67,90' },
+        { value: '35,98', total: '71,96' },
+        { value: '24,66', total: '73,99' },
+        { value: '19,01', total: '76,02' },
+        { value: '15,61', total: '78,05' },
+        { value: '13,35', total: '80,08' },
+        { value: '11,73', total: '82,11' },
+        { value: '10,52', total: '84,14' },
+        { value: '9,58',  total: '86,17' },
+        { value: '8,82',  total: '88,20' },
+        { value: '8,20',  total: '90,23' },
+        { value: '7,69',  total: '92,26' },
+        { value: '7,26',  total: '94,29' },
+        { value: '6,88',  total: '96,32' },
+        { value: '6,56',  total: '98,35' },
+        { value: '6,28',  total: '100,38' },
+        { value: '6,02',  total: '102,41' },
+        { value: '5,80',  total: '104,44' },
+        { value: '5,60',  total: '106,47' },
+        { value: '5,43',  total: '108,50' },
+        { value: '5,26',  total: '110,53' },
     ],
     pro: [
-        { value: '118,20', total: '118,20' },
-        { value: '62,05',  total: '124,09' },
-        { value: '42,34',  total: '127,03' },
-        { value: '32,49',  total: '129,97' },
-        { value: '26,58',  total: '132,92' },
-        { value: '22,64',  total: '135,86' },
-        { value: '19,83',  total: '138,80' },
-        { value: '17,72',  total: '141,75' },
-        { value: '16,08',  total: '144,69' },
-        { value: '14,76',  total: '147,63' },
-        { value: '13,69',  total: '150,57' },
-        { value: '12,79',  total: '153,52' },
-        { value: '12,04',  total: '156,46' },
-        { value: '11,39',  total: '159,40' },
-        { value: '10,82',  total: '162,35' },
-        { value: '10,33',  total: '165,29' },
-        { value: '9,90',   total: '168,23' },
-        { value: '9,51',   total: '171,18' },
-        { value: '9,16',   total: '174,12' },
-        { value: '8,85',   total: '177,06' },
-        { value: '8,57',   total: '180,01' },
+        { value: '137,90', total: '137,90' },
+        { value: '72,39',  total: '144,77' },
+        { value: '49,40',  total: '148,20' },
+        { value: '37,91',  total: '151,63' },
+        { value: '31,01',  total: '155,07' },
+        { value: '26,41',  total: '158,50' },
+        { value: '23,14',  total: '161,93' },
+        { value: '20,67',  total: '165,38' },
+        { value: '18,76',  total: '168,81' },
+        { value: '17,22',  total: '172,24' },
+        { value: '15,97',  total: '175,67' },
+        { value: '14,92',  total: '179,11' },
+        { value: '14,05',  total: '182,54' },
+        { value: '13,29',  total: '185,97' },
+        { value: '12,62',  total: '189,41' },
+        { value: '12,05',  total: '192,84' },
+        { value: '11,55',  total: '196,27' },
+        { value: '11,10',  total: '199,71' },
+        { value: '10,69',  total: '203,14' },
+        { value: '10,33',  total: '206,57' },
+        { value: '10,00',  total: '210,01' },
     ],
     elite: [
-        { value: '233,40', total: '233,40' },
-        { value: '122,51', total: '245,02' },
-        { value: '83,61',  total: '250,83' },
-        { value: '64,16',  total: '256,65' },
-        { value: '52,49',  total: '262,46' },
-        { value: '44,71',  total: '268,27' },
-        { value: '39,15',  total: '274,08' },
-        { value: '34,99',  total: '279,89' },
-        { value: '31,74',  total: '285,70' },
-        { value: '29,15',  total: '291,52' },
-        { value: '27,03',  total: '297,33' },
-        { value: '25,26',  total: '303,14' },
-        { value: '23,77',  total: '308,95' },
-        { value: '22,48',  total: '314,76' },
-        { value: '21,37',  total: '320,57' },
-        { value: '20,40',  total: '326,39' },
-        { value: '19,54',  total: '332,20' },
-        { value: '18,78',  total: '338,01' },
-        { value: '18,10',  total: '343,82' },
-        { value: '17,48',  total: '349,63' },
-        { value: '16,93',  total: '355,44' },
+        { value: '272,30', total: '272,30' },
+        { value: '142,93', total: '285,86' },
+        { value: '97,55',  total: '292,64' },
+        { value: '74,85',  total: '299,43' },
+        { value: '61,24',  total: '306,20' },
+        { value: '52,16',  total: '312,98' },
+        { value: '45,68',  total: '319,76' },
+        { value: '40,82',  total: '326,54' },
+        { value: '37,03',  total: '333,32' },
+        { value: '34,01',  total: '340,11' },
+        { value: '31,54',  total: '346,89' },
+        { value: '29,47',  total: '353,66' },
+        { value: '27,73',  total: '360,44' },
+        { value: '26,23',  total: '367,22' },
+        { value: '24,93',  total: '374,00' },
+        { value: '23,80',  total: '380,79' },
+        { value: '22,80',  total: '387,57' },
+        { value: '21,91',  total: '394,35' },
+        { value: '21,12',  total: '401,12' },
+        { value: '20,39',  total: '407,90' },
+        { value: '19,75',  total: '414,68' },
     ],
 };
 
@@ -112,13 +112,24 @@ function getTrackingData() {
     });
 
     try {
+        // Enforce lowercase keys for consistency if needed, but Appmax/UTMify usually expect these
         keys.forEach(key => {
             if (!tracking[key]) {
                 const lsVal = localStorage.getItem(key);
                 if (lsVal) tracking[key] = lsVal;
             }
         });
-    } catch {}
+
+        // Add Facebook fbp and fbc from cookies
+        const fbp = document.cookie.match(/(^|;)\s*_fbp\s*=\s*([^;]+)/);
+        if (fbp) tracking.fbp = decodeURIComponent(fbp[2]);
+
+        const fbc = document.cookie.match(/(^|;)\s*_fbc\s*=\s*([^;]+)/);
+        if (fbc) tracking.fbc = decodeURIComponent(fbc[2]);
+
+    } catch (e) {
+        console.error('Error getting tracking data:', e);
+    }
 
     return Object.keys(tracking).length > 0 ? tracking : undefined;
 }
@@ -711,7 +722,7 @@ const OrderSummary = ({ plan, priceStr, monthly12x, currencySymbol, planDisplayN
                 </div>
                 <div className="flex flex-col items-end shrink-0">
                     <div className="flex items-center gap-1.5 mb-1">
-                        <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-md font-black border border-emerald-200 uppercase tracking-wide">40% OFF</span>
+                        <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-md font-black border border-emerald-200 uppercase tracking-wide">{region === 'BR' ? '30% OFF' : '40% OFF'}</span>
                         <span className="text-[11px] text-slate-400 font-medium line-through">{currencySymbol} {oldPriceStr}</span>
                     </div>
                     <span className="text-[17px] font-black text-slate-900">{currencySymbol} {priceStr}</span>
@@ -748,7 +759,7 @@ export const CheckoutModal = ({
 
     const priceNum = parseFloat((plan.prices?.[region]?.annual || '0').replace(',', '.'));
     const priceStr = priceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-    const oldPriceNum = Math.round(priceNum / 0.6);
+    const oldPriceNum = region === 'BR' ? Math.round(priceNum / 0.7) : Math.round(priceNum / 0.6);
     const oldPriceStr = oldPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     let monthly12x = (priceNum / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     if (region === 'BR' && INSTALLMENTS[plan.id]?.[11]) {
