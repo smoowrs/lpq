@@ -187,4 +187,5 @@ export const motion = {
   h3: withGSAP('h3'),
   ul: withGSAP('ul'),
   li: withGSAP('li'),
+  a: withGSAP('a'),
 };
