@@ -238,6 +238,14 @@ export default function App() {
                 <span className="hidden sm:inline">{t.nav.create}</span>
                 <span className="sm:hidden">{t.nav.create_short}</span>
               </button>
+              <a
+                href="https://t.me/grupoconnect"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary px-3 sm:px-6 py-1.5 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] font-bold whitespace-nowrap rounded-full md:rounded-xl shadow-lg shadow-[#582ef5]/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center bg-gradient-to-r from-[#2AABEE] to-[#229ED9]"
+              >
+                Catálogo
+              </a>
             </div>
 
             {/* Desktop Idioma Selector (Bem na direita) */}
