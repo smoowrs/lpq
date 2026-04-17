@@ -238,14 +238,6 @@ export default function App() {
                 <span className="hidden sm:inline">{t.nav.create}</span>
                 <span className="sm:hidden">{t.nav.create_short}</span>
               </button>
-              <a
-                href="https://t.me/grupoconnect"
-                target="_blank"
-                rel="noreferrer"
-                className="btn-primary px-3 sm:px-6 py-1.5 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] font-bold whitespace-nowrap rounded-full md:rounded-xl shadow-lg shadow-[#582ef5]/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center bg-gradient-to-r from-[#2AABEE] to-[#229ED9]"
-              >
-                Catálogo
-              </a>
             </div>
 
             {/* Desktop Idioma Selector (Bem na direita) */}
@@ -349,16 +341,18 @@ export default function App() {
                     <ArrowRight className="w-5 h-5" strokeWidth={3} />
                   </motion.div>
                 </motion.button>
-                <motion.button
+                <motion.a
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
-                  onClick={scrollToPlanos}
+                  href="https://t.me/grupoconnect"
+                  target="_blank"
+                  rel="noreferrer"
                   className="btn-secondary px-8 py-4.5 text-[15px] sm:text-[16px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl group whitespace-nowrap border border-white/10 bg-white/5 backdrop-blur-sm"
                 >
-                  {t.hero.btnWork}
-                  <Play className="w-4 h-4 fill-white text-white" />
-                </motion.button>
+                  Catálogo de Produtos
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </motion.a>
               </div>
             </motion.div>
           </div>
