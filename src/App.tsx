@@ -291,18 +291,17 @@ export default function App() {
                 <span className="text-gray-200">{t.hero.sparkle}</span>
               </div>
 
-              <h1 className="text-[28px] md:text-5xl lg:text-[44px] xl:text-[56px] font-black tracking-tight mb-8 leading-[1.05] text-white">
-                {/* Versão Desktop (3 linhas) */}
-                <div className="hidden md:flex flex-col items-start text-white">
-                  <span className="whitespace-nowrap">{t.hero.title1}</span>
-                  <span className="whitespace-nowrap">{t.hero.title2}</span>
-                  <span className="whitespace-nowrap">{t.hero.title3}</span>
+              <h1 className="text-[22px] md:text-4xl lg:text-[40px] xl:text-[50px] font-black tracking-tight mb-8 leading-[1.1] text-white">
+                {/* Versão Desktop */}
+                <div className="hidden md:block text-white">
+                  {t.hero.title1}<br />
+                  <span>{t.hero.title2}</span><br />
+                  <span>{t.hero.title3}</span>
                 </div>
 
-                {/* Versão Mobile (2 linhas) */}
+                {/* Versão Mobile */}
                 <div className="flex md:hidden flex-col items-center text-white">
-                  <span className="whitespace-nowrap">{t.hero.title1}</span>
-                  <span className="whitespace-nowrap">{t.hero.titleMob}</span>
+                  <span>{t.hero.titleMob}</span>
                 </div>
               </h1>
 
