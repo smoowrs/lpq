@@ -1695,9 +1695,9 @@ export default function App() {
       <div className="md:hidden fixed bottom-6 left-6 z-[999]">
         <button
           onClick={scrollToPlanos}
-          className="w-[56px] h-[56px] rounded-full overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all p-0 border border-white/10"
+          className="w-[60px] h-[60px] flex items-center justify-center hover:scale-105 active:scale-95 transition-all drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
         >
-          <img src="https://i.postimg.cc/GtrRRvPz/icone.png" alt="Acessar" className="w-full h-full object-cover" />
+          <img src="https://i.postimg.cc/GtrRRvPz/icone.png" alt="Acessar" className="w-full h-full object-contain" />
         </button>
       </div>
     </div>
