@@ -1692,13 +1692,12 @@ export default function App() {
       </footer>
 
       {/* ─── STICKY CTA MOBILE ─────────────────────────────────── */}
-      <div className="md:hidden fixed bottom-4 left-4 right-4 z-[999]">
+      <div className="md:hidden fixed bottom-6 left-6 z-[999]">
         <button
           onClick={scrollToPlanos}
-          className="w-full bg-[#00E676] hover:bg-[#00C853] text-black py-4 rounded-xl font-black text-[15px] shadow-[0_10px_40px_rgba(0,230,118,0.4)] flex items-center justify-center gap-2 uppercase tracking-wider active:scale-95 transition-all"
+          className="w-[72px] h-[72px] rounded-full overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.6)] flex items-center justify-center hover:scale-105 active:scale-95 transition-all p-0 border border-white/10"
         >
-          {t.hero.btnCreate}
-          <ArrowRight className="w-5 h-5" strokeWidth={3} />
+          <img src="https://i.postimg.cc/GtrRRvPz/icone.png" alt="Acessar" className="w-full h-full object-cover" />
         </button>
       </div>
     </div>
