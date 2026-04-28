@@ -16,8 +16,9 @@ export const trackFBEvent = async (eventName: string, eventData: any = {}, userD
     
     // 2. Prepare Match Keys (UserData)
     // We send this to both Pixel (if possible) and CAPI
-    let enrichedUserData = { 
+    let enrichedUserData: any = { 
         external_id: getExternalId(),
+        country: 'br',
         ...(userData || {}) 
     };
 

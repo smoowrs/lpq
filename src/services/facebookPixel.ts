@@ -13,6 +13,8 @@ export const trackViewContent = (planName: string, value: number, currency = 'BR
   trackFBEvent('ViewContent', {
     content_name: planName,
     content_category: 'Plano',
+    content_ids: [planName],
+    content_type: 'product',
     value,
     currency,
   }, userData);
@@ -22,6 +24,8 @@ export const trackViewContent = (planName: string, value: number, currency = 'BR
 export const trackInitiateCheckout = (planName: string, value: number, currency = 'BRL', userData?: any) => {
   trackFBEvent('InitiateCheckout', {
     content_name: planName,
+    content_ids: [planName],
+    content_type: 'product',
     value,
     currency,
     num_items: 1,
@@ -41,6 +45,7 @@ export const trackLead = (planName: string, value: number, currency = 'BRL', use
 export const trackAddPaymentInfo = (planName: string, userData?: any) => {
   trackFBEvent('AddPaymentInfo', {
     content_name: planName,
+    content_category: 'Plano',
   }, userData);
 };
 
@@ -51,6 +56,9 @@ export const trackPurchase = (planName: string, value: number, currency = 'BRL',
     currency,
     content_name: planName,
     content_type: 'product',
+    content_ids: [planName],
+    contents: [{ id: planName, quantity: 1, item_price: value }],
+    num_items: 1,
     ...(orderId ? { order_id: orderId } : {}),
   }, userData);
 };

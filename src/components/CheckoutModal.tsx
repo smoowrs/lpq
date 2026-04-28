@@ -11,6 +11,7 @@ import {
 import { supabase } from '../services/supabase';
 import { toast } from 'react-hot-toast';
 import { trackInitiateCheckout, trackPurchase, trackAddPaymentInfo, trackLead } from '../services/facebookPixel';
+import { trackGoogleAdsPurchase } from '../services/googleAds';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://auth.connectacademy.com.br';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmeWZ6cGppdmVzcmJjeGlsbXpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2NTE1ODUsImV4cCI6MjA4NjIyNzU4NX0.4q3uB1PrFPbaH4lunmQ6wZU0jNABg2D0i45JRHXo_K0';
@@ -816,11 +817,14 @@ export const CheckoutModal = ({
     const handleLocalSuccess = async () => {
         setIsPaymentApproved(true);
         const nameParts = guestName?.split(' ') || [];
-        trackPurchase(plan.label || plan.id, priceNum, region === 'EU' ? 'EUR' : 'BRL', undefined, {
+        const purchaseCurrency = region === 'EU' ? 'EUR' : 'BRL';
+        const purchaseValue = totalPriceNum; // inclui order bump se ativo
+        trackPurchase(plan.label || plan.id, purchaseValue, purchaseCurrency, undefined, {
             email: guestEmail,
             firstName: nameParts[0] || '',
             phone: guestPhone.replace(/\D/g, ''),
         });
+        trackGoogleAdsPurchase(purchaseValue, purchaseCurrency);
         try {
             const { data: { session } } = await supabase.auth.getSession();
             const finalEmail = guestEmail || session?.user?.email;
@@ -842,7 +846,8 @@ export const CheckoutModal = ({
                     plan: plan.id, 
                     email: finalEmail, 
                     name: finalName,
-                    billingCycle: plan.billingCycle // Include billing cycle if present
+                    billingCycle: plan.billingCycle, // Include billing cycle if present
+                    sendEmail: false, // Backend already sent the access email
                 }),
             });
 

@@ -20,6 +20,21 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" /></noscript>
 
     <link rel="dns-prefetch" href="https://connect.facebook.net" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+
+    <!-- Google Ads (gtag.js) — carregado após load para não bloquear FCP/LCP -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-18105360522');
+    window.addEventListener('load', function() {
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18105360522';
+      document.head.appendChild(s);
+    });
+    </script>
 
     <!-- Preload do logo (LCP crítico) com fetchpriority high -->
     <link rel="preload" as="image" href="https://i.postimg.cc/t4CHMJzj/brancalogo.png" fetchpriority="high" />
@@ -99,9 +114,19 @@
             if (!CheckoutObj) return;
             try {
               if (typeof CheckoutObj === 'function') {
-                CheckoutObj('config', { max_interest_free: 1 });
+                CheckoutObj('config', { 
+                  max_interest_free: 1,
+                  installmentsWithoutInterest: 1,
+                  installments_without_interest: 1,
+                  maxInstallmentsWithoutInterest: 1
+                });
               } else if (typeof CheckoutObj.config === 'function') {
-                CheckoutObj.config({ max_interest_free: 1 });
+                CheckoutObj.config({ 
+                  max_interest_free: 1,
+                  installmentsWithoutInterest: 1,
+                  installments_without_interest: 1,
+                  maxInstallmentsWithoutInterest: 1
+                });
               }
             } catch (e) {
               console.warn("Erro ao configurar max_interest_free na Appmax", e);

@@ -38,6 +38,11 @@ export default async function handler(
   const rawFbc = fbc || request.cookies?._fbc || request.cookies?.fbc;
   const finalFbc = isValidFbc(rawFbc);
 
+  // Build external_id: prioritize Supabase user ID > CPF > random browser ID
+  // Hash it with SHA-256 as required by CAPI
+  const rawExternalId = userData?.external_id || userData?.cpf?.replace(/[^\d]/g, '') || undefined;
+  const hashedExternalId = rawExternalId ? hash(rawExternalId) : undefined;
+
   const eventData = {
     ...(testEventCode ? { test_event_code: testEventCode } : {}),
     data: [
@@ -52,16 +57,17 @@ export default async function handler(
           client_user_agent: request.headers['user-agent'] || '',
           fbp: fbp || request.cookies?._fbp || request.cookies?.fbp,
           ...(finalFbc ? { fbc: finalFbc } : {}),
+          ...(hashedExternalId ? { external_id: hashedExternalId } : {}),
           ...(userData?.email ? { em: hash(userData.email) } : {}),
           ...(userData?.firstName ? { fn: hash(userData.firstName) } : {}),
           ...(userData?.lastName ? { ln: hash(userData.lastName) } : {}),
-          ...(userData?.cpf ? { external_id: hash(userData.cpf.replace(/[^\d]/g, '')) } : {}),
           ...(userData?.phone ? (() => {
             // Normalize to E.164 format: +55XXXXXXXXXXX
             const digits = userData.phone.replace(/\D/g, '');
             const e164 = digits.startsWith('55') ? `+${digits}` : `+55${digits}`;
             return { ph: hash(e164) };
           })() : {}),
+          ...(userData?.country ? { country: hash(userData.country) } : { country: hash('br') }),
         },
         custom_data: clientData || {},
       }

@@ -3,10 +3,10 @@ export const translations = {
     nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (BR)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "A revolução da importação com IA",
-      title1: "Economize ou Lucre",
-      title2: "Importando Produtos",
-      title3: "Direto da China 🌏",
-      titleMob: "Importando da China 🌏",
+      title1: "Esqueça as taxas",
+      title2: "alfandegárias, nosso",
+      title3: "assistente cuida de tudo 🤖",
+      titleMob: "Nosso assistente cuida de tudo 🤖",
       desc: "Crie sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe de nossa comunidade de networking e utilize diversas outras ferramentas",
       btnCreate: "Criar conta grátis",
       btnWork: "Ver como funciona"
@@ -250,10 +250,10 @@ export const translations = {
     nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (PT)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "A revolução da importação com IA",
-      title1: "Economize ou Lucre",
-      title2: "Importando Produtos",
-      title3: "Direto da China 🌏",
-      titleMob: "Importando da China 🌏",
+      title1: "Esqueça as taxas",
+      title2: "alfandegárias, nosso",
+      title3: "assistente cuida de tudo 🤖",
+      titleMob: "Nosso assistente cuida de tudo 🤖",
       desc: "Crie a sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe da nossa comunidade de networking e utilize diversas outras ferramentas",
       btnCreate: "Criar conta grátis",
       btnWork: "Ver como funciona"
@@ -484,10 +484,10 @@ export const translations = {
     nav: { login: "Login", create: "Create free account", create_short: "Create account", lang: "English", community: "Community", products: "Products", ai: "Connect AI", tracking: "Tracking" },
     hero: {
       sparkle: "The import revolution with AI",
-      title1: "Save or Profit",
-      title2: "Importing Products",
-      title3: "Direct from China 🌏",
-      titleMob: "Import from China 🌏",
+      title1: "Forget customs",
+      title2: "fees, our intelligent",
+      title3: "assistant handles it all 🤖",
+      titleMob: "Our assistant handles it all 🤖",
       desc: "Create your free account and learn how to import from China! Get access to exclusive classes, real-time tracking, image generator and the Minerador: the AI developed to avoid abusive taxes, participate in our networking community and use several other tools",
       btnCreate: "Create free account",
       btnWork: "See how it works"
@@ -718,10 +718,10 @@ export const translations = {
     nav: { login: "Entrar", create: "Crear cuenta gratis", create_short: "Crear cuenta", lang: "Español", community: "Comunidad", products: "Productos", ai: "Connect AI", tracking: "Rastreo" },
     hero: {
       sparkle: "La revolución de la importación con IA",
-      title1: "Ahorra o Gana",
-      title2: "Importando Productos",
-      title3: "Directo de China 🌏",
-      titleMob: "Importar de China 🌏",
+      title1: "Olvida los aranceles,",
+      title2: "nuestro asistente",
+      title3: "inteligente lo hace todo 🤖",
+      titleMob: "Nuestro asistente lo hace todo 🤖",
       desc: "¡Crea tu cuenta gratis y aprende a importar de China! Ten acceso a clases exclusivas, rastreo en tiempo real, generador de imágenes y al Minerador: la IA desarrollada para evitar tasas abusivas, participa en nuestra comunidad de networking y utiliza diversas herramientas",
       btnCreate: "Crear cuenta gratis",
       btnWork: "Ver cómo funciona"
@@ -952,10 +952,10 @@ export const translations = {
     nav: { login: "Connexion", create: "Créer un compte", create_short: "Créer un compte", lang: "Français", community: "Communauté", products: "Produits", ai: "Connect AI", tracking: "Suivi" },
     hero: {
       sparkle: "La révolution de l'importation avec l'IA",
-      title1: "Économisez ou Profitez",
-      title2: "En participant aux Produits",
-      title3: "Directement de Chine 🌏",
-      titleMob: "Importer de Chine 🌏",
+      title1: "Oubliez les taxes",
+      title2: "douanières, notre assistant",
+      title3: "intelligent gère tout 🤖",
+      titleMob: "Notre assistant gère tout 🤖",
       desc: "Créez votre compte gratuit et apprenez à importer de Chine! Accédez à des cours exclusifs, au suivi en temps réel, au générateur d'images et au Minerador (IA développée pour éviter les taxes). Rejoignez notre communauté de réseautage et utilisez nos outils.",
       btnCreate: "Créer un compte",
       btnWork: "Voir comment ça marche"
