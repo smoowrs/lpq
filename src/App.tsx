@@ -333,7 +333,7 @@ export default function App() {
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
                   onClick={scrollToPlanos}
-                  className="btn-primary px-8 py-4.5 text-[15px] sm:text-[16px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.25)]"
+                  className="bg-[#00E676] hover:bg-[#00C853] text-black px-8 py-4.5 text-[15px] sm:text-[18px] font-black w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap rounded-2xl shadow-[0_20px_50px_rgba(0,230,118,0.4)] uppercase tracking-wide transition-all"
                 >
                   {t.hero.btnCreate}
                   <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
@@ -1690,6 +1690,17 @@ export default function App() {
           </p>
         </div>
       </footer>
+
+      {/* ─── STICKY CTA MOBILE ─────────────────────────────────── */}
+      <div className="md:hidden fixed bottom-4 left-4 right-4 z-[999]">
+        <button
+          onClick={scrollToPlanos}
+          className="w-full bg-[#00E676] hover:bg-[#00C853] text-black py-4 rounded-xl font-black text-[15px] shadow-[0_10px_40px_rgba(0,230,118,0.4)] flex items-center justify-center gap-2 uppercase tracking-wider active:scale-95 transition-all"
+        >
+          {t.hero.btnCreate}
+          <ArrowRight className="w-5 h-5" strokeWidth={3} />
+        </button>
+      </div>
     </div>
   );
 }
