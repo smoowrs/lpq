@@ -3,10 +3,10 @@ export const translations = {
     nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (BR)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "A revolução da importação com IA",
-      title1: "Esqueça as taxas alfandegárias.",
-      title2: "Nosso assistente inteligente",
-      title3: "cuida de tudo por você, automaticamente.",
-      titleMob: "Esqueça as taxas alfandegárias, nosso assistente inteligente cuida de tudo por você, automaticamente.",
+      title1: "Importe da China com segurança,",
+      title2: "sem surpresas e sem precisar",
+      title3: "entender de burocracia alfandegária.",
+      titleMob: "Importe da China com segurança, sem surpresas e sem precisar entender de burocracia alfandegária.",
       desc: "Crie sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe de nossa comunidade de networking e utilize diversas outras ferramentas",
       btnCreate: "Criar conta grátis",
       btnWork: "Ver como funciona"
@@ -250,10 +250,10 @@ export const translations = {
     nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (PT)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "A revolução da importação com IA",
-      title1: "Esqueça as taxas alfandegárias.",
-      title2: "Nosso assistente inteligente",
-      title3: "cuida de tudo por você, automaticamente.",
-      titleMob: "Esqueça as taxas alfandegárias, nosso assistente inteligente cuida de tudo por você, automaticamente.",
+      title1: "Importe da China com segurança,",
+      title2: "sem surpresas e sem precisar",
+      title3: "entender de burocracia alfandegária.",
+      titleMob: "Importe da China com segurança, sem surpresas e sem precisar entender de burocracia alfandegária.",
       desc: "Crie a sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe da nossa comunidade de networking e utilize diversas outras ferramentas",
       btnCreate: "Criar conta grátis",
       btnWork: "Ver como funciona"
@@ -484,10 +484,10 @@ export const translations = {
     nav: { login: "Login", create: "Create free account", create_short: "Create account", lang: "English", community: "Community", products: "Products", ai: "Connect AI", tracking: "Tracking" },
     hero: {
       sparkle: "The import revolution with AI",
-      title1: "Forget customs fees.",
-      title2: "Our intelligent assistant",
-      title3: "handles everything for you, automatically.",
-      titleMob: "Forget customs fees. Our intelligent assistant handles everything for you, automatically.",
+      title1: "Import from China safely,",
+      title2: "no surprises and no need",
+      title3: "to understand customs bureaucracy.",
+      titleMob: "Import from China safely, no surprises and no need to understand customs bureaucracy.",
       desc: "Create your free account and learn how to import from China! Get access to exclusive classes, real-time tracking, image generator and the Minerador: the AI developed to avoid abusive taxes, participate in our networking community and use several other tools",
       btnCreate: "Create free account",
       btnWork: "See how it works"
@@ -718,10 +718,10 @@ export const translations = {
     nav: { login: "Entrar", create: "Crear cuenta gratis", create_short: "Crear cuenta", lang: "Español", community: "Comunidad", products: "Productos", ai: "Connect AI", tracking: "Rastreo" },
     hero: {
       sparkle: "La revolución de la importación con IA",
-      title1: "Olvida los aranceles aduaneros.",
-      title2: "Nuestro asistente inteligente",
-      title3: "se encarga de todo por ti, automáticamente.",
-      titleMob: "Olvida los aranceles. Nuestro asistente inteligente se encarga de todo por ti, automáticamente.",
+      title1: "Importa desde China con seguridad,",
+      title2: "sin sorpresas y sin necesidad",
+      title3: "de entender la burocracia aduanera.",
+      titleMob: "Importa desde China con seguridad, sin sorpresas y sin necesidad de entender la burocracia aduanera.",
       desc: "¡Crea tu cuenta gratis y aprende a importar de China! Ten acceso a clases exclusivas, rastreo en tiempo real, generador de imágenes y al Minerador: la IA desarrollada para evitar tasas abusivas, participa en nuestra comunidad de networking y utiliza diversas herramientas",
       btnCreate: "Crear cuenta gratis",
       btnWork: "Ver cómo funciona"
@@ -952,10 +952,10 @@ export const translations = {
     nav: { login: "Connexion", create: "Créer un compte", create_short: "Créer un compte", lang: "Français", community: "Communauté", products: "Produits", ai: "Connect AI", tracking: "Suivi" },
     hero: {
       sparkle: "La révolution de l'importation avec l'IA",
-      title1: "Oubliez les taxes douanières.",
-      title2: "Notre assistant intelligent",
-      title3: "s'occupe de tout pour vous, automatiquement.",
-      titleMob: "Oubliez les taxes. Notre assistant intelligent s'occupe de tout pour vous, automatiquement.",
+      title1: "Importez de Chine en toute sécurité,",
+      title2: "sans surprises et sans avoir besoin",
+      title3: "de comprendre la bureaucratie douanière.",
+      titleMob: "Importez de Chine en toute sécurité, sans surprises et sans avoir besoin de comprendre la bureaucratie douanière.",
       desc: "Créez votre compte gratuit et apprenez à importer de Chine! Accédez à des cours exclusifs, au suivi en temps réel, au générateur d'images et au Minerador (IA développée pour éviter les taxes). Rejoignez notre communauté de réseautage et utilisez nos outils.",
       btnCreate: "Créer un compte",
       btnWork: "Voir comment ça marche"
