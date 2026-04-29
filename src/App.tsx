@@ -73,6 +73,51 @@ export default function App() {
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const langMenuRef = useRef<HTMLDivElement>(null);
 
+  // ── Offer countdown (persisted across visits via localStorage) ──────────
+  const OFFER_KEY = 'lpq_offer_expiry';
+  const OFFER_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+  const getOrCreateExpiry = (): number | null => {
+    try {
+      const stored = localStorage.getItem(OFFER_KEY);
+      if (stored) {
+        const expiry = parseInt(stored, 10);
+        if (!isNaN(expiry) && expiry > Date.now()) return expiry;
+        // Expired — keep null so timer hides
+        if (!isNaN(expiry)) return null;
+      }
+      // First visit: create expiry
+      const expiry = Date.now() + OFFER_DURATION_MS;
+      localStorage.setItem(OFFER_KEY, String(expiry));
+      return expiry;
+    } catch {
+      return null;
+    }
+  };
+
+  const calcTimeLeft = (expiry: number | null) => {
+    if (!expiry) return null;
+    const diff = expiry - Date.now();
+    if (diff <= 0) return null;
+    const h = Math.floor(diff / 3_600_000);
+    const m = Math.floor((diff % 3_600_000) / 60_000);
+    const s = Math.floor((diff % 60_000) / 1_000);
+    return { h, m, s };
+  };
+
+  const [offerExpiry] = useState<number | null>(() => getOrCreateExpiry());
+  const [offerTimeLeft, setOfferTimeLeft] = useState(() => calcTimeLeft(offerExpiry));
+
+  useEffect(() => {
+    if (!offerExpiry) return;
+    const id = setInterval(() => {
+      const tl = calcTimeLeft(offerExpiry);
+      setOfferTimeLeft(tl);
+      if (!tl) clearInterval(id);
+    }, 1000);
+    return () => clearInterval(id);
+  }, [offerExpiry]);
+
   const t = translations[language];
 
   const navLinks = [
@@ -232,7 +277,7 @@ export default function App() {
                 {t.nav.login}
               </button>
               <button
-                onClick={scrollToPlanos}
+                onClick={() => window.location.href = 'https://app.connectacademy.com.br/cadastro'}
                 className="btn-primary px-3 sm:px-6 py-1.5 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] font-bold whitespace-nowrap rounded-full md:rounded-xl shadow-lg shadow-[#582ef5]/20 hover:scale-105 active:scale-95 transition-all"
               >
                 <span className="hidden sm:inline">{t.nav.create}</span>
@@ -1399,11 +1444,49 @@ export default function App() {
               <ShieldCheck className="w-3.5 h-3.5" />
               <span>{t.planos.tag}</span>
             </div>
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-10 text-white">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 text-white">
               {t.planos.title}
             </h2>
 
-            {/* Toggles removidos: os planos já possuem ciclos fixos */}
+            {/* ── Countdown Timer (only while offer is active) ── */}
+            {offerTimeLeft && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-10 px-6 py-4 rounded-2xl border border-red-500/30 bg-red-500/10 backdrop-blur-md shadow-[0_0_40px_rgba(239,68,68,0.15)]"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
+                  </span>
+                  <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-red-400">
+                    {language.startsWith('pt') ? 'Oferta encerra em' : language === 'es' ? 'Oferta termina en' : language === 'fr' ? 'Offre se termine dans' : 'Offer ends in'}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  {[
+                    { v: offerTimeLeft.h, label: language.startsWith('pt') ? 'h' : 'h' },
+                    { v: offerTimeLeft.m, label: 'min' },
+                    { v: offerTimeLeft.s, label: 's' }
+                  ].map((unit, i) => (
+                    <React.Fragment key={i}>
+                      {i > 0 && <span className="text-red-500/60 font-black text-base">:</span>}
+                      <div className="flex flex-col items-center">
+                        <span
+                          className="text-[22px] sm:text-[26px] font-black text-white tabular-nums leading-none"
+                          style={{ fontVariantNumeric: 'tabular-nums' }}
+                        >
+                          {String(unit.v).padStart(2, '0')}
+                        </span>
+                        <span className="text-[9px] text-red-400/70 uppercase tracking-widest font-bold mt-0.5">{unit.label}</span>
+                      </div>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
@@ -1691,15 +1774,7 @@ export default function App() {
         </div>
       </footer>
 
-      {/* ─── STICKY CTA MOBILE ─────────────────────────────────── */}
-      <div className="md:hidden fixed bottom-6 left-6 z-[999]">
-        <button
-          onClick={scrollToPlanos}
-          className="w-[60px] h-[60px] flex items-center justify-center hover:scale-105 active:scale-95 transition-all drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
-        >
-          <img src="https://i.postimg.cc/GtrRRvPz/icone.png" alt="Acessar" className="w-full h-full object-contain" />
-        </button>
-      </div>
+
     </div>
   );
 }

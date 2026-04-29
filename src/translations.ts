@@ -1,6 +1,6 @@
 export const translations = {
   pt: {
-    nav: { login: "Entrar", create: "Quero entrar agora", create_short: "Entrar agora", lang: "Português (BR)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
+    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (BR)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "Economize ou Lucre importando",
       title1: "Esqueça as burocracias alfandegárias,",
@@ -247,7 +247,7 @@ export const translations = {
     }
   },
   'pt-PT': {
-    nav: { login: "Entrar", create: "Quero entrar agora", create_short: "Entrar agora", lang: "Português (PT)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
+    nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (PT)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "Economize ou Lucre importando",
       title1: "Esqueça as burocracias alfandegárias,",
@@ -481,7 +481,7 @@ export const translations = {
     }
   },
   en: {
-    nav: { login: "Login", create: "I want to join now", create_short: "Join now", lang: "English", community: "Community", products: "Products", ai: "Connect AI", tracking: "Tracking" },
+    nav: { login: "Login", create: "Create free account", create_short: "Sign up free", lang: "English", community: "Community", products: "Products", ai: "Connect AI", tracking: "Tracking" },
     hero: {
       sparkle: "Save or Profit by importing",
       title1: "Forget about customs bureaucracy,",
@@ -715,7 +715,7 @@ export const translations = {
     }
   },
   es: {
-    nav: { login: "Entrar", create: "Quiero entrar ahora", create_short: "Entrar ahora", lang: "Español", community: "Comunidad", products: "Productos", ai: "Connect AI", tracking: "Rastreo" },
+    nav: { login: "Entrar", create: "Crear cuenta gratis", create_short: "Crear cuenta", lang: "Español", community: "Comunidad", products: "Productos", ai: "Connect AI", tracking: "Rastreo" },
     hero: {
       sparkle: "Ahorra o Lucra importando",
       title1: "Olvídate de la burocracia aduanera,",
@@ -949,7 +949,7 @@ export const translations = {
     }
   },
   fr: {
-    nav: { login: "Connexion", create: "Je veux entrer maintenant", create_short: "Entrer", lang: "Français", community: "Communauté", products: "Produits", ai: "Connect AI", tracking: "Suivi" },
+    nav: { login: "Connexion", create: "Créer un compte gratuit", create_short: "S'inscrire", lang: "Français", community: "Communauté", products: "Produits", ai: "Connect AI", tracking: "Suivi" },
     hero: {
       sparkle: "Économisez ou Profitez en important",
       title1: "Oubliez la bureaucratie douanière,",
