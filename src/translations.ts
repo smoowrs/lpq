@@ -8,7 +8,7 @@ export const translations = {
       title3: "de tudo por você.",
       titleMob: "Esqueça as burocracias alfandegárias, nosso assistente inteligente cuida de tudo por você.",
       desc: "Crie sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe de nossa comunidade de networking e utilize diversas outras ferramentas",
-      btnCreate: "Quero entrar agora",
+      btnCreate: "Criar conta grátis",
       btnWork: "Ver como funciona"
     },
     comunidade: {
@@ -255,7 +255,7 @@ export const translations = {
       title3: "de tudo por você.",
       titleMob: "Esqueça as burocracias alfandegárias, nosso assistente inteligente cuida de tudo por você.",
       desc: "Crie a sua conta grátis e aprenda a importar da China! Tenha acesso a aulas exclusivas, rastreio em tempo real, gerador de imagens e ao Minerador: a IA desenvolvida para evitar taxas abusivas, participe da nossa comunidade de networking e utilize diversas outras ferramentas",
-      btnCreate: "Quero entrar agora",
+      btnCreate: "Criar conta grátis",
       btnWork: "Ver como funciona"
     },
     comunidade: {
@@ -489,7 +489,7 @@ export const translations = {
       title3: "everything for you.",
       titleMob: "Forget about customs bureaucracy, our intelligent assistant handles everything for you.",
       desc: "Create your free account and learn how to import from China! Get access to exclusive classes, real-time tracking, image generator and the Minerador: the AI developed to avoid abusive taxes, participate in our networking community and use several other tools",
-      btnCreate: "I want to join now",
+      btnCreate: "Create free account",
       btnWork: "See how it works"
     },
     comunidade: {
@@ -723,7 +723,7 @@ export const translations = {
       title3: "encarga de todo.",
       titleMob: "Olvídate de la burocracia aduanera, nuestro asistente inteligente se encarga de todo.",
       desc: "¡Crea tu cuenta gratis y aprende a importar de China! Ten acceso a clases exclusivas, rastreo en tiempo real, generador de imágenes y al Minerador: la IA desarrollada para evitar tasas abusivas, participa en nuestra comunidad de networking y utiliza diversas herramientas",
-      btnCreate: "Quiero entrar ahora",
+      btnCreate: "Crear cuenta gratis",
       btnWork: "Ver cómo funciona"
     },
     comunidade: {
@@ -957,7 +957,7 @@ export const translations = {
       title3: "de tout pour vous.",
       titleMob: "Oubliez la bureaucratie douanière, notre assistant intelligent s'occupe de tout pour vous.",
       desc: "Créez votre compte gratuit et apprenez à importer de Chine! Accédez à des cours exclusifs, au suivi en temps réel, au générateur d'images et au Minerador (IA développée pour éviter les taxes). Rejoignez notre communauté de réseautage et utilisez nos outils.",
-      btnCreate: "Je veux entrer maintenant",
+      btnCreate: "Créer un compte gratuit",
       btnWork: "Voir comment ça marche"
     },
     comunidade: {

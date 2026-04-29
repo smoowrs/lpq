@@ -74,8 +74,8 @@ export default function App() {
   const langMenuRef = useRef<HTMLDivElement>(null);
 
   // ── Offer countdown (persisted across visits via localStorage) ──────────
-  const OFFER_KEY = 'lpq_offer_expiry';
-  const OFFER_DURATION_MS = 24 * 60 * 60 * 1000; // 24 hours
+  const OFFER_KEY = 'lpq_offer_expiry_v2';
+  const OFFER_DURATION_MS = 2 * 60 * 60 * 1000 + 38 * 60 * 1000; // 2 hours 38 minutes
 
   const getOrCreateExpiry = (): number | null => {
     try {
@@ -377,7 +377,7 @@ export default function App() {
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
-                  onClick={scrollToPlanos}
+                  onClick={() => window.location.href = 'https://app.connectacademy.com.br/cadastro'}
                   className="bg-[#00E676] hover:bg-[#00C853] text-black px-8 py-4.5 text-[15px] sm:text-[18px] font-black w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap rounded-2xl shadow-[0_20px_50px_rgba(0,230,118,0.4)] uppercase tracking-wide transition-all"
                 >
                   {t.hero.btnCreate}
@@ -1447,46 +1447,6 @@ export default function App() {
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 text-white">
               {t.planos.title}
             </h2>
-
-            {/* ── Countdown Timer (only while offer is active) ── */}
-            {offerTimeLeft && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-10 px-6 py-4 rounded-2xl border border-red-500/30 bg-red-500/10 backdrop-blur-md shadow-[0_0_40px_rgba(239,68,68,0.15)]"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500" />
-                  </span>
-                  <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-red-400">
-                    {language.startsWith('pt') ? 'Oferta encerra em' : language === 'es' ? 'Oferta termina en' : language === 'fr' ? 'Offre se termine dans' : 'Offer ends in'}
-                  </span>
-                </div>
-
-                <div className="flex items-center gap-1.5">
-                  {[
-                    { v: offerTimeLeft.h, label: language.startsWith('pt') ? 'h' : 'h' },
-                    { v: offerTimeLeft.m, label: 'min' },
-                    { v: offerTimeLeft.s, label: 's' }
-                  ].map((unit, i) => (
-                    <React.Fragment key={i}>
-                      {i > 0 && <span className="text-red-500/60 font-black text-base">:</span>}
-                      <div className="flex flex-col items-center">
-                        <span
-                          className="text-[22px] sm:text-[26px] font-black text-white tabular-nums leading-none"
-                          style={{ fontVariantNumeric: 'tabular-nums' }}
-                        >
-                          {String(unit.v).padStart(2, '0')}
-                        </span>
-                        <span className="text-[9px] text-red-400/70 uppercase tracking-widest font-bold mt-0.5">{unit.label}</span>
-                      </div>
-                    </React.Fragment>
-                  ))}
-                </div>
-              </motion.div>
-            )}
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
@@ -1571,6 +1531,35 @@ export default function App() {
                         <span className="text-[13px] font-black text-white/90">
                           ou 12x de R$ {pData.parcelBR}
                         </span>
+                      </div>
+                    )}
+                    
+                    {offerTimeLeft && (
+                      <div className="mt-5 flex items-center gap-2 bg-red-500/10 border border-red-500/30 rounded-lg px-2.5 py-1.5 w-full">
+                        <span className="relative flex h-1.5 w-1.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+                        </span>
+                        <span className="text-[9px] font-black uppercase tracking-wider text-red-400/80 mr-auto">
+                          {language.startsWith('pt') ? 'Expira em' : language === 'es' ? 'Expira en' : language === 'fr' ? 'Expire dans' : 'Expires in'}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          {[
+                            { v: offerTimeLeft.h, label: 'h' },
+                            { v: offerTimeLeft.m, label: 'm' },
+                            { v: offerTimeLeft.s, label: 's' }
+                          ].map((unit, i) => (
+                            <React.Fragment key={i}>
+                              {i > 0 && <span className="text-red-500/50 font-black text-[10px]">:</span>}
+                              <div className="flex items-baseline gap-[1px]">
+                                <span className="text-xs font-black text-white tabular-nums leading-none">
+                                  {String(unit.v).padStart(2, '0')}
+                                </span>
+                                <span className="text-[7px] text-red-400/80 uppercase font-bold">{unit.label}</span>
+                              </div>
+                            </React.Fragment>
+                          ))}
+                        </div>
                       </div>
                     )}
                     
