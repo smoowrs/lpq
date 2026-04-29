@@ -277,7 +277,7 @@ export default function App() {
                 {t.nav.login}
               </button>
               <button
-                onClick={() => window.location.href = 'https://app.connectacademy.com.br/cadastro'}
+                onClick={scrollToPlanos}
                 className="btn-primary px-3 sm:px-6 py-1.5 md:py-2.5 text-[11px] sm:text-[14px] md:text-[15px] font-bold whitespace-nowrap rounded-full md:rounded-xl shadow-lg shadow-[#582ef5]/20 hover:scale-105 active:scale-95 transition-all"
               >
                 <span className="hidden sm:inline">{t.nav.create}</span>
@@ -377,7 +377,7 @@ export default function App() {
                   whileHover="hover"
                   initial="initial"
                   whileTap={{ scale: 0.95 }}
-                  onClick={() => window.location.href = 'https://app.connectacademy.com.br/cadastro'}
+                  onClick={scrollToPlanos}
                   className="bg-[#00E676] hover:bg-[#00C853] text-black px-8 py-4.5 text-[15px] sm:text-[18px] font-black w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap rounded-2xl shadow-[0_20px_50px_rgba(0,230,118,0.4)] uppercase tracking-wide transition-all"
                 >
                   {t.hero.btnCreate}
@@ -1541,7 +1541,7 @@ export default function App() {
                           <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
                         </span>
                         <span className="text-[9px] font-black uppercase tracking-wider text-red-400/80 mr-auto">
-                          {language.startsWith('pt') ? 'Expira em' : language === 'es' ? 'Expira en' : language === 'fr' ? 'Expire dans' : 'Expires in'}
+                          {language.startsWith('pt') ? 'Oferta expira em' : language === 'es' ? 'Oferta expira en' : language === 'fr' ? 'L\'offre expire dans' : 'Offer expires in'}
                         </span>
                         <div className="flex items-center gap-1">
                           {[
