@@ -73,50 +73,29 @@ export default function App() {
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const langMenuRef = useRef<HTMLDivElement>(null);
 
-  // ── Offer countdown (persisted across visits via localStorage) ──────────
-  const OFFER_KEY = 'lpq_offer_expiry_v2';
-  const OFFER_DURATION_MS = 2 * 60 * 60 * 1000 + 38 * 60 * 1000; // 2 hours 38 minutes
+  // ── Offer countdown — fixed deadline: 08/05/2026 23:59 BRT ─────────────
+  const OFFER_DEADLINE = new Date('2026-05-09T03:00:00.000Z').getTime();
 
-  const getOrCreateExpiry = (): number | null => {
-    try {
-      const stored = localStorage.getItem(OFFER_KEY);
-      if (stored) {
-        const expiry = parseInt(stored, 10);
-        if (!isNaN(expiry) && expiry > Date.now()) return expiry;
-        // Expired — keep null so timer hides
-        if (!isNaN(expiry)) return null;
-      }
-      // First visit: create expiry
-      const expiry = Date.now() + OFFER_DURATION_MS;
-      localStorage.setItem(OFFER_KEY, String(expiry));
-      return expiry;
-    } catch {
-      return null;
-    }
-  };
-
-  const calcTimeLeft = (expiry: number | null) => {
-    if (!expiry) return null;
-    const diff = expiry - Date.now();
+  const calcTimeLeft = (deadline: number) => {
+    const diff = deadline - Date.now();
     if (diff <= 0) return null;
-    const h = Math.floor(diff / 3_600_000);
+    const d = Math.floor(diff / 86_400_000);
+    const h = Math.floor((diff % 86_400_000) / 3_600_000);
     const m = Math.floor((diff % 3_600_000) / 60_000);
     const s = Math.floor((diff % 60_000) / 1_000);
-    return { h, m, s };
+    return { d, h, m, s };
   };
 
-  const [offerExpiry] = useState<number | null>(() => getOrCreateExpiry());
-  const [offerTimeLeft, setOfferTimeLeft] = useState(() => calcTimeLeft(offerExpiry));
+  const [offerTimeLeft, setOfferTimeLeft] = useState(() => calcTimeLeft(OFFER_DEADLINE));
 
   useEffect(() => {
-    if (!offerExpiry) return;
     const id = setInterval(() => {
-      const tl = calcTimeLeft(offerExpiry);
+      const tl = calcTimeLeft(OFFER_DEADLINE);
       setOfferTimeLeft(tl);
       if (!tl) clearInterval(id);
     }, 1000);
     return () => clearInterval(id);
-  }, [offerExpiry]);
+  }, []);
 
   const t = translations[language];
 
@@ -331,21 +310,16 @@ export default function App() {
               transition={{ duration: 0.8 }}
               className="w-full flex flex-col items-center md:items-start"
             >
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-medium mb-6 backdrop-blur-md shadow-[0_0_20px_rgba(88,46,245,0.15)]">
-                <Sparkles className="w-3 h-3 text-[#582ef5]" />
-                <span className="text-gray-200">{t.hero.sparkle}</span>
-              </div>
 
-              <h1 className="text-[22px] md:text-4xl lg:text-[40px] xl:text-[50px] font-black tracking-tight mb-8 leading-[1.1] text-white">
+
+              <h1 className="text-[22px] sm:text-[24px] md:text-3xl lg:text-4xl xl:text-[42px] font-black tracking-tight mb-8 leading-[1.3] text-white">
                 {/* Versão Desktop */}
-                <div className="hidden md:block text-white">
-                  {t.hero.title1}<br />
-                  <span>{t.hero.title2}</span><br />
-                  <span>{t.hero.title3}</span>
+                <div className="hidden md:block text-white max-w-[800px]">
+                  {t.hero.title1}
                 </div>
 
                 {/* Versão Mobile */}
-                <div className="flex md:hidden flex-col items-center text-white">
+                <div className="flex md:hidden flex-col items-center text-white text-center px-1">
                   <span>{t.hero.titleMob}</span>
                 </div>
               </h1>
@@ -1541,14 +1515,15 @@ export default function App() {
                           <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
                         </span>
                         <span className="text-[9px] font-black uppercase tracking-wider text-red-400/80 mr-auto">
-                          {language.startsWith('pt') ? 'Oferta expira em' : language === 'es' ? 'Oferta expira en' : language === 'fr' ? 'L\'offre expire dans' : 'Offer expires in'}
+                          {language.startsWith('pt') ? 'Oferta expira em' : language === 'es' ? 'Oferta expira en' : language === 'fr' ? "L'offre expire dans" : 'Offer expires in'}
                         </span>
                         <div className="flex items-center gap-1">
-                          {[
+                          {([
+                            ...(offerTimeLeft.d > 0 ? [{ v: offerTimeLeft.d, label: 'd' }] : []),
                             { v: offerTimeLeft.h, label: 'h' },
                             { v: offerTimeLeft.m, label: 'm' },
                             { v: offerTimeLeft.s, label: 's' }
-                          ].map((unit, i) => (
+                          ] as { v: number; label: string }[]).map((unit, i) => (
                             <React.Fragment key={i}>
                               {i > 0 && <span className="text-red-500/50 font-black text-[10px]">:</span>}
                               <div className="flex items-baseline gap-[1px]">
