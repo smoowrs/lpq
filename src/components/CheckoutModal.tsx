@@ -13,7 +13,7 @@ import { toast } from 'react-hot-toast';
 import { trackInitiateCheckout, trackPurchase, trackAddPaymentInfo, trackLead } from '../services/facebookPixel';
 import { trackGoogleAdsPurchase } from '../services/googleAds';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://auth.connectacademy.com.br';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://bfyfzpjivesrbcxilmzd.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmeWZ6cGppdmVzcmJjeGlsbXpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2NTE1ODUsImV4cCI6MjA4NjIyNzU4NX0.4q3uB1PrFPbaH4lunmQ6wZU0jNABg2D0i45JRHXo_K0';
 
 // ── Tabela de parcelas exatas da Appmax por plano ──
