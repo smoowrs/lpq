@@ -776,7 +776,7 @@ export const CheckoutModal = ({
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [step, setStep] = useState<1 | 2>(1);
     const [isPaymentApproved, setIsPaymentApproved] = useState(false);
-    const [selectedInstallment, setSelectedInstallment] = useState<{ n: number; info: { value: string; total: string } | null }>({ n: 1, info: INSTALLMENTS[plan.id]?.[0] || null });
+    const [selectedInstallment, setSelectedInstallment] = useState<{ n: number; info: { value: string; total: string } | null }>({ n: 1, info: region === 'BR' ? (INSTALLMENTS[plan.id]?.[0] || null) : null });
     const [orderBump, setOrderBump] = useState(false);
     const showOrderBump = region === 'BR' && ['starter', 'pro'].includes(plan.id?.toLowerCase());
     const ORDER_BUMP_PRICE = 49.90;
