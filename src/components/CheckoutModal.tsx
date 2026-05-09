@@ -751,7 +751,7 @@ const OrderSummary = ({ plan, region, priceStr, totalPriceStr, orderBump, monthl
                 </div>
                 <div className="flex flex-col items-end shrink-0">
                     <span className="text-[17px] font-black text-slate-900 transition-all duration-300">{currencySymbol} {displayPrice}</span>
-                    {!orderBump && <span className="text-[10px] text-slate-400 font-medium opacity-90 mt-0.5">Ou 12x de {currencySymbol} {monthly12x}</span>}
+                    {!orderBump && region === 'BR' && <span className="text-[10px] text-slate-400 font-medium opacity-90 mt-0.5">Ou 12x de {currencySymbol} {monthly12x}</span>}
                     {orderBump && <span className="text-[10px] text-emerald-600 font-black mt-0.5">Inclui Grupo de Networking</span>}
                 </div>
             </div>
@@ -940,10 +940,12 @@ export const CheckoutModal = ({
                                 <p className="text-[18px] font-black text-slate-900 mt-1">{currencySymbol} {selectedInstallment.info?.total || totalPriceStr}</p>
                             </div>
                         </div>
+                        {region === 'BR' && (
                         <div className="pt-4 border-t border-slate-50 flex justify-between items-center">
                             <span className="text-[12px] font-bold text-slate-400">Parcelamento</span>
                             <span className="text-[13px] font-black text-slate-900">{selectedInstallment.n}x {currencySymbol} {selectedInstallment.info?.value || monthly12x}</span>
                         </div>
+                        )}
                         {orderBump && (
                             <div className="pt-3 border-t border-slate-50 flex justify-between items-center">
                                 <span className="text-[12px] font-bold text-slate-400">Grupo de Networking</span>
