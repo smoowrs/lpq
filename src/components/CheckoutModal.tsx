@@ -18,74 +18,75 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 // ── Tabela de parcelas exatas da Appmax por plano ──
 const INSTALLMENTS: Record<string, { value: string; total: string }[]> = {
+    // Tabela Appmax — preços originais SEM desconto (juros repassados ao cliente)
     starter: [
-        { value: '67,90', total: '67,90' },
-        { value: '35,98', total: '71,96' },
-        { value: '24,66', total: '73,99' },
-        { value: '19,01', total: '76,02' },
-        { value: '15,61', total: '78,05' },
-        { value: '13,35', total: '80,08' },
-        { value: '11,73', total: '82,11' },
-        { value: '10,52', total: '84,14' },
-        { value: '9,58',  total: '86,17' },
-        { value: '8,82',  total: '88,20' },
-        { value: '8,20',  total: '90,23' },
-        { value: '7,69',  total: '92,26' },
-        { value: '7,26',  total: '94,29' },
-        { value: '6,88',  total: '96,32' },
-        { value: '6,56',  total: '98,35' },
-        { value: '6,28',  total: '100,38' },
-        { value: '6,02',  total: '102,41' },
-        { value: '5,80',  total: '104,44' },
-        { value: '5,60',  total: '106,47' },
-        { value: '5,43',  total: '108,50' },
-        { value: '5,26',  total: '110,53' },
+        { value: '97,00',  total: '97,00'  },
+        { value: '51,40',  total: '102,80' },
+        { value: '35,23',  total: '105,70' },
+        { value: '27,16',  total: '108,60' },
+        { value: '22,30',  total: '111,50' },
+        { value: '19,07',  total: '114,40' },
+        { value: '16,76',  total: '117,30' },
+        { value: '15,03',  total: '120,20' },
+        { value: '13,69',  total: '123,10' },
+        { value: '12,60',  total: '126,00' },
+        { value: '11,71',  total: '128,90' },
+        { value: '10,99',  total: '131,80' },
+        { value: '10,37',  total: '134,70' },
+        { value: '9,83',   total: '137,60' },
+        { value: '9,37',   total: '140,50' },
+        { value: '8,97',   total: '143,40' },
+        { value: '8,60',   total: '146,30' },
+        { value: '8,29',   total: '149,20' },
+        { value: '8,00',   total: '152,10' },
+        { value: '7,76',   total: '155,00' },
+        { value: '7,51',   total: '157,90' },
     ],
     pro: [
-        { value: '137,90', total: '137,90' },
-        { value: '72,39',  total: '144,77' },
-        { value: '49,40',  total: '148,20' },
-        { value: '37,91',  total: '151,63' },
-        { value: '31,01',  total: '155,07' },
-        { value: '26,41',  total: '158,50' },
-        { value: '23,14',  total: '161,93' },
-        { value: '20,67',  total: '165,38' },
-        { value: '18,76',  total: '168,81' },
-        { value: '17,22',  total: '172,24' },
-        { value: '15,97',  total: '175,67' },
-        { value: '14,92',  total: '179,11' },
-        { value: '14,05',  total: '182,54' },
-        { value: '13,29',  total: '185,97' },
-        { value: '12,62',  total: '189,41' },
-        { value: '12,05',  total: '192,84' },
-        { value: '11,55',  total: '196,27' },
-        { value: '11,10',  total: '199,71' },
-        { value: '10,69',  total: '203,14' },
-        { value: '10,33',  total: '206,57' },
-        { value: '10,00',  total: '210,01' },
+        { value: '197,00',  total: '197,00'  },
+        { value: '103,41',  total: '206,82'  },
+        { value: '70,57',   total: '211,71'  },
+        { value: '54,16',   total: '216,61'  },
+        { value: '44,30',   total: '221,53'  },
+        { value: '37,73',   total: '226,43'  },
+        { value: '33,06',   total: '231,33'  },
+        { value: '29,53',   total: '236,26'  },
+        { value: '26,80',   total: '241,16'  },
+        { value: '24,60',   total: '246,06'  },
+        { value: '22,81',   total: '250,96'  },
+        { value: '21,31',   total: '255,87'  },
+        { value: '20,07',   total: '260,77'  },
+        { value: '18,99',   total: '265,67'  },
+        { value: '18,03',   total: '270,59'  },
+        { value: '17,21',   total: '275,49'  },
+        { value: '16,50',   total: '280,39'  },
+        { value: '15,86',   total: '285,30'  },
+        { value: '15,27',   total: '290,20'  },
+        { value: '14,76',   total: '295,10'  },
+        { value: '14,29',   total: '300,01'  },
     ],
     elite: [
-        { value: '272,30', total: '272,30' },
-        { value: '142,93', total: '285,86' },
-        { value: '97,55',  total: '292,64' },
-        { value: '74,85',  total: '299,43' },
-        { value: '61,24',  total: '306,20' },
-        { value: '52,16',  total: '312,98' },
-        { value: '45,68',  total: '319,76' },
-        { value: '40,82',  total: '326,54' },
-        { value: '37,03',  total: '333,32' },
-        { value: '34,01',  total: '340,11' },
-        { value: '31,54',  total: '346,89' },
-        { value: '29,47',  total: '353,66' },
-        { value: '27,73',  total: '360,44' },
-        { value: '26,23',  total: '367,22' },
-        { value: '24,93',  total: '374,00' },
-        { value: '23,80',  total: '380,79' },
-        { value: '22,80',  total: '387,57' },
-        { value: '21,91',  total: '394,35' },
-        { value: '21,12',  total: '401,12' },
-        { value: '20,39',  total: '407,90' },
-        { value: '19,75',  total: '414,68' },
+        { value: '389,00',  total: '389,00'  },
+        { value: '204,19',  total: '408,37'  },
+        { value: '139,36',  total: '418,06'  },
+        { value: '106,93',  total: '427,76'  },
+        { value: '87,49',   total: '437,43'  },
+        { value: '74,51',   total: '447,11'  },
+        { value: '65,26',   total: '456,80'  },
+        { value: '58,31',   total: '466,49'  },
+        { value: '52,90',   total: '476,17'  },
+        { value: '48,59',   total: '485,87'  },
+        { value: '45,06',   total: '495,56'  },
+        { value: '42,10',   total: '505,23'  },
+        { value: '39,61',   total: '514,91'  },
+        { value: '37,47',   total: '524,60'  },
+        { value: '35,61',   total: '534,29'  },
+        { value: '34,00',   total: '543,99'  },
+        { value: '32,57',   total: '553,67'  },
+        { value: '31,30',   total: '563,36'  },
+        { value: '30,17',   total: '573,03'  },
+        { value: '29,13',   total: '582,71'  },
+        { value: '28,21',   total: '592,40'  },
     ],
 };
 
@@ -749,10 +750,6 @@ const OrderSummary = ({ plan, region, priceStr, totalPriceStr, orderBump, monthl
                     <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}{orderBump ? ' + Networking' : ''}</p>
                 </div>
                 <div className="flex flex-col items-end shrink-0">
-                    <div className="flex items-center gap-1.5 mb-1">
-                        <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-md font-black border border-emerald-200 uppercase tracking-wide">{region === 'BR' ? '30% OFF' : '40% OFF'}</span>
-                        <span className="text-[11px] text-slate-400 font-medium line-through">{currencySymbol} {oldPriceStr}</span>
-                    </div>
                     <span className="text-[17px] font-black text-slate-900 transition-all duration-300">{currencySymbol} {displayPrice}</span>
                     {!orderBump && <span className="text-[10px] text-slate-400 font-medium opacity-90 mt-0.5">Ou 12x de {currencySymbol} {monthly12x}</span>}
                     {orderBump && <span className="text-[10px] text-emerald-600 font-black mt-0.5">Inclui Grupo de Networking</span>}
@@ -782,7 +779,7 @@ export const CheckoutModal = ({
     const [selectedInstallment, setSelectedInstallment] = useState<{ n: number; info: { value: string; total: string } | null }>({ n: 1, info: INSTALLMENTS[plan.id]?.[0] || null });
     const [orderBump, setOrderBump] = useState(false);
     const showOrderBump = region === 'BR' && ['starter', 'pro'].includes(plan.id?.toLowerCase());
-    const ORDER_BUMP_PRICE = 29.90;
+    const ORDER_BUMP_PRICE = 49.90;
     const [guestEmail, setGuestEmail] = useState('');
     const [guestName, setGuestName] = useState('');
     const [guestPhone, setGuestPhone] = useState('');
@@ -791,8 +788,6 @@ export const CheckoutModal = ({
 
     const priceNum = parseFloat((plan.prices?.[region]?.annual || '0').replace(',', '.'));
     const priceStr = priceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-    const oldPriceNum = region === 'BR' ? Math.round(priceNum / 0.7) : Math.round(priceNum / 0.6);
-    const oldPriceStr = oldPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     const totalPriceNum = priceNum + (orderBump ? ORDER_BUMP_PRICE : 0);
     const totalPriceStr = totalPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     let monthly12x = (priceNum / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -940,10 +935,6 @@ export const CheckoutModal = ({
                                 <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.1em] mb-1">RESUMO DO PEDIDO</p>
                                 <div className="flex items-center justify-between gap-2">
                                     <h2 className="text-[18px] font-black text-slate-900 leading-tight">{planDisplayName}</h2>
-                                    <div className="flex items-center gap-1.5 shrink-0">
-                                        <span className="text-[9px] bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full font-black border border-emerald-100 uppercase">{region === 'BR' ? '30% OFF' : '40% OFF'}</span>
-                                        <span className="text-[11px] text-slate-400 font-medium line-through">{currencySymbol} {oldPriceStr}</span>
-                                    </div>
                                 </div>
                                 <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}</p>
                                 <p className="text-[18px] font-black text-slate-900 mt-1">{currencySymbol} {selectedInstallment.info?.total || totalPriceStr}</p>
@@ -956,7 +947,7 @@ export const CheckoutModal = ({
                         {orderBump && (
                             <div className="pt-3 border-t border-slate-50 flex justify-between items-center">
                                 <span className="text-[12px] font-bold text-slate-400">Grupo de Networking</span>
-                                <span className="text-[13px] font-black text-emerald-600">+ R$ 29,90</span>
+                                <span className="text-[13px] font-black text-emerald-600">+ R$ 49,90</span>
                             </div>
                         )}
                         {orderBump && (
@@ -1183,7 +1174,7 @@ export const CheckoutModal = ({
                                                 <span className="text-[10px] font-black bg-[#4D5BFF] text-white px-2 py-0.5 rounded-full uppercase tracking-wide">
                                                     Oferta Especial
                                                 </span>
-                                                <span className="text-[13px] font-black text-slate-900">+ R$ 29,90</span>
+                                                <span className="text-[13px] font-black text-slate-900">+ R$ 49,90</span>
                                             </div>
                                             <p className="text-[14px] font-black text-slate-900 leading-snug mb-1">
                                                 Grupo de Networking exclusivo no WhatsApp
