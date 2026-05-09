@@ -1004,7 +1004,6 @@ export const CheckoutModal = ({
                         orderBump={orderBump}
                         monthly12x={monthly12x}
                         currencySymbol={currencySymbol}
-                        oldPriceStr={oldPriceStr}
                         planDisplayName={planDisplayName}
                         selectedInstallment={selectedInstallment}
                         planAccessDuration={planAccessDuration}
