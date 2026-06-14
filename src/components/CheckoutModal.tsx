@@ -555,7 +555,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                 amount: totalWithInterest,
             }, session?.access_token || null);
             if (data?.success) onSuccess();
-            else throw new Error(data?.message || 'Erro ao processar pagamento');
+            else throw new Error(data?.error || data?.message || 'Erro ao processar pagamento');
         } catch (err: any) {
             toast.error(err.message);
         } finally {
