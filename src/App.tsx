@@ -1432,11 +1432,11 @@ export default function App() {
             ].map((plan, idx) => {
               const isBrasil = region === 'brasil';
               
-              const pricesMap: Record<string, { BR: string; EU: string; oldBR: string; oldEU: string; parcelBR?: string }> = {
-                free: { BR: "0", EU: "0", oldBR: "0", oldEU: "0" },
-                starter: { BR: "97,00", EU: "16,00", oldBR: "97,00", oldEU: "16,00", parcelBR: "10,99" },
-                pro: { BR: "197,00", EU: "32,00", oldBR: "197,00", oldEU: "32,00", parcelBR: "21,31" },
-                elite: { BR: "389,00", EU: "64,00", oldBR: "389,00", oldEU: "64,00", parcelBR: "42,10" }
+              const pricesMap: Record<string, { BR: string; EU: string; oldBR: string; oldEU: string; parcelBR?: string; parcelBROld?: string }> = {
+                free:    { BR: "0",      EU: "0",     oldBR: "0",      oldEU: "0" },
+                starter: { BR: "77,60",  EU: "16,00", oldBR: "97,00",  oldEU: "16,00", parcelBR: "8,79",  parcelBROld: "10,99" },
+                pro:     { BR: "157,60", EU: "32,00", oldBR: "197,00", oldEU: "32,00", parcelBR: "17,05", parcelBROld: "21,31" },
+                elite:   { BR: "311,20", EU: "64,00", oldBR: "389,00", oldEU: "64,00", parcelBR: "33,68", parcelBROld: "42,10" }
               };
               
               const pData = pricesMap[plan.id as keyof typeof pricesMap];
@@ -1457,6 +1457,18 @@ export default function App() {
                 >
                   {/* Accent Glow */}
                   <div className="absolute top-0 right-0 w-32 h-32 blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" style={{ backgroundColor: plan.color }} />
+
+                  {/* 20% OFF Badge — only BR, only paid plans */}
+                  {isBrasil && plan.id !== 'free' && (
+                    <div className="absolute top-5 right-5 z-10">
+                      <div className="relative flex items-center justify-center">
+                        <div className="absolute inset-0 rounded-full blur-[6px] opacity-60" style={{ backgroundColor: plan.color }} />
+                        <span className="relative px-2.5 py-1 rounded-full text-[10px] font-black tracking-wider uppercase text-white border border-white/20 shadow-lg" style={{ backgroundColor: plan.color }}>
+                          20% OFF
+                        </span>
+                      </div>
+                    </div>
+                  )}
 
                   {/* Icon - hidden for free plan */}
                   {plan.id !== 'free' && (
@@ -1479,6 +1491,12 @@ export default function App() {
                   {/* Price - hidden for free plan */}
                   {plan.id !== 'free' && (
                   <div className="mb-8 flex flex-col items-start text-left">
+                    {/* Original price struck-through — only shown in BR */}
+                    {isBrasil && pData.oldBR && pData.oldBR !== price && (
+                      <span className="text-[13px] font-bold text-gray-600 line-through mb-1">
+                        R$ {pData.oldBR}
+                      </span>
+                    )}
                     <div className="flex items-baseline gap-1 mt-1">
                       <span className="text-xs font-black text-gray-400 leading-none self-start mt-2.5">{isBrasil ? 'R$' : '€'}</span>
                       <span className="text-[44px] font-black tracking-tighter text-white leading-none">
@@ -1493,10 +1511,15 @@ export default function App() {
                     </div>
 
                     {isBrasil && pData.parcelBR && (
-                      <div className="mt-1">
+                      <div className="mt-1 flex items-center gap-2">
                         <span className="text-[13px] font-black text-white/90">
                           ou 12x de R$ {pData.parcelBR}
                         </span>
+                        {pData.parcelBROld && (
+                          <span className="text-[11px] text-gray-600 line-through">
+                            R$ {pData.parcelBROld}
+                          </span>
+                        )}
                       </div>
                     )}
                     
