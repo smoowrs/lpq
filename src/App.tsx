@@ -21,6 +21,54 @@ const flags: Record<Language, string> = {
   fr: "🇫🇷"
 };
 
+// Cupom por país europeu — Espanha ganhou a Copa 2026, demais levam o nome do país
+const EU_COUNTRY_COUPON: Record<string, string> = {
+  ES: 'COPA2026',   // 🏆 Campeã
+  PT: 'PORTUGAL',
+  FR: 'FRANCA',
+  DE: 'ALEMANHA',
+  IT: 'ITALIA',
+  NL: 'HOLANDA',
+  BE: 'BELGICA',
+  AT: 'AUSTRIA',
+  CH: 'SUICA',
+  PL: 'POLONIA',
+  GB: 'INGLATERRA',
+  SE: 'SUECIA',
+  NO: 'NORUEGA',
+  DK: 'DINAMARCA',
+  FI: 'FINLANDIA',
+  IE: 'IRLANDA',
+  GR: 'GRECIA',
+  CZ: 'TCHECIA',
+  SK: 'ESLOVAQUIA',
+  HU: 'HUNGRIA',
+  RO: 'ROMENIA',
+  BG: 'BULGARIA',
+  HR: 'CROACIA',
+  RS: 'SERVIA',
+  UA: 'UCRANIA',
+  LU: 'LUXEMBURGO',
+  MT: 'MALTA',
+  CY: 'CHIPRE',
+  EE: 'ESTONIA',
+  LV: 'LETONIA',
+  LT: 'LITUANIA',
+  SI: 'ESLOVENIA',
+  MK: 'MACEDONIA',
+  AL: 'ALBANIA',
+  BA: 'BOSNIA',
+  ME: 'MONTENEGRO',
+  XK: 'KOSOVO',
+  MD: 'MOLDOVA',
+  IS: 'ISLANDIA',
+  LI: 'LIECHTENSTEIN',
+  MC: 'MONACO',
+  SM: 'SANMARINO',
+  AD: 'ANDORRA',
+};
+const getEuropeCoupon = (country: string) => EU_COUNTRY_COUPON[country] || 'EUROPA';
+
 export default function App() {
   const [trackingStep, setTrackingStep] = useState(0);
   const [language, setLanguage] = useState<Language>('pt');
@@ -42,6 +90,7 @@ export default function App() {
         if (data.continent_code === 'EU') {
           isEurope = true;
         }
+        setUserCountry(data.country_code || '');
       } catch (err) {
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         if (tz && (tz.startsWith('Europe/') || tz.startsWith('Africa/'))) {
@@ -69,9 +118,13 @@ export default function App() {
 
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [region, setRegion] = useState<'brasil' | 'europa'>('brasil');
+  const [userCountry, setUserCountry] = useState<string>('');
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const langMenuRef = useRef<HTMLDivElement>(null);
+  const [showCouponBanner, setShowCouponBanner] = useState(false);
+  const [showBottomSheet, setShowBottomSheet] = useState(false);
+  const [bottomSheetDismissed, setBottomSheetDismissed] = useState(false);
 
   // ── Offer countdown — fixed deadline: 08/05/2026 23:59 BRT ─────────────
   const OFFER_DEADLINE = new Date('2026-05-09T03:00:00.000Z').getTime();
@@ -149,6 +202,21 @@ export default function App() {
     trackFBEvent('PageView');
   }, []);
 
+  // ── Floating coupon banner on scroll ─────────────────────────────────────
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowCouponBanner(window.scrollY > 120);
+      if (!bottomSheetDismissed) {
+        const planosEl = document.getElementById('planos');
+        const planosTop = planosEl ? planosEl.getBoundingClientRect().top : Infinity;
+        const nearPlanos = planosTop < window.innerHeight * 0.8;
+        setShowBottomSheet(window.scrollY > 300 && !nearPlanos);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [bottomSheetDismissed]);
+
   return (
     <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F7] selection:bg-white/20 flex flex-col">
       <Toaster position="top-right" />
@@ -161,6 +229,37 @@ export default function App() {
           }}
         />
       )}
+
+      {/* ─── FLOATING COUPON BANNER ──────────────────────────── */}
+      <div
+        className="fixed top-16 md:top-[72px] left-0 right-0 z-40 flex items-center justify-center transition-all duration-500 pointer-events-none"
+        style={{
+          transform: showCouponBanner ? 'translateY(0)' : 'translateY(-110%)',
+          opacity: showCouponBanner ? 1 : 0,
+        }}
+      >
+        <div
+          className="w-full pointer-events-auto"
+          style={{
+            background: 'linear-gradient(135deg, #582ef5 0%, #2b34f5 100%)',
+            boxShadow: '0 4px 30px rgba(88, 46, 245, 0.5)',
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3">
+            <span className="text-[11px] sm:text-sm font-black text-white tracking-wide text-center">
+              🎉 Cupom <span className="px-1.5 py-0.5 rounded font-black text-white" style={{ backgroundColor: '#22c55e' }}>"{region === 'brasil' ? '5ANOS' : getEuropeCoupon(userCountry)}"</span> ativado com sucesso! <span className="font-black" style={{ color: '#22c55e' }}>{region === 'brasil' ? '40% OFF' : '30% OFF'}</span>
+            </span>
+            <button
+              onClick={scrollToPlanos}
+              className="hidden sm:flex items-center gap-1 bg-white/20 hover:bg-white/30 text-white text-[10px] font-black px-3 py-1 rounded-full transition-all whitespace-nowrap border border-white/30"
+            >
+              Aproveitar <ArrowRight className="w-3 h-3" strokeWidth={3} />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom sheet removido */}
 
       {/* ─── NAV ──────────────────────────────────────────────── */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
@@ -295,7 +394,7 @@ export default function App() {
       {/* ─── HERO ─────────────────────────────────────────────── */}
 
       {/* ─── HERO ─────────────────────────────────────────────── */}
-      <section className="min-h-screen pt-20 pb-20 px-6 relative overflow-hidden border-b border-white/5 flex items-center justify-center">
+      <section className="pt-24 pb-16 px-6 relative overflow-hidden border-b border-white/5 flex items-center justify-center">
 
         {/* Grid Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none z-0" />
@@ -342,36 +441,43 @@ export default function App() {
                 </div>
               </div>
 
-              <p className="text-[13px] sm:text-[14px] md:text-base text-gray-400 mb-10 max-w-xl leading-relaxed px-4 md:px-0 opacity-80">
-                {t.hero.desc}
+              <p className="text-[13px] sm:text-[14px] md:text-base text-gray-300 mb-8 max-w-xl leading-relaxed px-4 md:px-0">
+                Crie sua conta grátis e tenha acesso a +30 milhões de produtos de 1.500 fábricas, aulas exclusivas, rastreio em tempo real e ao{' '}
+                <strong className="text-white">Minerador</strong>: a IA desenvolvida pra te guiar em cada importação.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+              {/* Dois botões idênticos — degradê azul-roxo */}
+              <div className="flex flex-col gap-3 w-full max-w-sm px-4 md:px-0">
                 <motion.button
-                  whileHover="hover"
-                  initial="initial"
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                   onClick={scrollToPlanos}
-                  className="bg-[#00E676] hover:bg-[#00C853] text-black px-8 py-4.5 text-[15px] sm:text-[18px] font-black w-full sm:w-auto flex items-center justify-center gap-2 group whitespace-nowrap rounded-2xl shadow-[0_20px_50px_rgba(0,230,118,0.4)] uppercase tracking-wide transition-all"
+                  className="w-full py-4 px-8 rounded-2xl text-white font-black text-[16px] sm:text-[18px] flex items-center justify-center gap-2 transition-all"
+                  style={{ background: 'linear-gradient(135deg, #582ef5 0%, #2b34f5 100%)', boxShadow: '0 12px 40px rgba(88,46,245,0.45)' }}
                 >
                   {t.hero.btnCreate}
-                  <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                    <ArrowRight className="w-5 h-5" strokeWidth={3} />
-                  </motion.div>
+                  <ArrowRight className="w-5 h-5" strokeWidth={3} />
                 </motion.button>
-                <motion.a
-                  whileHover="hover"
-                  initial="initial"
-                  whileTap={{ scale: 0.95 }}
-                  href="https://t.me/grupoconnect"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-secondary px-8 py-4.5 text-[15px] sm:text-[16px] font-bold w-full sm:w-auto flex items-center justify-center gap-2 rounded-2xl group whitespace-nowrap border border-white/10 bg-white/5 backdrop-blur-sm"
+
+                <motion.button
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={scrollToPlanos}
+                  className="w-full py-4 px-8 rounded-2xl font-black text-[16px] sm:text-[18px] flex items-center justify-center gap-2 transition-all text-white border border-white/30 bg-black hover:bg-white/5 hover:border-white/60"
+                  style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
                 >
-                  Catálogo de Produtos
-                  <ArrowRight className="w-4 h-4 text-white" />
-                </motion.a>
+                  <Play className="w-5 h-5 fill-white" strokeWidth={0} />
+                  {t.hero.btnWork}
+                </motion.button>
               </div>
+
+              {/* Social proof — 28 mil alunos */}
+              <div className="flex items-center gap-3 mt-6 px-4 md:px-0">
+                <p className="text-sm text-white font-black leading-tight">
+                  + de 28.000 Mil Alunos importando 💙
+                </p>
+              </div>
+
             </motion.div>
           </div>
 
@@ -404,7 +510,7 @@ export default function App() {
       </section>
 
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
-      <section id="comunidade" className="pt-24 md:pt-32 pb-16 md:pb-40 px-6 relative overflow-hidden bg-black border-t border-white/5 order-2 md:order-none">
+      <section id="comunidade" className="pt-12 md:pt-20 pb-8 md:pb-20 px-6 relative overflow-hidden bg-black border-t border-white/5 order-2 md:order-none">
         {/* Glow de fundo atmosférico - Apenas Desktop agora */}
         <div className="hidden md:block absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
 
@@ -454,16 +560,9 @@ export default function App() {
                   {t.comunidade.title1} <br />
                   <span className="whitespace-nowrap text-white">{t.comunidade.title2}</span>
                 </h2>
-                <p className="text-[11px] sm:text-[13px] text-gray-400 mb-6 leading-relaxed opacity-80">
+                <p className="text-[11px] sm:text-[13px] text-gray-400 mb-0 leading-relaxed opacity-80">
                   {t.comunidade.desc}
                 </p>
-                <button
-                  onClick={scrollToPlanos}
-                  className="w-full bg-[#582ef5] text-white py-3 sm:py-4 rounded-xl font-bold text-[13px] sm:text-[15px] flex items-center justify-center gap-2 hover:bg-[#4c25e6] active:scale-[0.98] transition-all"
-                >
-                  {t.comunidade.btn}
-                  <ArrowRight className="w-4 h-4" />
-                </button>
               </motion.div>
             </div>
           </div>
@@ -507,7 +606,7 @@ export default function App() {
                 <span className="whitespace-nowrap text-white">{t.comunidade.title2}</span>
               </h2>
 
-              <p className="text-base text-gray-400 mb-10 leading-relaxed max-w-xl opacity-80">
+              <p className="text-base text-gray-400 mb-8 leading-relaxed max-w-xl opacity-80">
                 {t.comunidade.desc}
               </p>
 
@@ -516,18 +615,22 @@ export default function App() {
                 initial="initial"
                 whileTap={{ scale: 0.95 }}
                 onClick={scrollToPlanos}
-                className="btn-primary w-fit px-10 py-5 text-base font-bold flex items-center justify-center gap-3 group rounded-[1.25rem] md:rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.3)] mt-0"
+                className="btn-primary w-fit px-10 py-4 text-sm font-bold flex items-center justify-center gap-2 group rounded-2xl shadow-[0_20px_50px_rgba(88,46,245,0.2)] transition-all duration-300"
               >
                 {t.comunidade.btn}
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" strokeWidth={3} />
+                <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
+                  <ArrowRight className="w-4 h-4" strokeWidth={3} />
+                </motion.div>
               </motion.button>
+
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* ─── PRODUTOS ────────────────────────────────────────── */}
-      <section id="produtos" className="pt-24 md:pt-32 pb-12 md:pb-32 relative overflow-hidden bg-black border-t border-white/5 order-4 md:order-none">
+
+      <section id="produtos" className="pt-12 md:pt-20 pb-8 md:pb-20 relative overflow-hidden bg-black border-t border-white/5 order-4 md:order-none">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none" />
 
         {/* Layer de Fundo: Cards Espalhados */}
@@ -583,163 +686,17 @@ export default function App() {
                 {t.produtos.title1} <br />
                 <span className="text-white">{t.produtos.title2}</span>
               </h2>
-              <p className="hidden md:block text-sm md:text-lg text-gray-300 md:text-gray-400 mb-10 leading-relaxed max-w-md text-left drop-shadow-lg">
+              <p className="hidden md:block text-sm md:text-lg text-gray-300 md:text-gray-400 mb-0 leading-relaxed max-w-md text-left drop-shadow-lg">
                 {t.produtos.desc}
               </p>
-              <motion.button
-                whileHover="hover"
-                initial="initial"
-                whileTap={{ scale: 0.95 }}
-                onClick={scrollToPlanos}
-                className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300"
-              >
-                {t.produtos.btn}
-                <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                  <ArrowRight className="w-4 h-4" strokeWidth={3} />
-                </motion.div>
-              </motion.button>
             </motion.div>
           </div>
           <div className="md:w-1/2 hidden md:block" />
         </div>
       </section>
 
-      {/* ─── AULAS PASSO A PASSO ────────────────────────────────── */}
-      <section id="aulas" className="py-24 md:py-32 px-6 relative overflow-hidden border-t border-white/5 bg-black order-5 md:order-none">
 
-        {/* Layer de Fundo: Cards Espalhados (Apenas Mobile) */}
-        <div className="md:hidden absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <div className="relative w-full h-full flex items-center justify-center scale-[0.7] opacity-60 transform-gpu">
-            {[
-              { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15 },
-              { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15 },
-              { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03", x: -180, y: 40, rot: -25 },
-              { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04", x: -20, y: -20, rot: 5 },
-              { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05", x: 160, y: 60, rot: 10 },
-              { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06", x: -60, y: 220, rot: -5 }
-            ].map((aula, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.8, x: 0, y: 40, rotateZ: 0 }}
-                whileInView={{ opacity: 1, scale: 1, x: aula.x, y: aula.y, rotateZ: aula.rot }}
-                viewport={{ once: true, margin: "-20px" }}
-                transition={{
-                  delay: idx * 0.04,
-                  duration: 0.8,
-                  ease: [0.23, 1, 0.32, 1]
-                }}
-                className="absolute w-36 aspect-[9/16] rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.5)] border border-white/20 bg-black"
-                style={{
-                  zIndex: idx,
-                  willChange: "transform, opacity"
-                }}
-              >
-                <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-90" loading="lazy" decoding="async" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-              </motion.div>
-            ))}
-          </div>
-          {/* Glow escuro para o texto ler bem no mobile (Ajustado para mais visibilidade) */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,black_100%)] z-10 pointer-events-none opacity-70" />
-          <div className="absolute inset-0 bg-black/20 z-10 pointer-events-none" />
-        </div>
-
-        <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#582ef5]/5 rounded-full blur-[120px] pointer-events-none hidden md:block" />
-
-        <div className="max-w-7xl mx-auto relative z-20 flex flex-col md:grid md:grid-cols-2 gap-12 md:gap-20 items-center justify-center min-h-[400px] md:min-h-0">
-
-          {/* CARDS (Apenas Desktop - Lado Esquerdo da Grid) */}
-          <div className="hidden md:flex relative z-0 md:z-auto pointer-events-none md:pointer-events-auto inset-0 md:inset-auto h-full items-center justify-center order-2 md:order-1 perspective-[2000px] py-10 md:py-20 md:h-[750px] lg:h-[800px] overflow-hidden md:overflow-visible">
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full blur-[150px] rounded-full bg-[#582ef5]/10" />
-              <div className="absolute top-0 left-0 w-64 h-64 blur-[100px] rounded-full bg-[#582ef5]/15 animate-pulse" />
-              <div className="absolute bottom-0 right-0 w-64 h-64 blur-[100px] rounded-full bg-[#2b34f5]/15 animate-pulse [animation-delay:1s]" />
-            </div>
-
-            <div className="relative w-full h-full flex items-center justify-center md:scale-100 scale-90 sm:scale-100">
-              {[
-                { img: "https://i.postimg.cc/bwhjVVkb/brands_wnba_3.jpg", id: "01", x: -140, y: -180, rot: -15, z: 0 },
-                { img: "https://i.postimg.cc/T36XNNgg/brands_wnba_19_2.jpg", id: "02", x: 120, y: -140, rot: 15, z: 20 },
-                { img: "https://i.postimg.cc/bwhjVVkn/brands_wnba_18_2.jpg", id: "03", x: -180, y: 40, rot: -25, z: 40 },
-                { img: "https://i.postimg.cc/x12SppM3/brands_wnba_20_2.jpg", id: "04", x: -20, y: -20, rot: 5, z: 60 },
-                { img: "https://i.postimg.cc/FH4QCC3B/brands_wnba_21_3.jpg", id: "05", x: 160, y: 60, rot: 10, z: 80 },
-                { img: "https://i.postimg.cc/0ysqXXDh/brands_wnba_22_2.jpg", id: "06", x: -60, y: 220, rot: -5, z: 100 }
-              ].map((aula, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.5, x: 0, y: 100, rotateZ: 0 }}
-                  whileInView={{ opacity: 1, scale: 1, x: aula.x, y: aula.y, rotateZ: aula.rot, rotateX: 10, rotateY: idx % 2 === 0 ? -15 : 15, z: aula.z }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1, duration: 1.5, type: "spring", stiffness: 35, damping: 15 }}
-                  whileHover={{ scale: 1.1, z: 200, rotateZ: 0, rotateX: 0, rotateY: 0, transition: { duration: 0.3 } }}
-                  className="absolute w-28 sm:w-36 md:w-52 lg:w-56 aspect-[9/16] rounded-2xl md:rounded-[2.5rem] overflow-hidden border border-white/20 shadow-[0_40px_80px_rgba(0,0,0,0.8)] cursor-pointer group/card-aula bg-black"
-                  style={{ zIndex: idx, transformStyle: "preserve-3d" }}
-                >
-                  <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
-                    <span className="text-[10px] font-black text-white bg-[#582ef5] px-2.5 py-1 rounded-lg border border-white/20 shadow-[0_0_15px_rgba(88,46,245,0.5)]">M{aula.id}</span>
-                  </div>
-                  <img src={aula.img} alt={`Aula ${aula.id}`} className="w-full h-full object-cover brightness-50 md:brightness-90 group-hover/card-aula:brightness-110 transition-all duration-500" loading="lazy" decoding="async" />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl md:rounded-[2.5rem] pointer-events-none" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 md:from-black/80 via-transparent to-transparent opacity-80 md:opacity-60" />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover/card-aula:opacity-100 transition-opacity" />
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative z-30 order-1 md:order-2 flex flex-col items-center md:items-start text-center md:text-left py-10 md:py-0 w-full lg:max-w-xl mx-auto md:mx-0 drop-shadow-2xl"
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold mb-6 backdrop-blur-md">
-              <PlayCircle className="w-3.5 h-3.5 text-[#582ef5]" />
-              <span className="text-gray-300 uppercase tracking-wider">{t.aulas.tag}</span>
-            </div>
-            <h2 className="text-[28px] md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 md:mb-8 leading-[1.1] drop-shadow-[0_8px_32px_rgba(0,0,0,0.8)] text-white">
-              {/* Versão Desktop */}
-              <span className="hidden md:block">
-                {t.aulas.title1} <br />
-                <span className="text-white">{t.aulas.title2}</span>
-              </span>
-              {/* Versão Mobile (1 linha) */}
-              <span className="md:hidden block whitespace-nowrap text-[26px]">
-                {t.aulas.titleMob}
-              </span>
-            </h2>
-            <p className="hidden md:block text-sm md:text-base text-gray-300 md:text-gray-400 mb-8 md:mb-10 leading-relaxed max-w-md drop-shadow-lg">
-              {t.aulas.desc}
-            </p>
-
-            <ul className="hidden md:block space-y-5 mb-12 w-full max-w-sm drop-shadow-2xl">
-              {t.aulas.items.map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-gray-200 md:text-gray-300 font-bold md:font-medium">
-                  <div className="w-6 h-6 rounded-full bg-[#582ef5]/40 md:bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/50 md:border-[#582ef5]/30 shrink-0">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-white md:text-[#582ef5]" />
-                  </div>
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <motion.button
-              whileHover="hover"
-              initial="initial"
-              whileTap={{ scale: 0.95 }}
-              onClick={scrollToPlanos}
-              className="btn-primary w-full max-w-[340px] md:w-auto px-10 py-4 md:py-5 text-[13px] sm:text-[15px] md:text-base font-bold flex items-center justify-center gap-3 group rounded-full md:rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-all duration-300 pointer-events-auto"
-            >
-              {t.aulas.btn}
-              <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                <ArrowRight className="w-5 h-5" strokeWidth={3} />
-              </motion.div>
-            </motion.button>
-          </motion.div>
-        </div>
-      </section>
-
-      <section id="fabricas" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-6 md:order-none">
+      <section id="fabricas" className="py-12 md:py-20 relative overflow-hidden bg-black border-t border-white/5 order-6 md:order-none">
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-20 lg:gap-32">
@@ -770,9 +727,11 @@ export default function App() {
                   </span>
                 </h2>
 
-                <p className="hidden md:block text-sm md:text-lg text-gray-300 md:text-gray-400 mb-6 md:mb-10 leading-relaxed max-w-md font-medium">
+                <p className="hidden md:block text-sm md:text-lg text-gray-300 md:text-gray-400 mb-8 leading-relaxed max-w-md font-medium">
                   {t.fabricas.desc}
                 </p>
+
+
 
                 {/* Imagem (Apenas Mobile: Entre Descrição e Botão) */}
                 <div className="flex md:hidden w-full justify-center my-4 relative z-10">
@@ -785,18 +744,6 @@ export default function App() {
                   />
                 </div>
 
-                <motion.button
-                  whileHover="hover"
-                  initial="initial"
-                  whileTap={{ scale: 0.95 }}
-                  onClick={scrollToPlanos}
-                  className="btn-primary w-full max-w-[340px] py-4 text-[13px] sm:text-[15px] font-bold flex items-center justify-center gap-2 group mx-auto md:mx-0 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.6)] transition-all duration-300 mt-2 md:mt-0"
-                >
-                  {t.fabricas.btn}
-                  <motion.div variants={{ initial: { x: 0 }, hover: { x: 5 } }}>
-                    <ArrowRight className="w-4 h-4" strokeWidth={3} />
-                  </motion.div>
-                </motion.button>
               </motion.div>
             </div>
 
@@ -973,6 +920,7 @@ export default function App() {
                 {t.minerador.btn}
                 <Sparkles className="w-5 h-5 fill-white/20" strokeWidth={2.5} />
               </motion.button>
+
             </motion.div>
           </div>
 
@@ -1081,7 +1029,7 @@ export default function App() {
       </section>
 
       {/* ─── NÍVEIS E RECOMPENSAS ────────────────────────────────────────── */}
-      <section id="ranking" className="py-24 md:py-32 relative overflow-hidden bg-black border-t border-white/5 order-7 md:order-none">
+      <section id="ranking" className="py-12 md:py-20 relative overflow-hidden bg-black border-t border-white/5 order-7 md:order-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#582ef5]/5 rounded-full blur-[150px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
@@ -1117,6 +1065,7 @@ export default function App() {
                     <ArrowRight className="w-5 h-5" strokeWidth={3} />
                   </motion.div>
                 </motion.button>
+
               </motion.div>
             </div>
 
@@ -1272,7 +1221,7 @@ export default function App() {
             <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed">
               {t.rastreio.desc}
             </p>
-            <ul className="space-y-4 mb-10">
+            <ul className="space-y-4 mb-8">
               {t.rastreio.items.map((item, i) => (
                 <li key={i} className="flex items-center gap-3 text-gray-300">
                   <div className="w-6 h-6 rounded-full bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/30">
@@ -1333,7 +1282,7 @@ export default function App() {
               <p className="text-sm md:text-base text-gray-400 mb-8 leading-relaxed max-w-md">
                 {t.connectAI.desc}
               </p>
-              <ul className="space-y-4 mb-10">
+              <ul className="space-y-4 mb-8">
                 {t.connectAI.items.map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-gray-300 font-medium">
                     <div className="w-6 h-6 rounded-full bg-[#582ef5]/20 flex items-center justify-center border border-[#582ef5]/30 shrink-0">
@@ -1434,9 +1383,9 @@ export default function App() {
               
               const pricesMap: Record<string, { BR: string; EU: string; oldBR: string; oldEU: string; parcelBR?: string; parcelBROld?: string }> = {
                 free:    { BR: "0",      EU: "0",     oldBR: "0",      oldEU: "0" },
-                starter: { BR: "77,60",  EU: "16,00", oldBR: "97,00",  oldEU: "16,00", parcelBR: "8,79",  parcelBROld: "10,99" },
-                pro:     { BR: "157,60", EU: "32,00", oldBR: "197,00", oldEU: "32,00", parcelBR: "17,05", parcelBROld: "21,31" },
-                elite:   { BR: "311,20", EU: "64,00", oldBR: "389,00", oldEU: "64,00", parcelBR: "33,68", parcelBROld: "42,10" }
+                starter: { BR: "58,20",  EU: "11,20", oldBR: "97,00",  oldEU: "16,00", parcelBR: "6,57",  parcelBROld: "7,66" },
+                pro:     { BR: "118,20", EU: "22,40", oldBR: "197,00", oldEU: "32,00", parcelBR: "12,78", parcelBROld: "14,91" },
+                elite:   { BR: "233,40", EU: "44,80", oldBR: "389,00", oldEU: "64,00", parcelBR: "25,27", parcelBROld: "29,48" }
               };
               
               const pData = pricesMap[plan.id as keyof typeof pricesMap];
@@ -1458,17 +1407,17 @@ export default function App() {
                   {/* Accent Glow */}
                   <div className="absolute top-0 right-0 w-32 h-32 blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity" style={{ backgroundColor: plan.color }} />
 
-                  {/* 20% OFF Badge — only BR, only paid plans */}
-                  {isBrasil && plan.id !== 'free' && (
-                    <div className="absolute top-5 right-5 z-10">
-                      <div className="relative flex items-center justify-center">
-                        <div className="absolute inset-0 rounded-full blur-[6px] opacity-60" style={{ backgroundColor: plan.color }} />
-                        <span className="relative px-2.5 py-1 rounded-full text-[10px] font-black tracking-wider uppercase text-white border border-white/20 shadow-lg" style={{ backgroundColor: plan.color }}>
-                          20% OFF
-                        </span>
+                  {/* 30% OFF badge — canto superior direito */}
+                  {plan.id !== 'free' && (() => {
+                    const oldPrice = isBrasil ? pData.oldBR : pData.oldEU;
+                    const hasDiscount = oldPrice && oldPrice !== price && oldPrice !== '0';
+                    if (!hasDiscount) return null;
+                    return (
+                      <div className="absolute top-5 right-5 px-3 py-1.5 rounded-full text-[11px] font-black tracking-wider uppercase text-white shadow-lg z-10" style={{ backgroundColor: '#22c55e', boxShadow: '0 0 14px rgba(34,197,94,0.55)' }}>
+                        30% OFF
                       </div>
-                    </div>
-                  )}
+                    );
+                  })()}
 
                   {/* Icon - hidden for free plan */}
                   {plan.id !== 'free' && (
@@ -1491,12 +1440,19 @@ export default function App() {
                   {/* Price - hidden for free plan */}
                   {plan.id !== 'free' && (
                   <div className="mb-8 flex flex-col items-start text-left">
-                    {/* Original price struck-through — only shown in BR */}
-                    {isBrasil && pData.oldBR && pData.oldBR !== price && (
-                      <span className="text-[13px] font-bold text-gray-600 line-through mb-1">
-                        R$ {pData.oldBR}
-                      </span>
-                    )}
+                    {/* Original price struck-through + 30% OFF badge — shown for paid plans */}
+                    {plan.id !== 'free' && (() => {
+                        const oldPrice = isBrasil ? pData.oldBR : pData.oldEU;
+                        const hasDiscount = oldPrice && oldPrice !== price && oldPrice !== '0';
+                        if (!hasDiscount) return null;
+                        return (
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[13px] font-bold text-gray-600 line-through">
+                              {isBrasil ? 'R$' : '€'} {oldPrice}
+                            </span>
+                          </div>
+                        );
+                      })()}
                     <div className="flex items-baseline gap-1 mt-1">
                       <span className="text-xs font-black text-gray-400 leading-none self-start mt-2.5">{isBrasil ? 'R$' : '€'}</span>
                       <span className="text-[44px] font-black tracking-tighter text-white leading-none">
@@ -1607,10 +1563,10 @@ export default function App() {
                       setIsCheckoutOpen(true);
                     }}
                     className={`w-full py-4 rounded-2xl text-xs font-black tracking-widest transition-all shadow-lg ${plan.id === 'free'
-                        ? 'bg-white/5 text-gray-400 border border-white/10'
-                        : 'text-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
+                        ? 'text-white shadow-[0_10px_30px_rgba(88,46,245,0.4)]'
+                        : 'text-black shadow-[0_10px_30px_rgba(34,197,94,0.4)]'
                       }`}
-                    style={plan.id !== 'free' ? { backgroundColor: plan.color, boxShadow: `0 10px 30px ${plan.color}33` } : {}}
+                    style={plan.id !== 'free' ? { backgroundColor: '#22c55e', boxShadow: '0 10px 30px rgba(34,197,94,0.35)' } : { background: 'linear-gradient(135deg, #582ef5 0%, #2b34f5 100%)' }}
                   >
                     {plan.id === 'free' ? t.nav.create.toUpperCase() : t.planos.btnSelect}
                   </motion.button>

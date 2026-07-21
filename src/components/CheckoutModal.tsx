@@ -18,77 +18,78 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 // ── Tabela de parcelas exatas da Appmax por plano ──
 const INSTALLMENTS: Record<string, { value: string; total: string }[]> = {
-    // Tabela Appmax — preços com 20% de desconto BR (juros repassados ao cliente)
+    // Tabela Appmax — preços com 40% de desconto BR (juros repassados ao cliente)
     starter: [
-        { value: '77,60',  total: '77,60'  },
-        { value: '41,12',  total: '82,24'  },
-        { value: '28,18',  total: '84,56'  },
-        { value: '21,73',  total: '86,88'  },
-        { value: '17,84',  total: '89,20'  },
-        { value: '15,26',  total: '91,52'  },
-        { value: '13,41',  total: '93,84'  },
-        { value: '12,02',  total: '96,16'  },
-        { value: '10,95',  total: '98,48'  },
-        { value: '10,08',  total: '100,80' },
-        { value: '9,37',   total: '103,12' },
-        { value: '8,79',   total: '105,44' },
-        { value: '8,30',   total: '107,76' },
-        { value: '7,86',   total: '110,08' },
-        { value: '7,50',   total: '112,40' },
-        { value: '7,18',   total: '114,72' },
-        { value: '6,88',   total: '117,04' },
-        { value: '6,63',   total: '119,36' },
-        { value: '6,40',   total: '121,68' },
-        { value: '6,21',   total: '124,00' },
-        { value: '6,01',   total: '126,32' },
+        { value: '58,20',  total: '58,20'  },
+        { value: '30,81',  total: '61,63'  },
+        { value: '21,09',  total: '63,27'  },
+        { value: '16,27',  total: '65,06'  },
+        { value: '13,35',  total: '66,72'  },
+        { value: '11,42',  total: '68,49'  },
+        { value: '10,03',  total: '70,18'  },
+        { value: '8,99',   total: '71,91'  },
+        { value: '8,19',   total: '73,70'  },
+        { value: '7,54',   total: '75,43'  },
+        { value: '7,01',   total: '77,09'  },
+        { value: '6,57',   total: '78,75'  },
+        { value: '6,18',   total: '80,30'  },
+        { value: '5,86',   total: '82,04'  },
+        { value: '5,60',   total: '83,91'  },
+        { value: '5,36',   total: '85,71'  },
+        { value: '5,14',   total: '87,34'  },
+        { value: '4,95',   total: '88,96'  },
+        { value: '4,78',   total: '90,86'  },
+        { value: '4,64',   total: '92,71'  },
+        { value: '4,49',   total: '94,32'  },
     ],
     pro: [
-        { value: '157,60',  total: '157,60'  },
-        { value: '82,73',   total: '165,46'  },
-        { value: '56,46',   total: '169,37'  },
-        { value: '43,33',   total: '173,29'  },
-        { value: '35,44',   total: '177,22'  },
-        { value: '30,18',   total: '181,14'  },
-        { value: '26,45',   total: '185,06'  },
-        { value: '23,62',   total: '189,01'  },
-        { value: '21,44',   total: '192,93'  },
-        { value: '19,68',   total: '196,85'  },
-        { value: '18,25',   total: '200,77'  },
-        { value: '17,05',   total: '204,70'  },
-        { value: '16,06',   total: '208,62'  },
-        { value: '15,19',   total: '212,54'  },
-        { value: '14,42',   total: '216,47'  },
-        { value: '13,77',   total: '220,39'  },
-        { value: '13,20',   total: '224,31'  },
-        { value: '12,69',   total: '228,24'  },
-        { value: '12,22',   total: '232,16'  },
-        { value: '11,81',   total: '236,08'  },
-        { value: '11,43',   total: '240,01'  },
+        { value: '118,20',  total: '118,20'  },
+        { value: '61,98',   total: '123,96'  },
+        { value: '42,30',   total: '126,89'  },
+        { value: '32,46',   total: '129,82'  },
+        { value: '26,56',   total: '132,81'  },
+        { value: '22,61',   total: '135,67'  },
+        { value: '19,82',   total: '138,70'  },
+        { value: '17,70',   total: '141,60'  },
+        { value: '16,06',   total: '144,53'  },
+        { value: '14,75',   total: '147,50'  },
+        { value: '13,68',   total: '150,46'  },
+        { value: '12,78',   total: '153,34'  },
+        { value: '12,03',   total: '156,38'  },
+        { value: '11,38',   total: '159,34'  },
+        { value: '10,81',   total: '162,09'  },
+        { value: '10,32',   total: '165,10'  },
+        { value: '9,89',    total: '168,15'  },
+        { value: '9,50',    total: '171,10'  },
+        { value: '9,15',    total: '173,90'  },
+        { value: '8,85',    total: '177,02'  },
+        { value: '8,56',    total: '179,91'  },
     ],
     elite: [
-        { value: '311,20',  total: '311,20'  },
-        { value: '163,35',  total: '326,70'  },
-        { value: '111,49',  total: '334,45'  },
-        { value: '85,54',   total: '342,21'  },
-        { value: '69,99',   total: '349,94'  },
-        { value: '59,61',   total: '357,69'  },
-        { value: '52,21',   total: '365,44'  },
-        { value: '46,65',   total: '373,19'  },
-        { value: '42,32',   total: '380,94'  },
-        { value: '38,87',   total: '388,70'  },
-        { value: '36,05',   total: '396,45'  },
-        { value: '33,68',   total: '404,18'  },
-        { value: '31,69',   total: '411,93'  },
-        { value: '29,98',   total: '419,68'  },
-        { value: '28,49',   total: '427,43'  },
-        { value: '27,20',   total: '435,19'  },
-        { value: '26,06',   total: '442,94'  },
-        { value: '25,04',   total: '450,69'  },
-        { value: '24,14',   total: '458,42'  },
-        { value: '23,30',   total: '466,17'  },
-        { value: '22,57',   total: '473,92'  },
+        { value: '233,40',  total: '233,40'  },
+        { value: '122,40',  total: '244,80'  },
+        { value: '83,55',   total: '250,63'  },
+        { value: '64,11',   total: '256,46'  },
+        { value: '52,46',   total: '262,29'  },
+        { value: '44,67',   total: '268,01'  },
+        { value: '39,13',   total: '273,91'  },
+        { value: '34,95',   total: '279,58'  },
+        { value: '31,71',   total: '285,43'  },
+        { value: '29,13',   total: '291,34'  },
+        { value: '27,02',   total: '297,26'  },
+        { value: '25,27',   total: '303,19'  },
+        { value: '23,75',   total: '308,79'  },
+        { value: '22,47',   total: '314,61'  },
+        { value: '21,35',   total: '320,23'  },
+        { value: '20,38',   total: '326,09'  },
+        { value: '19,53',   total: '331,90'  },
+        { value: '18,77',   total: '337,90'  },
+        { value: '18,09',   total: '343,71'  },
+        { value: '17,47',   total: '349,44'  },
+        { value: '16,90',   total: '355,06'  },
     ],
 };
+
 
 async function invokeFn(fnName: string, body: any, token: string | null): Promise<any> {
     const res = await fetch(`${SUPABASE_URL}/functions/v1/${fnName}`, {
@@ -1216,7 +1217,8 @@ export const CheckoutModal = ({
                                         </button>
                                     )}
 
-                                    {/* Apple Pay — native sheet */}
+                                    {/* Apple Pay — native sheet (EU only — BR recebe via Appmax/Pix) */}
+                                    {region === 'EU' && (
                                     <ApplePayButton
                                         plan={plan}
                                         priceNum={totalPriceNum}
@@ -1227,6 +1229,7 @@ export const CheckoutModal = ({
                                         isActive={method === 'apple_pay'}
                                         onClick={() => setMethod('apple_pay')}
                                     />
+                                    )}
                                 </div>
 
                                 {/* Payment form */}

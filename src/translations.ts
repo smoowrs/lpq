@@ -7,8 +7,8 @@ export const translations = {
       title2: "",
       title3: "",
       titleMob: "Aprenda importar da China com seguro de envio incluso e sem burocracias alfandegárias.",
-      desc: "Mais de 25.000 membros já provaram, importar da China pode ser tão simples quanto comprar em um marketplace, para revender ou uso pessoal, sem quantidade mínima. Na Connect Academy você tem aulas, rastreio em tempo real, Minerador (a IA que elimina burocracias alfandegárias), seguro de envio incluso e muito mais. Tudo em um ecossistema feito para quem quer importar com inteligência.",
-      btnCreate: "Criar conta grátis",
+      desc: "Crie sua conta grátis e tenha acesso a +30 milhões de produtos de 1.500 fábricas, aulas exclusivas, rastreio em tempo real e ao Minerador: a IA desenvolvida pra te guiar em cada importação.",
+      btnCreate: "Criar minha conta grátis",
       btnWork: "Ver como funciona"
     },
     comunidade: {
@@ -77,7 +77,7 @@ export const translations = {
       stages: [
         { title: "Postado na China", time: "09:41 AM" },
         { title: "Chegou no Brasil", time: "14:20 PM" },
-        { title: "Fiscalização Concluída", time: "10:15 AM" },
+        { title: "Zero burocracias", time: "10:15 AM" },
         { title: "Saiu para Entrega", time: "08:30 AM" }
       ]
     },
@@ -90,11 +90,11 @@ export const translations = {
       btn: "Testar Connect AI"
     },
     cupom: {
-      title1: "REGISTRE-SE e GANHE",
-      title2: "R$660 em CUPONS",
-      desc: "Aproveite essa oferta exclusiva de boas-vindas. Resgate agora seus cupons de desconto exclusivos e economize nas suas primeiras importações.",
-      btn: "Resgatar cupom",
-      badges: ["Imediato", "Única", "VIP Connect"]
+      title1: "VOCÊ GANHOU 40%",
+      title2: "de DESCONTO! 🎁",
+      desc: "Cupom 5ANOS ativado! Acesse a plataforma de importação mais completa do Brasil com 40% de desconto exclusivo por tempo limitado.",
+      btn: "Resgatar 40% OFF",
+      badges: ["Cupom ativo", "40% desconto", "Tempo limitado"]
     },
     footer: { rights: "Todos os direitos reservados", terms: "Termos", privacy: "Privacidade" },
     planos: {
@@ -320,8 +320,8 @@ export const translations = {
       items: ['Notificações push a cada movimentação', 'Previsão de entrega com IA', 'Alerta automático de taxas'],
       stages: [
         { title: "Postado na China", time: "09:41 AM" },
-        { title: "Chegou a Portugal", time: "14:20 PM" },
-        { title: "Desalfandegamento Concluído", time: "10:15 AM" },
+        { title: "Chegou à Europa", time: "14:20 PM" },
+        { title: "Zero burocracias", time: "10:15 AM" },
         { title: "Saiu para Entrega", time: "08:30 AM" }
       ]
     },
@@ -554,8 +554,8 @@ export const translations = {
       items: ['Push notifications for every move', 'AI delivery prediction', 'Automatic tax alerts'],
       stages: [
         { title: "Posted in China", time: "09:41 AM" },
-        { title: "Arrived in Brazil", time: "02:20 PM" },
-        { title: "Customs Completed", time: "10:15 AM" },
+        { title: "Arrived in Europe", time: "02:20 PM" },
+        { title: "Zero bureaucracy", time: "10:15 AM" },
         { title: "Out for Delivery", time: "08:30 AM" }
       ]
     },
@@ -788,8 +788,8 @@ export const translations = {
       items: ['Notificaciones push en cada movimiento', 'Predicción de entrega con IA', 'Alerta automática de tasas'],
       stages: [
         { title: "Publicado en China", time: "09:41 AM" },
-        { title: "Llegó a Brasil", time: "14:20 PM" },
-        { title: "Aduana Completada", time: "10:15 AM" },
+        { title: "Llegó a Europa", time: "14:20 PM" },
+        { title: "Zero burocracia", time: "10:15 AM" },
         { title: "Salió para Entrega", time: "08:30 AM" }
       ]
     },
@@ -1022,8 +1022,8 @@ export const translations = {
       items: ["Notifications push à chaque mouvement", "Prédiction de livraison par IA", "Alerte de taxe automatisée"],
       stages: [
         { title: "Posté en Chine", time: "09:41 AM" },
-        { title: "Arrivée", time: "14:20 PM" },
-        { title: "Dédouanement terminé", time: "10:15 AM" },
+        { title: "Arrivée en Europe", time: "14:20 PM" },
+        { title: "Zéro bureaucratie", time: "10:15 AM" },
         { title: "En cours de livraison", time: "08:30 AM" }
       ]
     },
