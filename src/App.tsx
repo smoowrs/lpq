@@ -231,6 +231,7 @@ export default function App() {
       )}
 
       {/* ─── FLOATING COUPON BANNER ──────────────────────────── */}
+      {region === 'brasil' && (
       <div
         className="fixed top-16 md:top-[72px] left-0 right-0 z-40 flex items-center justify-center transition-all duration-500 pointer-events-none"
         style={{
@@ -258,6 +259,7 @@ export default function App() {
           </div>
         </div>
       </div>
+      )}
 
       {/* Bottom sheet removido */}
 
@@ -1499,10 +1501,10 @@ export default function App() {
               const isBrasil = region === 'brasil';
               
               const pricesMap: Record<string, { BR: string; EU: string; oldBR: string; oldEU: string; parcelBR?: string; parcelBROld?: string }> = {
-                free:    { BR: "0",      EU: "0",     oldBR: "0",      oldEU: "0" },
-                starter: { BR: "58,20",  EU: "11,20", oldBR: "97,00",  oldEU: "16,00", parcelBR: "6,57",  parcelBROld: "7,66" },
-                pro:     { BR: "118,20", EU: "22,40", oldBR: "197,00", oldEU: "32,00", parcelBR: "12,78", parcelBROld: "14,91" },
-                elite:   { BR: "233,40", EU: "44,80", oldBR: "389,00", oldEU: "64,00", parcelBR: "25,27", parcelBROld: "29,48" }
+                free:    { BR: "0",      EU: "0",     oldBR: "0",   oldEU: "0" },
+                starter: { BR: "58,20",  EU: "16,00", oldBR: "97,00",  oldEU: "0", parcelBR: "6,57",  parcelBROld: "7,66" },
+                pro:     { BR: "118,20", EU: "32,00", oldBR: "197,00", oldEU: "0", parcelBR: "12,78", parcelBROld: "14,91" },
+                elite:   { BR: "233,40", EU: "64,00", oldBR: "389,00", oldEU: "0", parcelBR: "25,27", parcelBROld: "29,48" }
               };
               
               const pData = pricesMap[plan.id as keyof typeof pricesMap];
