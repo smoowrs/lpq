@@ -411,7 +411,7 @@ export default function App() {
             >
 
 
-              <h1 className="text-[22px] sm:text-[24px] md:text-3xl lg:text-4xl xl:text-[42px] font-black tracking-tight mb-8 leading-[1.3] text-white">
+              <h1 className="text-[24px] sm:text-[26px] md:text-3xl lg:text-4xl xl:text-[46px] font-black tracking-tight mb-8 leading-[1.25] text-white">
                 {/* Versão Desktop */}
                 <div className="hidden md:block text-white max-w-[800px]">
                   {t.hero.title1}
@@ -459,11 +459,12 @@ export default function App() {
                   <ArrowRight className="w-5 h-5" strokeWidth={3} />
                 </motion.button>
 
+                {/* Botão 'Ver como funciona' — visível só no desktop */}
                 <motion.button
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                   onClick={scrollToPlanos}
-                  className="w-full py-4 px-8 rounded-2xl font-black text-[16px] sm:text-[18px] flex items-center justify-center gap-2 transition-all text-white border border-white/30 bg-black hover:bg-white/5 hover:border-white/60"
+                  className="hidden md:flex w-full py-4 px-8 rounded-2xl font-black text-[16px] sm:text-[18px] items-center justify-center gap-2 transition-all text-white border border-white/30 bg-black hover:bg-white/5 hover:border-white/60"
                   style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
                 >
                   <Play className="w-5 h-5 fill-white" strokeWidth={0} />
@@ -473,7 +474,7 @@ export default function App() {
 
               {/* Social proof — 28 mil alunos */}
               <div className="flex items-center gap-3 mt-6 px-4 md:px-0">
-                <div className="flex -space-x-2">
+                <div className="flex -space-x-2 shrink-0">
                   {['R','C','L'].map((l, i) => (
                     <div key={i} className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-[11px] font-black text-white" style={{ background: `linear-gradient(135deg, #582ef5, #2b34f5)`, zIndex: 3 - i }}>
                       {l}
@@ -481,7 +482,7 @@ export default function App() {
                   ))}
                   <div className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-[11px] font-black text-white bg-[#333]" style={{ zIndex: 0 }}>+</div>
                 </div>
-                <p className="text-sm text-white font-black leading-tight">
+                <p className="text-sm text-white/80 font-light leading-tight whitespace-nowrap">
                   + de 28.000 Mil Alunos importando 💙
                 </p>
               </div>
@@ -568,9 +569,18 @@ export default function App() {
                   {t.comunidade.title1} <br />
                   <span className="whitespace-nowrap text-white">{t.comunidade.title2}</span>
                 </h2>
-                <p className="text-[11px] sm:text-[13px] text-gray-400 mb-0 leading-relaxed opacity-80">
+                <p className="text-[11px] sm:text-[13px] text-gray-400 mb-4 leading-relaxed opacity-80">
                   {t.comunidade.desc}
                 </p>
+
+                {/* Botão 'Ver como funciona' — apenas mobile, vem da hero */}
+                <button
+                  onClick={scrollToPlanos}
+                  className="w-full py-3 px-6 rounded-xl font-semibold text-[14px] flex items-center justify-center gap-2 transition-all text-white border border-white/25 bg-black/60 hover:bg-white/5 active:scale-95"
+                >
+                  <Play className="w-4 h-4 fill-white" strokeWidth={0} />
+                  {t.hero.btnWork}
+                </button>
               </motion.div>
             </div>
           </div>

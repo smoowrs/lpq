@@ -3,10 +3,10 @@ export const translations = {
     nav: { login: "Entrar", create: "Criar conta grátis", create_short: "Criar conta", lang: "Português (BR)", community: "Rede Social", products: "Produtos", ai: "Connect AI", tracking: "Rastreio" },
     hero: {
       sparkle: "Economize ou Lucre importando",
-      title1: "Aprenda importar da China com seguro de envio incluso e sem burocracias alfandegárias.",
+      title1: "Importe da China com seguro de envio incluso, sem quantidade mínima e sem burocracias alfandegárias.",
       title2: "",
       title3: "",
-      titleMob: "Aprenda importar da China com seguro de envio incluso e sem burocracias alfandegárias.",
+      titleMob: "Importe da China com seguro de envio incluso, sem quantidade mínima e sem burocracias alfandegárias.",
       desc: "Crie sua conta grátis e tenha acesso a +30 milhões de produtos de 1.500 fábricas, aulas exclusivas, rastreio em tempo real e ao Minerador: a IA desenvolvida pra te guiar em cada importação.",
       btnCreate: "Criar minha conta grátis",
       btnWork: "Ver como funciona"
