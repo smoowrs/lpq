@@ -1432,7 +1432,7 @@ export default function App() {
                     if (!hasDiscount) return null;
                     return (
                       <div className="absolute top-5 right-5 px-3 py-1.5 rounded-full text-[11px] font-black tracking-wider uppercase text-white shadow-lg z-10" style={{ backgroundColor: '#22c55e', boxShadow: '0 0 14px rgba(34,197,94,0.55)' }}>
-                        30% OFF
+                        40% OFF
                       </div>
                     );
                   })()}
