@@ -473,6 +473,14 @@ export default function App() {
 
               {/* Social proof — 28 mil alunos */}
               <div className="flex items-center gap-3 mt-6 px-4 md:px-0">
+                <div className="flex -space-x-2">
+                  {['R','C','L'].map((l, i) => (
+                    <div key={i} className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-[11px] font-black text-white" style={{ background: `linear-gradient(135deg, #582ef5, #2b34f5)`, zIndex: 3 - i }}>
+                      {l}
+                    </div>
+                  ))}
+                  <div className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center text-[11px] font-black text-white bg-[#333]" style={{ zIndex: 0 }}>+</div>
+                </div>
                 <p className="text-sm text-white font-black leading-tight">
                   + de 28.000 Mil Alunos importando 💙
                 </p>
