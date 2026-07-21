@@ -417,9 +417,11 @@ export default function App() {
                   {t.hero.title1}
                 </div>
 
-                {/* Versão Mobile */}
+                {/* Versão Mobile — fonte menor + balance para evitar funil */}
                 <div className="flex md:hidden flex-col items-center text-white text-center px-1">
-                  <span>{t.hero.titleMob}</span>
+                  <span className="text-[20px] leading-[1.3]" style={{ textWrap: 'balance' } as React.CSSProperties}>
+                    {t.hero.titleMob}
+                  </span>
                 </div>
               </h1>
 
@@ -569,20 +571,21 @@ export default function App() {
                   {t.comunidade.title1} <br />
                   <span className="whitespace-nowrap text-white">{t.comunidade.title2}</span>
                 </h2>
-                <p className="text-[11px] sm:text-[13px] text-gray-400 mb-4 leading-relaxed opacity-80">
+                <p className="text-[11px] sm:text-[13px] text-gray-400 mb-0 leading-relaxed opacity-80">
                   {t.comunidade.desc}
                 </p>
-
-                {/* Botão 'Ver como funciona' — apenas mobile, vem da hero */}
-                <button
-                  onClick={scrollToPlanos}
-                  className="w-full py-3 px-6 rounded-xl font-semibold text-[14px] flex items-center justify-center gap-2 transition-all text-white border border-white/25 bg-black/60 hover:bg-white/5 active:scale-95"
-                >
-                  <Play className="w-4 h-4 fill-white" strokeWidth={0} />
-                  {t.hero.btnWork}
-                </button>
               </motion.div>
             </div>
+
+            {/* Botão 'Ver como funciona' — full-width abaixo da linha imagem+texto */}
+            <button
+              onClick={scrollToPlanos}
+              className="mt-6 w-full py-4 px-8 rounded-2xl font-black text-[16px] flex items-center justify-center gap-2 transition-all text-white border border-white/30 bg-black hover:bg-white/5 active:scale-95"
+              style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+            >
+              <Play className="w-5 h-5 fill-white" strokeWidth={0} />
+              {t.hero.btnWork}
+            </button>
           </div>
 
           {/* --- DESKTOP LAYOUT --- */}
