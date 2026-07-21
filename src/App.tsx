@@ -521,7 +521,7 @@ export default function App() {
       </section>
 
       {/* ─── COMUNIDADE ────────────────────────────────────────── */}
-      <section id="comunidade" className="pt-12 md:pt-20 pb-8 md:pb-20 px-6 relative overflow-hidden bg-black border-t border-white/5 order-2 md:order-none">
+      <section id="comunidade" className="pt-12 md:pt-20 pb-8 md:pb-20 px-6 relative bg-black border-t border-white/5 order-2 md:order-none">
         {/* Glow de fundo atmosférico - Apenas Desktop agora */}
         <div className="hidden md:block absolute top-1/2 left-1/4 w-[500px] h-[500px] bg-[#582ef5]/10 rounded-full blur-[150px] pointer-events-none" />
 
@@ -649,7 +649,7 @@ export default function App() {
         </div>
       </section>
       {/* ─── COMO FUNCIONA — Sticky stacking cards ───────────────── */}
-      <section className="relative bg-black border-t border-white/5">
+      <section className="relative bg-black border-t border-white/5 order-3 md:order-none">
         <div className="max-w-2xl mx-auto px-6 pt-10 pb-12">
           {[
             {
