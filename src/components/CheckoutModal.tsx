@@ -307,6 +307,8 @@ const ApplePayButton = ({
         }
     };
 
+    if (!canPay) return null;
+
     return (
         <button
             onClick={handleClick}
@@ -1217,8 +1219,7 @@ export const CheckoutModal = ({
                                         </button>
                                     )}
 
-                                    {/* Apple Pay — native sheet (EU only — BR recebe via Appmax/Pix) */}
-                                    {region === 'EU' && (
+                                    {/* Apple Pay — nativo, aparece automaticamente se o dispositivo suportar */}
                                     <ApplePayButton
                                         plan={plan}
                                         priceNum={totalPriceNum}
@@ -1229,7 +1230,6 @@ export const CheckoutModal = ({
                                         isActive={method === 'apple_pay'}
                                         onClick={() => setMethod('apple_pay')}
                                     />
-                                    )}
                                 </div>
 
                                 {/* Payment form */}
