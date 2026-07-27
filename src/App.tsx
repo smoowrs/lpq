@@ -413,15 +413,18 @@ export default function App() {
             >
 
 
-              <h1 className="text-[24px] sm:text-[26px] md:text-3xl lg:text-4xl xl:text-[46px] font-black tracking-tight mb-8 leading-[1.25] text-white">
+              <h1 className="text-[24px] sm:text-[26px] md:text-4xl lg:text-5xl xl:text-[56px] font-black tracking-tight mb-8 leading-[1.15] text-white">
                 {/* Versão Desktop */}
                 <div className="hidden md:block text-white max-w-[800px]">
                   {t.hero.title1}
                 </div>
 
-                {/* Versão Mobile — fonte menor + balance para evitar funil */}
-                <div className="flex md:hidden flex-col items-center text-white text-center px-1">
-                  <span className="text-[20px] leading-[1.3]" style={{ textWrap: 'balance' } as React.CSSProperties}>
+                {/* Versão Mobile — balance para evitar funil */}
+                <div className="flex md:hidden flex-col items-center text-white text-center px-2">
+                  <span
+                    className="text-[20px] leading-[1.35] font-black"
+                    style={{ textWrap: 'balance' } as React.CSSProperties}
+                  >
                     {t.hero.titleMob}
                   </span>
                 </div>
@@ -650,101 +653,7 @@ export default function App() {
           </div>
         </div>
       </section>
-      {/* ─── COMO FUNCIONA — Sticky stacking cards ───────────────── */}
-      <section className="relative bg-black border-t border-white/5 order-3 md:order-none">
-        <div className="max-w-2xl mx-auto px-6 pt-10 pb-12">
-          {[
-            {
-              n: 1,
-              icon: (
-                <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-                </svg>
-              ),
-              title: 'Crie sua conta grátis',
-              desc: 'Entre na plataforma sem pagar nada, conheça a estrutura por dentro e assista às primeiras aulas.'
-            },
-            {
-              n: 2,
-              icon: (
-                <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-                </svg>
-              ),
-              title: 'Pergunte ao Minerador',
-              desc: 'Nossa IA encontra o produto certo, responde suas dúvidas e te orienta pra evitar taxas abusivas na importação.'
-            },
-            {
-              n: 3,
-              icon: (
-                <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                </svg>
-              ),
-              title: 'Compre direto da fábrica',
-              desc: 'Escolha entre +30 milhões de produtos de 1.500 fábricas parceiras. Sem pedido mínimo: pode comprar 1 unidade.'
-            },
-            {
-              n: 4,
-              icon: (
-                <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 5v3h-7V8z"/>
-                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-                </svg>
-              ),
-              title: region === 'EU' ? 'Receba em até 6 dias' : 'Receba em até 15 dias',
-              desc: 'Envio Aéreo Expresso com rastreio em tempo real e 100% de seguro. Extravio ou roubo? Reembolso em até 24h.'
-            },
-          ].map((card, i, arr) => (
-            <div
-              key={card.n}
-              style={{
-                position: 'sticky',
-                top: `${72 + i * 10}px`,
-                zIndex: i + 1,
-                /* dá espaço de scroll para cada card — último não precisa */
-                minHeight: i < arr.length - 1 ? '260px' : 'auto',
-              }}
-            >
-              <div
-                className="relative rounded-3xl p-7 overflow-hidden"
-                style={{
-                  background: `linear-gradient(135deg, #131318 0%, #0e0e13 100%)`,
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  boxShadow: '0 12px 48px rgba(0,0,0,0.6)',
-                  /* leve scale decrescente cria ilusão de profundidade no deck */
-                  transform: `scale(${1 - (arr.length - 1 - i) * 0.012})`,
-                  transformOrigin: 'top center',
-                }}
-              >
-                {/* Glow roxo sutil no canto */}
-                <div className="absolute -top-10 -left-10 w-40 h-40 rounded-full blur-[60px] opacity-20 pointer-events-none" style={{ background: '#6c3ef5' }} />
 
-                {/* Icon */}
-                <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lg relative z-10"
-                  style={{ background: 'linear-gradient(135deg, #6c3ef5 0%, #4527d4 100%)' }}
-                >
-                  {card.icon}
-                </div>
-
-                {/* Number */}
-                <span className="absolute top-5 right-6 text-[72px] font-black leading-none select-none pointer-events-none" style={{ color: 'rgba(255,255,255,0.05)' }}>
-                  {card.n}
-                </span>
-
-                <h3 className="text-[21px] font-black text-white mb-3 leading-tight relative z-10">
-                  {card.title}
-                </h3>
-                <p className="text-[14px] text-gray-400 leading-relaxed relative z-10">
-                  {card.desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
 
       {/* ─── PRODUTOS ────────────────────────────────────────── */}
