@@ -419,16 +419,13 @@ export default function App() {
                   {t.hero.title1}
                 </div>
 
-                {/* Versão Mobile — 3 linhas fixas, grande e sem funil */}
-                <div className="flex md:hidden flex-col items-center text-white text-center px-2">
+                {/* Versão Mobile — mesma largura do bloco de vídeo, 3 linhas com balance */}
+                <div className="flex md:hidden text-white text-center w-full">
                   <span
-                    className="font-black leading-[1.25]"
-                    style={{ fontSize: '24px', wordBreak: 'keep-all' }}
+                    className="font-black leading-[1.3] w-full"
+                    style={{ fontSize: '18px', textWrap: 'balance' } as React.CSSProperties}
                   >
-                    Aprenda importar da China<br/>
-                    com seguro de envio,<br/>
-                    sem quantidade mínima<br/>
-                    e sem burocracias alfandegárias
+                    Aprenda importar da China com seguro de envio, sem quantidade mínima e sem burocracias alfandegárias
                   </span>
                 </div>
               </h1>
