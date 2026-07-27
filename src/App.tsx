@@ -419,13 +419,16 @@ export default function App() {
                   {t.hero.title1}
                 </div>
 
-                {/* Versão Mobile — balance para evitar funil */}
+                {/* Versão Mobile — 3 linhas fixas, grande e sem funil */}
                 <div className="flex md:hidden flex-col items-center text-white text-center px-2">
                   <span
-                    className="text-[20px] leading-[1.35] font-black"
-                    style={{ textWrap: 'balance' } as React.CSSProperties}
+                    className="font-black leading-[1.25]"
+                    style={{ fontSize: '24px', wordBreak: 'keep-all' }}
                   >
-                    {t.hero.titleMob}
+                    Aprenda importar da China<br/>
+                    com seguro de envio,<br/>
+                    sem quantidade mínima<br/>
+                    e sem burocracias alfandegárias
                   </span>
                 </div>
               </h1>
