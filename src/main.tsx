@@ -1,6 +1,8 @@
 import React from 'react';
-import {createRoot} from 'react-dom/client';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.tsx';
+import { NovaPage } from './pages/NovaPage.tsx';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import './index.css';
 
@@ -10,7 +12,12 @@ if (container) {
   root.render(
     <React.StrictMode>
       <ErrorBoundary>
-        <App />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/nova" element={<NovaPage />} />
+          </Routes>
+        </BrowserRouter>
       </ErrorBoundary>
     </React.StrictMode>
   );
