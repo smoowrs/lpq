@@ -165,7 +165,7 @@ export const NovaPage: React.FC = () => {
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 8,
             background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255,255,255,0.2)', borderRadius: 999,
+            border: '1px solid rgba(255,255,255,0.2)', borderRadius: 12,
             padding: '8px 16px', marginBottom: 28,
           }}>
             <div style={{ display: 'flex', marginRight: 2 }}>
