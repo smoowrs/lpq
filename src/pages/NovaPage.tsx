@@ -114,7 +114,7 @@ export const NovaPage: React.FC = () => {
             <button
               onClick={() => setCheckout(PLANS[1])}
               style={{
-                height: 38, padding: '0 20px', borderRadius: 999,
+                height: 38, padding: '0 20px', borderRadius: 12,
                 background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
                 color: '#fff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
                 boxShadow: `0 4px 16px ${B}40`, transition: 'opacity 0.2s',
@@ -186,19 +186,19 @@ export const NovaPage: React.FC = () => {
           {/* Headline */}
           <h1 style={{
             fontFamily: "'Bricolage Grotesque', system-ui, sans-serif",
-            fontSize: 'clamp(40px, 8vw, 80px)',
+            fontSize: 'clamp(36px, 7vw, 76px)',
             fontWeight: 800,
             color: '#fff',
-            lineHeight: 1.0,
+            lineHeight: 1.05,
             letterSpacing: '-0.03em',
             margin: '0 0 24px',
-            maxWidth: 800,
+            maxWidth: 860,
           }}>
-            Importe da China com seguro e sem burocracia.
+            Aprenda importar da China com seguro de envio, sem quantidade mínima e sem burocracias alfandegárias
           </h1>
 
-          <p style={{ fontSize: 'clamp(15px, 2vw, 18px)', color: 'rgba(255,255,255,0.72)', maxWidth: 480, lineHeight: 1.6, margin: '0 0 40px', fontWeight: 500 }}>
-            Acesse +30 milhões de produtos, use nossa IA e receba em até 15 dias — sem quantidade mínima, com seguro incluso.
+          <p style={{ fontSize: 'clamp(14px, 2vw, 17px)', color: 'rgba(255,255,255,0.72)', maxWidth: 560, lineHeight: 1.65, margin: '0 0 40px', fontWeight: 500 }}>
+            Crie sua conta grátis e tenha acesso a +30 milhões de produtos de 1.500 fábricas, aulas exclusivas, rastreio em tempo real e ao Minerador: a IA desenvolvida pra te guiar em cada importação.
           </p>
 
           {/* CTAs */}
