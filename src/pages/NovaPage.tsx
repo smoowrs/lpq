@@ -95,7 +95,7 @@ export const NovaPage: React.FC = () => {
         <nav style={{
           background: 'rgba(255,255,255,0.92)',
           backdropFilter: 'blur(20px)',
-          borderRadius: 999,
+          borderRadius: 20,
           border: '1px solid rgba(0,0,0,0.08)',
           boxShadow: scrolled ? '0 8px 40px rgba(0,0,0,0.12)' : '0 2px 12px rgba(0,0,0,0.06)',
           maxWidth: 1080,
@@ -194,7 +194,7 @@ export const NovaPage: React.FC = () => {
             margin: '0 0 24px',
             maxWidth: 860,
           }}>
-            Aprenda importar da China com seguro de envio, sem quantidade mínima e sem burocracias alfandegárias
+            Aprenda importar da China sem burocracias alfandegárias.
           </h1>
 
           <p style={{ fontSize: 'clamp(14px, 2vw, 17px)', color: 'rgba(255,255,255,0.72)', maxWidth: 560, lineHeight: 1.65, margin: '0 0 40px', fontWeight: 500 }}>
