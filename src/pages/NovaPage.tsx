@@ -116,9 +116,14 @@ export const NovaPage: React.FC = () => {
         }
         .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
         .nav-lang { display: flex; }
+        .nav-lang-label { display: inline; }
+        .nav-lang-chevron { display: inline; }
         @media (max-width: 639px) {
           .nav-inner { grid-template-columns: auto 1fr auto; }
-          .nav-lang { display: none; }
+          .nav-lang { display: flex; }
+          .nav-lang-label { display: none; }
+          .nav-lang-chevron { display: none; }
+          .nav-right a { display: none; }
         }
       `}</style>
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: '14px 16px' }}>
@@ -151,8 +156,8 @@ export const NovaPage: React.FC = () => {
                 onMouseLeave={e => { if (!langOpen) e.currentTarget.style.background = 'transparent'; }}
               >
                 <span style={{ fontSize: 18, lineHeight: 1 }}>{selectedLang.flag}</span>
-                <span>{selectedLang.label}</span>
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                <span className="nav-lang-label">{selectedLang.label}</span>
+                <svg className="nav-lang-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none"
                   style={{ transform: langOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
                   <path d="M2 4l4 4 4-4" stroke="#888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -206,7 +211,7 @@ export const NovaPage: React.FC = () => {
                 style={{
                   height: 28,
                   display: 'block',
-                  filter: 'brightness(0) saturate(100%) invert(28%) sepia(65%) saturate(3000%) hue-rotate(236deg) brightness(97%) contrast(100%)',
+                  filter: 'invert(29%) sepia(98%) saturate(1483%) hue-rotate(234deg) brightness(87%) contrast(101%)',
                 }}
               />
             </div>
