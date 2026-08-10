@@ -110,20 +110,17 @@ export const NovaPage: React.FC = () => {
       <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
       <style>{`
         .nav-inner {
-          display: grid;
-          grid-template-columns: 1fr auto 1fr;
+          display: flex;
           align-items: center;
+          gap: 12px;
         }
-        .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
-        .nav-lang { display: flex; }
+        .nav-entrar { display: inline; }
         .nav-lang-label { display: inline; }
-        .nav-lang-chevron { display: inline; }
+        .nav-lang-chevron { display: inline-flex; }
         @media (max-width: 639px) {
-          .nav-inner { grid-template-columns: auto 1fr auto; }
-          .nav-lang { display: flex; }
+          .nav-entrar { display: none; }
           .nav-lang-label { display: none; }
           .nav-lang-chevron { display: none; }
-          .nav-right a { display: none; }
         }
       `}</style>
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: '14px 16px' }}>
@@ -140,8 +137,42 @@ export const NovaPage: React.FC = () => {
         }}>
           <div className="nav-inner">
 
-            {/* LEFT — Language selector */}
-            <div className="nav-lang" style={{ position: 'relative' }}>
+            {/* Logo azul — canto esquerdo */}
+            <img
+              src="/logo-blue.png"
+              alt="Connect Academy"
+              style={{ height: 32, display: 'block', flexShrink: 0 }}
+            />
+
+            {/* Spacer */}
+            <div style={{ flex: 1 }} />
+
+            {/* Entrar */}
+            <a
+              href="https://app.connectacademy.com.br"
+              className="nav-entrar"
+              style={{ fontSize: 13, fontWeight: 600, color: '#555', textDecoration: 'none', whiteSpace: 'nowrap', padding: '0 4px' }}
+            >
+              Entrar
+            </a>
+
+            {/* Criar conta */}
+            <button
+              onClick={() => setCheckout(PLANS[1])}
+              style={{
+                height: 38, padding: '0 18px', borderRadius: 12,
+                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
+                color: '#fff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
+                boxShadow: `0 4px 16px ${B}40`, transition: 'opacity 0.2s', whiteSpace: 'nowrap', flexShrink: 0,
+              }}
+              onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+              onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+            >
+              Criar conta grátis
+            </button>
+
+            {/* Language selector */}
+            <div style={{ position: 'relative', flexShrink: 0 }}>
               <button
                 onClick={e => { e.stopPropagation(); setLangOpen(v => !v); }}
                 style={{
@@ -150,7 +181,7 @@ export const NovaPage: React.FC = () => {
                   border: '1px solid #E5E7EB', borderRadius: 10,
                   padding: '6px 10px', cursor: 'pointer',
                   fontSize: 13, fontWeight: 600, color: '#444',
-                  transition: 'background 0.15s',
+                  transition: 'background 0.15s', whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={e => { if (!langOpen) e.currentTarget.style.background = '#F9FAFB'; }}
                 onMouseLeave={e => { if (!langOpen) e.currentTarget.style.background = 'transparent'; }}
@@ -168,7 +199,7 @@ export const NovaPage: React.FC = () => {
                 <div
                   onClick={e => e.stopPropagation()}
                   style={{
-                    position: 'absolute', top: 'calc(100% + 8px)', left: 0,
+                    position: 'absolute', top: 'calc(100% + 8px)', right: 0,
                     background: '#fff', border: '1px solid #E5E7EB',
                     borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                     padding: '6px', minWidth: 180, zIndex: 200,
@@ -201,42 +232,6 @@ export const NovaPage: React.FC = () => {
                   ))}
                 </div>
               )}
-            </div>
-
-            {/* CENTER — Logo azul */}
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <img
-                src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
-                alt="Connect Academy"
-                style={{
-                  height: 28,
-                  display: 'block',
-                  filter: 'invert(29%) sepia(98%) saturate(1483%) hue-rotate(234deg) brightness(87%) contrast(101%)',
-                }}
-              />
-            </div>
-
-            {/* RIGHT — Entrar + Criar conta */}
-            <div className="nav-right">
-              <a
-                href="https://app.connectacademy.com.br"
-                style={{ fontSize: 13, fontWeight: 600, color: '#555', textDecoration: 'none', whiteSpace: 'nowrap' }}
-              >
-                Entrar
-              </a>
-              <button
-                onClick={() => setCheckout(PLANS[1])}
-                style={{
-                  height: 38, padding: '0 20px', borderRadius: 12,
-                  background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
-                  color: '#fff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
-                  boxShadow: `0 4px 16px ${B}40`, transition: 'opacity 0.2s', whiteSpace: 'nowrap',
-                }}
-                onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-              >
-                Criar conta grátis
-              </button>
             </div>
 
           </div>
