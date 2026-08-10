@@ -346,20 +346,115 @@ export const NovaPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ═══════════════ STATS ═══════════════════════ */}
-      <section style={{ borderBottom: '1px solid #F0F0F2', background: '#FAFAFB' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto', padding: '36px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '24px 16px' }}>
-          {[
-            { n: '+28K', l: 'alunos importando' },
-            { n: '+30M', l: 'produtos disponíveis' },
-            { n: '1.500', l: 'fábricas parceiras' },
-            { n: '15 dias', l: 'entrega no Brasil' },
-          ].map(s => (
-            <div key={s.n} style={{ textAlign: 'center' }}>
-              <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 36, fontWeight: 800, color: '#0a0a0a', margin: '0 0 4px', lineHeight: 1 }}>{s.n}</p>
-              <p style={{ fontSize: 13, color: '#888', fontWeight: 500, margin: 0 }}>{s.l}</p>
+      {/* ═══════════════ REDE SOCIAL ════════════════════ */}
+      <style>{`
+        .social-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.2fr;
+          gap: 48px;
+          align-items: center;
+          max-width: 1080px;
+          margin: 0 auto;
+        }
+        .social-phone-img { width: 100%; max-width: 420px; }
+        .social-title { font-size: clamp(28px, 5vw, 58px); }
+        .social-desc { font-size: 16px; }
+        .social-gap { gap: 20px; }
+        @media (max-width: 639px) {
+          .social-grid { grid-template-columns: 1fr 1.4fr; gap: 16px; }
+          .social-phone-img { max-width: 100%; }
+          .social-title { font-size: 20px !important; letter-spacing: -0.02em; }
+          .social-desc { font-size: 12px !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+          .social-gap { gap: 10px; }
+          .social-feat-text { font-size: 11px !important; }
+          .social-badge { padding: 4px 10px !important; }
+          .social-cta { height: 40px !important; padding: 0 16px !important; font-size: 13px !important; }
+        }
+      `}</style>
+      <section style={{ background: '#fff', padding: '80px 16px', overflow: 'hidden' }}>
+        <div className="social-grid">
+
+          {/* Phones image */}
+          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+            <div style={{
+              position: 'absolute', inset: '10%',
+              background: `radial-gradient(ellipse at center, ${B}22 0%, transparent 70%)`,
+              filter: 'blur(40px)', zIndex: 0,
+            }} />
+            <img
+              src="https://i.postimg.cc/3RkrkCVn/phones.png"
+              alt="Connect Academy — Rede Social do Importador"
+              className="social-phone-img"
+              style={{
+                position: 'relative', zIndex: 1,
+                filter: 'drop-shadow(0 24px 48px rgba(76,53,232,0.18))',
+              }}
+            />
+          </div>
+
+          {/* Text */}
+          <div className="social-gap" style={{ display: 'flex', flexDirection: 'column' }}>
+
+            {/* Headline */}
+            <h2 className="social-title" style={{
+              fontFamily: "'Bricolage Grotesque', system-ui",
+              fontWeight: 800, lineHeight: 1.08,
+              letterSpacing: '-0.03em',
+              color: '#0a0a0a', margin: 0,
+            }}>
+              A 1ª Rede Social<br />do Importador 💙
+            </h2>
+
+            {/* Description */}
+            <p className="social-desc" style={{ color: '#555', lineHeight: 1.65, margin: 0, maxWidth: 440 }}>
+              Uma comunidade exclusiva para importadores e empreendedores. Troque informações estratégicas, compartilhe seus resultados e evolua ao lado de quem fala a sua língua.
+            </p>
+
+            {/* Features list */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {[
+                'Feed exclusivo para importadores',
+                'Grupos por nicho de produto',
+                'Fornecedores da comunidade',
+                '+28.000 membros ativos',
+              ].map(item => (
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  <div style={{
+                    width: 18, height: 18, borderRadius: 5,
+                    background: `${B}15`, flexShrink: 0,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6l2.5 2.5L10 3" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="social-feat-text" style={{ fontSize: 13, color: '#444', fontWeight: 500 }}>{item}</span>
+                </div>
+              ))}
             </div>
-          ))}
+
+            {/* CTA */}
+            <button
+              className="social-cta"
+              onClick={() => setCheckout(PLANS[1])}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                height: 52, padding: '0 28px', borderRadius: 14,
+                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
+                color: '#fff', fontWeight: 700, fontSize: 15, border: 'none', cursor: 'pointer',
+                boxShadow: `0 8px 28px ${B}45`, transition: 'transform 0.15s, box-shadow 0.15s',
+                width: 'fit-content',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 12px 36px ${B}55`; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 8px 28px ${B}45`; }}
+            >
+              Testar comunidade
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
         </div>
       </section>
 
@@ -399,6 +494,23 @@ export const NovaPage: React.FC = () => {
               loading="lazy"
             />
           </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ STATS ═══════════════════════ */}
+      <section style={{ borderBottom: '1px solid #F0F0F2', background: '#FAFAFB', marginTop: 72 }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto', padding: '36px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '24px 16px' }}>
+          {[
+            { n: '+28K', l: 'alunos importando' },
+            { n: '+30M', l: 'produtos disponíveis' },
+            { n: '1.500', l: 'fábricas parceiras' },
+            { n: '15 dias', l: 'entrega no Brasil' },
+          ].map(s => (
+            <div key={s.n} style={{ textAlign: 'center' }}>
+              <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 36, fontWeight: 800, color: '#0a0a0a', margin: '0 0 4px', lineHeight: 1 }}>{s.n}</p>
+              <p style={{ fontSize: 13, color: '#888', fontWeight: 500, margin: 0 }}>{s.l}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -546,118 +658,6 @@ export const NovaPage: React.FC = () => {
             <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#fff', margin: '0 0 8px' }}>Aulas Exclusivas</h3>
             <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.55, margin: 0 }}>Do zero ao avançado. Aprenda a importar e montar seu negócio.</p>
           </div>
-        </div>
-      </section>
-
-      {/* ═══════════════ REDE SOCIAL ════════════════════ */}
-      <style>{`
-        .social-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.2fr;
-          gap: 48px;
-          align-items: center;
-          max-width: 1080px;
-          margin: 0 auto;
-        }
-        .social-phone-img { width: 100%; max-width: 420px; }
-        .social-title { font-size: clamp(28px, 5vw, 58px); }
-        .social-desc { font-size: 16px; }
-        .social-gap { gap: 20px; }
-        @media (max-width: 639px) {
-          .social-grid { grid-template-columns: 1fr 1.4fr; gap: 16px; }
-          .social-phone-img { max-width: 100%; }
-          .social-title { font-size: 20px !important; letter-spacing: -0.02em; }
-          .social-desc { font-size: 12px !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-          .social-gap { gap: 10px; }
-          .social-feat-text { font-size: 11px !important; }
-          .social-badge { padding: 4px 10px !important; }
-          .social-cta { height: 40px !important; padding: 0 16px !important; font-size: 13px !important; }
-        }
-      `}</style>
-      <section style={{ background: '#fff', padding: '80px 16px', overflow: 'hidden' }}>
-        <div className="social-grid">
-
-          {/* Phones image */}
-          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-            <div style={{
-              position: 'absolute', inset: '10%',
-              background: `radial-gradient(ellipse at center, ${B}22 0%, transparent 70%)`,
-              filter: 'blur(40px)', zIndex: 0,
-            }} />
-            <img
-              src="https://i.postimg.cc/3RkrkCVn/phones.png"
-              alt="Connect Academy — Rede Social do Importador"
-              className="social-phone-img"
-              style={{
-                position: 'relative', zIndex: 1,
-                filter: 'drop-shadow(0 24px 48px rgba(76,53,232,0.18))',
-              }}
-            />
-          </div>
-
-          {/* Text */}
-          <div className="social-gap" style={{ display: 'flex', flexDirection: 'column' }}>
-
-            {/* Headline */}
-            <h2 className="social-title" style={{
-              fontFamily: "'Bricolage Grotesque', system-ui",
-              fontWeight: 800, lineHeight: 1.08,
-              letterSpacing: '-0.03em',
-              color: '#0a0a0a', margin: 0,
-            }}>
-              A 1ª Rede Social<br />do Importador 💙
-            </h2>
-
-            {/* Description */}
-            <p className="social-desc" style={{ color: '#555', lineHeight: 1.65, margin: 0, maxWidth: 440 }}>
-              Uma comunidade exclusiva para importadores e empreendedores. Troque informações estratégicas, compartilhe seus resultados e evolua ao lado de quem fala a sua língua.
-            </p>
-
-            {/* Features list */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {[
-                'Feed exclusivo para importadores',
-                'Grupos por nicho de produto',
-                'Fornecedores da comunidade',
-                '+28.000 membros ativos',
-              ].map(item => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <div style={{
-                    width: 18, height: 18, borderRadius: 5,
-                    background: `${B}15`, flexShrink: 0,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}>
-                    <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 6l2.5 2.5L10 3" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <span className="social-feat-text" style={{ fontSize: 13, color: '#444', fontWeight: 500 }}>{item}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* CTA */}
-            <button
-              className="social-cta"
-              onClick={() => setCheckout(PLANS[1])}
-              style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-                height: 52, padding: '0 28px', borderRadius: 14,
-                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
-                color: '#fff', fontWeight: 700, fontSize: 15, border: 'none', cursor: 'pointer',
-                boxShadow: `0 8px 28px ${B}45`, transition: 'transform 0.15s, box-shadow 0.15s',
-                width: 'fit-content',
-              }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 12px 36px ${B}55`; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 8px 28px ${B}45`; }}
-            >
-              Testar comunidade
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-
         </div>
       </section>
 
