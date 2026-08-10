@@ -511,39 +511,17 @@ export const NovaPage: React.FC = () => {
             <p style={{ fontSize: 13, color: '#666', lineHeight: 1.55, margin: 0 }}>Brasil em 15 dias, Europa em 6. Acompanhe no app.</p>
           </div>
 
-          {/* 6 — Comunidade */}
-          <div className="b6 bcard-dark" style={{ background: '#0A0A1A', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 28 }}>
-            <div style={{ position: 'absolute', bottom: -60, left: -40, width: 180, height: 180, borderRadius: '50%', background: B, opacity: 0.15, filter: 'blur(60px)' }} />
-            <div style={{ flex: 1, minWidth: 180 }}>
-              <div style={{ width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#fff', margin: '0 0 6px' }}>Comunidade Exclusiva</h3>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, margin: 0 }}>A maior rede de importadores do Brasil.</p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flexShrink: 0 }}>
-              <div style={{ display: 'flex' }}>
-                {['#4C35E8','#7C5CF6','#A88BF5','#C4AEF8','#DDD5FD'].map((c, i) => (
-                  <div key={c} style={{ width: 36, height: 36, borderRadius: '50%', background: c, border: '2px solid #0A0A1A', marginLeft: i > 0 ? -10 : 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 800, color: '#fff' }}>
-                    {['A','B','C','D','E'][i]}
-                  </div>
-                ))}
-              </div>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', fontWeight: 600, margin: 0 }}>+28.000 membros</p>
-            </div>
-          </div>
 
-          {/* 7 — Aulas */}
-          <div className="b7 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
-            <div style={{ width: 44, height: 44, borderRadius: 13, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          {/* 7 — Aulas — dark card */}
+          <div className="b7 bcard-dark" style={{ background: '#0A0A1A' }}>
+            <div style={{ position: 'absolute', top: -40, right: -40, width: 140, height: 140, borderRadius: '50%', background: B, opacity: 0.15, filter: 'blur(50px)' }} />
+            <div style={{ width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
               </svg>
             </div>
-            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>Aulas Exclusivas</h3>
-            <p style={{ fontSize: 13, color: '#666', lineHeight: 1.55, margin: 0 }}>Do zero ao avançado. Aprenda a importar e montar seu negócio.</p>
+            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#fff', margin: '0 0 8px' }}>Aulas Exclusivas</h3>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.55, margin: 0 }}>Do zero ao avançado. Aprenda a importar e montar seu negócio.</p>
           </div>
         </div>
       </section>
@@ -596,19 +574,6 @@ export const NovaPage: React.FC = () => {
 
           {/* Text */}
           <div className="social-gap" style={{ display: 'flex', flexDirection: 'column' }}>
-            {/* Badge */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', width: 'fit-content' }}>
-              <div className="social-badge" style={{
-                display: 'flex', alignItems: 'center', gap: 6,
-                background: `${B}12`, border: `1px solid ${B}25`,
-                borderRadius: 10, padding: '6px 14px',
-              }}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-                <span style={{ fontSize: 11, fontWeight: 700, color: B, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Comunidade</span>
-              </div>
-            </div>
 
             {/* Headline */}
             <h2 className="social-title" style={{
