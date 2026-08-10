@@ -469,7 +469,7 @@ export const NovaPage: React.FC = () => {
             fontWeight: 800, color: '#0a0a0a',
             margin: 0, letterSpacing: '-0.02em', lineHeight: 1.1,
           }}>
-            Conheça o App 💙
+            Conheça o App
           </h2>
         </div>
         <div style={{
