@@ -363,6 +363,45 @@ export const NovaPage: React.FC = () => {
         </div>
       </section>
 
+      {/* ═══════════════ VSL ═════════════════════════ */}
+      <section style={{ maxWidth: 900, margin: '0 auto', padding: '72px 20px 0' }}>
+        <div style={{
+          borderRadius: 24, overflow: 'hidden',
+          border: '1.5px solid #E5E7EB',
+          boxShadow: '0 32px 80px rgba(76,53,232,0.12), 0 8px 24px rgba(0,0,0,0.08)',
+        }}>
+          {/* Browser top bar */}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 8,
+            padding: '0 16px', height: 40,
+            background: '#F5F5F7', borderBottom: '1px solid #E5E7EB',
+          }}>
+            <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FF5F57', flexShrink: 0 }} />
+            <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#FFBD2E', flexShrink: 0 }} />
+            <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#28C840', flexShrink: 0 }} />
+            <div style={{
+              flex: 1, margin: '0 12px', height: 24, borderRadius: 6,
+              background: '#fff', border: '1px solid #E0E0E5',
+              display: 'flex', alignItems: 'center', paddingLeft: 10, gap: 6,
+            }}>
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                <path d="M6 1a5 5 0 1 0 0 10A5 5 0 0 0 6 1zM1 6h10M6 1c-1.5 2-2 3.5-2 5s.5 3 2 5M6 1c1.5 2 2 3.5 2 5s-.5 3-2 5" stroke="#aaa" strokeWidth="1" strokeLinecap="round"/>
+              </svg>
+              <span style={{ fontSize: 11, color: '#aaa', fontWeight: 500 }}>connectacademy.com.br</span>
+            </div>
+          </div>
+          {/* Video */}
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000' }}>
+            <iframe
+              src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=0b95370e-45d5-40d2-9c30-5c152ac60f49"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+              allowFullScreen
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════════ FEATURES BENTO ═════════════ */}
       <style>{`
         .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
