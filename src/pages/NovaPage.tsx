@@ -460,6 +460,18 @@ export const NovaPage: React.FC = () => {
 
       {/* ═══════════════ VSL ═════════════════════════ */}
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '72px 20px 0' }}>
+        {/* Título */}
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: B, margin: '0 0 12px' }}>Assista esse vídeo</p>
+          <h2 style={{
+            fontFamily: "'Bricolage Grotesque', system-ui",
+            fontSize: 'clamp(28px, 5vw, 48px)',
+            fontWeight: 800, color: '#0a0a0a',
+            margin: 0, letterSpacing: '-0.02em', lineHeight: 1.1,
+          }}>
+            Conheça o App 🚀
+          </h2>
+        </div>
         <div style={{
           borderRadius: 24, overflow: 'hidden',
           border: '1.5px solid #E5E7EB',
