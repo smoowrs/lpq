@@ -141,7 +141,7 @@ export const NovaPage: React.FC = () => {
             <img
               src="/logo-blue.png"
               alt="Connect Academy"
-              style={{ height: 32, display: 'block', flexShrink: 0 }}
+              style={{ height: 24, display: 'block', flexShrink: 0 }}
             />
 
             {/* Spacer */}
@@ -151,7 +151,7 @@ export const NovaPage: React.FC = () => {
             <a
               href="https://app.connectacademy.com.br"
               className="nav-entrar"
-              style={{ fontSize: 13, fontWeight: 600, color: '#555', textDecoration: 'none', whiteSpace: 'nowrap', padding: '0 4px' }}
+              style={{ fontSize: 12, fontWeight: 600, color: '#555', textDecoration: 'none', whiteSpace: 'nowrap', padding: '0 4px' }}
             >
               Entrar
             </a>
@@ -160,15 +160,15 @@ export const NovaPage: React.FC = () => {
             <button
               onClick={() => setCheckout(PLANS[1])}
               style={{
-                height: 38, padding: '0 18px', borderRadius: 12,
+                height: 34, padding: '0 14px', borderRadius: 10,
                 background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
-                color: '#fff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
-                boxShadow: `0 4px 16px ${B}40`, transition: 'opacity 0.2s', whiteSpace: 'nowrap', flexShrink: 0,
+                color: '#fff', fontWeight: 700, fontSize: 12, border: 'none', cursor: 'pointer',
+                boxShadow: `0 3px 12px ${B}40`, transition: 'opacity 0.2s', whiteSpace: 'nowrap', flexShrink: 0,
               }}
               onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
               onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
             >
-              Criar conta grátis
+              Teste grátis
             </button>
 
             {/* Language selector */}
