@@ -815,14 +815,64 @@ export const NovaPage: React.FC = () => {
       </section>
 
       {/* ═══════════════ FOOTER ══════════════════════ */}
-      <footer style={{ borderTop: '1px solid #F0F0F2', padding: '32px 20px' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
-          <img src="https://i.postimg.cc/t4CHMJzj/brancalogo.png" alt="Connect Academy" style={{ height: 24, filter: 'brightness(0)' }} />
-          <p style={{ fontSize: 13, color: '#bbb', margin: 0 }}>© 2025 Connect Academy. Todos os direitos reservados.</p>
-          <div style={{ display: 'flex', gap: 24 }}>
-            <a href="https://connectacademy.com.br" style={{ fontSize: 13, color: '#aaa', textDecoration: 'none' }}>Site principal</a>
-            <a href="mailto:suporte@connectacademy.com.br" style={{ fontSize: 13, color: '#aaa', textDecoration: 'none' }}>Suporte</a>
+      <footer style={{ background: '#FAFAFB', borderTop: '1px solid #F0F0F2', padding: '48px 20px 32px' }}>
+        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+
+          {/* Top row — logo + nav links */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 48px', justifyContent: 'space-between', marginBottom: 40 }}>
+
+            {/* Logo + tagline */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 28, display: 'block' }} />
+              <p style={{ fontSize: 13, color: '#888', margin: 0, maxWidth: 240, lineHeight: 1.6 }}>
+                A plataforma completa para importar da China com segurança e sem burocracia.
+              </p>
+            </div>
+
+            {/* Links */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px 48px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <p style={{ fontSize: 11, fontWeight: 700, color: '#aaa', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>Plataforma</p>
+                {[
+                  { label: 'Rede Social', href: 'https://app.connectacademy.com.br' },
+                  { label: 'Minerador IA', href: 'https://app.connectacademy.com.br' },
+                  { label: 'Aulas', href: 'https://app.connectacademy.com.br' },
+                  { label: 'Rastreio', href: 'https://app.connectacademy.com.br' },
+                ].map(l => (
+                  <a key={l.label} href={l.href} style={{ fontSize: 13, color: '#555', textDecoration: 'none', fontWeight: 500 }}
+                    onMouseEnter={e => (e.currentTarget.style.color = B)}
+                    onMouseLeave={e => (e.currentTarget.style.color = '#555')}
+                  >{l.label}</a>
+                ))}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                <p style={{ fontSize: 11, fontWeight: 700, color: '#aaa', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>Empresa</p>
+                {[
+                  { label: 'Site principal', href: 'https://connectacademy.com.br' },
+                  { label: 'Suporte', href: 'mailto:suporte@connectacademy.com.br' },
+                  { label: 'Termos de Uso', href: 'https://connectacademy.com.br/termos-de-uso' },
+                  { label: 'Política de Privacidade', href: 'https://connectacademy.com.br/politica-de-privacidade' },
+                ].map(l => (
+                  <a key={l.label} href={l.href} style={{ fontSize: 13, color: '#555', textDecoration: 'none', fontWeight: 500 }}
+                    onMouseEnter={e => (e.currentTarget.style.color = B)}
+                    onMouseLeave={e => (e.currentTarget.style.color = '#555')}
+                  >{l.label}</a>
+                ))}
+              </div>
+            </div>
           </div>
+
+          {/* Divider */}
+          <div style={{ borderTop: '1px solid #EBEBED', paddingTop: 24, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+            <p style={{ fontSize: 12, color: '#bbb', margin: 0 }}>
+              © 2026 Connect Academy Ltda. Todos os direitos reservados. · CNPJ: 48.620.890/0001-09
+            </p>
+            <div style={{ display: 'flex', gap: 16 }}>
+              <a href="https://connectacademy.com.br/termos-de-uso" style={{ fontSize: 12, color: '#bbb', textDecoration: 'none' }}>Termos</a>
+              <a href="https://connectacademy.com.br/politica-de-privacidade" style={{ fontSize: 12, color: '#bbb', textDecoration: 'none' }}>Privacidade</a>
+            </div>
+          </div>
+
         </div>
       </footer>
 
