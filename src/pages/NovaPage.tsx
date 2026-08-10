@@ -75,6 +75,16 @@ function FaqCard({ q, a }: { q: string; a: string }) {
   );
 }
 
+/* ─── Languages ──────────────────────────────────────── */
+const LANGS = [
+  { code: 'pt-BR', flag: '🇧🇷', label: 'Brasil' },
+  { code: 'pt-PT', flag: '🇵🇹', label: 'Portugal' },
+  { code: 'en-US', flag: '🇺🇸', label: 'Estados Unidos' },
+  { code: 'es',    flag: '🇪🇸', label: 'Espanha' },
+  { code: 'de-CH', flag: '🇨🇭', label: 'Suíça' },
+  { code: 'en-CA', flag: '🇨🇦', label: 'Canadá' },
+];
+
 /* ─── Main ───────────────────────────────────────────── */
 export const NovaPage: React.FC = () => {
   const [checkout, setCheckout] = useState<any>(null);
