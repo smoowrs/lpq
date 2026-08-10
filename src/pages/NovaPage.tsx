@@ -549,16 +549,35 @@ export const NovaPage: React.FC = () => {
       </section>
 
       {/* ═══════════════ REDE SOCIAL ════════════════════ */}
-      <section style={{ background: '#fff', padding: '96px 20px', overflow: 'hidden' }}>
-        <div style={{
-          maxWidth: 1080, margin: '0 auto',
-          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: 64, alignItems: 'center',
-        }}>
+      <style>{`
+        .social-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.2fr;
+          gap: 48px;
+          align-items: center;
+          max-width: 1080px;
+          margin: 0 auto;
+        }
+        .social-phone-img { width: 100%; max-width: 420px; }
+        .social-title { font-size: clamp(28px, 5vw, 58px); }
+        .social-desc { font-size: 16px; }
+        .social-gap { gap: 20px; }
+        @media (max-width: 639px) {
+          .social-grid { grid-template-columns: 1fr 1.4fr; gap: 16px; }
+          .social-phone-img { max-width: 100%; }
+          .social-title { font-size: 20px !important; letter-spacing: -0.02em; }
+          .social-desc { font-size: 12px !important; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+          .social-gap { gap: 10px; }
+          .social-feat-text { font-size: 11px !important; }
+          .social-badge { padding: 4px 10px !important; }
+          .social-cta { height: 40px !important; padding: 0 16px !important; font-size: 13px !important; }
+        }
+      `}</style>
+      <section style={{ background: '#fff', padding: '80px 16px', overflow: 'hidden' }}>
+        <div className="social-grid">
 
           {/* Phones image */}
           <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-            {/* Glow behind image */}
             <div style={{
               position: 'absolute', inset: '10%',
               background: `radial-gradient(ellipse at center, ${B}22 0%, transparent 70%)`,
@@ -567,35 +586,34 @@ export const NovaPage: React.FC = () => {
             <img
               src="https://i.postimg.cc/3RkrkCVn/phones.png"
               alt="Connect Academy — Rede Social do Importador"
+              className="social-phone-img"
               style={{
-                width: '100%', maxWidth: 460,
                 position: 'relative', zIndex: 1,
-                filter: 'drop-shadow(0 32px 64px rgba(76,53,232,0.18))',
+                filter: 'drop-shadow(0 24px 48px rgba(76,53,232,0.18))',
               }}
             />
           </div>
 
           {/* Text */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div className="social-gap" style={{ display: 'flex', flexDirection: 'column' }}>
             {/* Badge */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, width: 'fit-content' }}>
-              <div style={{
-                display: 'flex', alignItems: 'center', gap: 8,
+            <div style={{ display: 'inline-flex', alignItems: 'center', width: 'fit-content' }}>
+              <div className="social-badge" style={{
+                display: 'flex', alignItems: 'center', gap: 6,
                 background: `${B}12`, border: `1px solid ${B}25`,
                 borderRadius: 10, padding: '6px 14px',
               }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
-                <span style={{ fontSize: 12, fontWeight: 700, color: B, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Comunidade</span>
+                <span style={{ fontSize: 11, fontWeight: 700, color: B, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Comunidade</span>
               </div>
             </div>
 
             {/* Headline */}
-            <h2 style={{
+            <h2 className="social-title" style={{
               fontFamily: "'Bricolage Grotesque', system-ui",
-              fontSize: 'clamp(34px, 5vw, 60px)',
-              fontWeight: 800, lineHeight: 1.05,
+              fontWeight: 800, lineHeight: 1.08,
               letterSpacing: '-0.03em',
               color: '#0a0a0a', margin: 0,
             }}>
@@ -603,35 +621,36 @@ export const NovaPage: React.FC = () => {
             </h2>
 
             {/* Description */}
-            <p style={{ fontSize: 17, color: '#555', lineHeight: 1.7, margin: 0, maxWidth: 440 }}>
+            <p className="social-desc" style={{ color: '#555', lineHeight: 1.65, margin: 0, maxWidth: 440 }}>
               Uma comunidade exclusiva para importadores e empreendedores. Troque informações estratégicas, compartilhe seus resultados e evolua ao lado de quem fala a sua língua.
             </p>
 
             {/* Features list */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {[
                 'Feed exclusivo para importadores',
                 'Grupos por nicho de produto',
-                'Fornecedores compartilhados pela comunidade',
+                'Fornecedores da comunidade',
                 '+28.000 membros ativos',
               ].map(item => (
-                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <div style={{
-                    width: 20, height: 20, borderRadius: 6,
+                    width: 18, height: 18, borderRadius: 5,
                     background: `${B}15`, flexShrink: 0,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
-                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                    <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
                       <path d="M2 6l2.5 2.5L10 3" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
-                  <span style={{ fontSize: 14, color: '#444', fontWeight: 500 }}>{item}</span>
+                  <span className="social-feat-text" style={{ fontSize: 13, color: '#444', fontWeight: 500 }}>{item}</span>
                 </div>
               ))}
             </div>
 
             {/* CTA */}
             <button
+              className="social-cta"
               onClick={() => setCheckout(PLANS[1])}
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
