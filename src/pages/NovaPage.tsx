@@ -548,6 +548,112 @@ export const NovaPage: React.FC = () => {
         </div>
       </section>
 
+      {/* ═══════════════ REDE SOCIAL ════════════════════ */}
+      <section style={{ background: '#fff', padding: '96px 20px', overflow: 'hidden' }}>
+        <div style={{
+          maxWidth: 1080, margin: '0 auto',
+          display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: 64, alignItems: 'center',
+        }}>
+
+          {/* Phones image */}
+          <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
+            {/* Glow behind image */}
+            <div style={{
+              position: 'absolute', inset: '10%',
+              background: `radial-gradient(ellipse at center, ${B}22 0%, transparent 70%)`,
+              filter: 'blur(40px)', zIndex: 0,
+            }} />
+            <img
+              src="https://i.postimg.cc/3RkrkCVn/phones.png"
+              alt="Connect Academy — Rede Social do Importador"
+              style={{
+                width: '100%', maxWidth: 460,
+                position: 'relative', zIndex: 1,
+                filter: 'drop-shadow(0 32px 64px rgba(76,53,232,0.18))',
+              }}
+            />
+          </div>
+
+          {/* Text */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            {/* Badge */}
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, width: 'fit-content' }}>
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                background: `${B}12`, border: `1px solid ${B}25`,
+                borderRadius: 10, padding: '6px 14px',
+              }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span style={{ fontSize: 12, fontWeight: 700, color: B, letterSpacing: '0.08em', textTransform: 'uppercase' }}>Comunidade</span>
+              </div>
+            </div>
+
+            {/* Headline */}
+            <h2 style={{
+              fontFamily: "'Bricolage Grotesque', system-ui",
+              fontSize: 'clamp(34px, 5vw, 60px)',
+              fontWeight: 800, lineHeight: 1.05,
+              letterSpacing: '-0.03em',
+              color: '#0a0a0a', margin: 0,
+            }}>
+              A 1ª Rede Social<br />do Importador 💙
+            </h2>
+
+            {/* Description */}
+            <p style={{ fontSize: 17, color: '#555', lineHeight: 1.7, margin: 0, maxWidth: 440 }}>
+              Uma comunidade exclusiva para importadores e empreendedores. Troque informações estratégicas, compartilhe seus resultados e evolua ao lado de quem fala a sua língua.
+            </p>
+
+            {/* Features list */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {[
+                'Feed exclusivo para importadores',
+                'Grupos por nicho de produto',
+                'Fornecedores compartilhados pela comunidade',
+                '+28.000 membros ativos',
+              ].map(item => (
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{
+                    width: 20, height: 20, borderRadius: 6,
+                    background: `${B}15`, flexShrink: 0,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                      <path d="M2 6l2.5 2.5L10 3" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span style={{ fontSize: 14, color: '#444', fontWeight: 500 }}>{item}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <button
+              onClick={() => setCheckout(PLANS[1])}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                height: 52, padding: '0 28px', borderRadius: 14,
+                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
+                color: '#fff', fontWeight: 700, fontSize: 15, border: 'none', cursor: 'pointer',
+                boxShadow: `0 8px 28px ${B}45`, transition: 'transform 0.15s, box-shadow 0.15s',
+                width: 'fit-content',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 12px 36px ${B}55`; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 8px 28px ${B}45`; }}
+            >
+              Testar comunidade
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
       {/* ═══════════════ COMO FUNCIONA ═══════════════ */}
       <section style={{ background: '#FAFAFB', borderTop: '1px solid #F0F0F2', borderBottom: '1px solid #F0F0F2', padding: '96px 20px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
