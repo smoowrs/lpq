@@ -477,19 +477,26 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* 2 — +30M Produtos */}
-          <div className="b2 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff', justifyContent: 'space-between', minHeight: 280 }}>
-            <div>
-              <div style={{ width: 48, height: 48, borderRadius: 14, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="b2 bcard-dark" style={{ background: '#0a0a0a', minHeight: 280, justifyContent: 'space-between' }}>
+            {/* Video de fundo */}
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/vaievolta.mp4" type="video/mp4" />
+            </video>
+            {/* Overlay */}
+            <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(5,5,15,0.70) 0%, rgba(5,5,15,0.55) 100%)' }} />
+            {/* Conteúdo */}
+            <div style={{ position: 'relative', zIndex: 2 }}>
+              <div style={{ width: 48, height: 48, borderRadius: 14, background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
                 </svg>
               </div>
-              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 22, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px', lineHeight: 1.2 }}>+30M de Produtos</h3>
-              <p style={{ fontSize: 14, color: '#666', lineHeight: 1.6, margin: 0 }}>1.500 fábricas parceiras. Qualquer nicho, direto da fonte.</p>
+              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 22, fontWeight: 800, color: '#fff', margin: '0 0 8px', lineHeight: 1.2 }}>+30M de Produtos</h3>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, margin: 0 }}>1.500 fábricas parceiras. Qualquer nicho, direto da fonte.</p>
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 20 }}>
+            <div style={{ position: 'relative', zIndex: 2, display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 20 }}>
               {['Eletrônicos', 'Moda', 'Casa', 'Beleza', '+mais'].map(t => (
-                <span key={t} style={{ padding: '4px 12px', borderRadius: 999, background: '#F3F4F6', fontSize: 11, fontWeight: 600, color: '#555' }}>{t}</span>
+                <span key={t} style={{ padding: '4px 12px', borderRadius: 999, background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>{t}</span>
               ))}
             </div>
           </div>
