@@ -441,22 +441,38 @@ export const NovaPage: React.FC = () => {
         <div className="bento">
 
           {/* 1 — Minerador AI */}
-          <div className="b1 bcard-dark" style={{ background: 'linear-gradient(145deg, #0A0A1A 0%, #12103A 100%)', minHeight: 280 }}>
-            <div style={{ position: 'absolute', top: -60, right: -60, width: 200, height: 200, borderRadius: '50%', background: B, opacity: 0.18, filter: 'blur(60px)' }} />
-            <div>
+          <div className="b1 bcard-dark" style={{ background: '#0A0A1A', minHeight: 280 }}>
+            {/* Video de fundo em loop */}
+            <video
+              autoPlay muted loop playsInline
+              style={{
+                position: 'absolute', inset: 0,
+                width: '100%', height: '100%',
+                objectFit: 'cover', zIndex: 0,
+              }}
+            >
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/magnific_anime-somente-os-tres-rob_nVTr7erYQD.mp4" type="video/mp4" />
+            </video>
+            {/* Overlay escuro para legibilidade */}
+            <div style={{
+              position: 'absolute', inset: 0, zIndex: 1,
+              background: 'linear-gradient(145deg, rgba(10,10,26,0.72) 0%, rgba(18,16,58,0.65) 100%)',
+            }} />
+            {/* Conteúdo */}
+            <div style={{ position: 'relative', zIndex: 2 }}>
               <div style={{ width: 52, height: 52, borderRadius: 16, background: `${B}30`, border: `1px solid ${B}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                 </svg>
               </div>
               <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 24, fontWeight: 800, color: '#fff', margin: '0 0 10px', lineHeight: 1.2 }}>Minerador IA</h3>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, margin: 0 }}>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>
                 Nossa IA pesquisa produtos, verifica fornecedores, calcula impostos reais e elimina burocracias alfandegárias.
               </p>
             </div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 999, padding: '8px 16px', width: 'fit-content', marginTop: 24 }}>
+            <div style={{ position: 'relative', zIndex: 2, display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 999, padding: '8px 16px', width: 'fit-content', marginTop: 24 }}>
               <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4ade80', display: 'block' }} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)' }}>IA ativa 24/7</span>
+              <span style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>IA ativa 24/7</span>
             </div>
           </div>
 
