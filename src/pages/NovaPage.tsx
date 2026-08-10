@@ -197,12 +197,13 @@ export const NovaPage: React.FC = () => {
             <button
               onClick={() => setCheckout(PLANS[1])}
               style={{
-                height: 52, padding: '0 32px', borderRadius: 999,
+                height: 56, padding: '0 40px', borderRadius: 14,
                 background: '#fff', color: '#0a0a0a',
-                fontWeight: 700, fontSize: 15, border: 'none', cursor: 'pointer',
+                fontWeight: 700, fontSize: 16, border: 'none', cursor: 'pointer',
                 boxShadow: '0 4px 24px rgba(0,0,0,0.2)', transition: 'transform 0.15s, box-shadow 0.15s',
+                minWidth: 200,
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.25)'; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)'; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.2)'; }}
             >
               Começar agora
@@ -210,11 +211,12 @@ export const NovaPage: React.FC = () => {
             <button
               onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
-                height: 52, padding: '0 28px', borderRadius: 999,
+                height: 56, padding: '0 32px', borderRadius: 14,
                 background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)',
-                color: '#fff', fontWeight: 600, fontSize: 15,
-                border: '1px solid rgba(255,255,255,0.25)', cursor: 'pointer',
+                color: '#fff', fontWeight: 600, fontSize: 16,
+                border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer',
                 transition: 'background 0.15s',
+                minWidth: 160,
               }}
               onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)')}
               onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
@@ -243,6 +245,32 @@ export const NovaPage: React.FC = () => {
       </section>
 
       {/* ═══════════════ FEATURES BENTO ═════════════ */}
+      <style>{`
+        .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+        .b1  { grid-column: span 7; }
+        .b2  { grid-column: span 5; }
+        .b3  { grid-column: span 4; }
+        .b4  { grid-column: span 4; }
+        .b5  { grid-column: span 4; }
+        .b6  { grid-column: span 8; }
+        .b7  { grid-column: span 4; }
+        .bcard { border-radius: 28px; padding: 36px; display: flex; flex-direction: column; }
+        .bcard-dark { border-radius: 28px; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+        @media (max-width: 767px) {
+          .bento { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+          .b1  { grid-column: span 2; }
+          .b2  { grid-column: span 2; }
+          .b3  { grid-column: span 1; }
+          .b4  { grid-column: span 1; }
+          .b5  { grid-column: span 2; }
+          .b6  { grid-column: span 2; }
+          .b7  { grid-column: span 2; }
+          .bcard { padding: 24px; border-radius: 22px; }
+          .bcard-dark { padding: 28px; border-radius: 22px; }
+          .bcard h3, .bcard-dark h3 { font-size: 18px !important; }
+          .bcard p, .bcard-dark p { font-size: 13px !important; }
+        }
+      `}</style>
       <section style={{ maxWidth: 1080, margin: '0 auto', padding: '96px 20px' }}>
         <div style={{ textAlign: 'center', marginBottom: 56 }}>
           <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: B, margin: '0 0 12px' }}>Plataforma completa</p>
@@ -252,40 +280,30 @@ export const NovaPage: React.FC = () => {
         </div>
 
         {/* Bento Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: 16 }}>
+        <div className="bento">
 
-          {/* 1 — Minerador AI — wide dark card */}
-          <div style={{
-            gridColumn: 'span 7',
-            background: `linear-gradient(145deg, #0A0A1A 0%, #12103A 100%)`,
-            borderRadius: 28, padding: 40,
-            minHeight: 280, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-            position: 'relative', overflow: 'hidden',
-          }}>
+          {/* 1 — Minerador AI */}
+          <div className="b1 bcard-dark" style={{ background: 'linear-gradient(145deg, #0A0A1A 0%, #12103A 100%)', minHeight: 280 }}>
             <div style={{ position: 'absolute', top: -60, right: -60, width: 200, height: 200, borderRadius: '50%', background: B, opacity: 0.18, filter: 'blur(60px)' }} />
             <div>
-              <div style={{ width: 52, height: 52, borderRadius: 16, background: `${B}30`, border: `1px solid ${B}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24 }}>
+              <div style={{ width: 52, height: 52, borderRadius: 16, background: `${B}30`, border: `1px solid ${B}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                 </svg>
               </div>
               <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 24, fontWeight: 800, color: '#fff', margin: '0 0 10px', lineHeight: 1.2 }}>Minerador IA</h3>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, margin: 0, maxWidth: 340 }}>
-                Nossa IA exclusiva pesquisa produtos, verifica fornecedores, calcula impostos reais e elimina todas as burocracias alfandegárias — automaticamente.
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, margin: 0 }}>
+                Nossa IA pesquisa produtos, verifica fornecedores, calcula impostos reais e elimina burocracias alfandegárias.
               </p>
             </div>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: 999, padding: '8px 16px', width: 'fit-content', marginTop: 24 }}>
-              <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4ade80', animation: 'pulse 2s infinite', display: 'block' }} />
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4ade80', display: 'block' }} />
               <span style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.7)' }}>IA ativa 24/7</span>
             </div>
           </div>
 
           {/* 2 — +30M Produtos */}
-          <div style={{
-            gridColumn: 'span 5', borderRadius: 28, padding: 36,
-            border: '1.5px solid #EEEEF2', background: '#fff',
-            minHeight: 280, display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-          }}>
+          <div className="b2 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff', justifyContent: 'space-between', minHeight: 280 }}>
             <div>
               <div style={{ width: 48, height: 48, borderRadius: 14, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -293,9 +311,7 @@ export const NovaPage: React.FC = () => {
                 </svg>
               </div>
               <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 22, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px', lineHeight: 1.2 }}>+30M de Produtos</h3>
-              <p style={{ fontSize: 14, color: '#666', lineHeight: 1.6, margin: 0 }}>
-                1.500 fábricas parceiras. Eletrônicos, moda, casa, beleza — qualquer nicho, direto da fonte.
-              </p>
+              <p style={{ fontSize: 14, color: '#666', lineHeight: 1.6, margin: 0 }}>1.500 fábricas parceiras. Qualquer nicho, direto da fonte.</p>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 20 }}>
               {['Eletrônicos', 'Moda', 'Casa', 'Beleza', '+mais'].map(t => (
@@ -305,79 +321,54 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* 3 — Sem Mínimo */}
-          <div style={{
-            gridColumn: 'span 4', borderRadius: 28, padding: 36,
-            background: BL, border: `1.5px solid ${B}20`,
-            display: 'flex', flexDirection: 'column',
-          }}>
-            <div style={{ width: 48, height: 48, borderRadius: 14, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="b3 bcard" style={{ background: BL, border: `1.5px solid ${B}20` }}>
+            <div style={{ width: 44, height: 44, borderRadius: 13, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="M9 9h.01M15 15h.01"/>
               </svg>
             </div>
-            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: B2, margin: '0 0 8px' }}>Sem Quantidade Mínima</h3>
-            <p style={{ fontSize: 14, color: `${B2}99`, lineHeight: 1.6, margin: 0 }}>
-              Compre 1 unidade para testar ou 1.000 para escalar. Você decide.
-            </p>
+            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: B2, margin: '0 0 8px' }}>Sem Qtd. Mínima</h3>
+            <p style={{ fontSize: 13, color: `${B2}90`, lineHeight: 1.55, margin: 0 }}>1 unidade para testar ou 1.000 para escalar.</p>
           </div>
 
           {/* 4 — Seguro */}
-          <div style={{
-            gridColumn: 'span 4', borderRadius: 28, padding: 36,
-            border: '1.5px solid #EEEEF2', background: '#fff',
-            display: 'flex', flexDirection: 'column',
-          }}>
-            <div style={{ width: 48, height: 48, borderRadius: 14, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="b4 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 13, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
             </div>
-            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>Seguro de Envio</h3>
-            <p style={{ fontSize: 14, color: '#666', lineHeight: 1.6, margin: 0 }}>
-              Extravio ou roubo? Reembolso em até 24h, sem burocracia. Incluso em todos os planos.
-            </p>
+            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>Seguro Incluso</h3>
+            <p style={{ fontSize: 13, color: '#666', lineHeight: 1.55, margin: 0 }}>Reembolso em até 24h em caso de extravio ou dano.</p>
           </div>
 
           {/* 5 — Rastreio */}
-          <div style={{
-            gridColumn: 'span 4', borderRadius: 28, padding: 36,
-            border: '1.5px solid #EEEEF2', background: '#fff',
-            display: 'flex', flexDirection: 'column',
-          }}>
-            <div style={{ width: 48, height: 48, borderRadius: 14, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="b5 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 13, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="3 11 22 2 13 21 11 13 3 11"/>
               </svg>
             </div>
-            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>Rastreio Real-Time</h3>
-            <p style={{ fontSize: 14, color: '#666', lineHeight: 1.6, margin: 0 }}>
-              Acompanhe cada etapa do envio no app. Brasil em 15 dias, Europa em 6 dias.
-            </p>
+            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>Rastreio Real-Time</h3>
+            <p style={{ fontSize: 13, color: '#666', lineHeight: 1.55, margin: 0 }}>Brasil em 15 dias, Europa em 6. Acompanhe no app.</p>
           </div>
 
-          {/* 6 — Comunidade — wide dark */}
-          <div style={{
-            gridColumn: 'span 8', borderRadius: 28, padding: 40,
-            background: '#0A0A1A',
-            display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 32,
-            position: 'relative', overflow: 'hidden',
-          }}>
+          {/* 6 — Comunidade */}
+          <div className="b6 bcard-dark" style={{ background: '#0A0A1A', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 28 }}>
             <div style={{ position: 'absolute', bottom: -60, left: -40, width: 180, height: 180, borderRadius: '50%', background: B, opacity: 0.15, filter: 'blur(60px)' }} />
-            <div style={{ flex: 1, minWidth: 220 }}>
-              <div style={{ width: 48, height: 48, borderRadius: 14, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <div style={{ flex: 1, minWidth: 180 }}>
+              <div style={{ width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
               </div>
-              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 22, fontWeight: 800, color: '#fff', margin: '0 0 8px' }}>Comunidade Exclusiva</h3>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, margin: 0, maxWidth: 360 }}>
-                A maior rede de importadores do Brasil. Tire dúvidas, encontre parceiros e compartilhe fornecedores.
-              </p>
+              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#fff', margin: '0 0 6px' }}>Comunidade Exclusiva</h3>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, margin: 0 }}>A maior rede de importadores do Brasil.</p>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, flexShrink: 0 }}>
               <div style={{ display: 'flex' }}>
                 {['#4C35E8','#7C5CF6','#A88BF5','#C4AEF8','#DDD5FD'].map((c, i) => (
-                  <div key={c} style={{ width: 40, height: 40, borderRadius: '50%', background: c, border: '2.5px solid #0A0A1A', marginLeft: i > 0 ? -12 : 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, color: '#fff' }}>
+                  <div key={c} style={{ width: 36, height: 36, borderRadius: '50%', background: c, border: '2px solid #0A0A1A', marginLeft: i > 0 ? -10 : 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 800, color: '#fff' }}>
                     {['A','B','C','D','E'][i]}
                   </div>
                 ))}
@@ -387,20 +378,14 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* 7 — Aulas */}
-          <div style={{
-            gridColumn: 'span 4', borderRadius: 28, padding: 36,
-            border: '1.5px solid #EEEEF2', background: '#fff',
-            display: 'flex', flexDirection: 'column',
-          }}>
-            <div style={{ width: 48, height: 48, borderRadius: 14, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="b7 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
+            <div style={{ width: 44, height: 44, borderRadius: 13, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
               </svg>
             </div>
-            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>Aulas Exclusivas</h3>
-            <p style={{ fontSize: 14, color: '#666', lineHeight: 1.6, margin: 0 }}>
-              Do zero ao avançado. Escolha fornecedores, negocie preços, calcule impostos e monte seu negócio.
-            </p>
+            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>Aulas Exclusivas</h3>
+            <p style={{ fontSize: 13, color: '#666', lineHeight: 1.55, margin: 0 }}>Do zero ao avançado. Aprenda a importar e montar seu negócio.</p>
           </div>
         </div>
       </section>
