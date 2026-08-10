@@ -79,6 +79,8 @@ function FaqCard({ q, a }: { q: string; a: string }) {
 export const NovaPage: React.FC = () => {
   const [checkout, setCheckout] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [selectedLang, setSelectedLang] = useState(LANGS[0]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -86,11 +88,29 @@ export const NovaPage: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!langOpen) return;
+    const close = () => setLangOpen(false);
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  }, [langOpen]);
+
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: '#fff', color: '#0a0a0a', overflowX: 'hidden' }}>
       <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-      {/* ═══════════════ FLOATING NAV ════════════════ */}
+      <style>{`
+        .nav-inner {
+          display: grid;
+          grid-template-columns: 1fr auto 1fr;
+          align-items: center;
+        }
+        .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+        .nav-lang { display: flex; }
+        @media (max-width: 639px) {
+          .nav-inner { grid-template-columns: auto 1fr auto; }
+          .nav-lang { display: none; }
+        }
+      `}</style>
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: '14px 16px' }}>
         <nav style={{
           background: 'rgba(255,255,255,0.92)',
@@ -101,29 +121,109 @@ export const NovaPage: React.FC = () => {
           maxWidth: 1080,
           margin: '0 auto',
           padding: '10px 20px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
           transition: 'box-shadow 0.3s',
         }}>
-          <img src="https://i.postimg.cc/t4CHMJzj/brancalogo.png" alt="Connect Academy" style={{ height: 28, filter: 'brightness(0)', display: 'block' }} />
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <a href="https://app.connectacademy.com.br" style={{ fontSize: 13, fontWeight: 600, color: '#555', textDecoration: 'none' }}>
-              Entrar
-            </a>
-            <button
-              onClick={() => setCheckout(PLANS[1])}
-              style={{
-                height: 38, padding: '0 20px', borderRadius: 12,
-                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
-                color: '#fff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
-                boxShadow: `0 4px 16px ${B}40`, transition: 'opacity 0.2s',
-              }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-              onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-            >
-              Criar conta grátis
-            </button>
+          <div className="nav-inner">
+
+            {/* LEFT — Language selector */}
+            <div className="nav-lang" style={{ position: 'relative' }}>
+              <button
+                onClick={e => { e.stopPropagation(); setLangOpen(v => !v); }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
+                  background: langOpen ? '#F3F4F6' : 'transparent',
+                  border: '1px solid #E5E7EB', borderRadius: 10,
+                  padding: '6px 10px', cursor: 'pointer',
+                  fontSize: 13, fontWeight: 600, color: '#444',
+                  transition: 'background 0.15s',
+                }}
+                onMouseEnter={e => { if (!langOpen) e.currentTarget.style.background = '#F9FAFB'; }}
+                onMouseLeave={e => { if (!langOpen) e.currentTarget.style.background = 'transparent'; }}
+              >
+                <span style={{ fontSize: 18, lineHeight: 1 }}>{selectedLang.flag}</span>
+                <span>{selectedLang.label}</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                  style={{ transform: langOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+                  <path d="M2 4l4 4 4-4" stroke="#888" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              {/* Dropdown */}
+              {langOpen && (
+                <div
+                  onClick={e => e.stopPropagation()}
+                  style={{
+                    position: 'absolute', top: 'calc(100% + 8px)', left: 0,
+                    background: '#fff', border: '1px solid #E5E7EB',
+                    borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
+                    padding: '6px', minWidth: 180, zIndex: 200,
+                  }}
+                >
+                  {LANGS.map(lang => (
+                    <button
+                      key={lang.code}
+                      onClick={() => { setSelectedLang(lang); setLangOpen(false); }}
+                      style={{
+                        display: 'flex', alignItems: 'center', gap: 10,
+                        width: '100%', padding: '8px 12px', borderRadius: 9,
+                        border: 'none', cursor: 'pointer', textAlign: 'left',
+                        background: selectedLang.code === lang.code ? '#F0EEFF' : 'transparent',
+                        color: selectedLang.code === lang.code ? B : '#333',
+                        fontWeight: selectedLang.code === lang.code ? 700 : 500,
+                        fontSize: 13, transition: 'background 0.12s',
+                      }}
+                      onMouseEnter={e => { if (selectedLang.code !== lang.code) e.currentTarget.style.background = '#F9FAFB'; }}
+                      onMouseLeave={e => { if (selectedLang.code !== lang.code) e.currentTarget.style.background = 'transparent'; }}
+                    >
+                      <span style={{ fontSize: 20 }}>{lang.flag}</span>
+                      <span>{lang.label}</span>
+                      {selectedLang.code === lang.code && (
+                        <svg style={{ marginLeft: 'auto' }} width="14" height="14" viewBox="0 0 14 14" fill="none">
+                          <path d="M2 7l3.5 3.5L12 3" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* CENTER — Logo azul */}
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <img
+                src="https://i.postimg.cc/t4CHMJzj/brancalogo.png"
+                alt="Connect Academy"
+                style={{
+                  height: 28,
+                  display: 'block',
+                  filter: 'brightness(0) saturate(100%) invert(28%) sepia(65%) saturate(3000%) hue-rotate(236deg) brightness(97%) contrast(100%)',
+                }}
+              />
+            </div>
+
+            {/* RIGHT — Entrar + Criar conta */}
+            <div className="nav-right">
+              <a
+                href="https://app.connectacademy.com.br"
+                style={{ fontSize: 13, fontWeight: 600, color: '#555', textDecoration: 'none', whiteSpace: 'nowrap' }}
+              >
+                Entrar
+              </a>
+              <button
+                onClick={() => setCheckout(PLANS[1])}
+                style={{
+                  height: 38, padding: '0 20px', borderRadius: 12,
+                  background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
+                  color: '#fff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer',
+                  boxShadow: `0 4px 16px ${B}40`, transition: 'opacity 0.2s', whiteSpace: 'nowrap',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+              >
+                Criar conta grátis
+              </button>
+            </div>
+
           </div>
         </nav>
       </div>
