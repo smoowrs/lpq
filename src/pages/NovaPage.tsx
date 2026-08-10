@@ -137,13 +137,22 @@ export const NovaPage: React.FC = () => {
         justifyContent: 'flex-end',
         overflow: 'hidden',
       }}>
-        {/* Photo background */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          backgroundImage: 'url(/hero-bg.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center 30%',
-        }} />
+        {/* Video background — loop silencioso */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+          }}
+        >
+          <source src="https://res.cloudinary.com/ce70kcrk/video/upload/v1786392349/magnific_preciso-que-anime-essa-im_ovm6Fx3829.mp4" type="video/mp4" />
+        </video>
+
         {/* Gradient overlay — dark at top, heavy at bottom for text readability */}
         <div style={{
           position: 'absolute', inset: 0,
