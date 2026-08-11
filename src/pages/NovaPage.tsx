@@ -464,7 +464,7 @@ export const NovaPage: React.FC = () => {
                 objectFit: 'cover', zIndex: 0,
               }}
             >
-              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/magnific_anime-somente-os-tres-rob_nVTr7erYQD.mp4" type="video/mp4" />
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/completo.mp4" type="video/mp4" />
             </video>
             {/* Overlay escuro para legibilidade */}
             <div style={{
