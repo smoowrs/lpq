@@ -484,12 +484,14 @@ export const NovaPage: React.FC = () => {
           {/* Video */}
           <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000' }}>
             <iframe
-              src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=0b95370e-45d5-40d2-9c30-5c152ac60f49"
+              src="https://player.cloudinary.com/embed/?cloud_name=ce70kcrk&public_id=Portugiss"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
+              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
               allowFullScreen
               loading="lazy"
             />
           </div>
+
         </div>
       </section>
 
