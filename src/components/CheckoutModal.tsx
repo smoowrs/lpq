@@ -580,6 +580,9 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                 <div className="relative">
                     <input
                         name="card_number"
+                        type="tel"
+                        inputMode="numeric"
+                        pattern="[0-9 ]*"
                         placeholder="1234 1234 1234 1234"
                         required
                         className={`${inputStyle} pr-24`}
@@ -621,6 +624,9 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                     <label className={labelStyle}>CPF DO TITULAR</label>
                     <input
                         name="cpf"
+                        type="tel"
+                        inputMode="numeric"
+                        pattern="[0-9]*"
                         placeholder="000.000.000-00"
                         required
                         className={inputStyle}
@@ -637,13 +643,15 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                     <label className={labelStyle}>DATA DE VALIDADE</label>
                     <input
                         name="card_expiry"
+                        type="tel"
+                        inputMode="numeric"
+                        pattern="[0-9/]*"
                         placeholder="MM/AA"
                         required
                         className={inputStyle}
                         value={formData.card_expiry}
                         onChange={handleInputChange}
                         maxLength={5}
-                        inputMode="numeric"
                     />
                 </div>
                 <div>
@@ -651,6 +659,9 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                     <div className="relative">
                         <input
                             name="card_cvv"
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
                             placeholder="123"
                             required
                             className={`${inputStyle} pr-10`}
