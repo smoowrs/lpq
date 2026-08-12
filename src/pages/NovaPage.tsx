@@ -654,7 +654,10 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* 7 — Aulas */}
-          <div className="b7 bcard-dark" style={{ background: '#0A0A1A', backgroundImage: 'url(/aulas-bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+          <div className="b7 bcard-dark" style={{ background: '#0A0A1A' }}>
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/aulas.mp4" type="video/mp4" />
+            </video>
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.72) 0%, rgba(10,10,30,0.60) 100%)', borderRadius: 'inherit' }} />
             <div style={{ position: 'absolute', top: -40, right: -40, width: 140, height: 140, borderRadius: '50%', background: B, opacity: 0.15, filter: 'blur(50px)' }} />
             <div style={{ position: 'relative', zIndex: 1, width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
@@ -936,7 +939,12 @@ export const NovaPage: React.FC = () => {
               © 2026 Connect Academy Ltda.
             </p>
             <p style={{ fontSize: 11, color: '#bbb', margin: 0 }}>
-              Todos os direitos reservados · CNPJ: 44.292.841/0001-95
+              Todos os direitos reservados ·{' '}
+              <a href="https://cnpj.biz/44292841000195" target="_blank" rel="noopener noreferrer"
+                style={{ color: '#bbb', textDecoration: 'underline', textUnderlineOffset: 3, cursor: 'pointer' }}
+                onMouseEnter={e => (e.currentTarget.style.color = B)}
+                onMouseLeave={e => (e.currentTarget.style.color = '#bbb')}
+              >CNPJ: 44.292.841/0001-95</a>
             </p>
           </div>
 
