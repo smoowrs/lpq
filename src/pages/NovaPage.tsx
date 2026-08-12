@@ -578,11 +578,12 @@ export const NovaPage: React.FC = () => {
           {/* 2 — +30M Produtos */}
           <div className="b2 bcard-dark" style={{ background: '#0a0a0a', minHeight: 280, justifyContent: 'space-between' }}>
             <iframe
-              src="https://player.cloudinary.com/embed/?cloud_name=ce70kcrk&public_id=hf_20260812_061148_8b410879-709f-462d-8c5e-7fb743bc9351"
+              src="https://player.cloudinary.com/embed/?cloud_name=ce70kcrk&public_id=hf_20260812_061148_8b410879-709f-462d-8c5e-7fb743bc9351&loop=true&autoplay=true&muted=true&controls=false"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none', zIndex: 0 }}
               allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
               allowFullScreen
             />
+
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(5,5,15,0.70) 0%, rgba(5,5,15,0.55) 100%)' }} />
             <div style={{ position: 'relative', zIndex: 2 }}>
               <div style={{ width: 48, height: 48, borderRadius: 14, background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
