@@ -643,14 +643,18 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* 6 — Rastreio */}
-          <div className="b6 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
-            <div style={{ width: 44, height: 44, borderRadius: 13, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="b6 bcard-dark" style={{ background: '#0A0A1A' }}>
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_105151_3105962d-701e-4c55-ab8f-a8c47fe3ddc0.mp4" type="video/mp4" />
+            </video>
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.70) 0%, rgba(10,10,30,0.55) 100%)', borderRadius: 'inherit' }} />
+            <div style={{ position: 'relative', zIndex: 1, width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="3 11 22 2 13 21 11 13 3 11"/>
               </svg>
             </div>
-            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>Rastreio Real-Time</h3>
-            <p style={{ fontSize: 13, color: '#666', lineHeight: 1.55, margin: 0 }}>Brasil em 15 dias, Europa em 6. Acompanhe no app.</p>
+            <h3 style={{ position: 'relative', zIndex: 1, fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#fff', margin: '0 0 8px' }}>Rastreio Real-Time</h3>
+            <p style={{ position: 'relative', zIndex: 1, fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.55, margin: 0 }}>Brasil em 15 dias, Europa em 6. Acompanhe no app.</p>
           </div>
 
           {/* 7 — Aulas */}
