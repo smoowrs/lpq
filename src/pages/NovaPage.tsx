@@ -843,21 +843,22 @@ export const NovaPage: React.FC = () => {
       </section>
 
       {/* ═══════════════ FINAL CTA ═══════════════════ */}
-      <section style={{ padding: '24px 0' }}>
+      <section style={{ padding: 0, margin: 0 }}>
         <a
           href="https://app.connectacademy.com.br/cadastro"
           style={{ display: 'block', width: '100%', cursor: 'pointer', textDecoration: 'none' }}
         >
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
+          <div style={{ position: 'relative', width: '100%', height: 'clamp(400px, 65vw, 720px)', overflow: 'hidden' }}>
             <video
               autoPlay muted loop playsInline
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', border: 'none', display: 'block', pointerEvents: 'none' }}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block', pointerEvents: 'none' }}
             >
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_072553_ac511a23-5d6a-422e-b450-2f0782b69755.mp4" type="video/mp4" />
             </video>
           </div>
         </a>
       </section>
+
 
 
 
