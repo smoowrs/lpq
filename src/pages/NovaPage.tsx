@@ -22,7 +22,7 @@ const PLANS = [
     id: 'starter', label: 'STARTER', emoji: '🌎',
     period: '3 MESES DE ACESSO', periodLabel: 'trimestre',
     priceOriginal: 'R$ 97,00', price: 'R$ 67,90', installment: 'ou 12x de R$ 6,57',
-    cta: 'Começar', ctaHref: 'https://app.connectacademy.com.br/cadastro',
+    cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: false, free: false,
     desc: 'Acesso essencial para começar suas importações.',
     included: [
@@ -52,7 +52,7 @@ const PLANS = [
     id: 'pro', label: 'PRO', emoji: '🌎',
     period: '1 ANO DE ACESSO', periodLabel: 'ano',
     priceOriginal: 'R$ 197,00', price: 'R$ 137,90', installment: 'ou 12x de R$ 12,78',
-    cta: 'Começar', ctaHref: 'https://app.connectacademy.com.br/cadastro',
+    cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: true, free: false,
     desc: 'O plano intermediário para quem busca variedade e ferramentas de IA.',
     included: [
@@ -81,7 +81,7 @@ const PLANS = [
     id: 'elite', label: 'ELITE', emoji: '🏆',
     period: 'ACESSO PARA SEMPRE', periodLabel: 'vitalício',
     priceOriginal: 'R$ 380,00', price: 'R$ 266,00', installment: 'ou 12x de R$ 25,27',
-    cta: 'Começar', ctaHref: 'https://app.connectacademy.com.br/cadastro',
+    cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: false, free: false,
     desc: 'Acesso total e suporte prioritário para escala máxima.',
     included: [
@@ -762,16 +762,9 @@ export const NovaPage: React.FC = () => {
                 </a>
                 {!plan.free && (
                   <>
-                    <p style={{ fontSize: 11, color: plan.highlight ? 'rgba(255,255,255,0.3)' : '#bbb', textAlign: 'center', margin: '0 0 12px' }}>Cancele quando quiser.</p>
-                    <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginBottom: 24, flexWrap: 'wrap' }}>
-                      {['VISA', 'MC', 'GPay', 'Apple Pay', 'PIX'].map(pm => (
-                        <span key={pm} style={{
-                          fontSize: 10, fontWeight: 700, padding: '3px 7px', borderRadius: 5,
-                          background: plan.highlight ? 'rgba(255,255,255,0.08)' : '#F3F4F6',
-                          color: plan.highlight ? 'rgba(255,255,255,0.4)' : '#888',
-                          letterSpacing: '0.03em',
-                        }}>{pm}</span>
-                      ))}
+                    <p style={{ fontSize: 11, color: plan.highlight ? 'rgba(255,255,255,0.3)' : '#bbb', textAlign: 'center', margin: '0 0 12px' }}>Pague uma única vez, sem recorrências mensais.</p>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24 }}>
+                      <img src="/logos-cartao.png" alt="Formas de pagamento" style={{ height: 28, objectFit: 'contain', opacity: plan.highlight ? 0.7 : 1 }} />
                     </div>
                   </>
                 )}
