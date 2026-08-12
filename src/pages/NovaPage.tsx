@@ -869,10 +869,10 @@ export const NovaPage: React.FC = () => {
           {/* Top row — logo esquerda + links direita */}
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: '24px 40px', marginBottom: 32 }}>
 
-            {/* Logo + tagline — escorado à borda esquerda */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginLeft: 'calc(-20px + 0px)' }}>
+            {/* Logo + tagline */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block' }} />
-              <p style={{ fontSize: 12, color: '#999', margin: 0, maxWidth: 220, lineHeight: 1.55 }}>
+              <p style={{ fontSize: 12, color: '#999', margin: 0, maxWidth: 220, lineHeight: 1.55, paddingLeft: 2 }}>
                 A plataforma completa para importar da China.
               </p>
             </div>
