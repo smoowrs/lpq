@@ -482,7 +482,7 @@ export const NovaPage: React.FC = () => {
             </div>
           </div>
           {/* Video */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000' }}>
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3' }}>
             <iframe
               src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=0b95370e-45d5-40d2-9c30-5c152ac60f49"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
@@ -848,10 +848,10 @@ export const NovaPage: React.FC = () => {
           href="https://app.connectacademy.com.br/cadastro"
           style={{ display: 'block', width: '100%', cursor: 'pointer', textDecoration: 'none' }}
         >
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', background: '#000' }}>
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3' }}>
             <video
               autoPlay muted loop playsInline
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain', display: 'block', pointerEvents: 'none' }}
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
             >
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_075251_0b1de3a0-944f-4b4e-b869-468c5a483634.mp4" type="video/mp4" />
             </video>
