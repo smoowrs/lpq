@@ -264,6 +264,47 @@ export const NovaPage: React.FC = () => {
       .catch(() => {/* keep default BR */});
   }, []);
 
+  // Força autoplay em todos os videos — iOS Safari exige .play() programático
+  useEffect(() => {
+    const tryPlay = (video: HTMLVideoElement) => {
+      video.muted = true;
+      video.playsInline = true;
+      const p = video.play();
+      if (p !== undefined) {
+        p.catch(() => {
+          // tenta de novo após 500ms (rede lenta ou bloqueio temporário)
+          setTimeout(() => { video.muted = true; video.play().catch(() => {}); }, 500);
+        });
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          const vid = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            tryPlay(vid);
+          } else {
+            vid.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    // pequeno delay para garantir que os elementos do DOM já foram montados
+    const timer = setTimeout(() => {
+      const videos = document.querySelectorAll<HTMLVideoElement>('video');
+      videos.forEach(vid => {
+        vid.muted = true;
+        tryPlay(vid);        // tenta já na carga inicial
+        observer.observe(vid);
+      });
+    }, 100);
+
+    return () => { clearTimeout(timer); observer.disconnect(); };
+  }, []);
+
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: '#fff', color: '#0a0a0a', overflowX: 'hidden' }}>
       <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -434,7 +475,7 @@ export const NovaPage: React.FC = () => {
         overflow: 'hidden',
       }}>
         {/* Video background — loop silencioso */}
-        <video
+        <video preload="auto"
           autoPlay
           muted
           loop
@@ -646,7 +687,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 1 — Rede Social */}
           <div className="b1 bcard-dark" style={{ background: '#0A0A1A', minHeight: 280, overflow: 'hidden' }}>
-            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/app.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(10,10,26,0.78) 0%, rgba(10,10,26,0.55) 100%)' }} />
@@ -672,7 +713,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 2 — +30M Produtos */}
           <div className="b2 bcard-dark" style={{ background: '#0a0a0a', minHeight: 280, justifyContent: 'space-between', overflow: 'hidden' }}>
-            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_061148_8b410879-709f-462d-8c5e-7fb743bc9351.mp4" type="video/mp4" />
             </video>
 
@@ -696,7 +737,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 3 — Minerador IA */}
           <div className="b3 bcard-dark" style={{ background: '#0A0A1A', overflow: 'hidden' }}>
-            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/completo.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(145deg, rgba(10,10,26,0.72) 0%, rgba(18,16,58,0.65) 100%)' }} />
@@ -739,7 +780,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 6 — Rastreio */}
           <div className="b6 bcard-dark" style={{ background: '#0A0A1A' }}>
-            <video autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_105151_3105962d-701e-4c55-ab8f-a8c47fe3ddc0.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.70) 0%, rgba(10,10,30,0.55) 100%)', borderRadius: 'inherit' }} />
@@ -754,7 +795,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 7 — Aulas */}
           <div className="b7 bcard-dark" style={{ background: '#0A0A1A' }}>
-            <video autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/aulas.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.72) 0%, rgba(10,10,30,0.60) 100%)', borderRadius: 'inherit' }} />
