@@ -748,25 +748,47 @@ export const NovaPage: React.FC = () => {
                     <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 32, fontWeight: 800, color: plan.highlight ? '#fff' : '#0a0a0a', margin: 0 }}>Grátis</p>
                   </div>
                 )}
-                <a
-                  href={plan.ctaHref}
-                  style={{
-                    display: 'block', textAlign: 'center',
-                    width: '100%', height: 52, lineHeight: '52px',
-                    borderRadius: 16,
-                    background: plan.highlight ? '#fff' : `linear-gradient(135deg, ${B}, ${B2})`,
-                    color: plan.highlight ? '#0a0a0a' : '#fff',
-                    fontWeight: 700, fontSize: 15,
-                    textDecoration: 'none',
-                    boxShadow: plan.highlight ? 'none' : `0 8px 24px ${B}40`,
-                    marginBottom: 10,
-                    transition: 'opacity 0.15s, transform 0.15s',
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.opacity = '0.88'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-                  onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'none'; }}
-                >
-                  {plan.cta}
-                </a>
+                {plan.free ? (
+                  <a
+                    href={plan.ctaHref}
+                    style={{
+                      display: 'block', textAlign: 'center',
+                      width: '100%', height: 52, lineHeight: '52px',
+                      borderRadius: 16,
+                      background: `linear-gradient(135deg, ${B}, ${B2})`,
+                      color: '#fff',
+                      fontWeight: 700, fontSize: 15,
+                      textDecoration: 'none',
+                      boxShadow: `0 8px 24px ${B}40`,
+                      marginBottom: 10,
+                      transition: 'opacity 0.15s, transform 0.15s',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.opacity = '0.88'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'none'; }}
+                  >
+                    {plan.cta}
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => setCheckout(plan)}
+                    style={{
+                      display: 'block', textAlign: 'center',
+                      width: '100%', height: 52, lineHeight: '52px',
+                      borderRadius: 16,
+                      background: plan.highlight ? '#fff' : `linear-gradient(135deg, ${B}, ${B2})`,
+                      color: plan.highlight ? '#0a0a0a' : '#fff',
+                      fontWeight: 700, fontSize: 15,
+                      border: 'none', cursor: 'pointer',
+                      boxShadow: plan.highlight ? 'none' : `0 8px 24px ${B}40`,
+                      marginBottom: 10,
+                      transition: 'opacity 0.15s, transform 0.15s',
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.opacity = '0.88'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'none'; }}
+                  >
+                    {plan.cta}
+                  </button>
+                )}
                 {!plan.free && (
                   <>
                     <p style={{ fontSize: 11, color: plan.highlight ? 'rgba(255,255,255,0.3)' : '#bbb', textAlign: 'center', margin: '0 0 12px' }}>Pague uma única vez, sem recorrências mensais.</p>
