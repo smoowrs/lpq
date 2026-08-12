@@ -844,39 +844,21 @@ export const NovaPage: React.FC = () => {
 
       {/* ═══════════════ FINAL CTA ═══════════════════ */}
       <section style={{ padding: '96px 20px' }}>
-        <div style={{
-          maxWidth: 900, margin: '0 auto',
-          background: `linear-gradient(145deg, #0A0A1A 0%, #12103A 100%)`,
-          borderRadius: 36, padding: 'clamp(48px, 8vw, 80px) clamp(32px, 6vw, 80px)',
-          textAlign: 'center', position: 'relative', overflow: 'hidden',
-        }}>
-          <div style={{ position: 'absolute', top: -80, right: -60, width: 280, height: 280, borderRadius: '50%', background: B, opacity: 0.18, filter: 'blur(80px)' }} />
-          <div style={{ position: 'absolute', bottom: -80, left: -60, width: 240, height: 240, borderRadius: '50%', background: '#7C5CF6', opacity: 0.15, filter: 'blur(70px)' }} />
-          <div style={{ position: 'relative' }}>
-            <h2 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 'clamp(32px, 6vw, 60px)', fontWeight: 800, color: '#fff', margin: '0 0 16px', lineHeight: 1.05, letterSpacing: '-0.03em' }}>
-              Comece a importar hoje.
-            </h2>
-            <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.55)', maxWidth: 460, margin: '0 auto 40px', lineHeight: 1.6 }}>
-              +28.000 alunos já provaram. Importar da China pode ser simples, seguro e lucrativo.
-            </p>
-            <button
-              onClick={() => setCheckout(PLANS[1])}
-              style={{
-                height: 56, padding: '0 40px', borderRadius: 999,
-                background: '#fff', color: '#0a0a0a',
-                fontWeight: 700, fontSize: 16, border: 'none', cursor: 'pointer',
-                boxShadow: '0 8px 40px rgba(0,0,0,0.3)', transition: 'transform 0.15s, box-shadow 0.15s',
-                display: 'inline-flex', alignItems: 'center', gap: 8,
-              }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 14px 50px rgba(0,0,0,0.35)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 8px 40px rgba(0,0,0,0.3)'; }}
-            >
-              Criar conta grátis
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-            </button>
+        <a
+          href="https://app.connectacademy.com.br/cadastro"
+          style={{ display: 'block', maxWidth: 900, margin: '0 auto', borderRadius: 36, overflow: 'hidden', cursor: 'pointer', textDecoration: 'none' }}
+        >
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
+            <iframe
+              src="https://player.cloudinary.com/embed/?cloud_name=ce70kcrk&public_id=hf_20260812_072553_ac511a23-5d6a-422e-b450-2f0782b69755"
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none', display: 'block', pointerEvents: 'none' }}
+              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+              allowFullScreen
+            />
           </div>
-        </div>
+        </a>
       </section>
+
 
       {/* ═══════════════ FOOTER ══════════════════════ */}
       <footer style={{ background: '#FAFAFB', borderTop: '1px solid #F0F0F2', padding: '40px 20px 28px' }}>
