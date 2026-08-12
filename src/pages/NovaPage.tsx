@@ -420,7 +420,7 @@ export const NovaPage: React.FC = () => {
         .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
         .b1  { grid-column: span 7; }
         .b2  { grid-column: span 5; }
-        .b3  { grid-column: span 4; }
+        .b3  { grid-column: span 12; }
         .b4  { grid-column: span 4; }
         .b5  { grid-column: span 4; }
         .b6  { grid-column: span 8; }
@@ -431,7 +431,7 @@ export const NovaPage: React.FC = () => {
           .bento { grid-template-columns: repeat(2, 1fr); gap: 12px; }
           .b1  { grid-column: span 2; }
           .b2  { grid-column: span 2; }
-          .b3  { grid-column: span 1; }
+          .b3  { grid-column: span 2; }
           .b4  { grid-column: span 1; }
           .b5  { grid-column: span 2; }
           .b6  { grid-column: span 2; }
