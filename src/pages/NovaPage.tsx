@@ -9,25 +9,102 @@ const BL = '#EEF0FF';         // very light blue tint
 /* ─── Plans ─────────────────────────────────────────── */
 const PLANS = [
   {
-    id: 'starter', label: 'Starter', emoji: '🪙',
-    period: 'Trimestral', price: 'R$ 58,20', sub: '≈ R$ 19/mês',
-    cta: 'Começar',  highlight: false,
-    perks: ['3 meses de acesso', 'Minerador IA', '+30M produtos', 'Seguro de envio', 'Rastreio real-time', 'Comunidade'],
-    prices: { BR: { annual: '58.20' } }, region: 'BR',
+    id: 'experience', label: 'Experience', emoji: '💙',
+    period: '', periodLabel: '',
+    priceOriginal: '', price: '', installment: '',
+    cta: 'Criar conta grátis', ctaHref: 'https://app.connectacademy.com.br/cadastro',
+    highlight: false, free: true,
+    desc: 'Uma forma simples de conhecer a estrutura por dentro e entender se faz sentido para você antes de seguir para a experiência completa.',
+    included: [], excluded: [],
+    prices: { BR: { annual: '0' } }, region: 'BR',
   },
   {
-    id: 'pro', label: 'Pro', emoji: '💙',
-    period: 'Anual', price: 'R$ 118,20', sub: '≈ R$ 9,85/mês',
-    cta: 'Começar',  highlight: true,
-    perks: ['12 meses de acesso', 'Minerador IA', '+30M produtos', 'Seguro de envio', 'Rastreio real-time', 'Comunidade', 'Gerador de imagens IA'],
-    prices: { BR: { annual: '118.20' } }, region: 'BR',
+    id: 'starter', label: 'STARTER', emoji: '🌎',
+    period: '3 MESES DE ACESSO', periodLabel: 'trimestre',
+    priceOriginal: 'R$ 97,00', price: 'R$ 67,90', installment: 'ou 12x de R$ 6,57',
+    cta: 'COMPRAR AGORA', ctaHref: 'https://app.connectacademy.com.br/cadastro',
+    highlight: false, free: false,
+    desc: 'Acesso essencial para começar suas importações.',
+    included: [
+      'Acesso às fábricas diretas na China.',
+      'Roupas, Tênis, Relógios, Bonés, Óculos, Meias, Bolsas, Perfumes, Ferramentas, Pesca, Eletrônicos, Periféricos, Acessórios para celular, Iluminação, Casa e Cozinha, Decoração, Brinquedos, Papelaria, Pet, Beleza, Maquiagem, Automotivo, Esporte, Ciclismo, Fitness, Sex Shop, Joias, Jardinagem, Festa e Brindes. (Não inclui produtos Apple e nem eletrônicos)',
+      'Um painel com produtos atualizados',
+      'O Minerador (Inteligência artificial de buscas e perguntas).',
+      'Gerador de imagens 4K (3 créditos mensais).',
+      'Rastreio em tempo real de até 5 envios.',
+      'Módulos de aulas exclusivas.',
+      'Acesso à comunidade.',
+      'Sistema Indique e Ganhe.',
+    ],
+    excluded: [
+      'Acesso à Apple oficial na China, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global',
+      'Baixar imagens ilimitadas',
+      'Acesso aos marketplaces locais na China',
+      'Prioridade no suporte (Topo da lista)',
+      'Medalha de destaque exclusiva na comunidade',
+      'Alertas e oportunidades em primeira mão',
+      'Sorteios mensais e premiações',
+      'Grupo de Networking no WhatsApp',
+    ],
+    prices: { BR: { annual: '67.90' } }, region: 'BR',
   },
   {
-    id: 'elite', label: 'Elite', emoji: '🥇',
-    period: 'Vitalício', price: 'R$ 233,40', sub: 'Pague uma vez',
-    cta: 'Começar',  highlight: false,
-    perks: ['Acesso vitalício', 'Minerador IA', '+30M produtos', 'Seguro de envio', 'Rastreio real-time', 'Comunidade', 'Gerador de imagens IA', 'Suporte prioritário'],
-    prices: { BR: { annual: '233.40' } }, region: 'BR',
+    id: 'pro', label: 'PRO', emoji: '🌎',
+    period: '1 ANO DE ACESSO', periodLabel: 'ano',
+    priceOriginal: 'R$ 197,00', price: 'R$ 137,90', installment: 'ou 12x de R$ 12,78',
+    cta: 'COMPRAR AGORA', ctaHref: 'https://app.connectacademy.com.br/cadastro',
+    highlight: true, free: false,
+    desc: 'O plano intermediário para quem busca variedade e ferramentas de IA.',
+    included: [
+      'Acesso à fábricas exclusivas na China.',
+      'Roupas, Tênis, Relógios, Bonés, Óculos, Meias, Bolsas, Perfumes, Ferramentas, Pesca, Eletrônicos, Periféricos, Acessórios para celular, Iluminação, Casa e Cozinha, Decoração, Brinquedos, Papelaria, Pet, Beleza, Maquiagem, Automotivo, Esporte, Ciclismo, Fitness, Sex Shop, Joias, Jardinagem, Festa e Brindes. (Não inclui produtos Apple)',
+      'Gerador de imagens 4K (5 créditos mensais).',
+      'Inteligência Artificial o Minerador de buscas e perguntas.',
+      'Acesso aos marketplaces locais na China.',
+      'Rastreio em tempo real de até 10 envios.',
+      'Módulos de aulas exclusivas.',
+      'Acesso à comunidade.',
+      'Alertas e oportunidades em primeira mão.',
+      'Sorteios mensais e premiações.',
+      'Sistema Indique e Ganhe.',
+    ],
+    excluded: [
+      'Acesso à Apple oficial na China, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global',
+      'Baixar imagens ilimitadas',
+      'Prioridade no suporte (Topo da lista)',
+      'Medalha de destaque exclusiva na comunidade',
+      'Grupo de Networking no WhatsApp',
+    ],
+    prices: { BR: { annual: '137.90' } }, region: 'BR',
+  },
+  {
+    id: 'elite', label: 'ELITE', emoji: '🏆',
+    period: 'ACESSO PARA SEMPRE', periodLabel: 'vitalício',
+    priceOriginal: 'R$ 380,00', price: 'R$ 266,00', installment: 'ou 12x de R$ 25,27',
+    cta: 'COMPRAR AGORA', ctaHref: 'https://app.connectacademy.com.br/cadastro',
+    highlight: false, free: false,
+    desc: 'Acesso total e suporte prioritário para escala máxima.',
+    included: [
+      'Acesso à Apple oficial na China, produtos originais, lacrados, desbloqueados e com 1 ano de garantia global',
+      'Baixar imagens ilimitadas',
+      'Painel de fábricas e produtos exclusivos não divulgados publicamente.',
+      'Um painel com produtos atualizados',
+      'Acesso à origem de Eletrônicos, Gamer, Periféricos, Acessórios para Celular, Automotivo, Roupas, Tênis, Relógios, Perfumes, Bolsas, Joias, Óculos, Beleza, Maquiagem, Sex Shop, Fitness, Esporte, Ciclismo, Pesca, Casa e Cozinha, Decoração, Iluminação, Jardinagem, Ferramentas, Brinquedos, Papelaria, Pet, Festa e Brindes.',
+      'Gerador de imagens 4K (10 créditos mensais).',
+      'Inteligência Artificial o Minerador de buscas e perguntas.',
+      'Acesso aos marketplaces locais na China.',
+      'Sem limites de rastreios de envios.',
+      'Módulos de aulas exclusivas.',
+      'Acesso à comunidade.',
+      'Prioridade no suporte (Topo da lista).',
+      'Medalha de destaque na comunidade.',
+      'Alertas e oportunidades em primeira mão.',
+      'Sorteios mensais e premiações.',
+      'Sistema Indique e Ganhe.',
+      'Grupo de Networking no WhatsApp',
+    ],
+    excluded: [],
+    prices: { BR: { annual: '266.00' } }, region: 'BR',
   },
 ];
 
@@ -609,79 +686,120 @@ export const NovaPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ═══════════════ PRICING ═════════════════════ */}
-      <section id="precos" style={{ maxWidth: 1080, margin: '0 auto', padding: '96px 20px' }}>
-        <div style={{ textAlign: 'center', marginBottom: 56 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: B, margin: '0 0 12px' }}>Planos</p>
-          <h2 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 800, color: '#0a0a0a', margin: '0 0 12px', letterSpacing: '-0.02em' }}>Escolha seu plano</h2>
-          <p style={{ fontSize: 15, color: '#888', margin: 0, fontWeight: 500 }}>Acesso completo. Sem surpresas.</p>
-        </div>
+      {/* ═══════════════ PRICING ══════════════════════ */}
+      <section id="precos" style={{ background: '#0D0D14', padding: '96px 20px' }}>
+        <div style={{ maxWidth: 1240, margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: 56 }}>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: B, margin: '0 0 12px' }}>Planos de acesso</p>
+            <h2 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 'clamp(28px, 5vw, 52px)', fontWeight: 800, color: '#fff', margin: 0, letterSpacing: '-0.02em' }}>Escolha o seu plano</h2>
+          </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16, alignItems: 'stretch' }}>
-          {PLANS.map(plan => (
-            <div key={plan.id} style={{
-              borderRadius: 28,
-              background: plan.highlight ? '#0D0D14' : '#fff',
-              border: plan.highlight ? `1.5px solid rgba(76,53,232,0.3)` : '1.5px solid #EEEEF2',
-              padding: '36px 32px',
-              display: 'flex', flexDirection: 'column',
-              position: 'relative',
-              boxShadow: plan.highlight ? `0 24px 60px rgba(76,53,232,0.25)` : 'none',
-            }}>
-              {plan.highlight && (
-                <div style={{
-                  position: 'absolute', top: -14, left: '50%', transform: 'translateX(-50%)',
-                  background: '#F59E0B', color: '#78350F', fontSize: 11, fontWeight: 800,
-                  padding: '5px 16px', borderRadius: 999, whiteSpace: 'nowrap', letterSpacing: '0.05em', textTransform: 'uppercase',
-                }}>⭐ Mais Popular</div>
-              )}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, alignItems: 'start' }}>
+            {PLANS.map(plan => (
+              <div key={plan.id} style={{
+                borderRadius: 20,
+                background: plan.highlight ? '#1a1040' : '#181824',
+                border: plan.highlight ? `2px solid ${B}` : '1.5px solid rgba(255,255,255,0.08)',
+                padding: '28px 24px 24px',
+                display: 'flex', flexDirection: 'column',
+                position: 'relative',
+                boxShadow: plan.highlight ? `0 0 0 1px ${B}40, 0 24px 60px rgba(76,53,232,0.3)` : 'none',
+              }}>
 
-              {/* Period tag */}
-              <p style={{ fontSize: 11, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: plan.highlight ? 'rgba(255,255,255,0.4)' : '#aaa', margin: '0 0 6px' }}>{plan.period}</p>
+                {/* 30% OFF badge */}
+                {!plan.free && (
+                  <div style={{
+                    position: 'absolute', top: 16, right: 16,
+                    background: '#22c55e', color: '#fff', fontSize: 11, fontWeight: 800,
+                    padding: '3px 10px', borderRadius: 999, letterSpacing: '0.05em',
+                  }}>30% OFF</div>
+                )}
 
-              {/* Name */}
-              <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 22, fontWeight: 800, color: plan.highlight ? '#fff' : '#0a0a0a', margin: '0 0 24px' }}>{plan.emoji} {plan.label}</p>
+                {/* Period */}
+                {plan.period && (
+                  <p style={{ fontSize: 10, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.12em', color: B, margin: '0 0 10px' }}>{plan.period}</p>
+                )}
 
-              {/* Price */}
-              <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 42, fontWeight: 800, color: plan.highlight ? '#fff' : '#0a0a0a', margin: '0 0 4px', lineHeight: 1 }}>{plan.price}</p>
-              <p style={{ fontSize: 13, color: plan.highlight ? 'rgba(255,255,255,0.4)' : '#aaa', margin: '0 0 32px', fontWeight: 500 }}>{plan.sub}</p>
+                {/* Name */}
+                <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#fff', margin: '0 0 8px' }}>
+                  {plan.label} {plan.emoji}
+                </p>
 
-              {/* Perks */}
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', display: 'flex', flexDirection: 'column', gap: 14, flex: 1 }}>
-                {plan.perks.map(p => (
-                  <li key={p} style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                    <div style={{
-                      width: 22, height: 22, borderRadius: '50%', flexShrink: 0,
-                      background: plan.highlight ? 'rgba(255,255,255,0.12)' : '#F0F0F4',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}>
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                        <path d="M2.5 6l2.5 2.5 4.5-5" stroke={plan.highlight ? '#fff' : B} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <span style={{ fontSize: 14, color: plan.highlight ? 'rgba(255,255,255,0.8)' : '#444', fontWeight: 500 }}>{p}</span>
-                  </li>
-                ))}
-              </ul>
+                {/* Desc */}
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.55, margin: '0 0 20px' }}>{plan.desc}</p>
 
-              {/* CTA */}
-              <button
-                onClick={() => setCheckout(plan)}
-                style={{
-                  width: '100%', height: 52, borderRadius: 16,
-                  background: plan.highlight ? '#fff' : `linear-gradient(135deg, ${B}, ${B2})`,
-                  color: plan.highlight ? '#0a0a0a' : '#fff',
-                  fontWeight: 700, fontSize: 15, border: 'none', cursor: 'pointer',
-                  boxShadow: plan.highlight ? 'none' : `0 8px 24px ${B}40`,
-                  transition: 'opacity 0.15s, transform 0.15s',
-                }}
-                onMouseEnter={e => { e.currentTarget.style.opacity = '0.88'; e.currentTarget.style.transform = 'translateY(-1px)'; }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transform = 'none'; }}
-              >
-                {plan.cta}
-              </button>
-            </div>
-          ))}
+                {/* Price */}
+                {!plan.free ? (
+                  <div style={{ marginBottom: 20 }}>
+                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'line-through', margin: '0 0 2px' }}>{plan.priceOriginal}</p>
+                    <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 36, fontWeight: 800, color: '#fff', margin: '0 0 4px', lineHeight: 1 }}>
+                      <span style={{ fontSize: 16, fontWeight: 600, verticalAlign: 'super' }}>R$</span>
+                      {plan.price.replace('R$ ', '')}
+                      <span style={{ fontSize: 13, fontWeight: 500, color: 'rgba(255,255,255,0.5)' }}>/{plan.periodLabel}</span>
+                    </p>
+                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', margin: 0 }}>{plan.installment}</p>
+                  </div>
+                ) : (
+                  <div style={{ marginBottom: 20 }}>
+                    <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 28, fontWeight: 800, color: '#fff', margin: 0 }}>Grátis</p>
+                  </div>
+                )}
+
+                {/* CTA */}
+                <a
+                  href={plan.ctaHref}
+                  style={{
+                    display: 'block', textAlign: 'center',
+                    width: '100%', height: 46, lineHeight: '46px',
+                    borderRadius: 12,
+                    background: plan.free ? `linear-gradient(135deg, ${B}, ${B2})` : '#22c55e',
+                    color: '#fff',
+                    fontWeight: 800, fontSize: 13,
+                    textDecoration: 'none', letterSpacing: '0.04em',
+                    marginBottom: 8,
+                    transition: 'opacity 0.15s',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = '0.88')}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+                >
+                  {plan.cta}
+                </a>
+
+                {/* Cancel anytime */}
+                {!plan.free && (
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', textAlign: 'center', margin: '0 0 14px' }}>Cancele quando quiser.</p>
+                )}
+
+                {/* Payment icons */}
+                {!plan.free && (
+                  <div style={{ display: 'flex', gap: 6, justifyContent: 'center', marginBottom: 20, flexWrap: 'wrap' }}>
+                    {['VISA', 'MC', 'GPay', 'Apple Pay', 'PIX'].map(pm => (
+                      <span key={pm} style={{ fontSize: 10, fontWeight: 700, padding: '3px 7px', borderRadius: 5, background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.03em' }}>{pm}</span>
+                    ))}
+                  </div>
+                )}
+
+                {/* Feature list */}
+                {(plan.included.length > 0 || plan.excluded.length > 0) && (
+                  <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 20, display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
+                    {plan.included.map(item => (
+                      <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                        <span style={{ color: '#22c55e', fontWeight: 700, fontSize: 14, flexShrink: 0, marginTop: 1 }}>✓</span>
+                        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', lineHeight: 1.5 }}>{item}</span>
+                      </div>
+                    ))}
+                    {plan.excluded.map(item => (
+                      <div key={item} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                        <span style={{ color: '#ef4444', fontWeight: 700, fontSize: 14, flexShrink: 0, marginTop: 1 }}>✕</span>
+                        <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.22)', lineHeight: 1.5, textDecoration: 'line-through' }}>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
