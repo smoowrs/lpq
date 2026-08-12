@@ -869,9 +869,51 @@ export const NovaPage: React.FC = () => {
           {/* Logo + links verticais à esquerda */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16, marginBottom: 32 }}>
             <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block' }} />
+
+            {/* Social icons */}
+            <div style={{ display: 'flex', gap: 8 }}>
+              {[
+                {
+                  href: 'https://instagram.com/connnectacademy',
+                  label: 'Instagram',
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>,
+                },
+                {
+                  href: 'https://t.me/grupoconnect',
+                  label: 'Telegram',
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 5L2 12.5l7 1M21 5l-2.5 15L9 13.5M21 5L9 13.5m0 0v5.5l3.5-3"/></svg>,
+                },
+                {
+                  href: 'https://tiktok.com/@connnectacademy',
+                  label: 'TikTok',
+                  icon: <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>,
+                },
+              ].map(s => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.label}
+                  style={{
+                    width: 32, height: 32, borderRadius: '50%',
+                    border: '1px solid #D8D8DC',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: '#999', textDecoration: 'none',
+                    transition: 'color 0.15s, border-color 0.15s',
+                  }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = B; (e.currentTarget as HTMLElement).style.borderColor = B; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = '#999'; (e.currentTarget as HTMLElement).style.borderColor = '#D8D8DC'; }}
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
+
             <p style={{ fontSize: 12, color: '#999', margin: 0, maxWidth: 220, lineHeight: 1.55 }}>
               A plataforma completa para importar da China.
             </p>
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 4 }}>
               {[
                 { label: 'Suporte', href: 'mailto:suporte@connectacademy.com.br' },
