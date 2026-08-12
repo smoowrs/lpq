@@ -849,7 +849,14 @@ export const NovaPage: React.FC = () => {
           href="https://app.connectacademy.com.br/cadastro"
           style={{ display: 'block', width: '100%', cursor: 'pointer', textDecoration: 'none' }}
         >
-          <img src="/aulas-bg.jpg" alt="Connect Academy" style={{ display: 'block', width: '100%', height: 'auto' }} />
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3' }}>
+            <video
+              autoPlay muted loop playsInline
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
+            >
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_075251_0b1de3a0-944f-4b4e-b869-468c5a483634.mp4" type="video/mp4" />
+            </video>
+          </div>
         </a>
       </section>
 
@@ -864,9 +871,9 @@ export const NovaPage: React.FC = () => {
           {/* Top row — logo esquerda + links direita */}
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: '24px 40px', marginBottom: 32 }}>
 
-            {/* Logo + tagline — escorado à esquerda */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block', marginLeft: 0 }} />
+            {/* Logo + tagline — escorado à borda esquerda */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginLeft: 'calc(-20px + 0px)' }}>
+              <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block' }} />
               <p style={{ fontSize: 12, color: '#999', margin: 0, maxWidth: 220, lineHeight: 1.55 }}>
                 A plataforma completa para importar da China.
               </p>
@@ -875,7 +882,6 @@ export const NovaPage: React.FC = () => {
             {/* Links horizontais compactos */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px', alignItems: 'center' }}>
               {[
-                { label: 'Site principal', href: 'https://connectacademy.com.br' },
                 { label: 'Suporte', href: 'mailto:suporte@connectacademy.com.br' },
                 { label: 'Termos de Uso', href: 'https://connectacademy.com.br/termos-de-uso' },
                 { label: 'Política de Privacidade', href: 'https://connectacademy.com.br/politica-de-privacidade' },
