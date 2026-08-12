@@ -433,8 +433,8 @@ export const NovaPage: React.FC = () => {
           .b2  { grid-column: span 2; }
           .b3  { grid-column: span 2; }
           .b4  { grid-column: span 1; }
-          .b5  { grid-column: span 2; }
-          .b6  { grid-column: span 1; }
+          .b5  { grid-column: span 1; }
+          .b6  { grid-column: span 2; }
           .b7  { grid-column: span 2; }
           .bcard { padding: 24px; border-radius: 22px; }
           .bcard-dark { padding: 28px; border-radius: 22px; }
