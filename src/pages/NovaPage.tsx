@@ -369,7 +369,19 @@ export const NovaPage: React.FC = () => {
             border: '1px solid rgba(255,255,255,0.2)', borderRadius: 12,
             padding: '8px 16px', marginBottom: 28,
           }}>
-            <img src="/avatars-users.png" alt="Importadores" style={{ height: 28, width: 'auto', objectFit: 'contain', marginRight: 4 }} />
+            <div style={{ display: 'flex', marginRight: 6 }}>
+              {[0, 1, 2].map(i => (
+                <div key={i} style={{
+                  width: 28, height: 28, borderRadius: '50%',
+                  border: '2px solid rgba(255,255,255,0.5)',
+                  marginLeft: i > 0 ? -10 : 0,
+                  overflow: 'hidden', flexShrink: 0,
+                }}>
+                  <img src="/avatars-users.png" alt="Importador" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }} />
+                </div>
+              ))}
+            </div>
+
             <span style={{ fontSize: 13, fontWeight: 600, color: '#fff', letterSpacing: 0.1 }}>
               Usado por +28.000 importadores
             </span>
