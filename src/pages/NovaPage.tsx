@@ -112,7 +112,19 @@ export const NovaPage: React.FC = () => {
         .nav-inner {
           display: flex;
           align-items: center;
-          gap: 12px;
+          position: relative;
+        }
+        .nav-logo-center {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          pointer-events: none;
+        }
+        .nav-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          margin-left: auto;
         }
         .nav-entrar { display: inline; }
         .nav-lang-label { display: inline; }
@@ -121,6 +133,7 @@ export const NovaPage: React.FC = () => {
           .nav-entrar { display: none; }
           .nav-lang-label { display: none; }
           .nav-lang-chevron { display: none; }
+          .nav-logo-center { pointer-events: auto; }
         }
       `}</style>
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: '14px 16px' }}>
@@ -137,41 +150,7 @@ export const NovaPage: React.FC = () => {
         }}>
           <div className="nav-inner">
 
-            {/* Logo azul — canto esquerdo */}
-            <img
-              src="/logo-blue.png"
-              alt="Connect Academy"
-              style={{ height: 24, display: 'block', flexShrink: 0 }}
-            />
-
-            {/* Spacer */}
-            <div style={{ flex: 1 }} />
-
-            {/* Entrar */}
-            <a
-              href="https://app.connectacademy.com.br"
-              className="nav-entrar"
-              style={{ fontSize: 12, fontWeight: 600, color: '#555', textDecoration: 'none', whiteSpace: 'nowrap', padding: '0 4px' }}
-            >
-              Entrar
-            </a>
-
-            {/* Criar conta */}
-            <button
-              onClick={() => setCheckout(PLANS[1])}
-              style={{
-                height: 34, padding: '0 14px', borderRadius: 10,
-                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
-                color: '#fff', fontWeight: 700, fontSize: 12, border: 'none', cursor: 'pointer',
-                boxShadow: `0 3px 12px ${B}40`, transition: 'opacity 0.2s', whiteSpace: 'nowrap', flexShrink: 0,
-              }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
-              onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-            >
-              Teste grátis
-            </button>
-
-            {/* Language selector */}
+            {/* Bandeira — extrema esquerda */}
             <div style={{ position: 'relative', flexShrink: 0 }}>
               <button
                 onClick={e => { e.stopPropagation(); setLangOpen(v => !v); }}
@@ -199,7 +178,7 @@ export const NovaPage: React.FC = () => {
                 <div
                   onClick={e => e.stopPropagation()}
                   style={{
-                    position: 'absolute', top: 'calc(100% + 8px)', right: 0,
+                    position: 'absolute', top: 'calc(100% + 8px)', left: 0,
                     background: '#fff', border: '1px solid #E5E7EB',
                     borderRadius: 14, boxShadow: '0 8px 32px rgba(0,0,0,0.12)',
                     padding: '6px', minWidth: 180, zIndex: 200,
@@ -232,6 +211,39 @@ export const NovaPage: React.FC = () => {
                   ))}
                 </div>
               )}
+            </div>
+
+            {/* Logo — centro absoluto */}
+            <div className="nav-logo-center">
+              <img
+                src="/logo-blue.png"
+                alt="Connect Academy"
+                style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block' }}
+              />
+            </div>
+
+            {/* Direita — Entrar + Teste grátis */}
+            <div className="nav-right">
+              <a
+                href="https://app.connectacademy.com.br"
+                className="nav-entrar"
+                style={{ fontSize: 12, fontWeight: 600, color: '#555', textDecoration: 'none', whiteSpace: 'nowrap', padding: '0 4px' }}
+              >
+                Entrar
+              </a>
+              <button
+                onClick={() => setCheckout(PLANS[1])}
+                style={{
+                  height: 34, padding: '0 14px', borderRadius: 10,
+                  background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
+                  color: '#fff', fontWeight: 700, fontSize: 12, border: 'none', cursor: 'pointer',
+                  boxShadow: `0 3px 12px ${B}40`, transition: 'opacity 0.2s', whiteSpace: 'nowrap', flexShrink: 0,
+                }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
+                onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+              >
+                Teste grátis
+              </button>
             </div>
 
           </div>
@@ -317,13 +329,14 @@ export const NovaPage: React.FC = () => {
               onClick={() => setCheckout(PLANS[1])}
               style={{
                 height: 56, padding: '0 40px', borderRadius: 14,
-                background: '#fff', color: '#0a0a0a',
+                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
+                color: '#fff',
                 fontWeight: 700, fontSize: 16, border: 'none', cursor: 'pointer',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.2)', transition: 'transform 0.15s, box-shadow 0.15s',
+                boxShadow: `0 4px 24px ${B}50`, transition: 'transform 0.15s, box-shadow 0.15s',
                 minWidth: 200,
               }}
-              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 32px rgba(0,0,0,0.3)'; }}
-              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.2)'; }}
+              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 32px ${B}70`; }}
+              onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 4px 24px ${B}50`; }}
             >
               Começar agora
             </button>
