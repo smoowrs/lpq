@@ -22,7 +22,7 @@ const PLANS = [
   {
     id: 'starter', label: 'STARTER', emoji: '🌎',
     period: '3 MESES DE ACESSO', periodLabel: 'trimestre',
-    priceOriginal: 'R$ 97,00', price: 'R$ 67,90', installment: 'ou 12x de R$ 5,66 sem juros',
+    priceOriginal: 'R$ 97,00', price: 'R$ 67,90', installment: 'ou 12x de R$ 7,66',
     priceEU: '€ 16,00',
     cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: false, free: false,
@@ -53,7 +53,7 @@ const PLANS = [
   {
     id: 'pro', label: 'PRO', emoji: '🌎',
     period: '1 ANO DE ACESSO', periodLabel: 'ano',
-    priceOriginal: 'R$ 197,00', price: 'R$ 137,90', installment: 'ou 12x de R$ 11,49 sem juros',
+    priceOriginal: 'R$ 197,00', price: 'R$ 137,90', installment: 'ou 12x de R$ 14,91',
     priceEU: '€ 32,00',
     cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: true, free: false,
@@ -83,7 +83,7 @@ const PLANS = [
   {
     id: 'elite', label: 'ELITE', emoji: '🏆',
     period: 'ACESSO PARA SEMPRE', periodLabel: 'vitalício',
-    priceOriginal: 'R$ 380,00', price: 'R$ 266,00', installment: 'ou 12x de R$ 22,17 sem juros',
+    priceOriginal: 'R$ 380,00', price: 'R$ 266,00', installment: 'ou 12x de R$ 28,80',
     priceEU: '€ 64,00',
     cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: false, free: false,

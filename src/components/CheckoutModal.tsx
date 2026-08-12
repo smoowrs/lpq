@@ -16,49 +16,51 @@ import { trackGoogleAdsPurchase } from '../services/googleAds';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://bfyfzpjivesrbcxilmzd.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmeWZ6cGppdmVzcmJjeGlsbXpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2NTE1ODUsImV4cCI6MjA4NjIyNzU4NX0.4q3uB1PrFPbaH4lunmQ6wZU0jNABg2D0i45JRHXo_K0';
 
-// ── Tabela de parcelas — 30% off, sem juros (total = preço do plano) ──
+// ── Tabela de parcelas Appmax — 30% off + juros repassados ao comprador ──
+// Calculado com base nos multiplicadores originais escalados para os novos preços:
+// Starter: 67,90 (antes 58,20) | Pro: 137,90 (antes 118,20) | Elite: 266,00 (antes 233,40)
 const INSTALLMENTS: Record<string, { value: string; total: string }[]> = {
     starter: [
-        { value: '67,90',  total: '67,90'  }, // 1x
-        { value: '33,95',  total: '67,90'  }, // 2x
-        { value: '22,63',  total: '67,89'  }, // 3x
-        { value: '16,98',  total: '67,92'  }, // 4x
-        { value: '13,58',  total: '67,90'  }, // 5x
-        { value: '11,32',  total: '67,92'  }, // 6x
-        { value: '9,70',   total: '67,90'  }, // 7x
-        { value: '8,49',   total: '67,92'  }, // 8x
-        { value: '7,54',   total: '67,86'  }, // 9x
-        { value: '6,79',   total: '67,90'  }, // 10x
-        { value: '6,17',   total: '67,87'  }, // 11x
-        { value: '5,66',   total: '67,92'  }, // 12x
+        { value: '67,90',  total: '67,90'  }, // 1x  sem juros
+        { value: '35,95',  total: '71,90'  }, // 2x
+        { value: '24,61',  total: '73,82'  }, // 3x
+        { value: '18,98',  total: '75,90'  }, // 4x
+        { value: '15,57',  total: '77,84'  }, // 5x
+        { value: '13,32',  total: '79,91'  }, // 6x
+        { value: '11,70',  total: '81,88'  }, // 7x
+        { value: '10,49',  total: '83,90'  }, // 8x
+        { value: '9,55',   total: '85,98'  }, // 9x
+        { value: '8,80',   total: '88,00'  }, // 10x
+        { value: '8,18',   total: '89,94'  }, // 11x
+        { value: '7,66',   total: '91,88'  }, // 12x
     ],
     pro: [
-        { value: '137,90',  total: '137,90'  }, // 1x
-        { value: '68,95',   total: '137,90'  }, // 2x
-        { value: '45,97',   total: '137,91'  }, // 3x
-        { value: '34,48',   total: '137,92'  }, // 4x
-        { value: '27,58',   total: '137,90'  }, // 5x
-        { value: '22,98',   total: '137,88'  }, // 6x
-        { value: '19,70',   total: '137,90'  }, // 7x
-        { value: '17,24',   total: '137,92'  }, // 8x
-        { value: '15,32',   total: '137,88'  }, // 9x
-        { value: '13,79',   total: '137,90'  }, // 10x
-        { value: '12,54',   total: '137,94'  }, // 11x
-        { value: '11,49',   total: '137,88'  }, // 12x
+        { value: '137,90',  total: '137,90'  }, // 1x  sem juros
+        { value: '72,31',   total: '144,62'  }, // 2x
+        { value: '49,35',   total: '148,04'  }, // 3x
+        { value: '37,86',   total: '151,46'  }, // 4x
+        { value: '30,99',   total: '154,95'  }, // 5x
+        { value: '26,38',   total: '158,28'  }, // 6x
+        { value: '23,12',   total: '161,82'  }, // 7x
+        { value: '20,65',   total: '165,20'  }, // 8x
+        { value: '18,74',   total: '168,62'  }, // 9x
+        { value: '17,21',   total: '172,08'  }, // 10x
+        { value: '15,96',   total: '175,54'  }, // 11x
+        { value: '14,91',   total: '178,90'  }, // 12x
     ],
     elite: [
-        { value: '266,00',  total: '266,00'  }, // 1x
-        { value: '133,00',  total: '266,00'  }, // 2x
-        { value: '88,67',   total: '266,01'  }, // 3x
-        { value: '66,50',   total: '266,00'  }, // 4x
-        { value: '53,20',   total: '266,00'  }, // 5x
-        { value: '44,33',   total: '265,98'  }, // 6x
-        { value: '38,00',   total: '266,00'  }, // 7x
-        { value: '33,25',   total: '266,00'  }, // 8x
-        { value: '29,56',   total: '266,04'  }, // 9x
-        { value: '26,60',   total: '266,00'  }, // 10x
-        { value: '24,18',   total: '265,98'  }, // 11x
-        { value: '22,17',   total: '266,04'  }, // 12x
+        { value: '266,00',  total: '266,00'  }, // 1x  sem juros
+        { value: '139,50',  total: '279,00'  }, // 2x
+        { value: '95,22',   total: '285,67'  }, // 3x
+        { value: '73,08',   total: '292,32'  }, // 4x
+        { value: '59,79',   total: '298,97'  }, // 5x
+        { value: '50,92',   total: '305,51'  }, // 6x
+        { value: '44,60',   total: '312,23'  }, // 7x
+        { value: '39,84',   total: '318,71'  }, // 8x
+        { value: '36,15',   total: '325,31'  }, // 9x
+        { value: '33,20',   total: '332,04'  }, // 10x
+        { value: '30,80',   total: '338,79'  }, // 11x
+        { value: '28,80',   total: '345,64'  }, // 12x
     ],
 };
 
@@ -341,6 +343,11 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
             toast.error('Email inválido. Volte e preencha seus dados');
             return;
         }
+        // Calcula o valor correto a cobrar no PIX
+        const basePriceNum = parseFloat(
+            (plan.prices?.BR?.annual || plan.prices?.[plan.region]?.annual || '0').replace(',', '.')
+        );
+        const totalAmount = basePriceNum + (orderBump ? (orderBumpPrice || 0) : 0);
         setLoading(true);
         try {
             const { data: { session } } = await supabase.auth.getSession();
@@ -351,7 +358,17 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
                     'Authorization': session ? `Bearer ${session.access_token}` : `Bearer ${SUPABASE_ANON_KEY}`,
                     'apikey': SUPABASE_ANON_KEY,
                 },
-                body: JSON.stringify({ plan, cpf: cleanCpf, email: guestEmail, name: guestName, phone: guestPhone, tracking: getTrackingData(), orderBump: orderBump || false, orderBumpPrice: orderBump ? orderBumpPrice : 0 }),
+                body: JSON.stringify({
+                    plan,
+                    amount: totalAmount,
+                    cpf: cleanCpf,
+                    email: guestEmail,
+                    name: guestName,
+                    phone: guestPhone,
+                    tracking: getTrackingData(),
+                    orderBump: orderBump || false,
+                    orderBumpPrice: orderBump ? orderBumpPrice : 0,
+                }),
             });
             const data = await res.json();
             if (data?.error || data?.message?.toLowerCase().includes('error')) throw new Error(data.error || data.message);
@@ -423,7 +440,9 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
             <div>
                 <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">CPF do Titular</label>
                 <input
-                    type="text"
+                    type="tel"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     className="w-full h-14 bg-white border border-slate-200 rounded-xl px-4 text-base text-slate-900 outline-none focus:border-[#4D5BFF] transition-all font-medium placeholder:text-slate-300"
                     placeholder="000.000.000-00"
                     value={cpf}
