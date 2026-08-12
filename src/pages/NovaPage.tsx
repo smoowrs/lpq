@@ -850,7 +850,7 @@ export const NovaPage: React.FC = () => {
         >
           <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
             <iframe
-              src="https://player.cloudinary.com/embed/?cloud_name=ce70kcrk&public_id=hf_20260812_072553_ac511a23-5d6a-422e-b450-2f0782b69755"
+              src="https://player.cloudinary.com/embed/?cloud_name=ce70kcrk&public_id=hf_20260812_072553_ac511a23-5d6a-422e-b450-2f0782b69755&loop=true&autoplay=true&muted=true&controls=false"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none', display: 'block', pointerEvents: 'none' }}
               allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
               allowFullScreen
