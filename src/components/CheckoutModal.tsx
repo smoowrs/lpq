@@ -328,8 +328,19 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
     }, [pixData]);
 
     const handleGeneratePix = async () => {
-        if (!agreedToTerms) return;
-        if (!cpf.replace(/\D/g, '')) { toast.error('Informe seu CPF'); return; }
+        if (!agreedToTerms) {
+            toast.error('Aceite os termos para continuar');
+            return;
+        }
+        const cleanCpf = cpf.replace(/\D/g, '');
+        if (!cleanCpf || cleanCpf.length < 11) {
+            toast.error('Informe um CPF válido (11 dígitos)');
+            return;
+        }
+        if (!guestEmail || !guestEmail.includes('@')) {
+            toast.error('Email inválido. Volte e preencha seus dados');
+            return;
+        }
         setLoading(true);
         try {
             const { data: { session } } = await supabase.auth.getSession();
@@ -340,13 +351,14 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
                     'Authorization': session ? `Bearer ${session.access_token}` : `Bearer ${SUPABASE_ANON_KEY}`,
                     'apikey': SUPABASE_ANON_KEY,
                 },
-                body: JSON.stringify({ plan, cpf, email: guestEmail, name: guestName, phone: guestPhone, tracking: getTrackingData(), orderBump: orderBump || false, orderBumpPrice: orderBump ? orderBumpPrice : 0 }),
+                body: JSON.stringify({ plan, cpf: cleanCpf, email: guestEmail, name: guestName, phone: guestPhone, tracking: getTrackingData(), orderBump: orderBump || false, orderBumpPrice: orderBump ? orderBumpPrice : 0 }),
             });
             const data = await res.json();
-            if (data?.error) throw new Error(data.error);
+            if (data?.error || data?.message?.toLowerCase().includes('error')) throw new Error(data.error || data.message);
+            if (!data?.payload && !data?.qr_code) throw new Error('PIX não gerado. Tente novamente.');
             setPixData(data);
         } catch (err: any) {
-            toast.error(err.message);
+            toast.error(err?.message || 'Erro ao gerar PIX. Tente novamente.');
         } finally {
             setLoading(false);
         }
@@ -428,8 +440,8 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
             </label>
             <button
                 onClick={handleGeneratePix}
-                disabled={loading || !agreedToTerms}
-                className="w-full h-14 bg-[#4D5BFF] hover:bg-[#3D4AE5] text-white rounded-2xl font-bold text-base transition-all disabled:opacity-40 shadow-lg shadow-[#4D5BFF]/20"
+                disabled={loading}
+                className="w-full h-14 bg-[#4D5BFF] hover:bg-[#3D4AE5] text-white rounded-2xl font-bold text-base transition-all disabled:opacity-60 shadow-lg shadow-[#4D5BFF]/20"
             >
                 {loading ? 'Gerando...' : 'Gerar QR Code PIX'}
             </button>

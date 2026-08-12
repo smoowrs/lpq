@@ -881,7 +881,7 @@ export const NovaPage: React.FC = () => {
                   </a>
                 ) : (
                   <button
-                    onClick={() => setCheckout(plan)}
+                    onClick={() => setCheckout({ ...plan, region: selectedLang.region, prices: { ...plan.prices, [selectedLang.region]: plan.prices[selectedLang.region] || plan.prices['BR'] } })}
                     style={{
                       display: 'block', textAlign: 'center',
                       width: '100%', height: 52, lineHeight: '52px',
