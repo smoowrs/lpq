@@ -631,7 +631,7 @@ export const NovaPage: React.FC = () => {
             </div>
           </div>
           {/* Video */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3' }}>
+          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
             <iframe
               src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=0b95370e-45d5-40d2-9c30-5c152ac60f49"
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
