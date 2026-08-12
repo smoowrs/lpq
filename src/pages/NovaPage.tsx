@@ -654,15 +654,16 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* 7 — Aulas */}
-          <div className="b7 bcard-dark" style={{ background: '#0A0A1A' }}>
+          <div className="b7 bcard-dark" style={{ background: '#0A0A1A', backgroundImage: 'url(/aulas-bg.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.72) 0%, rgba(10,10,30,0.60) 100%)', borderRadius: 'inherit' }} />
             <div style={{ position: 'absolute', top: -40, right: -40, width: 140, height: 140, borderRadius: '50%', background: B, opacity: 0.15, filter: 'blur(50px)' }} />
-            <div style={{ width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+            <div style={{ position: 'relative', zIndex: 1, width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
               </svg>
             </div>
-            <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#fff', margin: '0 0 8px' }}>Aulas Exclusivas</h3>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.55, margin: 0 }}>Do zero ao avançado. Aprenda a importar e montar seu negócio.</p>
+            <h3 style={{ position: 'relative', zIndex: 1, fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#fff', margin: '0 0 8px' }}>Aulas Exclusivas</h3>
+            <p style={{ position: 'relative', zIndex: 1, fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.55, margin: 0 }}>Do zero ao avançado. Aprenda a importar e montar seu negócio.</p>
           </div>
         </div>
       </section>
@@ -848,14 +849,7 @@ export const NovaPage: React.FC = () => {
           href="https://app.connectacademy.com.br/cadastro"
           style={{ display: 'block', width: '100%', cursor: 'pointer', textDecoration: 'none' }}
         >
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3' }}>
-            <video
-              autoPlay muted loop playsInline
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', pointerEvents: 'none' }}
-            >
-              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_075251_0b1de3a0-944f-4b4e-b869-468c5a483634.mp4" type="video/mp4" />
-            </video>
-          </div>
+          <img src="/aulas-bg.jpg" alt="Connect Academy" style={{ display: 'block', width: '100%', height: 'auto' }} />
         </a>
       </section>
 
