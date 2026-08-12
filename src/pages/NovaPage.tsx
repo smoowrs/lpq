@@ -866,25 +866,21 @@ export const NovaPage: React.FC = () => {
       <footer style={{ background: '#FAFAFB', borderTop: '1px solid #F0F0F2', padding: '40px 20px 28px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
 
-          {/* Top row — logo esquerda + links direita */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: '24px 40px', marginBottom: 32 }}>
-
-            {/* Logo + tagline */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
-              <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block' }} />
-              <p style={{ fontSize: 12, color: '#999', margin: 0, maxWidth: 220, lineHeight: 1.55, paddingLeft: 2 }}>
-                A plataforma completa para importar da China.
-              </p>
-            </div>
-
-            {/* Links horizontais compactos */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px', alignItems: 'center' }}>
+          {/* Logo + links verticais à esquerda */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 16, marginBottom: 32 }}>
+            <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block' }} />
+            <p style={{ fontSize: 12, color: '#999', margin: 0, maxWidth: 220, lineHeight: 1.55 }}>
+              A plataforma completa para importar da China.
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 4 }}>
               {[
                 { label: 'Suporte', href: 'mailto:suporte@connectacademy.com.br' },
                 { label: 'Termos de Uso', href: 'https://connectacademy.com.br/termos-de-uso' },
                 { label: 'Política de Privacidade', href: 'https://connectacademy.com.br/politica-de-privacidade' },
+                { label: 'Teste grátis', href: 'https://app.connectacademy.com.br/cadastro' },
+                { label: 'Aplicativo', href: 'https://app.connectacademy.com.br' },
               ].map(l => (
-                <a key={l.label} href={l.href} style={{ fontSize: 13, color: '#666', textDecoration: 'none', fontWeight: 500 }}
+                <a key={l.label} href={l.href} style={{ fontSize: 13, color: '#666', textDecoration: 'none', fontWeight: 500, width: 'fit-content' }}
                   onMouseEnter={e => (e.currentTarget.style.color = B)}
                   onMouseLeave={e => (e.currentTarget.style.color = '#666')}
                 >{l.label}</a>
@@ -892,7 +888,7 @@ export const NovaPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Divider + copyright em 2 linhas */}
+          {/* Divider + copyright */}
           <div style={{ borderTop: '1px solid #EBEBED', paddingTop: 20, textAlign: 'center' }}>
             <p style={{ fontSize: 12, color: '#aaa', margin: '0 0 2px', fontWeight: 600 }}>
               © 2026 Connect Academy Ltda.
@@ -904,6 +900,7 @@ export const NovaPage: React.FC = () => {
 
         </div>
       </footer>
+
 
       {checkout && <CheckoutModal plan={checkout} onClose={() => { setCheckout(null); setTimeout(() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }), 50); }} onSuccess={() => setCheckout(null)} />}
 
