@@ -245,7 +245,8 @@ export const NovaPage: React.FC = () => {
 
             {/* Teste grátis */}
             <a
-              href="https://app.connectacademy.com.br/cadastro"
+              href="#precos"
+              onClick={e => { e.preventDefault(); document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }); }}
               style={{
                 display: 'inline-flex', alignItems: 'center',
                 height: 34, padding: '0 14px', borderRadius: 10,
@@ -368,16 +369,7 @@ export const NovaPage: React.FC = () => {
             border: '1px solid rgba(255,255,255,0.2)', borderRadius: 12,
             padding: '8px 16px', marginBottom: 28,
           }}>
-            <div style={{ display: 'flex', marginRight: 2 }}>
-              {['#4C35E8','#7C5CF6','#A88BF5'].map((c, i) => (
-                <div key={c} style={{
-                  width: 24, height: 24, borderRadius: '50%', background: c,
-                  border: '2px solid rgba(255,255,255,0.3)', marginLeft: i > 0 ? -8 : 0,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 9, fontWeight: 800, color: '#fff',
-                }}>{['A','B','C'][i]}</div>
-              ))}
-            </div>
+            <img src="/avatars-users.png" alt="Importadores" style={{ height: 28, width: 'auto', objectFit: 'contain', marginRight: 4 }} />
             <span style={{ fontSize: 13, fontWeight: 600, color: '#fff', letterSpacing: 0.1 }}>
               Usado por +28.000 importadores
             </span>
@@ -404,7 +396,7 @@ export const NovaPage: React.FC = () => {
           {/* CTAs */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
             <button
-              onClick={() => setCheckout(PLANS[1])}
+              onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
                 height: 56, padding: '0 40px', borderRadius: 14,
                 background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
@@ -562,7 +554,7 @@ export const NovaPage: React.FC = () => {
               </p>
             </div>
             <button
-              onClick={() => setCheckout(PLANS[1])}
+              onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}
               style={{ position: 'relative', zIndex: 2, display: 'inline-flex', alignItems: 'center', gap: 8, height: 40, padding: '0 18px', borderRadius: 12, background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`, color: '#fff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer', boxShadow: `0 4px 16px ${B}50`, marginTop: 24, width: 'fit-content' }}
             >
               Testar comunidade
