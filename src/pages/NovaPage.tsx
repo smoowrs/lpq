@@ -167,19 +167,21 @@ export const NovaPage: React.FC = () => {
             </a>
 
             {/* Teste grátis */}
-            <button
-              onClick={() => setCheckout(PLANS[1])}
+            <a
+              href="https://app.connectacademy.com.br/cadastro"
               style={{
+                display: 'inline-flex', alignItems: 'center',
                 height: 34, padding: '0 14px', borderRadius: 10,
                 background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
                 color: '#fff', fontWeight: 700, fontSize: 12, border: 'none', cursor: 'pointer',
                 boxShadow: `0 3px 12px ${B}40`, transition: 'opacity 0.2s', whiteSpace: 'nowrap', flexShrink: 0,
+                textDecoration: 'none',
               }}
               onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
               onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
             >
               Teste grátis
-            </button>
+            </a>
 
             {/* Language selector */}
             <div style={{ position: 'relative', flexShrink: 0 }}>
@@ -735,57 +737,43 @@ export const NovaPage: React.FC = () => {
       </section>
 
       {/* ═══════════════ FOOTER ══════════════════════ */}
-      <footer style={{ background: '#FAFAFB', borderTop: '1px solid #F0F0F2', padding: '48px 20px 32px' }}>
+      <footer style={{ background: '#FAFAFB', borderTop: '1px solid #F0F0F2', padding: '40px 20px 28px' }}>
         <div style={{ maxWidth: 1080, margin: '0 auto' }}>
 
-          {/* Top row — logo + nav links */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '32px 48px', justifyContent: 'space-between', marginBottom: 40 }}>
+          {/* Top row — logo esquerda + links direita */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', justifyContent: 'space-between', gap: '24px 40px', marginBottom: 32 }}>
 
-            {/* Logo + tagline */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block' }} />
-              <p style={{ fontSize: 13, color: '#888', margin: 0, maxWidth: 240, lineHeight: 1.6 }}>
-                A plataforma completa para importar da China com segurança e sem burocracia.
+            {/* Logo + tagline — escorado à esquerda */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 26, width: 'auto', objectFit: 'contain', display: 'block', marginLeft: 0 }} />
+              <p style={{ fontSize: 12, color: '#999', margin: 0, maxWidth: 220, lineHeight: 1.55 }}>
+                A plataforma completa para importar da China.
               </p>
             </div>
 
-            {/* Links */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '24px 48px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <p style={{ fontSize: 11, fontWeight: 700, color: '#aaa', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>Plataforma</p>
-                {[
-                  { label: 'Rede Social', href: 'https://app.connectacademy.com.br' },
-                  { label: 'Minerador IA', href: 'https://app.connectacademy.com.br' },
-                  { label: 'Aulas', href: 'https://app.connectacademy.com.br' },
-                  { label: 'Rastreio', href: 'https://app.connectacademy.com.br' },
-                ].map(l => (
-                  <a key={l.label} href={l.href} style={{ fontSize: 13, color: '#555', textDecoration: 'none', fontWeight: 500 }}
-                    onMouseEnter={e => (e.currentTarget.style.color = B)}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#555')}
-                  >{l.label}</a>
-                ))}
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                <p style={{ fontSize: 11, fontWeight: 700, color: '#aaa', letterSpacing: '0.1em', textTransform: 'uppercase', margin: 0 }}>Empresa</p>
-                {[
-                  { label: 'Site principal', href: 'https://connectacademy.com.br' },
-                  { label: 'Suporte', href: 'mailto:suporte@connectacademy.com.br' },
-                  { label: 'Termos de Uso', href: 'https://connectacademy.com.br/termos-de-uso' },
-                  { label: 'Política de Privacidade', href: 'https://connectacademy.com.br/politica-de-privacidade' },
-                ].map(l => (
-                  <a key={l.label} href={l.href} style={{ fontSize: 13, color: '#555', textDecoration: 'none', fontWeight: 500 }}
-                    onMouseEnter={e => (e.currentTarget.style.color = B)}
-                    onMouseLeave={e => (e.currentTarget.style.color = '#555')}
-                  >{l.label}</a>
-                ))}
-              </div>
+            {/* Links horizontais compactos */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 24px', alignItems: 'center' }}>
+              {[
+                { label: 'Site principal', href: 'https://connectacademy.com.br' },
+                { label: 'Suporte', href: 'mailto:suporte@connectacademy.com.br' },
+                { label: 'Termos de Uso', href: 'https://connectacademy.com.br/termos-de-uso' },
+                { label: 'Política de Privacidade', href: 'https://connectacademy.com.br/politica-de-privacidade' },
+              ].map(l => (
+                <a key={l.label} href={l.href} style={{ fontSize: 13, color: '#666', textDecoration: 'none', fontWeight: 500 }}
+                  onMouseEnter={e => (e.currentTarget.style.color = B)}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#666')}
+                >{l.label}</a>
+              ))}
             </div>
           </div>
 
-          {/* Divider */}
-          <div style={{ borderTop: '1px solid #EBEBED', paddingTop: 24, textAlign: 'center' }}>
-            <p style={{ fontSize: 12, color: '#bbb', margin: 0 }}>
-              © 2026 Connect Academy Ltda. Todos os direitos reservados. · CNPJ: 44.292.841/0001-95
+          {/* Divider + copyright em 2 linhas */}
+          <div style={{ borderTop: '1px solid #EBEBED', paddingTop: 20, textAlign: 'center' }}>
+            <p style={{ fontSize: 12, color: '#aaa', margin: '0 0 2px', fontWeight: 600 }}>
+              © 2026 Connect Academy Ltda.
+            </p>
+            <p style={{ fontSize: 11, color: '#bbb', margin: 0 }}>
+              Todos os direitos reservados · CNPJ: 44.292.841/0001-95
             </p>
           </div>
 
