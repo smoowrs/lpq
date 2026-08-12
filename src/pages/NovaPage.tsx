@@ -423,8 +423,8 @@ export const NovaPage: React.FC = () => {
         .b3  { grid-column: span 12; }
         .b4  { grid-column: span 4; }
         .b5  { grid-column: span 4; }
-        .b6  { grid-column: span 8; }
-        .b7  { grid-column: span 4; }
+        .b6  { grid-column: span 4; }
+        .b7  { grid-column: span 12; }
         .bcard { border-radius: 28px; padding: 36px; display: flex; flex-direction: column; }
         .bcard-dark { border-radius: 28px; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
         @media (max-width: 767px) {
@@ -434,7 +434,7 @@ export const NovaPage: React.FC = () => {
           .b3  { grid-column: span 2; }
           .b4  { grid-column: span 1; }
           .b5  { grid-column: span 2; }
-          .b6  { grid-column: span 2; }
+          .b6  { grid-column: span 1; }
           .b7  { grid-column: span 2; }
           .bcard { padding: 24px; border-radius: 22px; }
           .bcard-dark { padding: 28px; border-radius: 22px; }
