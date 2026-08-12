@@ -731,7 +731,7 @@ export const NovaPage: React.FC = () => {
 
             {/* Logo + tagline */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 28, display: 'block' }} />
+              <img src="/logo-blue.png" alt="Connect Academy" style={{ height: 28, width: 'auto', objectFit: 'contain', display: 'block' }} />
               <p style={{ fontSize: 13, color: '#888', margin: 0, maxWidth: 240, lineHeight: 1.6 }}>
                 A plataforma completa para importar da China com segurança e sem burocracia.
               </p>
@@ -771,14 +771,10 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* Divider */}
-          <div style={{ borderTop: '1px solid #EBEBED', paddingTop: 24, display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+          <div style={{ borderTop: '1px solid #EBEBED', paddingTop: 24, textAlign: 'center' }}>
             <p style={{ fontSize: 12, color: '#bbb', margin: 0 }}>
               © 2026 Connect Academy Ltda. Todos os direitos reservados. · CNPJ: 44.292.841/0001-95
             </p>
-            <div style={{ display: 'flex', gap: 16 }}>
-              <a href="https://connectacademy.com.br/termos-de-uso" style={{ fontSize: 12, color: '#bbb', textDecoration: 'none' }}>Termos</a>
-              <a href="https://connectacademy.com.br/politica-de-privacidade" style={{ fontSize: 12, color: '#bbb', textDecoration: 'none' }}>Privacidade</a>
-            </div>
           </div>
 
         </div>
