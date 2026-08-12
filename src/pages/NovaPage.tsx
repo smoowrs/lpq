@@ -201,7 +201,7 @@ const TR: Record<string, Record<string, string>> = {
   },
   'fr': {
     hero_title: 'Importez de Chine sans bureaucratie douanière.',
-    hero_sub: 'Créez votre compte gratuit et accédez à +30 millions de produits de 1 500 usines, des cours exclusifs, un suivi en temps réel et au Minerador : l'IA conçue pour vous guider dans chaque importation.',
+    hero_sub: 'Cr\u00e9ez votre compte gratuit et acc\u00e9dez \u00e0 +30 millions de produits de 1 500 usines, des cours exclusifs, un suivi en temps r\u00e9el et au Minerador : l\u2019IA con\u00e7ue pour vous guider dans chaque importation.',
     hero_cta: 'Commencer maintenant',
     hero_cta2: 'Voir les plans',
     hero_badge: 'Utilisé par +28 000 importateurs',
