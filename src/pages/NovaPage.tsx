@@ -453,51 +453,38 @@ export const NovaPage: React.FC = () => {
         {/* Bento Grid */}
         <div className="bento">
 
-          {/* 1 — Minerador AI */}
+          {/* 1 — Rede Social */}
           <div className="b1 bcard-dark" style={{ background: '#0A0A1A', minHeight: 280 }}>
-            {/* Video de fundo em loop */}
-            <video
-              autoPlay muted loop playsInline
-              style={{
-                position: 'absolute', inset: 0,
-                width: '100%', height: '100%',
-                objectFit: 'cover', zIndex: 0,
-              }}
-            >
-              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/completo.mp4" type="video/mp4" />
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/app.mp4" type="video/mp4" />
             </video>
-            {/* Overlay escuro para legibilidade */}
-            <div style={{
-              position: 'absolute', inset: 0, zIndex: 1,
-              background: 'linear-gradient(145deg, rgba(10,10,26,0.72) 0%, rgba(18,16,58,0.65) 100%)',
-            }} />
-            {/* Conteúdo */}
+            <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(10,10,26,0.78) 0%, rgba(10,10,26,0.55) 100%)' }} />
             <div style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{ width: 52, height: 52, borderRadius: 16, background: `${B}30`, border: `1px solid ${B}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              <div style={{ width: 52, height: 52, borderRadius: 16, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
               </div>
-              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 24, fontWeight: 800, color: '#fff', margin: '0 0 10px', lineHeight: 1.2 }}>Minerador IA</h3>
-              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.75)', lineHeight: 1.65, margin: 0 }}>
-                Nossa IA pesquisa produtos, verifica fornecedores, calcula impostos reais e elimina burocracias alfandegárias.
+              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 24, fontWeight: 800, color: '#fff', margin: '0 0 10px', lineHeight: 1.2 }}>A 1ª Rede Social do Importador 💙</h3>
+              <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.7)', lineHeight: 1.65, margin: 0 }}>
+                Feed exclusivo, grupos por nicho, fornecedores compartilhados e +28.000 membros ativos.
               </p>
             </div>
-            <div style={{ position: 'relative', zIndex: 2, display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 999, padding: '8px 16px', width: 'fit-content', marginTop: 24 }}>
-              <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#4ade80', display: 'block' }} />
-              <span style={{ fontSize: 12, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>IA ativa 24/7</span>
-            </div>
+            <button
+              onClick={() => setCheckout(PLANS[1])}
+              style={{ position: 'relative', zIndex: 2, display: 'inline-flex', alignItems: 'center', gap: 8, height: 40, padding: '0 18px', borderRadius: 12, background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`, color: '#fff', fontWeight: 700, fontSize: 13, border: 'none', cursor: 'pointer', boxShadow: `0 4px 16px ${B}50`, marginTop: 24, width: 'fit-content' }}
+            >
+              Testar comunidade
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
           </div>
 
           {/* 2 — +30M Produtos */}
           <div className="b2 bcard-dark" style={{ background: '#0a0a0a', minHeight: 280, justifyContent: 'space-between' }}>
-            {/* Video de fundo */}
             <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/vaievolta.mp4" type="video/mp4" />
             </video>
-            {/* Overlay */}
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(5,5,15,0.70) 0%, rgba(5,5,15,0.55) 100%)' }} />
-            {/* Conteúdo */}
             <div style={{ position: 'relative', zIndex: 2 }}>
               <div style={{ width: 48, height: 48, borderRadius: 14, background: 'rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -514,8 +501,29 @@ export const NovaPage: React.FC = () => {
             </div>
           </div>
 
-          {/* 3 — Sem Mínimo */}
-          <div className="b3 bcard" style={{ background: BL, border: `1.5px solid ${B}20` }}>
+          {/* 3 — Minerador IA */}
+          <div className="b3 bcard-dark" style={{ background: '#0A0A1A' }}>
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/completo.mp4" type="video/mp4" />
+            </video>
+            <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(145deg, rgba(10,10,26,0.72) 0%, rgba(18,16,58,0.65) 100%)' }} />
+            <div style={{ position: 'relative', zIndex: 2 }}>
+              <div style={{ width: 44, height: 44, borderRadius: 14, background: `${B}30`, border: `1px solid ${B}40`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                </svg>
+              </div>
+              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 18, fontWeight: 800, color: '#fff', margin: '0 0 8px', lineHeight: 1.2 }}>Minerador IA</h3>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)', lineHeight: 1.6, margin: 0 }}>Nossa IA pesquisa produtos, verifica fornecedores e calcula impostos reais.</p>
+            </div>
+            <div style={{ position: 'relative', zIndex: 2, display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 999, padding: '6px 14px', width: 'fit-content', marginTop: 20 }}>
+              <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ade80', display: 'block' }} />
+              <span style={{ fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>IA ativa 24/7</span>
+            </div>
+          </div>
+
+          {/* 4 — Sem Mínimo */}
+          <div className="b4 bcard" style={{ background: BL, border: `1.5px solid ${B}20` }}>
             <div style={{ width: 44, height: 44, borderRadius: 13, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="M9 9h.01M15 15h.01"/>
@@ -525,8 +533,8 @@ export const NovaPage: React.FC = () => {
             <p style={{ fontSize: 13, color: `${B2}90`, lineHeight: 1.55, margin: 0 }}>1 unidade para testar ou 1.000 para escalar.</p>
           </div>
 
-          {/* 4 — Seguro */}
-          <div className="b4 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
+          {/* 5 — Seguro */}
+          <div className="b5 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
             <div style={{ width: 44, height: 44, borderRadius: 13, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -536,8 +544,8 @@ export const NovaPage: React.FC = () => {
             <p style={{ fontSize: 13, color: '#666', lineHeight: 1.55, margin: 0 }}>Reembolso em até 24h em caso de extravio ou dano.</p>
           </div>
 
-          {/* 5 — Rastreio */}
-          <div className="b5 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
+          {/* 6 — Rastreio */}
+          <div className="b6 bcard" style={{ border: '1.5px solid #EEEEF2', background: '#fff' }}>
             <div style={{ width: 44, height: 44, borderRadius: 13, background: BL, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="3 11 22 2 13 21 11 13 3 11"/>
@@ -547,43 +555,7 @@ export const NovaPage: React.FC = () => {
             <p style={{ fontSize: 13, color: '#666', lineHeight: 1.55, margin: 0 }}>Brasil em 15 dias, Europa em 6. Acompanhe no app.</p>
           </div>
 
-
-          {/* 6 — Rede Social */}
-          <div className="b6 bcard-dark" style={{ background: '#0A0A1A' }}>
-            {/* Video de fundo */}
-            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/app.mp4" type="video/mp4" />
-            </video>
-            {/* Overlay */}
-            <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(10,10,26,0.78) 0%, rgba(10,10,26,0.55) 100%)' }} />
-            {/* Conteúdo */}
-            <div style={{ position: 'relative', zIndex: 2 }}>
-              <div style={{ width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-              <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#fff', margin: '0 0 6px' }}>A 1ª Rede Social do Importador 💙</h3>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, margin: '0 0 18px' }}>Feed exclusivo, grupos por nicho, fornecedores compartilhados e +28.000 membros ativos.</p>
-              <button
-                onClick={() => setCheckout(PLANS[1])}
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 6,
-                  height: 36, padding: '0 16px', borderRadius: 10,
-                  background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
-                  color: '#fff', fontWeight: 700, fontSize: 12, border: 'none', cursor: 'pointer',
-                  boxShadow: `0 4px 16px ${B}50`,
-                }}
-              >
-                Testar comunidade
-                <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </button>
-            </div>
-          </div>
-
-
+          {/* 7 — Aulas */}
           <div className="b7 bcard-dark" style={{ background: '#0A0A1A' }}>
             <div style={{ position: 'absolute', top: -40, right: -40, width: 140, height: 140, borderRadius: '50%', background: B, opacity: 0.15, filter: 'blur(50px)' }} />
             <div style={{ width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
