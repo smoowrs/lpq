@@ -176,6 +176,12 @@ export const NovaPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'PageView');
+    }
+  }, []);
+
+  useEffect(() => {
     if (!langOpen) return;
     const close = () => setLangOpen(false);
     document.addEventListener('click', close);

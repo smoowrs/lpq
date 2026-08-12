@@ -14,8 +14,8 @@ if (container) {
       <ErrorBoundary>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<App />} />
-            <Route path="/nova" element={<NovaPage />} />
+            <Route path="/" element={<NovaPage />} />
+            <Route path="/nova" element={<App />} />
           </Routes>
         </BrowserRouter>
       </ErrorBoundary>
