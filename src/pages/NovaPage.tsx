@@ -278,6 +278,19 @@ export const NovaPage: React.FC = () => {
           .nav-lang-label { display: none; }
           .nav-lang-chevron { display: none; }
         }
+        /* Oculta o botão de play nativo do iOS em todos os vídeos de fundo */
+        video::-webkit-media-controls,
+        video::-webkit-media-controls-enclosure,
+        video::-webkit-media-controls-panel,
+        video::-webkit-media-controls-play-button,
+        video::-webkit-media-controls-start-playback-button {
+          display: none !important;
+          -webkit-appearance: none;
+          appearance: none;
+          opacity: 0 !important;
+          pointer-events: none !important;
+        }
+        video { -webkit-tap-highlight-color: transparent; }
       `}</style>
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: '14px 16px' }}>
         <nav style={{
@@ -725,7 +738,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 6 — Rastreio */}
           <div className="b6 bcard-dark" style={{ background: '#0A0A1A' }}>
-            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
+            <video autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_105151_3105962d-701e-4c55-ab8f-a8c47fe3ddc0.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.70) 0%, rgba(10,10,30,0.55) 100%)', borderRadius: 'inherit' }} />
@@ -740,7 +753,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 7 — Aulas */}
           <div className="b7 bcard-dark" style={{ background: '#0A0A1A' }}>
-            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
+            <video autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/aulas.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.72) 0%, rgba(10,10,30,0.60) 100%)', borderRadius: 'inherit' }} />
