@@ -843,10 +843,10 @@ export const NovaPage: React.FC = () => {
       </section>
 
       {/* ═══════════════ FINAL CTA ═══════════════════ */}
-      <section style={{ padding: '96px 20px' }}>
+      <section style={{ padding: '24px 0' }}>
         <a
           href="https://app.connectacademy.com.br/cadastro"
-          style={{ display: 'block', maxWidth: 900, margin: '0 auto', borderRadius: 36, overflow: 'hidden', cursor: 'pointer', textDecoration: 'none' }}
+          style={{ display: 'block', width: '100%', cursor: 'pointer', textDecoration: 'none' }}
         >
           <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
             <video
@@ -858,6 +858,7 @@ export const NovaPage: React.FC = () => {
           </div>
         </a>
       </section>
+
 
 
       {/* ═══════════════ FOOTER ══════════════════════ */}
