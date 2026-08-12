@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CheckoutModal } from '../components/CheckoutModal';
+import { Toaster } from 'react-hot-toast';
 
 /* ─── Brand ─────────────────────────────────────────── */
 const B = '#4C35E8';          // Connect blue-purple
@@ -1059,7 +1060,9 @@ export const NovaPage: React.FC = () => {
       </footer>
 
 
+      <Toaster position="top-center" toastOptions={{ duration: 4000, style: { fontFamily: "'Inter', system-ui, sans-serif", fontSize: 14, fontWeight: 600 } }} />
       {checkout && <CheckoutModal plan={checkout} onClose={() => { setCheckout(null); setTimeout(() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }), 50); }} onSuccess={() => setCheckout(null)} />}
+
 
     </div>
   );
