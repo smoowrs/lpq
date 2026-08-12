@@ -116,10 +116,10 @@
             try {
               if (typeof CheckoutObj === 'function') {
                 CheckoutObj('config', { 
-                  max_interest_free: 1,
-                  installmentsWithoutInterest: 1,
-                  installments_without_interest: 1,
-                  maxInstallmentsWithoutInterest: 1
+                  max_interest_free: 12,
+                  installmentsWithoutInterest: 12,
+                  installments_without_interest: 12,
+                  maxInstallmentsWithoutInterest: 12
                 });
               } else if (typeof CheckoutObj.config === 'function') {
                 CheckoutObj.config({ 

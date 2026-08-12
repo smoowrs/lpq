@@ -21,7 +21,8 @@ const PLANS = [
   {
     id: 'starter', label: 'STARTER', emoji: '🌎',
     period: '3 MESES DE ACESSO', periodLabel: 'trimestre',
-    priceOriginal: 'R$ 97,00', price: 'R$ 67,90', installment: 'ou 12x de R$ 6,57',
+    priceOriginal: 'R$ 97,00', price: 'R$ 67,90', installment: 'ou 12x de R$ 5,66 sem juros',
+    priceEU: '€ 16,00',
     cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: false, free: false,
     desc: 'Acesso essencial para começar suas importações.',
@@ -46,12 +47,13 @@ const PLANS = [
       'Sorteios mensais e premiações',
       'Grupo de Networking no WhatsApp',
     ],
-    prices: { BR: { annual: '67.90' } }, region: 'BR',
+    prices: { BR: { annual: '67.90' }, EU: { annual: '16.00' } }, region: 'BR',
   },
   {
     id: 'pro', label: 'PRO', emoji: '🌎',
     period: '1 ANO DE ACESSO', periodLabel: 'ano',
-    priceOriginal: 'R$ 197,00', price: 'R$ 137,90', installment: 'ou 12x de R$ 12,78',
+    priceOriginal: 'R$ 197,00', price: 'R$ 137,90', installment: 'ou 12x de R$ 11,49 sem juros',
+    priceEU: '€ 32,00',
     cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: true, free: false,
     desc: 'O plano intermediário para quem busca variedade e ferramentas de IA.',
@@ -75,12 +77,13 @@ const PLANS = [
       'Medalha de destaque exclusiva na comunidade',
       'Grupo de Networking no WhatsApp',
     ],
-    prices: { BR: { annual: '137.90' } }, region: 'BR',
+    prices: { BR: { annual: '137.90' }, EU: { annual: '32.00' } }, region: 'BR',
   },
   {
     id: 'elite', label: 'ELITE', emoji: '🏆',
     period: 'ACESSO PARA SEMPRE', periodLabel: 'vitalício',
-    priceOriginal: 'R$ 380,00', price: 'R$ 266,00', installment: 'ou 12x de R$ 25,27',
+    priceOriginal: 'R$ 380,00', price: 'R$ 266,00', installment: 'ou 12x de R$ 22,17 sem juros',
+    priceEU: '€ 64,00',
     cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: false, free: false,
     desc: 'Acesso total e suporte prioritário para escala máxima.',
@@ -152,15 +155,73 @@ function FaqCard({ q, a }: { q: string; a: string }) {
   );
 }
 
-/* ─── Languages ──────────────────────────────────────── */
+/* ─── Countries / Languages ─────────────────────────── */
 const LANGS = [
-  { code: 'pt-BR', flag: '🇧🇷', label: 'Brasil' },
-  { code: 'pt-PT', flag: '🇵🇹', label: 'Portugal' },
-  { code: 'en-US', flag: '🇺🇸', label: 'Estados Unidos' },
-  { code: 'es',    flag: '🇪🇸', label: 'Espanha' },
-  { code: 'de-CH', flag: '🇨🇭', label: 'Suíça' },
-  { code: 'en-CA', flag: '🇨🇦', label: 'Canadá' },
+  { code: 'pt-BR', flag: '🇧🇷', label: 'Brasil',   region: 'BR', currency: 'BRL', shipping: '15 dias', isoCountry: 'BR' },
+  { code: 'pt-PT', flag: '🇵🇹', label: 'Portugal', region: 'EU', currency: 'EUR', shipping: '6 dias',  isoCountry: 'PT' },
+  { code: 'es',    flag: '🇪🇸', label: 'España',   region: 'EU', currency: 'EUR', shipping: '6 días',  isoCountry: 'ES' },
+  { code: 'fr',    flag: '🇫🇷', label: 'France',   region: 'EU', currency: 'EUR', shipping: '6 jours', isoCountry: 'FR' },
+  { code: 'nl',    flag: '🇳🇱', label: 'Nederland',region: 'EU', currency: 'EUR', shipping: '6 dagen', isoCountry: 'NL' },
 ];
+
+/* ─── Translations ───────────────────────────────────── */
+const TR: Record<string, Record<string, string>> = {
+  'pt-BR': {
+    hero_title: 'Aprenda importar da China sem burocracias alfandegárias.',
+    hero_sub: 'Crie sua conta grátis e tenha acesso a +30 milhões de produtos de 1.500 fábricas, aulas exclusivas, rastreio em tempo real e ao Minerador: a IA desenvolvida pra te guiar em cada importação.',
+    hero_cta: 'Começar agora',
+    hero_cta2: 'Ver planos',
+    hero_badge: 'Usado por +28.000 importadores',
+    nav_cta: 'Teste grátis',
+    shipping_badge: '🚀 Entrega em até 15 dias no Brasil',
+    try_free: 'Criar conta grátis',
+    buy_now: 'Comprar agora',
+  },
+  'pt-PT': {
+    hero_title: 'Importe da China sem burocracias alfandegárias.',
+    hero_sub: 'Crie a sua conta grátis e tenha acesso a +30 milhões de produtos de 1.500 fábricas, aulas exclusivas, rastreio em tempo real e ao Minerador: a IA desenvolvida para o guiar em cada importação.',
+    hero_cta: 'Começar agora',
+    hero_cta2: 'Ver planos',
+    hero_badge: 'Usado por +28.000 importadores',
+    nav_cta: 'Teste grátis',
+    shipping_badge: '🚀 Entrega em até 6 dias na Europa',
+    try_free: 'Criar conta grátis',
+    buy_now: 'Comprar agora',
+  },
+  'es': {
+    hero_title: 'Importa desde China sin burocracia aduanera.',
+    hero_sub: 'Crea tu cuenta gratis y accede a +30 millones de productos de 1.500 fábricas, clases exclusivas, rastreo en tiempo real y al Minerador: la IA diseñada para guiarte en cada importación.',
+    hero_cta: 'Empezar ahora',
+    hero_cta2: 'Ver planes',
+    hero_badge: 'Usado por +28.000 importadores',
+    nav_cta: 'Prueba gratis',
+    shipping_badge: '🚀 Entrega en hasta 6 días en Europa',
+    try_free: 'Crear cuenta gratis',
+    buy_now: 'Comprar ahora',
+  },
+  'fr': {
+    hero_title: 'Importez de Chine sans bureaucratie douanière.',
+    hero_sub: 'Créez votre compte gratuit et accédez à +30 millions de produits de 1 500 usines, des cours exclusifs, un suivi en temps réel et au Minerador : l'IA conçue pour vous guider dans chaque importation.',
+    hero_cta: 'Commencer maintenant',
+    hero_cta2: 'Voir les plans',
+    hero_badge: 'Utilisé par +28 000 importateurs',
+    nav_cta: 'Essai gratuit',
+    shipping_badge: '🚀 Livraison en 6 jours en Europe',
+    try_free: 'Créer un compte gratuit',
+    buy_now: 'Acheter maintenant',
+  },
+  'nl': {
+    hero_title: 'Importeer uit China zonder douanebureaucratie.',
+    hero_sub: 'Maak een gratis account aan en krijg toegang tot +30 miljoen producten van 1.500 fabrieken, exclusieve lessen, realtime tracking en de Minerador: de AI die u begeleidt bij elke import.',
+    hero_cta: 'Nu beginnen',
+    hero_cta2: 'Plannen bekijken',
+    hero_badge: 'Gebruikt door +28.000 importeurs',
+    nav_cta: 'Gratis proberen',
+    shipping_badge: '🚀 Levering binnen 6 dagen in Europa',
+    try_free: 'Gratis account aanmaken',
+    buy_now: 'Nu kopen',
+  },
+};
 
 /* ─── Main ───────────────────────────────────────────── */
 export const NovaPage: React.FC = () => {
@@ -168,6 +229,8 @@ export const NovaPage: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState(LANGS[0]);
+  const t = TR[selectedLang.code] || TR['pt-BR'];
+  const isEU = selectedLang.region === 'EU';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -187,6 +250,18 @@ export const NovaPage: React.FC = () => {
     document.addEventListener('click', close);
     return () => document.removeEventListener('click', close);
   }, [langOpen]);
+
+  // Auto-detect country via IP
+  useEffect(() => {
+    fetch('https://ipapi.co/json/')
+      .then(r => r.json())
+      .then(data => {
+        const iso = data.country_code;
+        const match = LANGS.find(l => l.isoCountry === iso);
+        if (match) setSelectedLang(match);
+      })
+      .catch(() => {/* keep default BR */});
+  }, []);
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: '#fff', color: '#0a0a0a', overflowX: 'hidden' }}>
@@ -264,7 +339,7 @@ export const NovaPage: React.FC = () => {
               onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
               onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
             >
-              Teste grátis
+              {t.nav_cta}
             </a>
 
             {/* Language selector */}
@@ -389,7 +464,7 @@ export const NovaPage: React.FC = () => {
             </div>
 
             <span style={{ fontSize: 13, fontWeight: 600, color: '#fff', letterSpacing: 0.1 }}>
-              Usado por +28.000 importadores
+              {t.hero_badge}
             </span>
           </div>
 
@@ -404,11 +479,11 @@ export const NovaPage: React.FC = () => {
             margin: '0 0 24px',
             maxWidth: 860,
           }}>
-            Aprenda importar da China sem burocracias alfandegárias.
+            {t.hero_title}
           </h1>
 
           <p style={{ fontSize: 'clamp(14px, 2vw, 17px)', color: 'rgba(255,255,255,0.72)', maxWidth: 560, lineHeight: 1.65, margin: '0 0 40px', fontWeight: 500 }}>
-            Crie sua conta grátis e tenha acesso a +30 milhões de produtos de 1.500 fábricas, aulas exclusivas, rastreio em tempo real e ao Minerador: a IA desenvolvida pra te guiar em cada importação.
+            {t.hero_sub}
           </p>
 
           {/* CTAs */}
@@ -426,7 +501,7 @@ export const NovaPage: React.FC = () => {
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 32px ${B}70`; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 4px 24px ${B}50`; }}
             >
-              Começar agora
+              {t.hero_cta}
             </button>
             <button
               onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}
@@ -749,13 +824,22 @@ export const NovaPage: React.FC = () => {
                 <p style={{ fontSize: 13, color: plan.highlight ? 'rgba(255,255,255,0.5)' : '#888', lineHeight: 1.55, margin: '0 0 20px' }}>{plan.desc}</p>
                 {!plan.free ? (
                   <div style={{ marginBottom: 24 }}>
-                    <p style={{ fontSize: 13, color: plan.highlight ? 'rgba(255,255,255,0.3)' : '#bbb', textDecoration: 'line-through', margin: '0 0 2px' }}>{plan.priceOriginal}</p>
-                    <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 38, fontWeight: 800, color: plan.highlight ? '#fff' : '#0a0a0a', margin: '0 0 4px', lineHeight: 1 }}>
-                      <span style={{ fontSize: 16, fontWeight: 600, verticalAlign: 'super' }}>R$</span>
-                      {plan.price.replace('R$ ', '')}
-                      <span style={{ fontSize: 13, fontWeight: 500, color: plan.highlight ? 'rgba(255,255,255,0.4)' : '#aaa' }}>/{plan.periodLabel}</span>
-                    </p>
-                    <p style={{ fontSize: 12, color: plan.highlight ? 'rgba(255,255,255,0.35)' : '#aaa', margin: 0 }}>{plan.installment}</p>
+                    {isEU ? (
+                      /* Europa: preco cheio em EUR, sem desconto, sem parcelamento */
+                      <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 38, fontWeight: 800, color: plan.highlight ? '#fff' : '#0a0a0a', margin: '0 0 4px', lineHeight: 1 }}>
+                        {plan.priceEU}
+                      </p>
+                    ) : (
+                      <>
+                        <p style={{ fontSize: 13, color: plan.highlight ? 'rgba(255,255,255,0.3)' : '#bbb', textDecoration: 'line-through', margin: '0 0 2px' }}>{plan.priceOriginal}</p>
+                        <p style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 38, fontWeight: 800, color: plan.highlight ? '#fff' : '#0a0a0a', margin: '0 0 4px', lineHeight: 1 }}>
+                          <span style={{ fontSize: 16, fontWeight: 600, verticalAlign: 'super' }}>R$</span>
+                          {plan.price.replace('R$ ', '')}
+                          <span style={{ fontSize: 13, fontWeight: 500, color: plan.highlight ? 'rgba(255,255,255,0.4)' : '#aaa' }}>/{plan.periodLabel}</span>
+                        </p>
+                        <p style={{ fontSize: 12, color: plan.highlight ? 'rgba(255,255,255,0.35)' : '#aaa', margin: 0 }}>{plan.installment}</p>
+                      </>
+                    )}
                   </div>
                 ) : (
                   <div style={{ marginBottom: 24 }}>

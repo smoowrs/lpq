@@ -16,77 +16,49 @@ import { trackGoogleAdsPurchase } from '../services/googleAds';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://bfyfzpjivesrbcxilmzd.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmeWZ6cGppdmVzcmJjeGlsbXpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2NTE1ODUsImV4cCI6MjA4NjIyNzU4NX0.4q3uB1PrFPbaH4lunmQ6wZU0jNABg2D0i45JRHXo_K0';
 
-// ── Tabela de parcelas exatas da Appmax por plano ──
+// ── Tabela de parcelas — 30% off, sem juros (total = preço do plano) ──
 const INSTALLMENTS: Record<string, { value: string; total: string }[]> = {
-    // Tabela Appmax — preços com 40% de desconto BR (juros repassados ao cliente)
     starter: [
-        { value: '58,20',  total: '58,20'  },
-        { value: '30,81',  total: '61,63'  },
-        { value: '21,09',  total: '63,27'  },
-        { value: '16,27',  total: '65,06'  },
-        { value: '13,35',  total: '66,72'  },
-        { value: '11,42',  total: '68,49'  },
-        { value: '10,03',  total: '70,18'  },
-        { value: '8,99',   total: '71,91'  },
-        { value: '8,19',   total: '73,70'  },
-        { value: '7,54',   total: '75,43'  },
-        { value: '7,01',   total: '77,09'  },
-        { value: '6,57',   total: '78,75'  },
-        { value: '6,18',   total: '80,30'  },
-        { value: '5,86',   total: '82,04'  },
-        { value: '5,60',   total: '83,91'  },
-        { value: '5,36',   total: '85,71'  },
-        { value: '5,14',   total: '87,34'  },
-        { value: '4,95',   total: '88,96'  },
-        { value: '4,78',   total: '90,86'  },
-        { value: '4,64',   total: '92,71'  },
-        { value: '4,49',   total: '94,32'  },
+        { value: '67,90',  total: '67,90'  }, // 1x
+        { value: '33,95',  total: '67,90'  }, // 2x
+        { value: '22,63',  total: '67,89'  }, // 3x
+        { value: '16,98',  total: '67,92'  }, // 4x
+        { value: '13,58',  total: '67,90'  }, // 5x
+        { value: '11,32',  total: '67,92'  }, // 6x
+        { value: '9,70',   total: '67,90'  }, // 7x
+        { value: '8,49',   total: '67,92'  }, // 8x
+        { value: '7,54',   total: '67,86'  }, // 9x
+        { value: '6,79',   total: '67,90'  }, // 10x
+        { value: '6,17',   total: '67,87'  }, // 11x
+        { value: '5,66',   total: '67,92'  }, // 12x
     ],
     pro: [
-        { value: '118,20',  total: '118,20'  },
-        { value: '61,98',   total: '123,96'  },
-        { value: '42,30',   total: '126,89'  },
-        { value: '32,46',   total: '129,82'  },
-        { value: '26,56',   total: '132,81'  },
-        { value: '22,61',   total: '135,67'  },
-        { value: '19,82',   total: '138,70'  },
-        { value: '17,70',   total: '141,60'  },
-        { value: '16,06',   total: '144,53'  },
-        { value: '14,75',   total: '147,50'  },
-        { value: '13,68',   total: '150,46'  },
-        { value: '12,78',   total: '153,34'  },
-        { value: '12,03',   total: '156,38'  },
-        { value: '11,38',   total: '159,34'  },
-        { value: '10,81',   total: '162,09'  },
-        { value: '10,32',   total: '165,10'  },
-        { value: '9,89',    total: '168,15'  },
-        { value: '9,50',    total: '171,10'  },
-        { value: '9,15',    total: '173,90'  },
-        { value: '8,85',    total: '177,02'  },
-        { value: '8,56',    total: '179,91'  },
+        { value: '137,90',  total: '137,90'  }, // 1x
+        { value: '68,95',   total: '137,90'  }, // 2x
+        { value: '45,97',   total: '137,91'  }, // 3x
+        { value: '34,48',   total: '137,92'  }, // 4x
+        { value: '27,58',   total: '137,90'  }, // 5x
+        { value: '22,98',   total: '137,88'  }, // 6x
+        { value: '19,70',   total: '137,90'  }, // 7x
+        { value: '17,24',   total: '137,92'  }, // 8x
+        { value: '15,32',   total: '137,88'  }, // 9x
+        { value: '13,79',   total: '137,90'  }, // 10x
+        { value: '12,54',   total: '137,94'  }, // 11x
+        { value: '11,49',   total: '137,88'  }, // 12x
     ],
     elite: [
-        { value: '233,40',  total: '233,40'  },
-        { value: '122,40',  total: '244,80'  },
-        { value: '83,55',   total: '250,63'  },
-        { value: '64,11',   total: '256,46'  },
-        { value: '52,46',   total: '262,29'  },
-        { value: '44,67',   total: '268,01'  },
-        { value: '39,13',   total: '273,91'  },
-        { value: '34,95',   total: '279,58'  },
-        { value: '31,71',   total: '285,43'  },
-        { value: '29,13',   total: '291,34'  },
-        { value: '27,02',   total: '297,26'  },
-        { value: '25,27',   total: '303,19'  },
-        { value: '23,75',   total: '308,79'  },
-        { value: '22,47',   total: '314,61'  },
-        { value: '21,35',   total: '320,23'  },
-        { value: '20,38',   total: '326,09'  },
-        { value: '19,53',   total: '331,90'  },
-        { value: '18,77',   total: '337,90'  },
-        { value: '18,09',   total: '343,71'  },
-        { value: '17,47',   total: '349,44'  },
-        { value: '16,90',   total: '355,06'  },
+        { value: '266,00',  total: '266,00'  }, // 1x
+        { value: '133,00',  total: '266,00'  }, // 2x
+        { value: '88,67',   total: '266,01'  }, // 3x
+        { value: '66,50',   total: '266,00'  }, // 4x
+        { value: '53,20',   total: '266,00'  }, // 5x
+        { value: '44,33',   total: '265,98'  }, // 6x
+        { value: '38,00',   total: '266,00'  }, // 7x
+        { value: '33,25',   total: '266,00'  }, // 8x
+        { value: '29,56',   total: '266,04'  }, // 9x
+        { value: '26,60',   total: '266,00'  }, // 10x
+        { value: '24,18',   total: '265,98'  }, // 11x
+        { value: '22,17',   total: '266,04'  }, // 12x
     ],
 };
 
