@@ -555,16 +555,16 @@ export const NovaPage: React.FC = () => {
           </p>
 
           {/* CTAs */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+          <div style={{ display: 'flex', flexWrap: 'nowrap', gap: 10, width: '100%', maxWidth: 480 }}>
             <button
               onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
-                height: 56, padding: '0 40px', borderRadius: 14,
+                flex: 1, height: 52, padding: '0 16px', borderRadius: 14,
                 background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
                 color: '#fff',
-                fontWeight: 700, fontSize: 16, border: 'none', cursor: 'pointer',
+                fontWeight: 700, fontSize: 15, border: 'none', cursor: 'pointer',
                 boxShadow: `0 4px 24px ${B}50`, transition: 'transform 0.15s, box-shadow 0.15s',
-                minWidth: 200,
+                whiteSpace: 'nowrap',
               }}
               onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 32px ${B}70`; }}
               onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = `0 4px 24px ${B}50`; }}
@@ -574,17 +574,17 @@ export const NovaPage: React.FC = () => {
             <button
               onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}
               style={{
-                height: 56, padding: '0 32px', borderRadius: 14,
+                flex: 1, height: 52, padding: '0 16px', borderRadius: 14,
                 background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)',
-                color: '#fff', fontWeight: 600, fontSize: 16,
+                color: '#fff', fontWeight: 600, fontSize: 15,
                 border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer',
                 transition: 'background 0.15s',
-                minWidth: 160,
+                whiteSpace: 'nowrap',
               }}
               onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)')}
               onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
             >
-              Ver planos
+              {t.hero_cta2 || 'Ver planos'}
             </button>
           </div>
         </div>
