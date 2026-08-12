@@ -849,12 +849,12 @@ export const NovaPage: React.FC = () => {
           style={{ display: 'block', maxWidth: 900, margin: '0 auto', borderRadius: 36, overflow: 'hidden', cursor: 'pointer', textDecoration: 'none' }}
         >
           <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
-            <iframe
-              src="https://player.cloudinary.com/embed/?cloud_name=ce70kcrk&public_id=hf_20260812_072553_ac511a23-5d6a-422e-b450-2f0782b69755&loop=true&autoplay=true&muted=true&controls=false"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none', display: 'block', pointerEvents: 'none' }}
-              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-              allowFullScreen
-            />
+            <video
+              autoPlay muted loop playsInline
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', border: 'none', display: 'block', pointerEvents: 'none' }}
+            >
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_072553_ac511a23-5d6a-422e-b450-2f0782b69755.mp4" type="video/mp4" />
+            </video>
           </div>
         </a>
       </section>
