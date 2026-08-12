@@ -264,46 +264,59 @@ export const NovaPage: React.FC = () => {
       .catch(() => {/* keep default BR */});
   }, []);
 
-  // Força autoplay em todos os videos — iOS Safari exige .play() programático
+  // Autoplay de videos — iOS Safari só libera .play() com gesture do usuário
   useEffect(() => {
-    const tryPlay = (video: HTMLVideoElement) => {
-      video.muted = true;
-      video.playsInline = true;
-      const p = video.play();
-      if (p !== undefined) {
-        p.catch(() => {
-          // tenta de novo após 500ms (rede lenta ou bloqueio temporário)
-          setTimeout(() => { video.muted = true; video.play().catch(() => {}); }, 500);
-        });
-      }
+    let scrollObserver: IntersectionObserver | null = null;
+
+    const allVideos = () => document.querySelectorAll<HTMLVideoElement>('video');
+
+    const playVideo = (v: HTMLVideoElement) => {
+      v.muted = true;
+      v.playsInline = true;
+      v.play().catch(() => {});
     };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          const vid = entry.target as HTMLVideoElement;
-          if (entry.isIntersecting) {
-            tryPlay(vid);
-          } else {
-            vid.pause();
-          }
+    // Tenta rodar imediatamente (funciona para videos visíveis no load)
+    const initTimer = setTimeout(() => {
+      allVideos().forEach(v => playVideo(v));
+    }, 150);
+
+    // Configura o observer de scroll
+    const setupObserver = () => {
+      if (scrollObserver) return;
+      scrollObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) playVideo(v);
+          else v.pause();
         });
-      },
-      { threshold: 0.1 }
-    );
+      }, { threshold: 0.15 });
+      allVideos().forEach(v => scrollObserver!.observe(v));
+    };
 
-    // pequeno delay para garantir que os elementos do DOM já foram montados
-    const timer = setTimeout(() => {
-      const videos = document.querySelectorAll<HTMLVideoElement>('video');
-      videos.forEach(vid => {
-        vid.muted = true;
-        tryPlay(vid);        // tenta já na carga inicial
-        observer.observe(vid);
-      });
-    }, 100);
+    // No primeiro toque/scroll o iOS libera .play() para todos
+    const onFirstGesture = () => {
+      allVideos().forEach(v => playVideo(v));
+      setupObserver();
+      document.removeEventListener('touchstart', onFirstGesture);
+      document.removeEventListener('scroll', onFirstGesture);
+      document.removeEventListener('click', onFirstGesture);
+    };
 
-    return () => { clearTimeout(timer); observer.disconnect(); };
+    document.addEventListener('touchstart', onFirstGesture, { passive: true });
+    document.addEventListener('scroll', onFirstGesture, { passive: true });
+    document.addEventListener('click', onFirstGesture);
+    setupObserver();
+
+    return () => {
+      clearTimeout(initTimer);
+      scrollObserver?.disconnect();
+      document.removeEventListener('touchstart', onFirstGesture);
+      document.removeEventListener('scroll', onFirstGesture);
+      document.removeEventListener('click', onFirstGesture);
+    };
   }, []);
+
 
   return (
     <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: '#fff', color: '#0a0a0a', overflowX: 'hidden' }}>
@@ -485,7 +498,7 @@ export const NovaPage: React.FC = () => {
             width: '100%', height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
-          }}
+          }} poster="https://res.cloudinary.com/ce70kcrk/video/upload/so_0,f_jpg,q_80,w_800/Portugiss.jpg"
         >
           <source src="https://res.cloudinary.com/ce70kcrk/video/upload/Portugiss.mp4" type="video/mp4" />
         </video>
@@ -687,7 +700,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 1 — Rede Social */}
           <div className="b1 bcard-dark" style={{ background: '#0A0A1A', minHeight: 280, overflow: 'hidden' }}>
-            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }} poster="https://res.cloudinary.com/ce70kcrk/video/upload/so_0,f_jpg,q_80,w_800/app.jpg">
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/app.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(10,10,26,0.78) 0%, rgba(10,10,26,0.55) 100%)' }} />
@@ -713,7 +726,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 2 — +30M Produtos */}
           <div className="b2 bcard-dark" style={{ background: '#0a0a0a', minHeight: 280, justifyContent: 'space-between', overflow: 'hidden' }}>
-            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }} poster="https://res.cloudinary.com/ce70kcrk/video/upload/so_0,f_jpg,q_80,w_800/hf_20260812_061148_8b410879-709f-462d-8c5e-7fb743bc9351.jpg">
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_061148_8b410879-709f-462d-8c5e-7fb743bc9351.mp4" type="video/mp4" />
             </video>
 
@@ -737,7 +750,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 3 — Minerador IA */}
           <div className="b3 bcard-dark" style={{ background: '#0A0A1A', overflow: 'hidden' }}>
-            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }} poster="https://res.cloudinary.com/ce70kcrk/video/upload/so_0,f_jpg,q_80,w_800/completo.jpg">
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/completo.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(145deg, rgba(10,10,26,0.72) 0%, rgba(18,16,58,0.65) 100%)' }} />
@@ -780,7 +793,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 6 — Rastreio */}
           <div className="b6 bcard-dark" style={{ background: '#0A0A1A' }}>
-            <video preload="auto" autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }} poster="https://res.cloudinary.com/ce70kcrk/video/upload/so_0,f_jpg,q_80,w_800/hf_20260812_105151_3105962d-701e-4c55-ab8f-a8c47fe3ddc0.jpg">
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_105151_3105962d-701e-4c55-ab8f-a8c47fe3ddc0.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.70) 0%, rgba(10,10,30,0.55) 100%)', borderRadius: 'inherit' }} />
@@ -795,7 +808,7 @@ export const NovaPage: React.FC = () => {
 
           {/* 7 — Aulas */}
           <div className="b7 bcard-dark" style={{ background: '#0A0A1A' }}>
-            <video preload="auto" autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }}>
+            <video preload="auto" autoPlay muted loop playsInline disableRemotePlayback x-webkit-airplay="deny" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit', pointerEvents: 'none' }} poster="https://res.cloudinary.com/ce70kcrk/video/upload/so_0,f_jpg,q_80,w_800/aulas.jpg">
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/aulas.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, rgba(5,5,20,0.72) 0%, rgba(10,10,30,0.60) 100%)', borderRadius: 'inherit' }} />
