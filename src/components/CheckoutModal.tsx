@@ -308,8 +308,18 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
     const hasFiredAddPaymentInfo = useRef(false);
 
     const handleCpfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCpf(e.target.value);
-        if (!hasFiredAddPaymentInfo.current && e.target.value.length > 0) {
+        // Formata visualmente: 000.000.000-00
+        const digits = e.target.value.replace(/\D/g, '').slice(0, 11);
+        let formatted = digits;
+        if (digits.length > 9) {
+            formatted = digits.slice(0, 3) + '.' + digits.slice(3, 6) + '.' + digits.slice(6, 9) + '-' + digits.slice(9);
+        } else if (digits.length > 6) {
+            formatted = digits.slice(0, 3) + '.' + digits.slice(3, 6) + '.' + digits.slice(6);
+        } else if (digits.length > 3) {
+            formatted = digits.slice(0, 3) + '.' + digits.slice(3);
+        }
+        setCpf(formatted);
+        if (!hasFiredAddPaymentInfo.current && digits.length > 0) {
             hasFiredAddPaymentInfo.current = true;
             try { 
                 const parts = guestName?.split(' ') || [];
