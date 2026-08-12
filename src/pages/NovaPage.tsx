@@ -152,13 +152,13 @@ export const NovaPage: React.FC = () => {
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 width: 34, height: 34, borderRadius: 10,
-                border: '1.5px solid #E5E7EB',
-                background: '#FAFAFA',
+                border: '1px solid #E5E7EB',
+                background: '#fff',
                 flexShrink: 0, textDecoration: 'none',
                 transition: 'background 0.15s, border-color 0.15s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.background = '#F0EEFF'; e.currentTarget.style.borderColor = B; }}
-              onMouseLeave={e => { e.currentTarget.style.background = '#FAFAFA'; e.currentTarget.style.borderColor = '#E5E7EB'; }}
+              onMouseEnter={e => { e.currentTarget.style.background = '#F9FAFB'; e.currentTarget.style.borderColor = '#D1D5DB'; }}
+              onMouseLeave={e => { e.currentTarget.style.background = '#fff'; e.currentTarget.style.borderColor = '#E5E7EB'; }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#555" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -187,14 +187,15 @@ export const NovaPage: React.FC = () => {
                 onClick={e => { e.stopPropagation(); setLangOpen(v => !v); }}
                 style={{
                   display: 'flex', alignItems: 'center', gap: 6,
-                  background: langOpen ? '#F3F4F6' : 'transparent',
+                  height: 34, padding: '0 10px',
+                  background: langOpen ? '#F9FAFB' : '#fff',
                   border: '1px solid #E5E7EB', borderRadius: 10,
-                  padding: '6px 10px', cursor: 'pointer',
+                  cursor: 'pointer',
                   fontSize: 13, fontWeight: 600, color: '#444',
-                  transition: 'background 0.15s', whiteSpace: 'nowrap',
+                  transition: 'background 0.15s, border-color 0.15s', whiteSpace: 'nowrap',
                 }}
-                onMouseEnter={e => { if (!langOpen) e.currentTarget.style.background = '#F9FAFB'; }}
-                onMouseLeave={e => { if (!langOpen) e.currentTarget.style.background = 'transparent'; }}
+                onMouseEnter={e => { if (!langOpen) { e.currentTarget.style.background = '#F9FAFB'; e.currentTarget.style.borderColor = '#D1D5DB'; } }}
+                onMouseLeave={e => { if (!langOpen) { e.currentTarget.style.background = '#fff'; e.currentTarget.style.borderColor = '#E5E7EB'; } }}
               >
                 <span style={{ fontSize: 18, lineHeight: 1 }}>{selectedLang.flag}</span>
                 <span className="nav-lang-label">{selectedLang.label}</span>
