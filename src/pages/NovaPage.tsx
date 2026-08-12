@@ -549,17 +549,22 @@ export const NovaPage: React.FC = () => {
 
 
           {/* 6 — Rede Social */}
-          <div className="b6 bcard-dark" style={{ background: '#0A0A1A', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 28 }}>
-            <div style={{ position: 'absolute', bottom: -60, left: -40, width: 200, height: 200, borderRadius: '50%', background: B, opacity: 0.15, filter: 'blur(60px)' }} />
-            {/* Texto */}
-            <div style={{ flex: 1, minWidth: 180, position: 'relative', zIndex: 1 }}>
+          <div className="b6 bcard-dark" style={{ background: '#0A0A1A' }}>
+            {/* Video de fundo */}
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+              <source src="https://res.cloudinary.com/ce70kcrk/video/upload/app.mp4" type="video/mp4" />
+            </video>
+            {/* Overlay */}
+            <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(10,10,26,0.78) 0%, rgba(10,10,26,0.55) 100%)' }} />
+            {/* Conteúdo */}
+            <div style={{ position: 'relative', zIndex: 2 }}>
               <div style={{ width: 44, height: 44, borderRadius: 13, background: 'rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
               </div>
               <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#fff', margin: '0 0 6px' }}>A 1ª Rede Social do Importador 💙</h3>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.6, margin: '0 0 18px' }}>Feed exclusivo, grupos por nicho, fornecedores compartilhados e +28.000 membros ativos.</p>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 1.6, margin: '0 0 18px' }}>Feed exclusivo, grupos por nicho, fornecedores compartilhados e +28.000 membros ativos.</p>
               <button
                 onClick={() => setCheckout(PLANS[1])}
                 style={{
@@ -575,14 +580,6 @@ export const NovaPage: React.FC = () => {
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
-            </div>
-            {/* Phones image */}
-            <div style={{ flexShrink: 0, position: 'relative', zIndex: 1 }}>
-              <img
-                src="https://i.postimg.cc/3RkrkCVn/phones.png"
-                alt="App Connect Academy"
-                style={{ height: 180, width: 'auto', filter: 'drop-shadow(0 12px 32px rgba(76,53,232,0.4))' }}
-              />
             </div>
           </div>
 
