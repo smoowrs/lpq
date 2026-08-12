@@ -922,7 +922,8 @@ export const NovaPage: React.FC = () => {
         </div>
       </footer>
 
-      {checkout && <CheckoutModal plan={checkout} onClose={() => setCheckout(null)} onSuccess={() => setCheckout(null)} />}
+      {checkout && <CheckoutModal plan={checkout} onClose={() => { setCheckout(null); setTimeout(() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }), 50); }} onSuccess={() => setCheckout(null)} />}
+
     </div>
   );
 };
