@@ -550,11 +550,8 @@ export const NovaPage: React.FC = () => {
         <div className="bento">
 
           {/* 1 — Rede Social */}
-          <div className="b1 bcard-dark" style={{ background: '#0A0A1A', minHeight: 280, overflow: 'hidden' }}
-            onMouseEnter={e => (e.currentTarget.querySelector('video') as HTMLVideoElement)?.play()}
-            onMouseLeave={e => (e.currentTarget.querySelector('video') as HTMLVideoElement)?.pause()}
-          >
-            <video muted loop playsInline preload="metadata" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+          <div className="b1 bcard-dark" style={{ background: '#0A0A1A', minHeight: 280, overflow: 'hidden' }}>
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/app.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(160deg, rgba(10,10,26,0.78) 0%, rgba(10,10,26,0.55) 100%)' }} />
@@ -579,11 +576,8 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* 2 — +30M Produtos */}
-          <div className="b2 bcard-dark" style={{ background: '#0a0a0a', minHeight: 280, justifyContent: 'space-between', overflow: 'hidden' }}
-            onMouseEnter={e => (e.currentTarget.querySelector('video') as HTMLVideoElement)?.play()}
-            onMouseLeave={e => (e.currentTarget.querySelector('video') as HTMLVideoElement)?.pause()}
-          >
-            <video muted loop playsInline preload="metadata" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+          <div className="b2 bcard-dark" style={{ background: '#0a0a0a', minHeight: 280, justifyContent: 'space-between', overflow: 'hidden' }}>
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/hf_20260812_061148_8b410879-709f-462d-8c5e-7fb743bc9351.mp4" type="video/mp4" />
             </video>
 
@@ -606,11 +600,8 @@ export const NovaPage: React.FC = () => {
           </div>
 
           {/* 3 — Minerador IA */}
-          <div className="b3 bcard-dark" style={{ background: '#0A0A1A', overflow: 'hidden' }}
-            onMouseEnter={e => (e.currentTarget.querySelector('video') as HTMLVideoElement)?.play()}
-            onMouseLeave={e => (e.currentTarget.querySelector('video') as HTMLVideoElement)?.pause()}
-          >
-            <video muted loop playsInline preload="metadata" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
+          <div className="b3 bcard-dark" style={{ background: '#0A0A1A', overflow: 'hidden' }}>
+            <video autoPlay muted loop playsInline style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, display: 'block', pointerEvents: 'none' }}>
               <source src="https://res.cloudinary.com/ce70kcrk/video/upload/completo.mp4" type="video/mp4" />
             </video>
             <div style={{ position: 'absolute', inset: 0, zIndex: 1, background: 'linear-gradient(145deg, rgba(10,10,26,0.72) 0%, rgba(18,16,58,0.65) 100%)' }} />
