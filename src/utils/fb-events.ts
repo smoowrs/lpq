@@ -109,8 +109,6 @@ export const trackFBEvent = async (eventName: string, eventData: any = {}, userD
         }
     } catch (_) { /* silent */ }
 
-    }
-
     // 5. CAPI — server-side (maior contribuição para o match quality score)
     try {
         const fbc = getFbc();
