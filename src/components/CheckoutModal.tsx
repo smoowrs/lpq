@@ -404,7 +404,9 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
                 body: JSON.stringify({ id: pixData?.id }),
             });
             const data = await res.json();
-            if (data?.status === 'approved') onSuccess();
+            // case-insensitive: Appmax pode retornar 'approved', 'APPROVED', 'paid', etc.
+            const status = (data?.status || '').toLowerCase();
+            if (['approved', 'paid', 'completed', 'authorized'].includes(status)) onSuccess();
         } catch {}
     };
 
@@ -838,13 +840,32 @@ export const CheckoutModal = ({
 
     const handleLocalSuccess = async () => {
         setIsPaymentApproved(true);
-        const nameParts = guestName?.split(' ') || [];
         const purchaseCurrency = region === 'EU' ? 'EUR' : 'BRL';
-        const purchaseValue = totalPriceNum; // inclui order bump se ativo
-        trackPurchase(plan.label || plan.id, purchaseValue, purchaseCurrency, undefined, {
+        const purchaseValue = totalPriceNum;
+        // Gera eventID compartilhado — mesmo ID no browser pixel e na CAPI = deduplicação correta
+        const purchaseEventId = `purchase_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+
+        // ✔ Disparo SÍNCRONO imediato — garante que Purchase chega ao FB
+        //   independente do resultado das chamadas async seguintes
+        try {
+            if (typeof window !== 'undefined' && (window as any).fbq) {
+                (window as any).fbq('track', 'Purchase', {
+                    value: purchaseValue,
+                    currency: purchaseCurrency,
+                    content_name: plan.label || plan.id,
+                    content_type: 'product',
+                    content_ids: [plan.id || plan.label],
+                    num_items: 1,
+                }, { eventID: purchaseEventId });
+            }
+        } catch {}
+
+        // CAPI server-side com mesmo eventID para deduplicação
+        const nameParts = guestName?.split(' ') || [];
+        trackPurchase(plan.label || plan.id, purchaseValue, purchaseCurrency, purchaseEventId, {
             email: guestEmail,
             firstName: nameParts[0] || '',
-            phone: guestPhone.replace(/\D/g, ''),
+            phone: guestPhone?.replace(/\D/g, '') || '',
         });
         trackGoogleAdsPurchase(purchaseValue, purchaseCurrency);
         try {

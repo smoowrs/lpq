@@ -85,7 +85,15 @@ export const trackFBEvent = async (eventName: string, eventData: any = {}, userD
         ...(userData || {}),
     };
 
-    // 3. Enriquecer com dados da sessão Supabase (email, nome)
+    // ─── DISPARO IMEDIATO DO BROWSER PIXEL ────────────────────────────────────
+    // Dispara ANTES de qualquer await para garantir que o evento chega ao FB
+    // mesmo que a sessão do Supabase ou a CAPI falhem.
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', eventName, eventData, { eventID: eventId });
+    }
+    // ─────────────────────────────────────────────────────────────────────────
+
+    // 3. Enriquecer com dados da sessão Supabase (para CAPI)
     try {
         const { data: { session } } = await supabase.auth.getSession();
         if (session?.user) {
@@ -101,23 +109,6 @@ export const trackFBEvent = async (eventName: string, eventData: any = {}, userD
         }
     } catch (_) { /* silent */ }
 
-    // 4. Browser Pixel — advanced matching + deduplication via eventID
-    if (typeof window !== 'undefined' && (window as any).fbq) {
-        // Advanced matching: passa dados conhecidos para o fbq melhorar a correspondência
-        const advancedMatch: Record<string, string> = {};
-        if (enrichedUserData.email)     advancedMatch['em'] = enrichedUserData.email;
-        if (enrichedUserData.phone)     advancedMatch['ph'] = enrichedUserData.phone;
-        if (enrichedUserData.firstName) advancedMatch['fn'] = enrichedUserData.firstName;
-        if (enrichedUserData.lastName)  advancedMatch['ln'] = enrichedUserData.lastName;
-        if (enrichedUserData.country)   advancedMatch['country'] = enrichedUserData.country;
-
-        // Reinit com advanced matching quando tivermos dados (aumenta match quality browser side)
-        if (Object.keys(advancedMatch).length > 0) {
-            (window as any).fbq('init', '1207575821540865', advancedMatch);
-            (window as any).fbq('init', '858214503944051',  advancedMatch);
-        }
-
-        (window as any).fbq('track', eventName, eventData, { eventID: eventId });
     }
 
     // 5. CAPI — server-side (maior contribuição para o match quality score)
