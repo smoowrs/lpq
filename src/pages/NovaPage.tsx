@@ -225,12 +225,14 @@ const TR: Record<string, Record<string, string>> = {
 };
 
 /* ─── Main ───────────────────────────────────────────── */
-export const NovaPage: React.FC = () => {
+export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperience = false }) => {
   const [checkout, setCheckout] = useState<any>(null);
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState(LANGS[0]);
   const t = TR[selectedLang.code] || TR['pt-BR'];
+  // Filtra o plano experience quando showExperience=false (landing principal)
+  const visiblePlans = showExperience ? PLANS : PLANS.filter(p => p.id !== 'experience');
   const isEU = selectedLang.region === 'EU';
 
   useEffect(() => {
@@ -394,8 +396,10 @@ export const NovaPage: React.FC = () => {
 
             {/* Teste grátis */}
             <a
-              href="#precos"
-              onClick={e => { e.preventDefault(); document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }); }}
+              href={showExperience ? '#precos' : 'https://t.me/grupoconnect'}
+              target={showExperience ? undefined : '_blank'}
+              rel={showExperience ? undefined : 'noopener noreferrer'}
+              onClick={showExperience ? (e => { e.preventDefault(); document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }); }) : undefined}
               style={{
                 display: 'inline-flex', alignItems: 'center',
                 height: 34, padding: '0 14px', borderRadius: 10,
@@ -407,7 +411,7 @@ export const NovaPage: React.FC = () => {
               onMouseEnter={e => (e.currentTarget.style.opacity = '0.85')}
               onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
             >
-              {t.nav_cta}
+              {showExperience ? t.nav_cta : 'Catálogo'}
             </a>
 
             {/* Language selector */}
@@ -859,7 +863,7 @@ export const NovaPage: React.FC = () => {
             <p style={{ fontSize: 15, color: '#888', margin: 0, fontWeight: 500 }}>Acesso completo. Sem surpresas.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, alignItems: 'start' }}>
-            {PLANS.map(plan => (
+            {visiblePlans.map(plan => (
               <div key={plan.id} style={{
                 borderRadius: 28,
                 background: plan.highlight ? '#0D0D14' : '#fff',

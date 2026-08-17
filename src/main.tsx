@@ -15,6 +15,7 @@ if (container) {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<NovaPage />} />
+            <Route path="/experience" element={<NovaPage showExperience={true} />} />
             <Route path="/nova" element={<App />} />
           </Routes>
         </BrowserRouter>
