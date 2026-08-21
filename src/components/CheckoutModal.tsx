@@ -842,27 +842,12 @@ export const CheckoutModal = ({
         setIsPaymentApproved(true);
         const purchaseCurrency = region === 'EU' ? 'EUR' : 'BRL';
         const purchaseValue = totalPriceNum;
-        // Gera eventID compartilhado — mesmo ID no browser pixel e na CAPI = deduplicação correta
-        const purchaseEventId = `purchase_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
 
-        // ✔ Disparo SÍNCRONO imediato — garante que Purchase chega ao FB
-        //   independente do resultado das chamadas async seguintes
-        try {
-            if (typeof window !== 'undefined' && (window as any).fbq) {
-                (window as any).fbq('track', 'Purchase', {
-                    value: purchaseValue,
-                    currency: purchaseCurrency,
-                    content_name: plan.label || plan.id,
-                    content_type: 'product',
-                    content_ids: [plan.id || plan.label],
-                    num_items: 1,
-                }, { eventID: purchaseEventId });
-            }
-        } catch {}
-
-        // CAPI server-side com mesmo eventID para deduplicação
+        // trackPurchase → trackFBEvent:
+        //   1. Dispara fbq('track','Purchase') SINCRONAMENTE (antes de qualquer await)
+        //   2. Envia CAPI com o MESMO eventId → deduplicação correta no Facebook
         const nameParts = guestName?.split(' ') || [];
-        trackPurchase(plan.label || plan.id, purchaseValue, purchaseCurrency, purchaseEventId, {
+        trackPurchase(plan.label || plan.id, purchaseValue, purchaseCurrency, undefined, {
             email: guestEmail,
             firstName: nameParts[0] || '',
             phone: guestPhone?.replace(/\D/g, '') || '',
