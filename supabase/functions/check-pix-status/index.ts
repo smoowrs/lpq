@@ -17,7 +17,7 @@ serve(async (req) => {
             Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
         )
 
-        const { id } = await req.json()
+        const { id, email: requestEmail, name: requestName } = await req.json()
         const APPMAX_TOKEN = Deno.env.get('APPMAX_API_TOKEN')
 
         // 1. Fetch current status from Appmax first
@@ -79,8 +79,9 @@ serve(async (req) => {
             // - user creation if not exists
             // - plan activation with correct durations
             // - welcome/access email sending
-            const email = intent.guest_email
-            const name = intent.guest_name
+            // Use email from intent if available; fall back to the one sent by the frontend on each poll
+            const email = intent.guest_email || requestEmail || null
+            const name = intent.guest_name || requestName || null
             const userId = intent.user_id
 
             if (userId || email) {

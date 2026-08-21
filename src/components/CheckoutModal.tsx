@@ -401,10 +401,10 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
                     'Authorization': `Bearer ${sessionData?.session?.access_token || SUPABASE_ANON_KEY}`,
                     'apikey': SUPABASE_ANON_KEY,
                 },
-                body: JSON.stringify({ id: pixData?.id }),
+                // email + name sent as fallback in case payment_intents doesn't have guest_email
+                body: JSON.stringify({ id: pixData?.id, email: guestEmail, name: guestName }),
             });
             const data = await res.json();
-            // case-insensitive: Appmax pode retornar 'approved', 'APPROVED', 'paid', etc.
             const status = (data?.status || '').toLowerCase();
             if (['approved', 'paid', 'completed', 'authorized'].includes(status)) onSuccess();
         } catch {}
@@ -870,12 +870,16 @@ export const CheckoutModal = ({
                     'Authorization': `Bearer ${session?.access_token || SUPABASE_ANON_KEY}`,
                     'apikey': SUPABASE_ANON_KEY,
                 },
-                body: JSON.stringify({ 
-                    plan: plan.id, 
-                    email: finalEmail, 
+                body: JSON.stringify({
+                    plan: plan.id,
+                    email: finalEmail,
                     name: finalName,
-                    billingCycle: plan.billingCycle, // Include billing cycle if present
-                    sendEmail: false, // Backend already sent the access email
+                    billingCycle: plan.billingCycle,
+                    // sendEmail:true — safety net: garante email caso server-side falhe
+                    // activate-user não duplica para usuários criados há menos de 2min
+                    sendEmail: true,
+                    // grantCredits:false — créditos já concedidos por process-appmax-cc/check-pix-status
+                    grantCredits: false,
                 }),
             });
 

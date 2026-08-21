@@ -203,17 +203,49 @@ serve(async (req: Request) => {
 
         // Look up by email if userId not provided
         if (!targetUserId && email) {
-            // listUsers is the correct admin API — getUserByEmail doesn't exist in this SDK version
-            const { data: { users }, error: listErr } = await supabase.auth.admin.listUsers({ page: 1, perPage: 1000 })
-            const existingUser = listErr ? null : users.find((u: any) => u.email?.toLowerCase() === email.toLowerCase())
+            const normalizedEmail = email.toLowerCase().trim()
 
-            if (!existingUser) {
+            // ── STEP 1: look up in profiles table by email (fast, no 1000-user cap) ──
+            try {
+                const { data: profileMatch } = await supabase
+                    .from('profiles')
+                    .select('id')
+                    .ilike('email', normalizedEmail)
+                    .maybeSingle()
+
+                if (profileMatch?.id) {
+                    targetUserId = profileMatch.id
+                    console.log(`[activate-user] Found via profiles.email: ${email} → ${targetUserId}`)
+                }
+            } catch (profileLookupErr: any) {
+                console.warn('[activate-user] profiles email lookup failed (non-fatal):', profileLookupErr.message)
+            }
+
+            // ── STEP 2: if not found in profiles, paginate through auth.users ──
+            if (!targetUserId) {
+                let found = false
+                let page = 1
+                while (!found) {
+                    const { data: usersPage, error: listErr } = await supabase.auth.admin.listUsers({ page, perPage: 1000 })
+                    if (listErr || !usersPage?.users?.length) break
+                    const match = usersPage.users.find((u: any) => u.email?.toLowerCase() === normalizedEmail)
+                    if (match) {
+                        targetUserId = match.id
+                        found = true
+                        console.log(`[activate-user] Found via listUsers page ${page}: ${email} → ${targetUserId}`)
+                    }
+                    if (usersPage.users.length < 1000) break // last page
+                    page++
+                }
+            }
+
+            if (!targetUserId) {
                 // User does NOT exist — create them
-                console.log(`[activate-user] User ${email} not found. Creating account...`)
+                console.log(`[activate-user] User ${email} not found anywhere. Creating account...`)
 
                 const { data: newUser, error: createErr } = await supabase.auth.admin.createUser({
                     email,
-                    email_confirm: true, // mark email as confirmed immediately
+                    email_confirm: true,
                     user_metadata: {
                         full_name: name || email.split('@')[0],
                         plan,
@@ -221,14 +253,25 @@ serve(async (req: Request) => {
                 })
 
                 if (createErr) {
-                    // If "User already registered" race condition, retry listUsers
+                    // Race condition: another concurrent call already created the user
                     if (createErr.message?.toLowerCase().includes('already') || createErr.message?.toLowerCase().includes('registered')) {
-                        const { data: { users: retryUsers } } = await supabase.auth.admin.listUsers({ page: 1, perPage: 1000 })
-                        const retryUser = retryUsers?.find((u: any) => u.email?.toLowerCase() === email.toLowerCase())
-                        if (retryUser) {
-                            targetUserId = retryUser.id
+                        console.warn(`[activate-user] Race condition on createUser — re-searching for ${email}`)
+                        // Re-search profiles first
+                        const { data: raceProfile } = await supabase
+                            .from('profiles')
+                            .select('id')
+                            .ilike('email', normalizedEmail)
+                            .maybeSingle()
+                        if (raceProfile?.id) {
+                            targetUserId = raceProfile.id
                         } else {
-                            throw new Error(`Erro ao criar usuário: ${createErr.message}`)
+                            const { data: racePage } = await supabase.auth.admin.listUsers({ page: 1, perPage: 1000 })
+                            const raceUser = racePage?.users?.find((u: any) => u.email?.toLowerCase() === normalizedEmail)
+                            if (raceUser) {
+                                targetUserId = raceUser.id
+                            } else {
+                                throw new Error(`Erro ao criar usuário: ${createErr.message}`)
+                            }
                         }
                     } else {
                         throw new Error(`Erro ao criar usuário: ${createErr.message}`)
@@ -238,9 +281,6 @@ serve(async (req: Request) => {
                     isNewUser = true
                     console.log(`[activate-user] New user created: ${email} → ${targetUserId}`)
                 }
-            } else {
-                targetUserId = existingUser.id
-                console.log(`[activate-user] Existing user found: ${email} → ${targetUserId}`)
             }
         }
 
@@ -329,12 +369,34 @@ serve(async (req: Request) => {
 
         console.log(`[activate-user] Plan '${plan}' activated for user ${targetUserId} until ${endDate.toISOString()}`)
 
-        // Send access email — for new users (just created) OR when explicitly requested
-        // Always send for new users; for existing users only if sendEmail flag is true
-        if (email && (isNewUser || sendEmail)) {
-            const displayName = name || email.split('@')[0]
+        // Send access email with deduplication:
+        // - New users (isNewUser=true): always send — they must receive their credentials
+        // - Existing users with sendEmail=true: only send if profile was NOT updated in the last 3 minutes
+        //   (prevents double email when check-pix-status and handleLocalSuccess both fire with sendEmail:true)
+        let shouldSendEmail = false
+        if (email) {
+            if (isNewUser) {
+                shouldSendEmail = true
+            } else if (sendEmail) {
+                const { data: freshProfile } = await supabase
+                    .from('profiles')
+                    .select('updated_at')
+                    .eq('id', targetUserId)
+                    .single()
+                const lastUpdated = freshProfile?.updated_at ? new Date(freshProfile.updated_at).getTime() : 0
+                const ageMs = Date.now() - lastUpdated
+                // Only send if profile was NOT just updated by another concurrent call (> 3 min ago)
+                shouldSendEmail = ageMs > 3 * 60 * 1000
+                if (!shouldSendEmail) {
+                    console.log(`[activate-user] Skipping duplicate email for ${email} (profile updated ${Math.round(ageMs/1000)}s ago)`)
+                }
+            }
+        }
+
+        if (shouldSendEmail) {
+            const displayName = name || email!.split('@')[0]
             console.log(`[activate-user] Sending access email to ${email} (isNewUser=${isNewUser})`)
-            await sendAccessEmail(supabase, email, displayName, plan)
+            await sendAccessEmail(supabase, email!, displayName, plan)
         }
 
         return new Response(JSON.stringify({

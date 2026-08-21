@@ -14,9 +14,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   try {
     // Busca leads que:
-    // - foram criados há pelo menos 3 horas
+    // - foram criados há pelo menos 10 minutos
     // - ainda não receberam o email (email_sent = false ou null)
-    const query = `${SUPABASE_URL}/rest/v1/landing_leads?select=id,email&email_sent=is.false&created_at=lt.${new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString()}`;
+    const query = `${SUPABASE_URL}/rest/v1/landing_leads?select=id,email&email_sent=is.false&created_at=lt.${new Date(Date.now() - 10 * 60 * 1000).toISOString()}`;
 
     const leadsRes = await fetch(query, {
       headers: {
