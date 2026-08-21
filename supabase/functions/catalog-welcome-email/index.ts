@@ -21,16 +21,23 @@ function buildEmailHtml(firstName: string): string {
     <tr><td align="center">
       <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);max-width:600px;width:100%;">
 
-        <!-- Header: branco -> cinza muito leve, fino -->
+        <!-- Header: imagem de fundo + overlay escuro -->
         <tr>
-          <td style="background:linear-gradient(180deg,#ffffff 0%,#f0f0f3 100%);padding:32px 44px 28px;text-align:center;border-bottom:1px solid #e8e8ed;">
-            <img src="https://i.postimg.cc/Wz5JsrXh/LOGONE_2.png" alt="Connect Academy" style="height:22px;width:auto;display:block;margin:0 auto 20px;" />
-            <h1 style="color:#111827;font-size:24px;font-weight:800;margin:0 0 8px;letter-spacing:-0.4px;line-height:1.25;">
-              Voce ganhou 10 dias de acesso demo gratis! 🎉
-            </h1>
-            <p style="color:#6B7280;font-size:14px;margin:0;line-height:1.55;">
-              A rede social dos importadores te espera
-            </p>
+          <td style="background:#0a0a0f url('https://connectacademy.com.br/email-hero.jpg') center/cover no-repeat;padding:0;text-align:center;">
+            <!-- Overlay escuro sobre a imagem -->
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td style="background:rgba(0,0,0,0.62);padding:38px 44px 34px;text-align:center;">
+                  <img src="https://i.postimg.cc/Wz5JsrXh/LOGONE_2.png" alt="Connect Academy" style="height:22px;width:auto;display:block;margin:0 auto 20px;filter:brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(190deg);" />
+                  <h1 style="color:#ffffff;font-size:24px;font-weight:800;margin:0 0 8px;letter-spacing:-0.4px;line-height:1.25;text-shadow:0 2px 12px rgba(0,0,0,0.4);">
+                    Voce ganhou 10 dias de acesso demo gratis! 🎉
+                  </h1>
+                  <p style="color:rgba(255,255,255,0.85);font-size:14px;margin:0;line-height:1.55;text-shadow:0 1px 6px rgba(0,0,0,0.3);">
+                    A rede social dos importadores te espera
+                  </p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
 
