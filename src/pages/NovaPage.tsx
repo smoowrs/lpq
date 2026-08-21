@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { CheckoutModal } from '../components/CheckoutModal';
 import { Toaster } from 'react-hot-toast';
+import { supabase } from '../services/supabase';
 
 /* ─── Brand ─────────────────────────────────────────── */
 const B = '#4C35E8';          // Connect blue-purple
@@ -230,6 +231,10 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
   const [scrolled, setScrolled] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [selectedLang, setSelectedLang] = useState(LANGS[0]);
+  const [showCatalogModal, setShowCatalogModal] = useState(false);
+  const [catalogEmail, setCatalogEmail] = useState('');
+  const [catalogLoading, setCatalogLoading] = useState(false);
+  const [catalogDone, setCatalogDone] = useState(false);
   const t = TR[selectedLang.code] || TR['pt-BR'];
   // Filtra o plano experience quando showExperience=false (landing principal)
   const visiblePlans = showExperience ? PLANS : PLANS.filter(p => p.id !== 'experience');
@@ -396,10 +401,8 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
 
             {/* Teste grátis */}
             <a
-              href={showExperience ? '#precos' : 'https://t.me/grupoconnect'}
-              target={showExperience ? undefined : '_blank'}
-              rel={showExperience ? undefined : 'noopener noreferrer'}
-              onClick={showExperience ? (e => { e.preventDefault(); document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }); }) : undefined}
+              href="#"
+              onClick={e => { e.preventDefault(); if (showExperience) { document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }); } else { setShowCatalogModal(true); } }}
               style={{
                 display: 'inline-flex', alignItems: 'center',
                 height: 34, padding: '0 14px', borderRadius: 10,
@@ -1121,6 +1124,134 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
       <Toaster position="top-center" toastOptions={{ duration: 4000, style: { fontFamily: "'Inter', system-ui, sans-serif", fontSize: 14, fontWeight: 600 } }} />
       {checkout && <CheckoutModal plan={checkout} onClose={() => { setCheckout(null); setTimeout(() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' }), 50); }} onSuccess={() => setCheckout(null)} />}
 
+      {/* Bottom-sheet modal Catalogo */}
+      {showCatalogModal && (
+        <div
+          onClick={() => { setShowCatalogModal(false); setCatalogDone(false); setCatalogEmail(''); }}
+          style={{
+            position: 'fixed', inset: 0, zIndex: 1000,
+            background: 'rgba(0,0,0,0.55)',
+            backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)',
+            display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
+            animation: 'fadeInOverlay 0.25s ease',
+          }}
+        >
+          <style>{`
+            @keyframes fadeInOverlay { from { opacity:0 } to { opacity:1 } }
+            @keyframes slideUp { from { transform: translateY(100%) } to { transform: translateY(0) } }
+            @keyframes spin { to { transform: rotate(360deg) } }
+            .catalog-sheet { animation: slideUp 0.38s cubic-bezier(0.32,0.72,0,1); }
+            .catalog-input:focus { border-color: #4C35E8 !important; box-shadow: 0 0 0 3px rgba(76,53,232,0.15) !important; }
+            .catalog-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(76,53,232,0.45) !important; }
+            .catalog-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+          `}</style>
+          <div
+            className="catalog-sheet"
+            onClick={e => e.stopPropagation()}
+            style={{
+              width: '100%', maxWidth: 520,
+              background: '#fff', borderRadius: '28px 28px 0 0',
+              padding: '12px 28px 48px',
+              boxShadow: '0 -8px 60px rgba(0,0,0,0.18)',
+            }}
+          >
+            <div style={{ width: 40, height: 4, borderRadius: 99, background: '#E0E0E8', margin: '0 auto 28px' }} />
+            {catalogDone ? (
+              <div style={{ textAlign: 'center', padding: '8px 0 16px' }}>
+                <div style={{ fontSize: 48, marginBottom: 12 }}>🚀</div>
+                <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 22, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>
+                  Perfeito! Abrindo o catalogo...
+                </h3>
+                <p style={{ fontSize: 14, color: '#666', margin: 0 }}>Voce ja esta na lista. Abrindo o Telegram agora.</p>
+              </div>
+            ) : (
+              <>
+                <div style={{ width: 52, height: 52, borderRadius: 16, marginBottom: 20, background: 'linear-gradient(135deg, #4C35E8 0%, #7B5CE7 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </div>
+                <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 24, fontWeight: 800, color: '#0a0a0a', margin: '0 0 6px', letterSpacing: '-0.02em' }}>
+                  Acesse o Catalogo
+                </h3>
+                <p style={{ fontSize: 14, color: '#666', margin: '0 0 24px', lineHeight: 1.5 }}>
+                  Informe seu email para receber nossos lancamentos e produtos exclusivos no grupo.
+                </p>
+                <form
+                  onSubmit={async e => {
+                    e.preventDefault();
+                    if (!catalogEmail.includes('@')) return;
+                    setCatalogLoading(true);
+                    try {
+                      await supabase.from('landing_leads').insert({
+                        email: catalogEmail.trim().toLowerCase(),
+                        source: 'catalog_button',
+                        page_url: window.location.href,
+                      });
+                    } catch {}
+                    try { if ((window as any).fbq) (window as any).fbq('track', 'Lead', { content_name: 'catalog' }); } catch {}
+                    setCatalogLoading(false);
+                    setCatalogDone(true);
+                    setTimeout(() => {
+                      window.open('https://t.me/grupoconnect', '_blank', 'noopener,noreferrer');
+                      setShowCatalogModal(false);
+                      setCatalogDone(false);
+                      setCatalogEmail('');
+                    }, 1500);
+                  }}
+                  style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+                >
+                  <input
+                    className="catalog-input"
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    autoFocus
+                    placeholder="seuemail@exemplo.com"
+                    value={catalogEmail}
+                    onChange={e => setCatalogEmail(e.target.value)}
+                    required
+                    style={{
+                      width: '100%', height: 52, borderRadius: 14,
+                      border: '1.5px solid #E5E7EB', padding: '0 16px',
+                      fontSize: 16, fontFamily: "'Inter', system-ui",
+                      outline: 'none', color: '#0a0a0a', background: '#FAFAFA',
+                      boxSizing: 'border-box', transition: 'border-color 0.2s, box-shadow 0.2s',
+                    }}
+                  />
+                  <button
+                    type="submit"
+                    className="catalog-btn"
+                    disabled={catalogLoading || !catalogEmail.includes('@')}
+                    style={{
+                      width: '100%', height: 52, borderRadius: 14,
+                      background: 'linear-gradient(135deg, #4C35E8 0%, #7B5CE7 100%)',
+                      color: '#fff', fontWeight: 700, fontSize: 16, border: 'none', cursor: 'pointer',
+                      boxShadow: '0 4px 20px rgba(76,53,232,0.35)',
+                      transition: 'transform 0.15s, box-shadow 0.15s',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                    }}
+                  >
+                    {catalogLoading ? (
+                      <>
+                        <div style={{ width: 18, height: 18, border: '2.5px solid rgba(255,255,255,0.4)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 0.7s linear infinite' }} />
+                        Salvando...
+                      </>
+                    ) : 'Acessar Catalogo \u2192'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { window.open('https://t.me/grupoconnect','_blank','noopener,noreferrer'); setShowCatalogModal(false); }}
+                    style={{ background:'none', border:'none', color:'#999', fontSize:13, cursor:'pointer', padding:'4px 0', textDecoration:'underline', textUnderlineOffset:3 }}
+                  >
+                    Pular e acessar direto
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
     </div>
   );
