@@ -122,7 +122,7 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
     const body = await req.json();
-    const { email, name, test = false, lead_id } = body;
+    const { email, name, test = false, lead_id, ab_group } = body;
     if (!email) return new Response(JSON.stringify({ error: "email is required" }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
@@ -141,14 +141,20 @@ serve(async (req) => {
       }),
     });
     const result = await emailRes.json();
-    console.log("[catalog-welcome-email] Resend:", JSON.stringify(result));
+    console.log(`[catalog-welcome-email] Resend (grupo ${ab_group || '?'}):`, JSON.stringify(result));
 
+    // Marca como enviado, registra grupo A/B e horário para analytics
     if (!test && lead_id) {
       const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-      await sb.from("landing_leads").update({ email_sent: true, email_sent_at: new Date().toISOString() }).eq("id", lead_id);
+      await sb.from("landing_leads").update({
+        email_sent: true,
+        email_sent_at: new Date().toISOString(),
+        // ab_group já foi salvo no insert, mas garantimos aqui também
+        ...(ab_group ? { ab_group } : {}),
+      }).eq("id", lead_id);
     }
 
-    return new Response(JSON.stringify({ ok: true, resend: result }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    return new Response(JSON.stringify({ ok: true, resend: result, ab_group }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (err: any) {
     return new Response(JSON.stringify({ error: err.message }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   }

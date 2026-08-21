@@ -1183,10 +1183,13 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                     if (!catalogEmail.includes('@')) return;
                     setCatalogLoading(true);
                     try {
+                      // Atribui grupo A/B aleatório: A=24h, B=48h (teste de timing)
+                      const abGroup = Math.random() < 0.5 ? 'A' : 'B';
                       await supabase.from('landing_leads').insert({
                         email: catalogEmail.trim().toLowerCase(),
                         source: 'catalog_button',
                         page_url: window.location.href,
+                        ab_group: abGroup,
                       });
                     } catch {}
                     try { if ((window as any).fbq) (window as any).fbq('track', 'Lead', { content_name: 'catalog' }); } catch {}
