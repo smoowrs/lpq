@@ -1172,10 +1172,10 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                   </svg>
                 </div>
                 <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 24, fontWeight: 800, color: '#0a0a0a', margin: '0 0 6px', letterSpacing: '-0.02em' }}>
-                  Acesse o Catalogo
+                  Planos de acesso do App
                 </h3>
                 <p style={{ fontSize: 14, color: '#666', margin: '0 0 24px', lineHeight: 1.5 }}>
-                  Informe seu email para receber nossos lancamentos e produtos exclusivos no grupo.
+                  Receba em primeira mão valores dos produtos direto de fábricas e fornecedores da China, acessos a ferramentas exclusivas, sorteios e muito mais.
                 </p>
                 <form
                   onSubmit={async e => {
@@ -1206,7 +1206,6 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                     type="email"
                     inputMode="email"
                     autoComplete="email"
-                    autoFocus
                     placeholder="seuemail@exemplo.com"
                     value={catalogEmail}
                     onChange={e => setCatalogEmail(e.target.value)}
@@ -1239,13 +1238,7 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                       </>
                     ) : 'Acessar Catalogo \u2192'}
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => { window.open('https://t.me/grupoconnect','_blank','noopener,noreferrer'); setShowCatalogModal(false); }}
-                    style={{ background:'none', border:'none', color:'#999', fontSize:13, cursor:'pointer', padding:'4px 0', textDecoration:'underline', textUnderlineOffset:3 }}
-                  >
-                    Pular e acessar direto
-                  </button>
+
                 </form>
               </>
             )}
