@@ -1172,7 +1172,7 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                   </svg>
                 </div>
                 <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 24, fontWeight: 800, color: '#0a0a0a', margin: '0 0 6px', letterSpacing: '-0.02em' }}>
-                  Planos de acesso do App
+                  Acesse o Catálogo Grátis 💙
                 </h3>
                 <p style={{ fontSize: 14, color: '#666', margin: '0 0 24px', lineHeight: 1.5 }}>
                   Receba em primeira mão valores dos produtos direto de fábricas e fornecedores da China, acessos a ferramentas exclusivas, sorteios e muito mais.
