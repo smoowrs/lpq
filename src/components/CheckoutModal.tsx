@@ -334,10 +334,18 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
 
     useEffect(() => {
         if (!pixData) return;
-        const statusInterval = setInterval(checkPaymentStatus, 5000);
-        const timerInterval = setInterval(() => setTimeLeft(t => Math.max(0, t - 1)), 1000);
+        // Para quando o tempo expirar (timeLeft <= 0)
+        if (timeLeft <= 0) return;
+        const statusInterval = setInterval(checkPaymentStatus, 3000); // 3s para detecção mais rápida
+        const timerInterval = setInterval(() => setTimeLeft(t => {
+            if (t <= 1) {
+                clearInterval(statusInterval); // Para o polling ao expirar
+                clearInterval(timerInterval);
+            }
+            return Math.max(0, t - 1);
+        }), 1000);
         return () => { clearInterval(statusInterval); clearInterval(timerInterval); };
-    }, [pixData]);
+    }, [pixData, timeLeft <= 0]); // Re-roda se pixData muda ou expirou
 
     const handleGeneratePix = async () => {
         if (!agreedToTerms) {

@@ -25,14 +25,26 @@ serve(async (req) => {
         const result = await response.json()
         console.log(`[Check-PIX] Appmax Response for ${id}:`, JSON.stringify(result))
 
-        const appmaxStatus = (result.data?.status || result.status || result.data?.order_status || '').toLowerCase()
+        // Tenta múltiplos campos — API v2 e v3 usam nomes diferentes
+        const appmaxStatus = (
+            result.data?.status ||
+            result.data?.payment_status ||
+            result.data?.order_status ||
+            result.status ||
+            result.payment_status ||
+            ''
+        ).toLowerCase().trim()
+
         const isApprovedByAppmax = result.success && (
-            appmaxStatus === 'pagamento_confirmado' || 
-            appmaxStatus === 'pago' || 
-            appmaxStatus === 'aprovado' || 
+            appmaxStatus === 'pagamento_confirmado' ||
+            appmaxStatus === 'pago' ||
+            appmaxStatus === 'paid' ||        // ← faltava — CC aceita, PIX não aceitava
+            appmaxStatus === 'aprovado' ||
             appmaxStatus === 'approved' ||
             appmaxStatus === 'integralizado' ||
-            appmaxStatus === 'sucesso'
+            appmaxStatus === 'sucesso' ||
+            appmaxStatus === 'captured' ||
+            appmaxStatus === 'completed'
         )
 
         // ── IDEMPOTENCY: read intent status BEFORE any update ──
