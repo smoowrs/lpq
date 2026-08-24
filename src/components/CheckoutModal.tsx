@@ -775,6 +775,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
 /* ─── ORDER SUMMARY SECTION ────────────────────────────────────── */
 const OrderSummary = ({ plan, region, priceStr, totalPriceStr, orderBump, monthly12x, currencySymbol, planDisplayName, selectedInstallment, planAccessDuration, oldPriceStr }: any) => {
     const displayPrice = orderBump ? totalPriceStr : priceStr;
+    const showDiscount = region === 'BR' && !plan.free && oldPriceStr && !orderBump;
     return (
         <div className="w-full bg-white border-b border-slate-100">
             <div className="flex items-center gap-3 px-5 py-3">
@@ -787,6 +788,12 @@ const OrderSummary = ({ plan, region, priceStr, totalPriceStr, orderBump, monthl
                     <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}{orderBump ? ' + Networking' : ''}</p>
                 </div>
                 <div className="flex flex-col items-end shrink-0">
+                    {showDiscount && (
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                            <span className="text-[11px] text-slate-400 line-through font-medium">{currencySymbol} {oldPriceStr}</span>
+                            <span className="text-[9px] font-black text-white bg-emerald-500 rounded-full px-1.5 py-0.5 leading-none">30% OFF</span>
+                        </div>
+                    )}
                     <span className="text-[17px] font-black text-slate-900 transition-all duration-300">{currencySymbol} {displayPrice}</span>
                     {!orderBump && region === 'BR' && <span className="text-[10px] text-slate-400 font-medium opacity-90 mt-0.5">Ou 12x de {currencySymbol} {monthly12x}</span>}
                     {orderBump && <span className="text-[10px] text-emerald-600 font-black mt-0.5">Inclui Grupo de Networking</span>}
@@ -827,6 +834,10 @@ export const CheckoutModal = ({
     const priceStr = priceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     const totalPriceNum = priceNum + (orderBump ? ORDER_BUMP_PRICE : 0);
     const totalPriceStr = totalPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    // Preço original antes do desconto (ex: "R$ 97,00" → "97,00")
+    const oldPriceStr = region === 'BR' && plan.priceOriginal
+        ? plan.priceOriginal.replace('R$ ', '').replace('R$', '').trim()
+        : null;
     let monthly12x = (priceNum / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     if (region === 'BR' && INSTALLMENTS[plan.id]?.[11]) {
         monthly12x = INSTALLMENTS[plan.id][11].value;
@@ -1054,6 +1065,7 @@ export const CheckoutModal = ({
                         planDisplayName={planDisplayName}
                         selectedInstallment={selectedInstallment}
                         planAccessDuration={planAccessDuration}
+                        oldPriceStr={oldPriceStr}
                     />
                 </div>
 
