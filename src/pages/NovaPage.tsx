@@ -109,7 +109,7 @@ const PLANS = [
       'Grupo de Networking no WhatsApp',
     ],
     excluded: [],
-    prices: { BR: { annual: '266.00' } }, region: 'BR',
+    prices: { BR: { annual: '266.00' }, EU: { annual: '64.00' } }, region: 'BR',
   },
 ];
 
@@ -159,14 +159,31 @@ function FaqCard({ q, a }: { q: string; a: string }) {
 
 /* ─── Countries / Languages ─────────────────────────── */
 const LANGS = [
-  { code: 'pt-BR', flag: '🇧🇷', label: 'Brasil',   region: 'BR', currency: 'BRL', shipping: '15 dias', isoCountry: 'BR' },
-  { code: 'pt-PT', flag: '🇵🇹', label: 'Portugal', region: 'EU', currency: 'EUR', shipping: '6 dias',  isoCountry: 'PT' },
-  { code: 'es',    flag: '🇪🇸', label: 'España',   region: 'EU', currency: 'EUR', shipping: '6 días',  isoCountry: 'ES' },
-  { code: 'fr',    flag: '🇫🇷', label: 'France',   region: 'EU', currency: 'EUR', shipping: '6 jours', isoCountry: 'FR' },
-  { code: 'nl',    flag: '🇳🇱', label: 'Nederland',region: 'EU', currency: 'EUR', shipping: '6 dagen', isoCountry: 'NL' },
+  { code: 'pt-BR', flag: '🇧🇷', label: 'Brasil',      region: 'BR', currency: 'BRL', shipping: '15 dias',  isoCountry: 'BR' },
+  { code: 'pt-PT', flag: '🇵🇹', label: 'Portugal',    region: 'EU', currency: 'EUR', shipping: '6 dias',   isoCountry: 'PT' },
+  { code: 'es',    flag: '🇪🇸', label: 'España',      region: 'EU', currency: 'EUR', shipping: '6 días',   isoCountry: 'ES' },
+  { code: 'fr',    flag: '🇫🇷', label: 'France',      region: 'EU', currency: 'EUR', shipping: '6 jours',  isoCountry: 'FR' },
+  { code: 'nl',    flag: '🇳🇱', label: 'Nederland',   region: 'EU', currency: 'EUR', shipping: '6 dagen',  isoCountry: 'NL' },
+  { code: 'de',    flag: '🇩🇪', label: 'Deutschland', region: 'EU', currency: 'EUR', shipping: '6 Tage',   isoCountry: 'DE' },
+  { code: 'it',    flag: '🇮🇹', label: 'Italia',      region: 'EU', currency: 'EUR', shipping: '6 giorni', isoCountry: 'IT' },
 ];
 
+// Todos os Estados-Membros da UE — para usuários de países não listados acima
+// (AT, BE, BG, CY, CZ, DK, EE, FI, GR, HR, HU, IE, LT, LU, LV, MT, PL, RO, SE, SI, SK)
+const EU_MEMBER_STATES = new Set([
+  'AT','BE','BG','CY','CZ','DE','DK','EE','FI','FR',
+  'GR','HR','HU','IE','IT','LT','LU','LV','MT','NL',
+  'PL','PT','RO','SE','SI','SK','ES',
+]);
+
 /* ─── Translations ───────────────────────────────────── */
+const NEW_EU_DESC_PT = 'Tenha acesso ao aplicativo de importação da Connect Academy e importe diretamente da China, sem quantidade mínima e com todo o processo simplificado. Explore mais de 30 milhões de produtos e 1.500 fabricantes, incluindo grandes marcas como Apple, DJI, Samsung, Nike, Adidas e muitas outras. Conte com ferramentas exclusivas, rastreamento em tempo real, Minerador com IA para te guiar em cada etapa, download de imagens em massa diretamente dos fornecedores, estratégias para vender seus produtos e lucrar, além de lives semanais exclusivas com alunos. Tudo o que você precisa para importar em um só aplicativo.';
+const NEW_EU_DESC_ES = 'Accede a la aplicación de importación de Connect Academy e importa directamente desde China, sin cantidad mínima y con todo el proceso simplificado. Explora más de 30 millones de productos y 1.500 fabricantes, incluyendo grandes marcas como Apple, DJI, Samsung, Nike, Adidas y muchas más. Cuenta con herramientas exclusivas, seguimiento en tiempo real, Minerador con IA para guiarte en cada etapa, descarga masiva de imágenes directamente de los proveedores, estrategias para vender tus productos y obtener ganancias, además de lives semanales exclusivas con alumnos. Todo lo que necesitas para importar en una sola app.';
+const NEW_EU_DESC_FR = "Accédez à l'application d'importation de Connect Academy et importez directement depuis la Chine, sans quantité minimale et avec tout le processus simplifié. Explorez plus de 30 millions de produits et 1 500 fabricants, dont de grandes marques comme Apple, DJI, Samsung, Nike, Adidas et bien d'autres. Bénéficiez d'outils exclusifs, d'un suivi en temps réel, du Minerador avec IA pour vous guider à chaque étape, du téléchargement d'images en masse directement auprès des fournisseurs, de stratégies pour vendre vos produits et générer des bénéfices, ainsi que de lives hebdomadaires exclusifs avec les étudiants. Tout ce dont vous avez besoin pour importer dans une seule application.";
+const NEW_EU_DESC_NL = 'Krijg toegang tot de importapplicatie van Connect Academy en importeer rechtstreeks uit China, zonder minimumhoeveelheid en met een volledig vereenvoudigd proces. Ontdek meer dan 30 miljoen producten en 1.500 fabrikanten, waaronder grote merken als Apple, DJI, Samsung, Nike, Adidas en nog veel meer. Maak gebruik van exclusieve tools, realtime tracking, de Minerador met AI om u bij elke stap te begeleiden, massale download van afbeeldingen rechtstreeks van leveranciers, strategieën om uw producten te verkopen en winst te maken, plus wekelijkse exclusieve livestreams met studenten. Alles wat u nodig heeft om te importeren in één app.';
+const NEW_EU_DESC_DE = 'Erhalten Sie Zugang zur Importanwendung von Connect Academy und importieren Sie direkt aus China, ohne Mindestmenge und mit einem vollständig vereinfachten Prozess. Entdecken Sie mehr als 30 Millionen Produkte und 1.500 Hersteller, darunter große Marken wie Apple, DJI, Samsung, Nike, Adidas und viele mehr. Profitieren Sie von exklusiven Tools, Echtzeit-Tracking, dem KI-gestützten Minerador für jeden Schritt, Massen-Download von Bildern direkt von Lieferanten, Strategien zum Verkauf Ihrer Produkte und zur Gewinnerzielung sowie wöchentlichen exklusiven Live-Sessions mit Studenten. Alles, was Sie für den Import brauchen, in einer einzigen App.';
+const NEW_EU_DESC_IT = "Accedi all'applicazione di importazione di Connect Academy e importa direttamente dalla Cina, senza quantità minima e con tutto il processo semplificato. Esplora oltre 30 milioni di prodotti e 1.500 produttori, inclusi grandi marchi come Apple, DJI, Samsung, Nike, Adidas e molti altri. Sfrutta strumenti esclusivi, tracciamento in tempo reale, il Minerador con IA per guidarti in ogni fase, download massivo di immagini direttamente dai fornitori, strategie per vendere i tuoi prodotti e guadagnare, oltre a live settimanali esclusive con gli studenti. Tutto ciò di cui hai bisogno per importare in un'unica app.";
+
 const TR: Record<string, Record<string, string>> = {
   'pt-BR': {
     hero_title: 'Aprenda importar da China sem burocracias alfandegárias.',
@@ -180,48 +197,70 @@ const TR: Record<string, Record<string, string>> = {
     buy_now: 'Comprar agora',
   },
   'pt-PT': {
-    hero_title: 'Importe da China sem burocracias alfandegárias.',
-    hero_sub: 'Crie a sua conta grátis e tenha acesso a +30 milhões de produtos de 1.500 fábricas, aulas exclusivas, rastreio em tempo real e ao Minerador: a IA desenvolvida para o guiar em cada importação.',
+    hero_title: 'Aprenda importar da China para a Europa em 6 Dias',
+    hero_sub: NEW_EU_DESC_PT,
     hero_cta: 'Começar agora',
     hero_cta2: 'Ver planos',
     hero_badge: 'Usado por +28.000 importadores',
-    nav_cta: 'Teste grátis',
+    nav_cta: 'Começar agora',
     shipping_badge: '🚀 Entrega em até 6 dias na Europa',
     try_free: 'Criar conta grátis',
     buy_now: 'Comprar agora',
   },
   'es': {
-    hero_title: 'Importa desde China sin burocracia aduanera.',
-    hero_sub: 'Crea tu cuenta gratis y accede a +30 millones de productos de 1.500 fábricas, clases exclusivas, rastreo en tiempo real y al Minerador: la IA diseñada para guiarte en cada importación.',
+    hero_title: 'Aprende a importar de China a Europa en 6 Días',
+    hero_sub: NEW_EU_DESC_ES,
     hero_cta: 'Empezar ahora',
     hero_cta2: 'Ver planes',
     hero_badge: 'Usado por +28.000 importadores',
-    nav_cta: 'Prueba gratis',
+    nav_cta: 'Empezar ahora',
     shipping_badge: '🚀 Entrega en hasta 6 días en Europa',
     try_free: 'Crear cuenta gratis',
     buy_now: 'Comprar ahora',
   },
   'fr': {
-    hero_title: 'Importez de Chine sans bureaucratie douanière.',
-    hero_sub: 'Cr\u00e9ez votre compte gratuit et acc\u00e9dez \u00e0 +30 millions de produits de 1 500 usines, des cours exclusifs, un suivi en temps r\u00e9el et au Minerador : l\u2019IA con\u00e7ue pour vous guider dans chaque importation.',
+    hero_title: "Apprenez à importer de Chine vers l'Europe en 6 Jours",
+    hero_sub: NEW_EU_DESC_FR,
     hero_cta: 'Commencer maintenant',
     hero_cta2: 'Voir les plans',
     hero_badge: 'Utilisé par +28 000 importateurs',
-    nav_cta: 'Essai gratuit',
+    nav_cta: 'Commencer maintenant',
     shipping_badge: '🚀 Livraison en 6 jours en Europe',
     try_free: 'Créer un compte gratuit',
     buy_now: 'Acheter maintenant',
   },
   'nl': {
-    hero_title: 'Importeer uit China zonder douanebureaucratie.',
-    hero_sub: 'Maak een gratis account aan en krijg toegang tot +30 miljoen producten van 1.500 fabrieken, exclusieve lessen, realtime tracking en de Minerador: de AI die u begeleidt bij elke import.',
+    hero_title: 'Leer importeren vanuit China naar Europa in 6 Dagen',
+    hero_sub: NEW_EU_DESC_NL,
     hero_cta: 'Nu beginnen',
     hero_cta2: 'Plannen bekijken',
     hero_badge: 'Gebruikt door +28.000 importeurs',
-    nav_cta: 'Gratis proberen',
+    nav_cta: 'Nu beginnen',
     shipping_badge: '🚀 Levering binnen 6 dagen in Europa',
     try_free: 'Gratis account aanmaken',
     buy_now: 'Nu kopen',
+  },
+  'de': {
+    hero_title: 'Lernen Sie, aus China nach Europa in 6 Tagen zu importieren',
+    hero_sub: NEW_EU_DESC_DE,
+    hero_cta: 'Jetzt starten',
+    hero_cta2: 'Pläne ansehen',
+    hero_badge: 'Genutzt von +28.000 Importeuren',
+    nav_cta: 'Jetzt starten',
+    shipping_badge: '🚀 Lieferung in bis zu 6 Tagen in Europa',
+    try_free: 'Kostenloses Konto erstellen',
+    buy_now: 'Jetzt kaufen',
+  },
+  'it': {
+    hero_title: "Impara a importare dalla Cina all'Europa in 6 Giorni",
+    hero_sub: NEW_EU_DESC_IT,
+    hero_cta: 'Inizia ora',
+    hero_cta2: 'Vedi i piani',
+    hero_badge: 'Usato da +28.000 importatori',
+    nav_cta: 'Inizia ora',
+    shipping_badge: '🚀 Consegna in 6 giorni in Europa',
+    try_free: 'Crea account gratuito',
+    buy_now: 'Acquista ora',
   },
 };
 
@@ -259,14 +298,23 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
     return () => document.removeEventListener('click', close);
   }, [langOpen]);
 
-  // Auto-detect country via IP
+  // Auto-detect country via IP — cobre todos os países da UE
   useEffect(() => {
     fetch('https://ipapi.co/json/')
       .then(r => r.json())
       .then(data => {
         const iso = data.country_code;
-        const match = LANGS.find(l => l.isoCountry === iso);
-        if (match) setSelectedLang(match);
+        // 1. Tenta match exato pelo isoCountry (BR, PT, ES, FR, NL, DE, IT)
+        const exact = LANGS.find(l => l.isoCountry === iso);
+        if (exact) {
+          setSelectedLang(exact);
+          return;
+        }
+        // 2. Se for qualquer outro país da UE (AT, BE, GR, etc.) → Portugal (EUR)
+        if (EU_MEMBER_STATES.has(iso)) {
+          setSelectedLang(LANGS.find(l => l.code === 'pt-PT')!);
+        }
+        // 3. Outros países → mantém Brasil (default)
       })
       .catch(() => {/* keep default BR */});
   }, []);
