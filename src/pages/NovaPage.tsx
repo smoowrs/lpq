@@ -1202,29 +1202,25 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                   Receba em primeira mão valores dos produtos direto de fábricas e fornecedores da China, acessos a ferramentas exclusivas, sorteios e muito mais.
                 </p>
                 <form
-                  onSubmit={async e => {
+                  onSubmit={e => {
                     e.preventDefault();
                     if (!catalogEmail.includes('@')) return;
-                    setCatalogLoading(true);
-                    try {
-                      // Atribui grupo A/B aleatório: A=24h, B=48h (teste de timing)
-                      const abGroup = Math.random() < 0.5 ? 'A' : 'B';
-                      await supabase.from('landing_leads').insert({
-                        email: catalogEmail.trim().toLowerCase(),
-                        source: 'catalog_button',
-                        page_url: window.location.href,
-                        ab_group: abGroup,
-                      });
-                    } catch {}
+                    // 1. Abre Telegram IMEDIATAMENTE (síncrono, dentro do gesto do usuário)
+                    //    Após await/setTimeout o browser trata como popup e abre aba em branco
+                    window.open('https://t.me/grupoconnect', '_blank', 'noopener,noreferrer');
+                    // 2. Fecha o modal na hora
+                    setShowCatalogModal(false);
+                    const emailSaved = catalogEmail.trim().toLowerCase();
+                    setCatalogEmail('');
+                    // 3. Salva lead e pixel em background — fire and forget
+                    const abGroup = Math.random() < 0.5 ? 'A' : 'B';
+                    supabase.from('landing_leads').insert({
+                      email: emailSaved,
+                      source: 'catalog_button',
+                      page_url: window.location.href,
+                      ab_group: abGroup,
+                    }).catch(() => {});
                     try { if ((window as any).fbq) (window as any).fbq('track', 'Lead', { content_name: 'catalog' }); } catch {}
-                    setCatalogLoading(false);
-                    setCatalogDone(true);
-                    setTimeout(() => {
-                      window.open('https://t.me/grupoconnect', '_blank', 'noopener,noreferrer');
-                      setShowCatalogModal(false);
-                      setCatalogDone(false);
-                      setCatalogEmail('');
-                    }, 1500);
                   }}
                   style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
                 >
