@@ -197,7 +197,7 @@ const TR: Record<string, Record<string, string>> = {
     buy_now: 'Comprar agora',
   },
   'pt-PT': {
-    hero_title: 'Aprenda importar da China para a Europa em 6 Dias',
+    hero_title: 'Aprenda importar da China para a Europa com envio de 6 Dias e isento de tarifas alfandegárias',
     hero_sub: NEW_EU_DESC_PT,
     hero_cta: 'Começar agora',
     hero_cta2: 'Ver planos',
@@ -208,7 +208,7 @@ const TR: Record<string, Record<string, string>> = {
     buy_now: 'Comprar agora',
   },
   'es': {
-    hero_title: 'Aprende a importar de China a Europa en 6 Días',
+    hero_title: 'Aprende a importar de China a Europa con envío en 6 Días y sin aranceles aduaneros',
     hero_sub: NEW_EU_DESC_ES,
     hero_cta: 'Empezar ahora',
     hero_cta2: 'Ver planes',
@@ -219,7 +219,7 @@ const TR: Record<string, Record<string, string>> = {
     buy_now: 'Comprar ahora',
   },
   'fr': {
-    hero_title: "Apprenez à importer de Chine vers l'Europe en 6 Jours",
+    hero_title: "Apprenez à importer de Chine vers l'Europe avec livraison en 6 Jours et sans droits de douane",
     hero_sub: NEW_EU_DESC_FR,
     hero_cta: 'Commencer maintenant',
     hero_cta2: 'Voir les plans',
@@ -230,7 +230,7 @@ const TR: Record<string, Record<string, string>> = {
     buy_now: 'Acheter maintenant',
   },
   'nl': {
-    hero_title: 'Leer importeren vanuit China naar Europa in 6 Dagen',
+    hero_title: 'Leer importeren vanuit China naar Europa met levering in 6 Dagen en zonder douanerechten',
     hero_sub: NEW_EU_DESC_NL,
     hero_cta: 'Nu beginnen',
     hero_cta2: 'Plannen bekijken',
@@ -241,7 +241,7 @@ const TR: Record<string, Record<string, string>> = {
     buy_now: 'Nu kopen',
   },
   'de': {
-    hero_title: 'Lernen Sie, aus China nach Europa in 6 Tagen zu importieren',
+    hero_title: 'Importieren Sie aus China nach Europa mit Lieferung in 6 Tagen und ohne Zollgebühren',
     hero_sub: NEW_EU_DESC_DE,
     hero_cta: 'Jetzt starten',
     hero_cta2: 'Pläne ansehen',
@@ -252,7 +252,7 @@ const TR: Record<string, Record<string, string>> = {
     buy_now: 'Jetzt kaufen',
   },
   'it': {
-    hero_title: "Impara a importare dalla Cina all'Europa in 6 Giorni",
+    hero_title: "Impara a importare dalla Cina all'Europa con spedizione in 6 Giorni e senza dazi doganali",
     hero_sub: NEW_EU_DESC_IT,
     hero_cta: 'Inizia ora',
     hero_cta2: 'Vedi i piani',
