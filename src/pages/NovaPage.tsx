@@ -879,32 +879,6 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
         </div>
       </section>
 
-      {/* ═══════════════ COMO FUNCIONA ═══════════════ */}
-      <section style={{ background: '#FAFAFB', borderTop: '1px solid #F0F0F2', borderBottom: '1px solid #F0F0F2', padding: '96px 20px' }}>
-        <div style={{ maxWidth: 1080, margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: 56 }}>
-            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: B, margin: '0 0 12px' }}>Simples assim</p>
-            <h2 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 'clamp(28px, 5vw, 48px)', fontWeight: 800, color: '#0a0a0a', margin: 0, letterSpacing: '-0.02em' }}>
-              3 passos para importar
-            </h2>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
-            {[
-              { n: '01', title: 'Crie sua conta', desc: 'Cadastro grátis em menos de 2 minutos. Acesse imediatamente aulas e plataforma completa.', icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
-              { n: '02', title: 'Use o Minerador', desc: 'Descreva o produto. A IA encontra fornecedores, calcula custos reais e evita taxas abusivas.', icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg> },
-              { n: '03', title: 'Receba em casa', desc: 'Envio aéreo expresso com rastreio em tempo real e seguro incluso. Entrega em até 15 dias.', icon: <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg> },
-            ].map((s, i) => (
-              <div key={s.n} style={{ background: '#fff', borderRadius: 24, padding: '36px 32px', border: '1.5px solid #EEEEF2', position: 'relative' }}>
-                <span style={{ position: 'absolute', top: 20, right: 24, fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 64, fontWeight: 800, color: '#F0F0F4', lineHeight: 1 }}>{s.n}</span>
-                <div style={{ width: 52, height: 52, borderRadius: 16, background: `linear-gradient(135deg, ${B}, ${B2})`, display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 24, boxShadow: `0 8px 24px ${B}40` }}>{s.icon}</div>
-                <h3 style={{ fontFamily: "'Bricolage Grotesque', system-ui", fontSize: 20, fontWeight: 800, color: '#0a0a0a', margin: '0 0 8px' }}>{s.title}</h3>
-                <p style={{ fontSize: 14, color: '#666', lineHeight: 1.65, margin: 0 }}>{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* PRICING */}
       <section id="precos" style={{ background: '#fff', padding: '96px 20px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
