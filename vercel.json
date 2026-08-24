@@ -3,7 +3,7 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "crons": [
-    { "path": "/api/cron-catalog-emails", "schedule": "*/30 * * * *" },
+    { "path": "/api/cron-catalog-emails", "schedule": "*/5 * * * *" },
     { "path": "/api/cron-pix-recovery",   "schedule": "0 * * * *" }
   ]
 }
