@@ -803,6 +803,23 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                 <span key={t} style={{ padding: '4px 12px', borderRadius: 999, background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.18)', fontSize: 11, fontWeight: 600, color: 'rgba(255,255,255,0.8)' }}>{t}</span>
               ))}
             </div>
+            <button
+              onClick={() => setShowCatalogModal(true)}
+              style={{
+                position: 'relative', zIndex: 2,
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                height: 40, padding: '0 18px', borderRadius: 12,
+                background: 'linear-gradient(135deg, #00e676 0%, #00c853 100%)',
+                color: '#003300', fontWeight: 800, fontSize: 13,
+                border: 'none', cursor: 'pointer',
+                boxShadow: '0 4px 20px rgba(0,230,118,0.55)',
+                marginTop: 20, width: 'fit-content',
+                letterSpacing: '0.01em',
+              }}
+            >
+              Acessar Catálogo
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#003300" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
           </div>
 
           {/* 3 — Minerador IA */}
