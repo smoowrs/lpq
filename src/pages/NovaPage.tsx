@@ -729,6 +729,10 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
         .b7  { grid-column: span 12; }
         .bcard { border-radius: 28px; padding: 36px; display: flex; flex-direction: column; }
         .bcard-dark { border-radius: 28px; padding: 40px; display: flex; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
+        @keyframes catalogGreenBorder {
+          0%, 100% { border-color: rgba(0,230,118,0.45); box-shadow: 0 4px 16px rgba(76,53,232,0.4), 0 0 0 0px rgba(0,230,118,0); }
+          50%       { border-color: rgba(0,230,118,1);    box-shadow: 0 4px 16px rgba(76,53,232,0.4), 0 0 8px 1px rgba(0,230,118,0.35); }
+        }
         @media (max-width: 767px) {
           .bento { grid-template-columns: repeat(2, 1fr); gap: 12px; }
           .b1  { grid-column: span 2; }
@@ -809,16 +813,17 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                 position: 'relative', zIndex: 2,
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 height: 40, padding: '0 18px', borderRadius: 12,
-                background: 'linear-gradient(135deg, #00e676 0%, #00c853 100%)',
-                color: '#003300', fontWeight: 800, fontSize: 13,
-                border: 'none', cursor: 'pointer',
-                boxShadow: '0 4px 20px rgba(0,230,118,0.55)',
+                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
+                color: '#fff', fontWeight: 700, fontSize: 13,
+                border: '1.5px solid rgba(0,230,118,0.75)',
+                cursor: 'pointer',
+                boxShadow: `0 4px 16px ${B}50, 0 0 0 0px rgba(0,230,118,0)`,
                 marginTop: 20, width: 'fit-content',
-                letterSpacing: '0.01em',
+                animation: 'catalogGreenBorder 2.4s ease-in-out infinite',
               }}
             >
               Acessar Catálogo
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="#003300" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </button>
           </div>
 
