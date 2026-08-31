@@ -629,19 +629,18 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
               {t.hero_cta}
             </button>
             <button
-              onClick={() => document.getElementById('precos')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => setShowCatalogModal(true)}
               style={{
                 flex: 1, height: 52, padding: '0 16px', borderRadius: 14,
-                background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)',
-                color: '#fff', fontWeight: 600, fontSize: 15,
-                border: '1px solid rgba(255,255,255,0.3)', cursor: 'pointer',
-                transition: 'background 0.15s',
+                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
+                color: '#fff', fontWeight: 700, fontSize: 15,
+                border: '1.5px solid rgba(0,230,118,0.55)',
+                cursor: 'pointer',
                 whiteSpace: 'nowrap',
+                animation: 'catalogGreenBorder 2.4s ease-in-out infinite',
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.2)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
             >
-              {t.hero_cta2 || 'Ver planos'}
+              Catálogo
             </button>
           </div>
         </div>
