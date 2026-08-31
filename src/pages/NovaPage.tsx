@@ -632,8 +632,8 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
               onClick={() => setShowCatalogModal(true)}
               style={{
                 flex: 1, height: 52, padding: '0 16px', borderRadius: 14,
-                background: `linear-gradient(135deg, ${B} 0%, ${B2} 100%)`,
-                color: '#fff', fontWeight: 700, fontSize: 15,
+                background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(12px)',
+                color: '#fff', fontWeight: 600, fontSize: 15,
                 border: '1.5px solid rgba(0,230,118,0.55)',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
