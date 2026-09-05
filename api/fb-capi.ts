@@ -36,12 +36,22 @@ const isValidFbc = (val?: string): string | undefined => {
 /** Normaliza número de telefone para E.164 — suporta BR (+55) e Europa */
 const normalizePhone = (phone: string, country = 'br'): string => {
     const digits = phone.replace(/\D/g, '');
-    // Se já tem código de país (ex: 5511...) ou é europeu, não adiciona 55
-    if (digits.startsWith('55') && digits.length >= 12) return `+${digits}`; // BR
-    if (country === 'br') return `+55${digits}`;
-    // Para Europa: país já deve ter código incluso (ex: 351..., 34..., 33...)
-    return digits.startsWith('+') ? digits : `+${digits}`;
+    if (country === 'br') {
+        if (digits.startsWith('55') && digits.length >= 12) return `+${digits}`;
+        return `+55${digits}`;
+    }
+    // Códigos de discagem por país EU
+    const dialCodes: Record<string, string> = {
+        pt: '351', es: '34', fr: '33', nl: '31',
+        de: '49', it: '39', be: '32', at: '43',
+        pl: '48', ro: '40', cz: '420', hu: '36',
+        se: '46', dk: '45', fi: '358', gr: '30',
+    };
+    const code = dialCodes[country];
+    if (code && !digits.startsWith(code)) return `+${code}${digits}`;
+    return `+${digits}`;
 };
+
 
 /** Detecta país pelo header Accept-Language quando não enviado pelo browser */
 const detectCountryFromHeader = (acceptLang?: string): string => {

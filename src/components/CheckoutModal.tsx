@@ -865,10 +865,12 @@ export const CheckoutModal = ({
         // trackPurchase → trackFBEvent:
         //   1. Dispara fbq('track','Purchase') SINCRONAMENTE (antes de qualquer await)
         //   2. Envia CAPI com o MESMO eventId → deduplicação correta no Facebook
-        const nameParts = guestName?.split(' ') || [];
-        trackPurchase(plan.label || plan.id, purchaseValue, purchaseCurrency, undefined, {
+        const orderId = `order_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+        const nameParts = guestName?.trim().split(/\s+/) || [];
+        trackPurchase(plan.label || plan.id, purchaseValue, purchaseCurrency, orderId, {
             email: guestEmail,
             firstName: nameParts[0] || '',
+            lastName: nameParts.slice(1).join(' ') || '',
             phone: guestPhone?.replace(/\D/g, '') || '',
         });
         trackGoogleAdsPurchase(purchaseValue, purchaseCurrency);

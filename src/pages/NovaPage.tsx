@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CheckoutModal } from '../components/CheckoutModal';
 import { Toaster } from 'react-hot-toast';
 import { supabase } from '../services/supabase';
+import { trackFBEvent } from '../utils/fb-events';
 
 /* ─── Brand ─────────────────────────────────────────── */
 const B = '#4C35E8';          // Connect blue-purple
@@ -1244,6 +1245,8 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
                         });
                       } catch {}
                       try { if ((window as any).fbq) (window as any).fbq('track', 'Lead', { content_name: 'catalog' }); } catch {}
+                      // CAPI server-side com email para melhorar match quality
+                      try { trackFBEvent('Lead', { content_name: 'catalog' }, { email: emailSaved }); } catch {}
                     })();
                   }}
 
