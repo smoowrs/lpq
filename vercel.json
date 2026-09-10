@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/novos", "destination": "https://connect-academy-landing.vercel.app", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
