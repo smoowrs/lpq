@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.tsx';
 import { NovaPage } from './pages/NovaPage.tsx';
+import NovosPage from './pages/NovosPage.jsx';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import './index.css';
 
@@ -15,6 +16,7 @@ if (container) {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<NovaPage />} />
+            <Route path="/novos" element={<NovosPage />} />
             <Route path="/experience" element={<NovaPage showExperience={true} />} />
             <Route path="/nova" element={<App />} />
           </Routes>
