@@ -1,8 +1,9 @@
 {
+  "redirects": [
+    { "source": "/novos", "destination": "https://connect-academy-landing.vercel.app", "permanent": false }
+  ],
   "rewrites": [
-    { "source": "/novos",      "destination": "https://connect-academy-landing.vercel.app" },
-    { "source": "/novos/(.*)", "destination": "https://connect-academy-landing.vercel.app/$1" },
-    { "source": "/(.*)",       "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "crons": [
     { "path": "/api/cron-catalog-emails", "schedule": "*/5 * * * *" },
