@@ -3,6 +3,7 @@ import { CheckoutModal } from '../components/CheckoutModal';
 import { Toaster } from 'react-hot-toast';
 import { supabase } from '../services/supabase';
 import { trackFBEvent } from '../utils/fb-events';
+import DomeGallery from '../components/DomeGallery.jsx';
 
 /* ─── Brand ─────────────────────────────────────────── */
 const B = '#4C35E8';          // Connect blue-purple
@@ -1065,6 +1066,45 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ═══════════════ FEEDBACKS ALUNOS ════════════════ */}
+      <section style={{ background: '#0a0a0f', padding: '96px 0 0' }}>
+        <div style={{ maxWidth: 700, margin: '0 auto', textAlign: 'center', padding: '0 20px 56px' }}>
+          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 3, color: '#4C35E8', textTransform: 'uppercase', marginBottom: 16 }}>
+            O QUE DIZEM OS ALUNOS
+          </p>
+          <h2 style={{ fontSize: 'clamp(32px,4vw,52px)', fontWeight: 800, color: '#fff', lineHeight: 1.1, margin: 0 }}>
+            Resultados reais de<br /><em style={{ color: '#4C35E8', fontStyle: 'normal' }}>quem já está dentro.</em>
+          </h2>
+          <p style={{ color: '#aaa', fontSize: 17, marginTop: 18, lineHeight: 1.6 }}>
+            Clique em qualquer foto para ver em tamanho completo.
+          </p>
+        </div>
+        <div style={{ width: '100%', height: '70vh', minHeight: 480 }}>
+          <DomeGallery
+            fit={1}
+            minRadius={1000}
+            maxVerticalRotationDeg={20}
+            dragDampening={0}
+            grayscale={false}
+            overlayBlurColor="#0a0a0f"
+            imageBorderRadius="16px"
+            openedImageBorderRadius="16px"
+            openedImageWidth="420px"
+            openedImageHeight="520px"
+            images={[
+              'https://connectaa-cdn.b-cdn.net/hf.mp4',
+              'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800&auto=format&fit=crop',
+              'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&auto=format&fit=crop',
+              'https://images.unsplash.com/photo-1512314889357-e157c22f938d?w=800&auto=format&fit=crop',
+              'https://images.unsplash.com/photo-1543269865-cbf427effbad?w=800&auto=format&fit=crop',
+              'https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=800&auto=format&fit=crop',
+              'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop',
+              'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop',
+            ]}
+          />
         </div>
       </section>
 
