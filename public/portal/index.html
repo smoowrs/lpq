@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0a0b0e"><meta name="description" content="Aprenda a importar da China para uso pessoal ou para seu negócio. Conheça os produtos, aulas, ferramentas e comunidade da Connect Academy."><title>Connect Academy — O mundo ao seu alcance.</title><link rel="apple-touch-icon" sizes="180x180" href="/portal/assets/apple-touch-icon.png"><link rel="icon" type="image/svg+xml" href="/portal/assets/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/portal/assets/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/portal/assets/favicon-16x16.png"><link rel="manifest" href="/portal/assets/site.webmanifest"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Connect Academy"><link rel="stylesheet" href="/portal/styles.css"><link rel="preload" href="/portal/assets/tv-world.webp" as="image"><style>.btn,.btn-white,.btn-outline{border-radius:10px!important}</style><style>.story-step[data-step="2"]{background:#000!important}.scroll-story[data-chapter="2"],.scroll-story.chapter-2{background:#000!important}</style><style>
 /* Importar/Conecte step: azul no mobile em vez de preto */
-@media (max-width: 768px) {
-  .story-step[data-step="2"] { background: #2563EB !important; }
+@media (max-width: 900px) {
+  .story-step[data-step="2"] { background: transparent !important; }
 }
 /* Profile icon: borda fina */
 a[aria-label="Entrar na conta"] {
@@ -63,7 +63,7 @@ a[aria-label="Entrar na conta"] {
     var active=document.querySelector('.story-step.is-active[data-step="2"]') ||
                 document.querySelector('.story-step[data-step="2"].active');
     var btn=document.querySelector('.story-controls button.active[data-chapter="2"]');
-    if(active||btn){story.style.setProperty('background','#000','important');}
+    if((active||btn)&&window.innerWidth>900){story.style.setProperty('background','#000','important');}else if(window.innerWidth<=900){story.style.removeProperty('background');}
     else{story.style.removeProperty('background');}
   }
   new MutationObserver(update).observe(document.body,{attributes:true,subtree:true,attributeFilter:['class','aria-current']});
