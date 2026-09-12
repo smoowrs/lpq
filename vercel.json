@@ -1,9 +1,14 @@
 {
   "redirects": [
-    { "source": "/novos", "destination": "https://connect-academy-landing.vercel.app", "permanent": false }
+    { "source": "/novos", "destination": "https://connect-academy-landing.vercel.app", "permanent": false },
+    { "source": "/portal", "destination": "/portal/", "permanent": false }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/portal/assets/:path*", "destination": "/portal/assets/:path*" },
+    { "source": "/portal/app.js",        "destination": "/portal/app.js" },
+    { "source": "/portal/styles.css",    "destination": "/portal/styles.css" },
+    { "source": "/portal/",             "destination": "/portal/index.html" },
+    { "source": "/(.*)",                "destination": "/index.html" }
   ],
   "crons": [
     { "path": "/api/cron-catalog-emails", "schedule": "*/5 * * * *" },

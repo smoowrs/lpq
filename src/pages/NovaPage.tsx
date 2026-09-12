@@ -288,6 +288,26 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Abre checkout automaticamente se URL tiver ?checkout=planId (vindo do /portal)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const planId = params.get('checkout');
+    if (planId) {
+      const plan = PLANS.find(p => p.id === planId.toLowerCase());
+      if (plan && !plan.free) {
+        // Pequeno delay para o componente montar completamente
+        const t = setTimeout(() => {
+          setCheckout(plan);
+          // Limpa o param da URL sem recarregar a página
+          const url = new URL(window.location.href);
+          url.searchParams.delete('checkout');
+          window.history.replaceState({}, '', url.toString());
+        }, 300);
+        return () => clearTimeout(t);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'PageView');
@@ -687,15 +707,17 @@ export const NovaPage: React.FC<{ showExperience?: boolean }> = ({ showExperienc
               <span style={{ fontSize: 11, color: '#aaa', fontWeight: 500 }}>connectacademy.com.br</span>
             </div>
           </div>
-          {/* Video */}
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9' }}>
-            <iframe
-              src="https://player-vz-e87e1287-fbb.tv.pandavideo.com.br/embed/?v=0b95370e-45d5-40d2-9c30-5c152ac60f49"
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', border: 'none' }}
-              allowFullScreen
-              loading="lazy"
-            />
-          </div>
+          {/* Video em loop — sem controles, limpo */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="https://connectaa-cdn.b-cdn.net/hf2.jpg"
+            style={{ display: 'block', width: '100%', height: 'auto' }}
+          >
+            <source src="https://connectaa-cdn.b-cdn.net/hf2.mp4" type="video/mp4" />
+          </video>
 
         </div>
       </section>
