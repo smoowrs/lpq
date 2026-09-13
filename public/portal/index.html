@@ -100,9 +100,9 @@ article.plan { position: relative; }
   right: 18px !important;
   margin: 0 !important;
   align-self: unset !important;
-  display: block !important;
   width: fit-content !important;
 }
+body.eu-mode .price-old-br { display: none !important; }
 </style><style>
 .final-cta { position: relative; overflow: hidden; }
 .final-cta::before {
@@ -254,9 +254,11 @@ function submitCatalogForm(e){
       if(main) main.innerHTML = r==='EU' ? el.getAttribute('data-eu-price') : el.getAttribute('data-br-price');
     });
     // Hide BR-only elements (old price, installments) when EU
-    document.querySelectorAll('.price-old-br, .price-installment-br').forEach(function(el){
-      el.style.display = r==='EU' ? 'none' : '';
-    });
+    if(r==='EU'){
+      document.body.classList.add('eu-mode');
+    } else {
+      document.body.classList.remove('eu-mode');
+    }
     // Switch iPhone price
     var iphonePrice = document.getElementById('iphone-price');
     if(iphonePrice) iphonePrice.textContent = r==='EU' ? '€ 830' : 'R$ 4.500';
