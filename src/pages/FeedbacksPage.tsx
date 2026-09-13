@@ -1,4 +1,4 @@
-import DomeGallery from '../components/DomeGallery';
+import InvertedDome from '../components/InvertedDome';
 
 const BASE = 'https://connectaa-cdn.b-cdn.net/11zon_compressed/';
 const FILES = [
@@ -42,16 +42,14 @@ const images = FILES.map((f, i) => ({
 export default function FeedbacksPage() {
   return (
     <div style={{ width: '100vw', height: '100vh', background: '#090909', overflow: 'hidden' }}>
-      <DomeGallery
+      <InvertedDome
         images={images}
-        fit={0.52}
-        overlayBlurColor="#090909"
-        imageBorderRadius="10px"
-        openedImageBorderRadius="16px"
-        openedImageWidth="340px"
-        openedImageHeight="560px"
-        dragSensitivity={22}
-        segments={35}
+        tileWidth={210}
+        tileHeight={332}
+        gap={20}
+        grayscale={0}
+        wheelSensitivity={0.55}
+        rows={3}
       />
     </div>
   );
