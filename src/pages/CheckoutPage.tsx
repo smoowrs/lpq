@@ -13,9 +13,10 @@ export function CheckoutPage() {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const planId = params.get('checkout');
+    const regionParam = (params.get('region') || 'BR').toUpperCase();
     if (planId) {
       const found = PLANS.find(p => p.id === planId.toLowerCase());
-      if (found) setPlan(found);
+      if (found) setPlan({ ...found, region: regionParam });
       else window.location.href = '/';
     } else {
       window.location.href = '/';

@@ -178,4 +178,104 @@ function submitCatalogForm(e){
   closeCatalogModal();
 }
 </script>
+
+<style>
+#region-dropdown{position:absolute;top:46px;right:0;background:#fff;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:9000;min-width:170px;padding:6px;display:none}
+#region-dropdown button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border:none;background:none;cursor:pointer;border-radius:8px;font-size:14px;color:#0f172a}
+#region-dropdown button:hover{background:#f8fafc}
+.flag-wrapper{position:relative}
+</style>
+<script>
+(function(){
+  var EU=['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IE','IT','LV','LT','LU','MT','NL','PL','PT','RO','SK','SI','ES','SE'];
+  var STORED='ca_region';
+  window._caRegion = localStorage.getItem(STORED) || 'BR';
+
+  function setRegion(r){
+    window._caRegion = r;
+    localStorage.setItem(STORED, r);
+    updateFlagBtn(r);
+    updateLinks(r);
+  }
+
+  function updateFlagBtn(r){
+    var btn = document.querySelector('.header-region');
+    if(!btn) return;
+    if(r==='EU'){
+      btn.innerHTML = '🇵🇹 <span class="flag-label">Portugal</span>';
+    } else {
+      btn.innerHTML = '🇧🇷 <span class="flag-label">Brasil</span>';
+    }
+  }
+
+  function updateLinks(r){
+    document.querySelectorAll('a[href*="/comprar?checkout"]').forEach(function(a){
+      var h = a.getAttribute('href').replace(/&region=[^&]*/g,'');
+      if(r==='EU') h += '&region=EU';
+      a.setAttribute('href', h);
+    });
+    // Also update onclick-based buttons (comprar plan buttons)
+    document.querySelectorAll('a[href^="/comprar"]').forEach(function(a){
+      var h = a.getAttribute('href').replace(/&region=[^&]*/g,'');
+      if(r==='EU') h += '&region=EU';
+      a.setAttribute('href', h);
+    });
+  }
+
+  function buildDropdown(){
+    var btn = document.querySelector('.header-region');
+    if(!btn || document.getElementById('region-dropdown')) return;
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'flag-wrapper';
+    btn.parentNode.insertBefore(wrapper, btn);
+    wrapper.appendChild(btn);
+
+    var dd = document.createElement('div');
+    dd.id = 'region-dropdown';
+    wrapper.appendChild(dd);
+
+    [['BR','🇧🇷','Brasil (R$)'],['EU','🇵🇹','Portugal (€)']].forEach(function(opt){
+      var b = document.createElement('button');
+      b.textContent = opt[1]+' '+opt[2];
+      b.addEventListener('click', function(e){
+        e.stopPropagation();
+        setRegion(opt[0]);
+        dd.style.display='none';
+      });
+      dd.appendChild(b);
+    });
+
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      dd.style.display = dd.style.display==='none'||!dd.style.display ? 'block':'none';
+    });
+
+    document.addEventListener('click', function(){ dd.style.display='none'; });
+
+    // Apply stored region immediately
+    updateFlagBtn(window._caRegion);
+    updateLinks(window._caRegion);
+  }
+
+  // Geo detect on first visit
+  if(!localStorage.getItem(STORED)){
+    fetch('https://ipapi.co/json/')
+      .then(function(r){return r.json();})
+      .then(function(d){
+        var r = EU.indexOf(d.country_code)>=0 ? 'EU':'BR';
+        setRegion(r);
+      })
+      .catch(function(){ setRegion('BR'); });
+  } else {
+    // Apply stored preference on DOM ready
+    document.addEventListener('DOMContentLoaded', function(){
+      updateFlagBtn(window._caRegion);
+      updateLinks(window._caRegion);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', buildDropdown);
+})();
+</script>
 </body></html>
