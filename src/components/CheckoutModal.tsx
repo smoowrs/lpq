@@ -910,386 +910,311 @@ export const CheckoutModal = ({
 
     if (!mounted) return null;
 
-    return createPortal(
-        <div className="fixed inset-0 z-[300] bg-white flex flex-col md:flex-row overflow-hidden font-sans text-slate-900">
+    const BG = '#F7F8FC';
+    const BLUE = '#254bff';
+    const planEmoji = plan.id === 'elite' ? '👑' : plan.id === 'pro' ? '🌎' : '🌎';
+    const stepEyebrow = step === 1 ? '01 / VAMOS NOS CONHECER' : '02 / QUASE LÁ';
+    const stepHeading = step === 1 ? 'Seu próximo passo.' : 'Do seu jeito.';
+    const stepSub = step === 1
+        ? 'Crie sua conta para entrar no universo Connect.'
+        : 'Escolha como deseja pagar e comece seu próximo capítulo.';
 
-            {/* ══════════════════════════════════════════
-                DESKTOP SIDEBAR (hidden on mobile)
-            ══════════════════════════════════════════ */}
-            <div className="hidden md:flex md:w-[380px] lg:w-[420px] bg-white border-r border-slate-100 flex-col overflow-y-auto no-scrollbar shrink-0">
-                <div className="px-12 lg:px-14 py-12 lg:py-14">
-                    <button
-                        onClick={onClose}
-                        className="flex items-center gap-2 text-slate-300 hover:text-slate-500 transition-colors font-black text-[11px] mb-12 uppercase tracking-tighter"
-                    >
-                        <Icons.ArrowLeft className="w-4 h-4" />
-                        <span>Voltar plataforma</span>
-                    </button>
-                    <div className="space-y-6">
-                        <div className="flex items-center gap-4">
-                            <div className="w-14 h-14 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0 border border-slate-100">
-                                <img src="https://i.postimg.cc/Cx0Wn1pW/drone.webp" alt="Plano" className="w-10 h-10 object-contain" />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.1em] mb-1">RESUMO DO PEDIDO</p>
-                                <div className="flex items-center justify-between gap-2">
-                                    <h2 className="text-[18px] font-black text-slate-900 leading-tight">{planDisplayName}</h2>
-                                </div>
-                                <p className="text-[11px] font-bold text-slate-400 mt-0.5">{planAccessDuration}</p>
-                                <p className="text-[18px] font-black text-slate-900 mt-1">{currencySymbol} {selectedInstallment.info?.total || totalPriceStr}</p>
-                            </div>
-                        </div>
-                        {region === 'BR' && (
-                        <div className="pt-4 border-t border-slate-50 flex justify-between items-center">
-                            <span className="text-[12px] font-bold text-slate-400">Parcelamento</span>
-                            <span className="text-[13px] font-black text-slate-900">{selectedInstallment.n}x {currencySymbol} {selectedInstallment.info?.value || monthly12x}</span>
-                        </div>
-                        )}
-                        {orderBump && (
-                            <div className="pt-3 border-t border-slate-50 flex justify-between items-center">
-                                <span className="text-[12px] font-bold text-slate-400">Grupo de Networking</span>
-                                <span className="text-[13px] font-black text-emerald-600">+ R$ 49,90</span>
-                            </div>
-                        )}
-                        {orderBump && (
-                            <div className="pt-3 border-t border-slate-50 flex justify-between items-center">
-                                <span className="text-[12px] font-black text-slate-900">Total</span>
-                                <span className="text-[15px] font-black text-slate-900">{currencySymbol} {totalPriceStr}</span>
-                            </div>
-                        )}
+    const userInitials = guestName.trim().split(' ').map((n: string) => n[0]).join('').slice(0,2).toUpperCase() || '??';
+
+    return createPortal(
+        <div style={{ position: 'fixed', inset: 0, zIndex: 300, background: BG, display: 'flex', flexDirection: 'column', overflowY: 'auto', fontFamily: 'system-ui,-apple-system,sans-serif', color: '#0f172a' }}>
+
+            {/* Payment approved overlay */}
+            {isPaymentApproved && (
+                <div style={{ position: 'absolute', inset: 0, background: '#fff', zIndex: 200, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '32px', textAlign: 'center' }}>
+                    <div style={{ width: 80, height: 80, marginBottom: 24 }}>
+                        <img src="https://i.postimg.cc/8CypNtWj/IMG-3409.gif" style={{ width: '100%', height: '100%', objectFit: 'contain' }} alt="Success" />
                     </div>
+                    <h2 style={{ fontSize: 26, fontWeight: 800, margin: '0 0 8px' }}>Pagamento Aprovado!</h2>
+                    <p style={{ fontSize: 14, color: '#64748b', maxWidth: 280, lineHeight: 1.6, margin: '0 0 24px' }}>
+                        Seu acesso ao Connect Academy foi liberado. Verifique seu e-mail.
+                    </p>
+                </div>
+            )}
+
+            {/* ── HEADER ── */}
+            <div style={{ background: '#fff', borderBottom: '1px solid #EAECF0', padding: '0 20px', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0, position: 'sticky', top: 0, zIndex: 20 }}>
+                <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, color: '#64748b', fontSize: 14 }}>
+                    ← Voltar
+                </button>
+                <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}>
+                    <div style={{ fontFamily: "'Bricolage Grotesque',system-ui", fontWeight: 900, fontSize: 16, color: BLUE, letterSpacing: '-0.04em', lineHeight: 1 }}>CONNECT</div>
+                    <div style={{ fontSize: 9, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.18em' }}>ACADEMY</div>
+                </div>
+                <button onClick={() => {}} style={{ width: 32, height: 32, border: '1px solid #e2e8f0', borderRadius: '50%', background: 'none', cursor: 'pointer', fontSize: 14, color: '#64748b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>?</button>
+            </div>
+
+            {/* ── BANNER ── */}
+            <div style={{ margin: '16px 16px 0', borderRadius: 12, overflow: 'hidden', height: 140, background: '#0a0a1a', position: 'relative', flexShrink: 0 }}>
+                <img src="/portal/assets/iphone17promax.webp" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.45 }} />
+                <div style={{ position: 'absolute', inset: 0, padding: '20px 22px' }}>
+                    <p style={{ color: 'rgba(255,255,255,.6)', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', margin: '0 0 8px' }}>O PRIMEIRO PASSO É SEU.</p>
+                    <h2 style={{ color: '#fff', fontSize: 28, fontWeight: 800, margin: 0, lineHeight: 1.1, fontFamily: "'Bricolage Grotesque',system-ui" }}>
+                        Seu próximo<br /><em style={{ fontStyle: 'italic', fontWeight: 700 }}>capítulo.</em>
+                    </h2>
                 </div>
             </div>
 
-            {/* ══════════════════════════════════════════
-                MOBILE LAYOUT (full-screen column)
-            ══════════════════════════════════════════ */}
-            <div className="flex-1 flex flex-col bg-white overflow-y-auto no-scrollbar relative min-h-0">
-
-                {/* Payment approved overlay */}
-                {isPaymentApproved && (
-                    <div className="absolute inset-0 bg-white z-[200] flex flex-col items-center justify-center p-8 text-center animate-in fade-in duration-500">
-                        <div className="w-20 h-20 mb-6">
-                            <img src="https://i.postimg.cc/8CypNtWj/IMG-3409.gif" className="w-full h-full object-contain" alt="Success" />
+            {/* ── ORDER SUMMARY CARD ── */}
+            <div style={{ margin: '12px 16px 0', background: '#fff', borderRadius: 16, border: '1px solid #E8EAF0', padding: '14px 16px', flexShrink: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.12em', textTransform: 'uppercase' }}>RESUMO DO PEDIDO</span>
+                    {region === 'BR' && <span style={{ background: '#EEF2FF', color: BLUE, fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20 }}>30% OFF</span>}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                    <div style={{ width: 54, height: 54, borderRadius: 12, background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, flexShrink: 0 }}>
+                        {planEmoji}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                        <div style={{ fontSize: 11, color: '#94a3b8', marginBottom: 2 }}>Plano</div>
+                        <div style={{ fontSize: 20, fontWeight: 800, fontFamily: "'Bricolage Grotesque',system-ui", lineHeight: 1.1 }}>
+                            {(plan.label || '').replace(/[🥇🌏🪙💙]/g, '').trim()}<span style={{ color: BLUE }}>.</span>
                         </div>
-                        <h2 className="text-2xl font-black text-slate-900 mb-2">Pagamento Aprovado!</h2>
-                        <p className="text-[14px] text-slate-500 mb-8 max-w-[280px] leading-relaxed">
-                            Seu acesso ao Connect Academy foi liberado. Verifique seu e-mail para os próximos passos.
-                        </p>
-                        <div className="w-full max-w-[200px] h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-[#4D5BFF] animate-progress-fast" />
+                        <div style={{ fontSize: 12, color: '#64748b', marginTop: 3 }}>• {planAccessDuration}</div>
+                    </div>
+                    <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                        {region === 'BR' && oldPriceStr && <div style={{ fontSize: 12, color: '#94a3b8', textDecoration: 'line-through', marginBottom: 2 }}>R$ {oldPriceStr}</div>}
+                        <div style={{ fontSize: 24, fontWeight: 800, lineHeight: 1 }}>{currencySymbol} {orderBump ? totalPriceStr : priceStr}</div>
+                    </div>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 12, paddingTop: 10, borderTop: '1px solid #F1F3F7', fontSize: 12, color: '#94a3b8' }}>
+                    <span style={{ fontStyle: 'italic' }}>
+                        {plan.id === 'starter' ? 'Um novo começo, do seu jeito.' : plan.id === 'pro' ? 'O melhor custo-benefício.' : 'Acesso total para sempre.'}
+                    </span>
+                    {region === 'BR' && <span>Ou 12x de R$ {monthly12x}</span>}
+                </div>
+            </div>
+
+            {/* ── STEP INDICATOR ── */}
+            {!isAuthenticated && (
+                <div style={{ margin: '16px 16px 0', display: 'flex', alignItems: 'center', gap: 0 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                        <div style={{ width: 32, height: 32, borderRadius: '50%', background: step === 1 ? BLUE : '#e2e8f0', color: step === 1 ? '#fff' : '#94a3b8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 13 }}>
+                            {step > 1 ? '✓' : '1'}
+                        </div>
+                        <span style={{ fontSize: 11, fontWeight: 600, color: step === 1 ? BLUE : '#94a3b8', whiteSpace: 'nowrap' }}>Crie sua conta</span>
+                    </div>
+                    <div style={{ flex: 1, height: 2, background: '#e2e8f0', margin: '0 8px 16px' }} />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+                        <div style={{ width: 32, height: 32, borderRadius: '50%', background: step === 2 ? BLUE : '#e2e8f0', color: step === 2 ? '#fff' : '#94a3b8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 13 }}>2</div>
+                        <span style={{ fontSize: 11, fontWeight: 600, color: step === 2 ? BLUE : '#94a3b8' }}>Pagamento</span>
+                    </div>
+                </div>
+            )}
+
+            {/* ── CONTENT AREA ── */}
+            <div style={{ maxWidth: 480, width: '100%', margin: '0 auto', padding: '20px 16px 40px', flex: 1 }}>
+
+                {/* Prévia testar link */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, fontSize: 12, color: '#94a3b8' }}>
+                    <span>• Prévia interativa. Nenhuma cobrança será realizada.</span>
+                </div>
+
+                {/* Step eyebrow + heading */}
+                <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', color: '#94a3b8', margin: '0 0 6px', textTransform: 'uppercase' }}>{stepEyebrow}</p>
+                <h1 style={{ fontSize: 32, fontWeight: 800, margin: '0 0 6px', fontFamily: "'Bricolage Grotesque',system-ui", letterSpacing: '-0.02em', lineHeight: 1.1 }}>{stepHeading}</h1>
+                <p style={{ fontSize: 14, color: '#64748b', margin: '0 0 24px' }}>{stepSub}</p>
+
+                {/* ══ STEP 1 ══ */}
+                {step === 1 && !isAuthenticated && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                        {/* Name */}
+                        <div>
+                            <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Seu nome completo</label>
+                            <input
+                                type="text"
+                                placeholder="Marina Oliveira"
+                                value={guestName}
+                                onChange={e => setGuestName(e.target.value)}
+                                style={{ width: '100%', boxSizing: 'border-box', border: '1.5px solid #E2E8F0', borderRadius: 12, padding: '14px 16px', fontSize: 16, outline: 'none', background: '#fff' }}
+                            />
+                        </div>
+                        {/* Email */}
+                        <div>
+                            <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Seu e-mail</label>
+                            <input
+                                type="email"
+                                placeholder="marina@example.com"
+                                value={guestEmail}
+                                onChange={e => setGuestEmail(e.target.value)}
+                                style={{ width: '100%', boxSizing: 'border-box', border: '1.5px solid #E2E8F0', borderRadius: 12, padding: '14px 16px', fontSize: 16, outline: 'none', background: '#fff' }}
+                            />
+                        </div>
+                        {/* WhatsApp */}
+                        <div>
+                            <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Seu WhatsApp</label>
+                            <div style={{ display: 'flex', border: '1.5px solid #E2E8F0', borderRadius: 12, overflow: 'hidden', background: '#fff' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', padding: '0 12px', borderRight: '1px solid #E2E8F0', color: '#64748b', fontSize: 14, whiteSpace: 'nowrap', gap: 6 }}>
+                                    {region === 'EU' ? '🇵🇹 +351' : '🇧🇷 +55'}
+                                </div>
+                                <input
+                                    type="tel"
+                                    placeholder={region === 'EU' ? '912 345 678' : '(11) 99999-9999'}
+                                    value={guestPhone}
+                                    onChange={e => {
+                                        const digits = e.target.value.replace(/\D/g, '').slice(0, 11);
+                                        let masked = digits;
+                                        if (region !== 'EU') {
+                                            if (digits.length > 6) masked = `(${digits.slice(0,2)}) ${digits.slice(2,7)}-${digits.slice(7)}`;
+                                            else if (digits.length > 2) masked = `(${digits.slice(0,2)}) ${digits.slice(2)}`;
+                                            else if (digits.length > 0) masked = `(${digits}`;
+                                        }
+                                        setGuestPhone(masked);
+                                    }}
+                                    style={{ flex: 1, border: 'none', padding: '14px 16px', fontSize: 16, outline: 'none', background: 'transparent' }}
+                                    maxLength={16}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Info box */}
+                        <div style={{ background: '#EEF2FF', borderRadius: 12, padding: '14px 16px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                            <span style={{ fontSize: 18, flexShrink: 0 }}>✉</span>
+                            <p style={{ fontSize: 13, color: '#475569', margin: 0, lineHeight: 1.5 }}>
+                                Depois do pagamento, você recebe um <strong>e-mail com seus dados de acesso</strong> para definir sua senha. Simples assim.
+                            </p>
+                        </div>
+
+                        {/* CTA */}
+                        <button
+                            onClick={handleStep1Continue}
+                            style={{ width: '100%', padding: '18px', background: BLUE, color: '#fff', border: 'none', borderRadius: 14, fontSize: 17, fontWeight: 700, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+                        >
+                            Continuar para Pagamento →
+                        </button>
+                        <p style={{ textAlign: 'center', fontSize: 13, color: '#94a3b8', margin: 0 }}>Falta só mais um passo para começar.</p>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                            <img src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png" alt="Formas de pagamento" style={{ height: 20, opacity: 0.4, filter: 'grayscale(1)' }} />
                         </div>
                     </div>
                 )}
 
-                {/* ─── Mobile top header (logo + back only) ─── */}
-                <div className="md:hidden sticky top-0 z-20 bg-white flex items-center justify-between px-4 h-12 border-b border-slate-50">
-                    <button onClick={onClose} className="p-2 -ml-2 text-slate-500 hover:text-slate-700 transition-colors">
-                        <Icons.ArrowLeft className="w-5 h-5" />
-                    </button>
-                    <img
-                        src="https://i.postimg.cc/Wz5JsrXh/LOGONE_2.png"
-                        alt="Logo"
-                        className="h-6 w-auto absolute left-1/2 -translate-x-1/2"
-                    />
-                    <div className="w-9" /> {/* spacer */}
-                </div>
+                {/* ══ STEP 2 ══ */}
+                {(step === 2 || isAuthenticated) && (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
-                {/* ─── Mobile order summary (collapsible) ─── */}
-                <div className="md:hidden">
-                    <OrderSummary
-                        plan={plan}
-                        region={region}
-                        priceStr={priceStr}
-                        totalPriceStr={totalPriceStr}
-                        orderBump={orderBump}
-                        monthly12x={monthly12x}
-                        currencySymbol={currencySymbol}
-                        planDisplayName={planDisplayName}
-                        selectedInstallment={selectedInstallment}
-                        planAccessDuration={planAccessDuration}
-                        oldPriceStr={oldPriceStr}
-                    />
-                </div>
-
-                {/* ─── Main scrollable content ─── */}
-                <div className="w-full max-w-[480px] mx-auto px-5 md:px-12 py-4 md:py-12 flex flex-col">
-
-                    {/* Step indicator */}
-                    {!isAuthenticated && (
-                        <div className="flex items-center mb-6">
-                            <div className="flex items-center gap-2">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-black transition-all duration-300 border-2 ${
-                                    step === 1
-                                        ? 'bg-[#4D5BFF] border-[#4D5BFF] text-white'
-                                        : 'bg-white border-slate-200 text-slate-400'
-                                }`}>
-                                    {step > 1 ? <Icons.Check className="w-4 h-4 text-slate-400" /> : '1'}
+                        {/* User card (if guest, show edit option) */}
+                        {!isAuthenticated && guestName && (
+                            <div style={{ background: '#fff', borderRadius: 12, border: '1px solid #E8EAF0', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 12 }}>
+                                <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: 14, color: BLUE, flexShrink: 0 }}>
+                                    {userInitials}
                                 </div>
-                                <span className={`text-[13px] font-bold ${step === 1 ? 'text-[#4D5BFF]' : 'text-slate-400'}`}>
-                                    Criar sua Conta
-                                </span>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ fontWeight: 600, fontSize: 14 }}>{guestName}</div>
+                                    <div style={{ fontSize: 12, color: '#64748b' }}>{guestEmail}</div>
+                                </div>
+                                <button onClick={() => setStep(1)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: BLUE, fontSize: 13, fontWeight: 600 }}>Editar</button>
                             </div>
-                            <div className="flex-1 h-[1px] bg-slate-200 mx-3" />
-                            <div className="flex items-center gap-2">
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-[12px] font-black transition-all duration-300 border-2 ${
-                                    step === 2
-                                        ? 'bg-[#4D5BFF] border-[#4D5BFF] text-white'
-                                        : 'bg-white border-slate-200 text-slate-300'
-                                }`}>
-                                    2
+                        )}
+
+                        {/* Order bump */}
+                        {showOrderBump && (
+                            <label htmlFor="order-bump-checkbox" style={{ display: 'flex', alignItems: 'flex-start', gap: 14, padding: '14px 16px', borderRadius: 14, border: `2px solid ${orderBump ? BLUE : '#E2E8F0'}`, background: orderBump ? '#EEF2FF' : '#fff', cursor: 'pointer' }}>
+                                <div style={{ position: 'relative', flexShrink: 0, marginTop: 2 }}>
+                                    <input id="order-bump-checkbox" type="checkbox" checked={orderBump} onChange={e => setOrderBump(e.target.checked)} style={{ width: 18, height: 18, accentColor: BLUE, cursor: 'pointer' }} />
                                 </div>
-                                <span className={`text-[13px] font-bold ${step === 2 ? 'text-[#4D5BFF]' : 'text-slate-300'}`}>
-                                    Pagamento
-                                </span>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                                        <span style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.1em' }}>UMA CONEXÃO A MAIS</span>
+                                        <span style={{ fontSize: 13, fontWeight: 700 }}>+R$49,90</span>
+                                    </div>
+                                    <p style={{ fontSize: 14, fontWeight: 700, margin: '0 0 4px' }}>Grupo de Networking exclusivo no WhatsApp</p>
+                                    <p style={{ fontSize: 12, color: '#64748b', margin: 0, lineHeight: 1.5 }}>Além do aplicativo, participe do grupo exclusivo de Networking. Converse diretamente e diariamente com quem está no mesmo caminho que você.</p>
+                                    <div style={{ marginTop: 8, display: 'flex', justifyContent: 'flex-end' }}>
+                                        <span style={{ fontSize: 12, color: BLUE, fontWeight: 600, cursor: 'pointer' }}>Adicionar ao pedido</span>
+                                    </div>
+                                </div>
+                            </label>
+                        )}
+
+                        {/* Payment method selector */}
+                        <div>
+                            <p style={{ fontSize: 14, fontWeight: 600, marginBottom: 10 }}>Como você prefere pagar?</p>
+                            <div style={{ display: 'flex', gap: 8 }}>
+                                <button
+                                    onClick={() => setMethod(region === 'EU' ? 'cc' : 'cc_appmax')}
+                                    style={{ flex: 1, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, borderRadius: 12, border: `2px solid ${(method === 'cc_appmax' || method === 'cc') ? BLUE : '#E2E8F0'}`, background: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 600, color: (method === 'cc_appmax' || method === 'cc') ? BLUE : '#64748b' }}
+                                >
+                                    💳 Cartão
+                                </button>
+                                {region === 'BR' && (
+                                    <button
+                                        onClick={() => setMethod('pix')}
+                                        style={{ flex: 1, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 12, border: `2px solid ${method === 'pix' ? BLUE : '#E2E8F0'}`, background: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 600, color: method === 'pix' ? BLUE : '#64748b' }}
+                                    >
+                                        <Icons.Pix style={{ height: 16 }} />
+                                        <span style={{ marginLeft: 6 }}>Pix</span>
+                                    </button>
+                                )}
+                                <ApplePayButton plan={plan} priceNum={totalPriceNum} region={region} guestEmail={guestEmail} guestName={guestName} onSuccess={handleLocalSuccess} isActive={method === 'apple_pay'} onClick={() => setMethod('apple_pay')} />
                             </div>
                         </div>
-                    )}
 
-                    <div className="flex-1">
-
-                        {/* ══ STEP 1: Criar Conta ══ */}
-                        {step === 1 && !isAuthenticated ? (
-                            <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                <div>
-                                    <h2 className="text-[28px] font-black text-slate-900 tracking-tight leading-tight mb-1">
-                                        Crie sua Conta
-                                    </h2>
-                                    <p className="text-[14px] text-slate-400 font-medium">
-                                        Você receberá seus dados de acesso por e-mail.
-                                    </p>
-                                </div>
-
-                                <div className="space-y-4">
-                                    <div className="space-y-1.5">
-                                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                                            SEU NOME COMPLETO
-                                        </label>
-                                        <input
-                                            type="text"
-                                            className="w-full h-14 bg-white border border-slate-200 rounded-xl px-4 text-[15px] font-medium text-slate-800 outline-none focus:border-[#4D5BFF] transition-all placeholder:text-slate-300 shadow-sm"
-                                            placeholder="Ex: João Silva"
-                                            value={guestName}
-                                            onChange={e => setGuestName(e.target.value)}
-                                        />
+                        {/* Payment form */}
+                        <div>
+                            {method === 'cc_appmax' ? (
+                                <AppmaxCCPayment
+                                    plan={plan} onSuccess={handleLocalSuccess} region={region}
+                                    guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone}
+                                    orderBump={orderBump} orderBumpPrice={ORDER_BUMP_PRICE}
+                                    onInstallmentChange={(info: any, n: number) => setSelectedInstallment({ n, info })}
+                                />
+                            ) : method === 'cc' ? (
+                                clientSecret ? (
+                                    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe', variables: { colorPrimary: BLUE, borderRadius: '12px', fontSizeBase: '14px' } } }}>
+                                        <StripeForm plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone} />
+                                    </Elements>
+                                ) : (
+                                    <div style={{ padding: '40px 0', textAlign: 'center' }}>
+                                        <div style={{ width: 32, height: 32, border: `3px solid ${BLUE}`, borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin .7s linear infinite', margin: '0 auto 12px' }} />
+                                        <p style={{ fontSize: 12, color: '#94a3b8' }}>Iniciando checkout seguro...</p>
+                                        <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                                            SEU E-MAIL
-                                        </label>
-                                        <input
-                                            type="email"
-                                            className="w-full h-14 bg-white border border-slate-200 rounded-xl px-4 text-[15px] font-medium text-slate-800 outline-none focus:border-[#4D5BFF] transition-all placeholder:text-slate-300 shadow-sm"
-                                            placeholder="exemplo@email.com"
-                                            value={guestEmail}
-                                            onChange={e => setGuestEmail(e.target.value)}
-                                        />
+                                )
+                            ) : method === 'pix' ? (
+                                <PixPayment plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone} orderBump={orderBump} orderBumpPrice={ORDER_BUMP_PRICE} />
+                            ) : null}
+                        </div>
+
+                        {/* Order total */}
+                        {(method === 'cc_appmax' || method === 'cc') && (
+                            <div style={{ borderTop: '1px solid #F1F3F7', paddingTop: 16 }}>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                                    <span style={{ fontSize: 13, color: '#64748b' }}>{planAccessDuration.replace('de acesso', '').trim()} · {planAccessDuration}</span>
+                                    <span style={{ fontSize: 13, fontWeight: 600 }}>{currencySymbol} {priceStr}</span>
+                                </div>
+                                {orderBump && (
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4, fontSize: 13, color: '#64748b' }}>
+                                        <span>Grupo Networking</span>
+                                        <span>R$ 49,90</span>
                                     </div>
-                                    <div className="space-y-1.5">
-                                        <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                                            SEU WHATSAPP
-                                        </label>
-                                        <input
-                                            type="tel"
-                                            className="w-full h-14 bg-white border border-slate-200 rounded-xl px-4 text-[15px] font-medium text-slate-800 outline-none focus:border-[#4D5BFF] transition-all placeholder:text-slate-300 shadow-sm"
-                                            placeholder="(11) 99999-9999"
-                                            value={guestPhone}
-                                            onChange={e => {
-                                                const digits = e.target.value.replace(/\D/g, '').slice(0, 11);
-                                                let masked = digits;
-                                                if (digits.length > 6) {
-                                                    masked = `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
-                                                } else if (digits.length > 2) {
-                                                    masked = `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
-                                                } else if (digits.length > 0) {
-                                                    masked = `(${digits}`;
-                                                }
-                                                setGuestPhone(masked);
-                                            }}
-                                            maxLength={16}
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* Info box */}
-                                <div className="bg-[#EEF0FF] rounded-xl p-4 flex items-start gap-3 border border-[#D4D8FF]">
-                                    <div className="text-[#4D5BFF] shrink-0 mt-0.5">
-                                        <Icons.MessageCircle className="w-5 h-5" />
-                                    </div>
-                                    <p className="text-[12px] leading-relaxed text-slate-600">
-                                        Após o pagamento, você receberá um{' '}
-                                        <span className="font-black text-slate-800">e-mail com seus dados de acesso</span>
-                                        {' '}para definir sua senha.
-                                    </p>
-                                </div>
-
-                                <button
-                                    onClick={handleStep1Continue}
-                                    className="w-full h-14 bg-[#4D5BFF] hover:bg-[#3D4AE5] text-white rounded-2xl font-bold text-[15px] shadow-lg shadow-[#4D5BFF]/25 transition-all flex items-center justify-center gap-2 group"
-                                >
-                                    Continuar para Pagamento
-                                    <Icons.ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                                </button>
-
-                                {/* Payment logos below CTA */}
-                                <div className="flex items-center justify-center gap-3 pt-1">
-                                    <img src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png" alt="Formas de pagamento" className="h-5 w-auto opacity-30 grayscale brightness-0" />
-                                </div>
-                            </div>
-
-                        ) : (
-                        /* ══ STEP 2: Pagamento ══ */
-                            <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                                <div>
-                                    <h2 className="text-[28px] font-black text-slate-900 tracking-tight leading-tight mb-1">
-                                        Método de Pagamento
-                                    </h2>
-                                    <p className="text-[14px] text-slate-400 font-medium">Escolha como deseja pagar.</p>
-                                </div>
-
-                                {/* ── ORDER BUMP ── */}
-                                {showOrderBump && (
-                                    <label
-                                        htmlFor="order-bump-checkbox"
-                                        className={`flex items-start gap-4 p-4 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${
-                                            orderBump
-                                                ? 'border-[#4D5BFF] bg-[#EEF0FF]'
-                                                : 'border-slate-200 bg-slate-50 hover:border-slate-300'
-                                        }`}
-                                    >
-                                        {/* Checkbox */}
-                                        <div className="relative flex items-center shrink-0 mt-0.5">
-                                            <input
-                                                id="order-bump-checkbox"
-                                                type="checkbox"
-                                                className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border-2 border-slate-300 transition-all checked:bg-[#4D5BFF] checked:border-[#4D5BFF]"
-                                                checked={orderBump}
-                                                onChange={e => setOrderBump(e.target.checked)}
-                                            />
-                                            <Icons.Check className="absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-1" />
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex items-center justify-between gap-2 mb-1 flex-wrap">
-                                                <span className="text-[10px] font-black bg-[#4D5BFF] text-white px-2 py-0.5 rounded-full uppercase tracking-wide">
-                                                    Oferta Especial
-                                                </span>
-                                                <span className="text-[13px] font-black text-slate-900">+ R$ 49,90</span>
-                                            </div>
-                                            <p className="text-[14px] font-black text-slate-900 leading-snug mb-1">
-                                                Grupo de Networking exclusivo no WhatsApp
-                                            </p>
-                                            <p className="text-[12px] text-slate-500 leading-relaxed">
-                                                Além de todo nosso aplicativo, você participa exclusivamente do nosso grupo de Networking, converse diretamente e diariamente com quem está no mesmo caminho que você.
-                                            </p>
-                                        </div>
-                                    </label>
                                 )}
-
-                                {/* ── payment method buttons — separate, close together ── */}
-                                <div className="flex gap-2">
-                                    {/* Cartão */}
-                                    <button
-                                        onClick={() => setMethod(region === 'EU' ? 'cc' : 'cc_appmax')}
-                                        className={`flex-1 h-12 flex items-center justify-center gap-1.5 rounded-xl border transition-all text-[12px] font-bold ${
-                                            (method === 'cc_appmax' || method === 'cc')
-                                                ? 'bg-white border-[#4D5BFF] text-[#4D5BFF] shadow-sm'
-                                                : 'bg-white border-slate-200 text-slate-400 hover:border-slate-300'
-                                        }`}
-                                    >
-                                        <Icons.CreditCard className="w-4 h-4" />
-                                        <span>Cartão</span>
-                                    </button>
-
-                                    {/* Pix */}
-                                    {region === 'BR' && (
-                                        <button
-                                            onClick={() => setMethod('pix')}
-                                            className={`flex-1 h-12 flex items-center justify-center rounded-xl border transition-all ${
-                                                method === 'pix'
-                                                    ? 'bg-white border-[#4D5BFF] shadow-sm'
-                                                    : 'bg-white border-slate-200 hover:border-slate-300'
-                                            }`}
-                                        >
-                                            <Icons.Pix className={`h-4 w-auto transition-all ${method === 'pix' ? '' : 'opacity-40'}`} />
-                                        </button>
-                                    )}
-
-                                    {/* Apple Pay — nativo, aparece automaticamente se o dispositivo suportar */}
-                                    <ApplePayButton
-                                        plan={plan}
-                                        priceNum={totalPriceNum}
-                                        region={region}
-                                        guestEmail={guestEmail}
-                                        guestName={guestName}
-                                        onSuccess={handleLocalSuccess}
-                                        isActive={method === 'apple_pay'}
-                                        onClick={() => setMethod('apple_pay')}
-                                    />
-                                </div>
-
-                                {/* Payment form */}
-                                <div className="mt-1">
-                                    {method === 'cc_appmax' ? (
-                                        <AppmaxCCPayment 
-                                            plan={plan} 
-                                            onSuccess={handleLocalSuccess} 
-                                            region={region} 
-                                            guestEmail={guestEmail} 
-                                            guestName={guestName} 
-                                            guestPhone={guestPhone}
-                                            orderBump={orderBump}
-                                            orderBumpPrice={ORDER_BUMP_PRICE}
-                                            onInstallmentChange={(info: any, n: number) => setSelectedInstallment({ n, info })}
-                                        />
-                                    ) : method === 'cc' ? (
-                                        clientSecret ? (
-                                            <Elements
-                                                stripe={stripePromise}
-                                                options={{
-                                                    clientSecret,
-                                                    appearance: {
-                                                        theme: 'stripe',
-                                                        variables: {
-                                                            colorPrimary: '#4D5BFF',
-                                                            borderRadius: '12px',
-                                                            fontSizeBase: '14px',
-                                                        },
-                                                    },
-                                                }}
-                                            >
-                                                <StripeForm plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone} />
-                                            </Elements>
-                                        ) : (
-                                            <div className="py-12 text-center">
-                                                <div className="w-8 h-8 border-2 border-slate-100 border-t-[#4D5BFF] rounded-full animate-spin mx-auto mb-4" />
-                                                <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
-                                                    Iniciando Checkout Seguro...
-                                                </p>
-                                            </div>
-                                        )
-                                    ) : method === 'pix' ? (
-                                        <PixPayment plan={plan} onSuccess={handleLocalSuccess} guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone} orderBump={orderBump} orderBumpPrice={ORDER_BUMP_PRICE} />
-                                    ) : null /* apple_pay is handled natively, no extra UI */}
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 8 }}>
+                                    <div>
+                                        <div style={{ fontSize: 14, fontWeight: 600 }}>Total do pedido</div>
+                                        <div style={{ fontSize: 12, color: '#94a3b8' }}>Pagamento único</div>
+                                    </div>
+                                    <div style={{ fontSize: 28, fontWeight: 800, fontFamily: "'Bricolage Grotesque',system-ui" }}>{currencySymbol} {orderBump ? totalPriceStr : priceStr}</div>
                                 </div>
                             </div>
                         )}
                     </div>
+                )}
+            </div>
 
-                    {/* Footer logos — only on step 2 (payment) */}
-                    {(step === 2 || isAuthenticated) && (
-                        <div className="mt-6 pt-5 border-t border-slate-50 flex flex-col items-center">
-                            <img
-                                src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png"
-                                alt="Pagamento seguro"
-                                className="h-7 w-auto opacity-30 grayscale brightness-0"
-                            />
-                        </div>
-                    )}
-                </div>
+            {/* ── FOOTER BAR ── */}
+            <div style={{ background: '#fff', borderTop: '1px solid #EAECF0', padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.14em', textTransform: 'uppercase' }}>CONNECT ACADEMY</span>
+                <img src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png" alt="" style={{ height: 18, opacity: 0.3, filter: 'grayscale(1)' }} />
+                <span style={{ fontSize: 12, color: '#94a3b8' }}>Seu acesso, passo a passo →</span>
             </div>
         </div>,
         document.body
     );
 };
+
