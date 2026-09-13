@@ -236,6 +236,8 @@ body.eu-mode .price-old-br, body.eu-mode .price-installment-br { display: none !
     if(card.index===idx)return;
     card.index=idx;
     card.img.src=items[idx].imagem;
+    card.img.onerror=function(){card.el.style.visibility='hidden';card.img.onerror=null;};
+    card.img.onload=function(){card.el.style.visibility='';card.img.onload=null;};
   }
   function paint(){
     const W=stage.clientWidth, isMob=W<600;
