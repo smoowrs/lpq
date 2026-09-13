@@ -151,7 +151,27 @@ document.getElementById('catalog-modal').addEventListener('click',function(e){
 });
 function submitCatalogForm(e){
   e.preventDefault();
-  var email=document.getElementById('catalog-email').value;
+  var email=document.getElementById('catalog-email').value.trim().toLowerCase();
+  if(!email||email.indexOf('@')<0) return;
+  // Salva direto no Supabase (mesmo anon key do app - igual ao NovaPage)
+  var SUPA_URL='https://bfyfzpjivesrbcxilmzd.supabase.co';
+  var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmeWZ6cGppdmVzcmJjeGlsbXpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA2NTE1ODUsImV4cCI6MjA4NjIyNzU4NX0.4q3uB1PrFPbaH4lunmQ6wZU0jNABg2D0i45JRHXo_K0';
+  fetch(SUPA_URL+'/rest/v1/landing_leads',{
+    method:'POST',
+    headers:{
+      'apikey':SUPA_KEY,
+      'Authorization':'Bearer '+SUPA_KEY,
+      'Content-Type':'application/json',
+      'Prefer':'return=minimal'
+    },
+    body:JSON.stringify({
+      email:email,
+      source:'portal_catalog_modal',
+      page_url:window.location.href,
+      ab_group:Math.random()<0.5?'A':'B'
+    })
+  }).catch(function(){});
+  // Também chama o server-side para CAPI do Facebook
   fetch('/api/catalog-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email})}).catch(function(){});
   try{ if(window.fbq){ fbq('track','Lead',{content_name:'catalog_portal'}); } }catch(err){}
   window.open('https://t.me/grupoconnect','_blank');
