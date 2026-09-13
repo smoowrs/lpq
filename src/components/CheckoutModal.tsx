@@ -1143,7 +1143,11 @@ export const CheckoutModal = ({
                                         onClick={() => setMethod('pix')}
                                         style={{ flex: 1, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 12, border: `2px solid ${method === 'pix' ? BLUE : '#E2E8F0'}`, background: '#fff', cursor: 'pointer' }}
                                     >
-                                        <Icons.Pix style={{ height: 14, width: 'auto', maxWidth: 44, display: 'block' }} />
+                                        <div style={{ display:'flex', alignItems:'center', justifyContent:'center', width:44, height:20, overflow:'hidden' }}>
+                                        <div style={{ transform:'scale(0.32)', transformOrigin:'center', flexShrink:0 }}>
+                                            <Icons.Pix />
+                                        </div>
+                                    </div>
                                     </button>
                                 )}
                                 <ApplePayButton plan={plan} priceNum={totalPriceNum} region={region} guestEmail={guestEmail} guestName={guestName} onSuccess={handleLocalSuccess} isActive={method === 'apple_pay'} onClick={() => setMethod('apple_pay')} />
