@@ -939,19 +939,18 @@ export const CheckoutModal = ({
 
             {/* ── HEADER ── */}
             <div style={{ background: '#fff', borderBottom: '1px solid #EAECF0', padding: '0 20px', height: 52, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0, position: 'sticky', top: 0, zIndex: 20 }}>
-                <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, color: '#64748b', fontSize: 14 }}>
+                <button onClick={() => { window.location.href = '/#planos'; }} style={{ background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, color: '#64748b', fontSize: 14 }}>
                     ← Voltar
                 </button>
-                <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', textAlign: 'center' }}>
-                    <div style={{ fontFamily: "'Bricolage Grotesque',system-ui", fontWeight: 900, fontSize: 16, color: BLUE, letterSpacing: '-0.04em', lineHeight: 1 }}>CONNECT</div>
-                    <div style={{ fontSize: 9, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.18em' }}>ACADEMY</div>
+                <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+                    <img src="/portal/assets/logo.png" alt="Connect Academy" style={{ height: 28, width: 'auto', display: 'block' }} />
                 </div>
-                <button onClick={() => {}} style={{ width: 32, height: 32, border: '1px solid #e2e8f0', borderRadius: '50%', background: 'none', cursor: 'pointer', fontSize: 14, color: '#64748b', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>?</button>
+                <div style={{ width: 32 }} />
             </div>
 
             {/* ── BANNER ── */}
             <div style={{ margin: '16px 16px 0', borderRadius: 12, overflow: 'hidden', height: 140, background: '#0a0a1a', position: 'relative', flexShrink: 0 }}>
-                <img src="/portal/assets/iphone17promax.webp" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.45 }} />
+                <img src="/portal/assets/banner-checkout.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center 25%', opacity: 0.6 }} />
                 <div style={{ position: 'absolute', inset: 0, padding: '20px 22px' }}>
                     <p style={{ color: 'rgba(255,255,255,.6)', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', margin: '0 0 8px' }}>O PRIMEIRO PASSO É SEU.</p>
                     <h2 style={{ color: '#fff', fontSize: 28, fontWeight: 800, margin: 0, lineHeight: 1.1, fontFamily: "'Bricolage Grotesque',system-ui" }}>
@@ -1010,10 +1009,7 @@ export const CheckoutModal = ({
             {/* ── CONTENT AREA ── */}
             <div style={{ maxWidth: 480, width: '100%', margin: '0 auto', padding: '20px 16px 40px', flex: 1 }}>
 
-                {/* Prévia testar link */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, fontSize: 12, color: '#94a3b8' }}>
-                    <span>• Prévia interativa. Nenhuma cobrança será realizada.</span>
-                </div>
+                {/* Sem texto de prévia */}
 
                 {/* Step eyebrow + heading */}
                 <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.14em', color: '#94a3b8', margin: '0 0 6px', textTransform: 'uppercase' }}>{stepEyebrow}</p>
@@ -1140,15 +1136,14 @@ export const CheckoutModal = ({
                                     onClick={() => setMethod(region === 'EU' ? 'cc' : 'cc_appmax')}
                                     style={{ flex: 1, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, borderRadius: 12, border: `2px solid ${(method === 'cc_appmax' || method === 'cc') ? BLUE : '#E2E8F0'}`, background: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 600, color: (method === 'cc_appmax' || method === 'cc') ? BLUE : '#64748b' }}
                                 >
-                                    💳 Cartão
+                                    Cartão
                                 </button>
                                 {region === 'BR' && (
                                     <button
                                         onClick={() => setMethod('pix')}
-                                        style={{ flex: 1, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 12, border: `2px solid ${method === 'pix' ? BLUE : '#E2E8F0'}`, background: '#fff', cursor: 'pointer', fontSize: 13, fontWeight: 600, color: method === 'pix' ? BLUE : '#64748b' }}
+                                        style={{ flex: 1, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 12, border: `2px solid ${method === 'pix' ? BLUE : '#E2E8F0'}`, background: '#fff', cursor: 'pointer' }}
                                     >
-                                        <Icons.Pix style={{ height: 16 }} />
-                                        <span style={{ marginLeft: 6 }}>Pix</span>
+                                        <Icons.Pix style={{ height: 18, width: 'auto', display: 'block' }} />
                                     </button>
                                 )}
                                 <ApplePayButton plan={plan} priceNum={totalPriceNum} region={region} guestEmail={guestEmail} guestName={guestName} onSuccess={handleLocalSuccess} isActive={method === 'apple_pay'} onClick={() => setMethod('apple_pay')} />
@@ -1208,10 +1203,12 @@ export const CheckoutModal = ({
             </div>
 
             {/* ── FOOTER BAR ── */}
-            <div style={{ background: '#fff', borderTop: '1px solid #EAECF0', padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexShrink: 0 }}>
-                <span style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.14em', textTransform: 'uppercase' }}>CONNECT ACADEMY</span>
-                <img src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png" alt="" style={{ height: 18, opacity: 0.3, filter: 'grayscale(1)' }} />
-                <span style={{ fontSize: 12, color: '#94a3b8' }}>Seu acesso, passo a passo →</span>
+            <div style={{ background: '#fff', borderTop: '1px solid #EAECF0', padding: '14px 20px', flexShrink: 0, textAlign: 'center' }}>
+                <img src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png" alt="" style={{ height: 18, opacity: 0.3, filter: 'grayscale(1)', display: 'block', margin: '0 auto 10px' }} />
+                <p style={{ fontSize: 11, color: '#94a3b8', margin: 0, lineHeight: 1.6 }}>
+                    © 2026 Connect Academy Ltda.<br />
+                    <span style={{ fontSize: 10 }}>Todos os direitos reservados · CNPJ: 44.292.841/0001-85</span>
+                </p>
             </div>
         </div>,
         document.body
