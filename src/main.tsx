@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.tsx';
 import { NovaPage } from './pages/NovaPage.tsx';
 import { CheckoutPage } from './pages/CheckoutPage.tsx';
+import FeedbacksPage from './pages/FeedbacksPage.tsx';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import './index.css';
 
@@ -19,6 +20,7 @@ if (container) {
             <Route path="/comprar" element={<CheckoutPage />} />
             <Route path="/experience" element={<NovaPage showExperience={true} />} />
             <Route path="/nova" element={<App />} />
+            <Route path="/feedbacks" element={<FeedbacksPage />} />
           </Routes>
         </BrowserRouter>
       </ErrorBoundary>
