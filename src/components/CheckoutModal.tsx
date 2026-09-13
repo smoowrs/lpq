@@ -18,7 +18,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 // ── Tabela de parcelas Appmax — 30% off + juros repassados ao comprador ──
 // Calculado com base nos multiplicadores originais escalados para os novos preços:
-// Starter: 67,90 (antes 58,20) | Pro: 137,90 (antes 118,20) | Elite: 266,00 (antes 233,40)
+// Starter: 67,90 (antes 58,20) | Pro: 137,90 (antes 118,20) | Elite: 272,30 (antes 233,40)
 const INSTALLMENTS: Record<string, { value: string; total: string }[]> = {
     starter: [
         { value: '67,90',  total: '67,90'  }, // 1x  sem juros
@@ -49,18 +49,18 @@ const INSTALLMENTS: Record<string, { value: string; total: string }[]> = {
         { value: '14,91',   total: '178,90'  }, // 12x
     ],
     elite: [
-        { value: '266,00',  total: '266,00'  }, // 1x  sem juros
-        { value: '139,50',  total: '279,00'  }, // 2x
-        { value: '95,22',   total: '285,67'  }, // 3x
-        { value: '73,08',   total: '292,32'  }, // 4x
-        { value: '59,79',   total: '298,97'  }, // 5x
-        { value: '50,92',   total: '305,51'  }, // 6x
-        { value: '44,60',   total: '312,23'  }, // 7x
-        { value: '39,84',   total: '318,71'  }, // 8x
-        { value: '36,15',   total: '325,31'  }, // 9x
-        { value: '33,20',   total: '332,04'  }, // 10x
-        { value: '30,80',   total: '338,79'  }, // 11x
-        { value: '28,80',   total: '345,64'  }, // 12x
+        { value: '272,30',  total: '272,30'  }, // 1x  sem juros
+        { value: '142,81',  total: '285,61'  }, // 2x
+        { value: '97,48',   total: '292,44'  }, // 3x
+        { value: '74,81',   total: '299,24'  }, // 4x
+        { value: '61,21',   total: '306,05'  }, // 5x
+        { value: '52,12',   total: '312,75'  }, // 6x
+        { value: '45,66',   total: '319,62'  }, // 7x
+        { value: '40,78',   total: '326,26'  }, // 8x
+        { value: '37,00',   total: '333,01'  }, // 9x
+        { value: '33,99',   total: '339,90'  }, // 10x
+        { value: '31,53',   total: '346,81'  }, // 11x
+        { value: '29,49',   total: '353,83'  }, // 12x
     ],
 };
 
