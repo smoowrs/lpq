@@ -1196,16 +1196,19 @@ export const CheckoutModal = ({
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 8 }}>
                                     <div>
                                         <div style={{ fontSize: 14, fontWeight: 600 }}>Total do pedido</div>
-                                        {region === 'BR' && oldPriceStr && (
-                                            <div style={{ fontSize: 12, color: '#94a3b8', textDecoration: 'line-through' }}>De R$ {oldPriceStr}</div>
-                                        )}
+                                        <div style={{ fontSize: 12, color: '#94a3b8' }}>Pagamento único</div>
                                         {region === 'BR' && (method === 'cc_appmax' || method === 'cc') && (
-                                            <div style={{ fontSize: 12, color: '#64748b' }}>
+                                            <div style={{ fontSize: 12, color: '#64748b', marginTop: 2 }}>
                                                 Ou {selectedInstallment.n}x de R$ {selectedInstallment.info?.value || monthly12x}
                                             </div>
                                         )}
                                     </div>
-                                    <div style={{ fontSize: 28, fontWeight: 800, fontFamily: "'Bricolage Grotesque',system-ui" }}>{currencySymbol} {orderBump ? totalPriceStr : priceStr}</div>
+                                    <div style={{ textAlign: 'right' }}>
+                                        {region === 'BR' && oldPriceStr && (
+                                            <div style={{ fontSize: 12, color: '#94a3b8', textDecoration: 'line-through', marginBottom: 2 }}>R$ {oldPriceStr}</div>
+                                        )}
+                                        <div style={{ fontSize: 28, fontWeight: 800, fontFamily: "'Bricolage Grotesque',system-ui", lineHeight: 1 }}>{currencySymbol} {orderBump ? totalPriceStr : priceStr}</div>
+                                    </div>
                                 </div>
                             </div>
                         )}
