@@ -217,7 +217,7 @@ body.eu-mode .price-old-br, body.eu-mode .price-installment-br { display: none !
   if(!root||root.dataset.ready)return; root.dataset.ready='1';
   const stage=root.querySelector('.fi-stage');
   const reduced=window.matchMedia('(prefers-reduced-motion:reduce)');
-  const items=feedbacks.filter(f=>f&&f.imagem);
+  window.__feedbacks=feedbacks; const items=feedbacks.filter(f=>f&&f.imagem);
   if(!items.length)return;
   // Use only 14 cards for desktop, 9 for mobile — wider spacing so images are fully visible
   const isMobile=window.innerWidth<600;
@@ -528,7 +528,7 @@ function submitCatalogForm(e){
 
 <script>
 (function(){
-  var IMGS=(window.__fbImgs||(window.__fbImgs=feedbacks.map(function(f){return f.imagem;})));
+  var IMGS=(window.__fbImgs||(window.__fbImgs=(window.__feedbacks||[]).map(function(f){return f.imagem;})));
   var overlay=document.getElementById('fb-modal-overlay');
   var grid=document.getElementById('fb-grid');
   var closeBtn=document.getElementById('fb-modal-close');
