@@ -737,7 +737,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                             <button
                                 type="button"
                                 onClick={() => { setCardError(null); onSwitchToPix(); }}
-                                style={{ width: '100%', padding: '12px', background: '#22c55e', border: 'none', borderRadius: 10, fontSize: 13, fontWeight: 700, color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+                                style={{ width: '100%', padding: '12px', background: '#254bff', border: 'none', borderRadius: 10, fontSize: 13, fontWeight: 700, color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
                             >
                                 <img src="https://i.postimg.cc/4yBY9NWm/PIX.png" alt="Pix" style={{ height: 14 }} />
                                 Pagar com Pix (sem taxas)
