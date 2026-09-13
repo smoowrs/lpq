@@ -490,8 +490,9 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
 };
 
 /* ─── APPMAX CC ─────────────────────────────────────────────────── */
-const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guestPhone, orderBump, orderBumpPrice, onInstallmentChange }: any) => {
+const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guestPhone, orderBump, orderBumpPrice, onInstallmentChange, onSwitchToPix }: any) => {
     const [loading, setLoading] = useState(false);
+    const [cardError, setCardError] = useState<string | null>(null);
     const [formData, setFormData] = useState({ card_number: '', card_name: '', card_expiry: '', card_cvv: '', cpf: '', installments: '1', country: 'BR' });
     const [agreedToTerms, setAgreedToTerms] = useState(false);
     const hasFiredAddPaymentInfo = useRef(false);
@@ -582,9 +583,11 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                 amount: totalWithInterest,
             }, session?.access_token || null);
             if (data?.success) onSuccess();
-            else throw new Error(data?.error || data?.message || 'Erro ao processar pagamento');
+            else throw new Error(data?.error || data?.message || 'Cartão recusado. Verifique os dados e tente novamente.');
         } catch (err: any) {
-            toast.error(err.message);
+            const msg = err.message || 'Cartão recusado. Verifique os dados e tente novamente.';
+            setCardError(msg);
+            toast.error(msg);
         } finally {
             setLoading(false);
         }
@@ -709,6 +712,40 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
             >
                 {loading ? 'Processando...' : 'Comprar →'}
             </button>
+
+            {/* Error banner */}
+            {cardError && (
+                <div style={{ background: '#FFF1F2', border: '1.5px solid #FECDD3', borderRadius: 12, padding: '14px 16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+                        <span style={{ fontSize: 18 }}>❌</span>
+                        <span style={{ fontSize: 14, fontWeight: 700, color: '#BE123C' }}>Cartão recusado</span>
+                    </div>
+                    <p style={{ fontSize: 13, color: '#9F1239', margin: '0 0 12px', lineHeight: 1.5 }}>
+                        {cardError.includes('recusado') || cardError.includes('declined')
+                            ? 'Seu cartão foi recusado. Verifique os dados ou tente outro cartão.'
+                            : cardError}
+                    </p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                        <button
+                            type="button"
+                            onClick={() => setCardError(null)}
+                            style={{ width: '100%', padding: '12px', background: '#fff', border: '1.5px solid #FECDD3', borderRadius: 10, fontSize: 13, fontWeight: 600, color: '#BE123C', cursor: 'pointer' }}
+                        >
+                            Tentar novamente com outro cartão
+                        </button>
+                        {onSwitchToPix && (
+                            <button
+                                type="button"
+                                onClick={() => { setCardError(null); onSwitchToPix(); }}
+                                style={{ width: '100%', padding: '12px', background: '#22c55e', border: 'none', borderRadius: 10, fontSize: 13, fontWeight: 700, color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+                            >
+                                <img src="https://i.postimg.cc/4yBY9NWm/PIX.png" alt="Pix" style={{ height: 14 }} />
+                                Pagar com Pix (sem taxas)
+                            </button>
+                        )}
+                    </div>
+                </div>
+            )}
         </form>
     );
 };
@@ -1158,6 +1195,7 @@ export const CheckoutModal = ({
                                     guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone}
                                     orderBump={orderBump} orderBumpPrice={ORDER_BUMP_PRICE}
                                     onInstallmentChange={(info: any, n: number) => setSelectedInstallment({ n, info })}
+                                            onSwitchToPix={region === 'BR' ? () => setMethod('pix') : undefined}
                                 />
                             ) : method === 'cc' ? (
                                 clientSecret ? (
