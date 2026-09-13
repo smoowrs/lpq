@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import App from './App.tsx';
 import { NovaPage } from './pages/NovaPage.tsx';
 import { CheckoutPage } from './pages/CheckoutPage.tsx';
@@ -17,7 +17,7 @@ if (container) {
           <Routes>
             <Route path="/" element={<NovaPage />} />
             <Route path="/comprar" element={<CheckoutPage />} />
-            <Route path="/experience" element={<NovaPage showExperience={true} />} />
+            <Route path="/experience" element={<Navigate to="/" replace />} />
             <Route path="/nova" element={<App />} />
           </Routes>
         </BrowserRouter>
