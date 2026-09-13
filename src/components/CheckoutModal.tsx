@@ -1257,7 +1257,7 @@ export const CheckoutModal = ({
             <div style={{ background: '#fff', borderTop: '1px solid #EAECF0', padding: '14px 20px', flexShrink: 0, textAlign: 'center' }}>
                 <p style={{ fontSize: 11, color: '#94a3b8', margin: 0, lineHeight: 1.6 }}>
                     © 2026 Connect Academy Ltda.<br />
-                    <span style={{ fontSize: 10 }}>Todos os direitos reservados · CNPJ: 44.292.841/0001-85</span>
+                    <span style={{ fontSize: 10 }}>Todos os direitos reservados · CNPJ: <a href="https://cnpj.biz/44292841000195" target="_blank" rel="noopener noreferrer" style={{ color: '#94a3b8', textDecoration: 'underline', cursor: 'pointer' }}>44.292.841/0001-85</a></span>
                 </p>
             </div>
         </div>,
