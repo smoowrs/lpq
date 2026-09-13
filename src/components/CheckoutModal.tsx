@@ -1043,7 +1043,7 @@ export const CheckoutModal = ({
                         </div>
                         {/* WhatsApp */}
                         <div>
-                            <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Seu WhatsApp</label>
+                            <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Seu WhatsApp{region === 'EU' && <span style={{ fontWeight: 400, color: '#94a3b8', fontSize: 12 }}> (opcional)</span>}</label>
                             <div style={{ display: 'flex', border: '1.5px solid #E2E8F0', borderRadius: 12, overflow: 'hidden', background: '#fff' }}>
                                 <div style={{ display: 'flex', alignItems: 'center', padding: '0 12px', borderRight: '1px solid #E2E8F0', color: '#64748b', fontSize: 14, whiteSpace: 'nowrap', gap: 6 }}>
                                     {region === 'EU' ? '🇵🇹 +351' : '🇧🇷 +55'}
