@@ -1,7 +1,8 @@
 {
   "redirects": [
-    { "source": "/novos", "destination": "https://connect-academy-landing.vercel.app", "permanent": false },
-    { "source": "/portal", "destination": "/", "permanent": true }
+    { "source": "/novos",      "destination": "https://connect-academy-landing.vercel.app", "permanent": false },
+    { "source": "/portal",     "destination": "/", "permanent": true },
+    { "source": "/experience", "destination": "/", "permanent": false }
   ],
   "rewrites": [
     { "source": "/portal/assets/:path*", "destination": "/portal/assets/:path*" },
