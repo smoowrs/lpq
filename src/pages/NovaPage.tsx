@@ -85,8 +85,8 @@ const PLANS = [
   {
     id: 'elite', label: 'ELITE', emoji: '🏆',
     period: 'ACESSO PARA SEMPRE', periodLabel: 'vitalício',
-    priceOriginal: 'R$ 380,00', price: 'R$ 266,00', installment: 'ou 12x de R$ 28,80',
-    priceEU: '€ 64,00',
+    priceOriginal: 'R$ 389,00', price: 'R$ 272,30', installment: 'ou 12x de R$ 29,47',
+    priceEU: '€ 62,00',
     cta: 'Comprar agora', ctaHref: 'https://app.connectacademy.com.br/cadastro',
     highlight: false, free: false,
     desc: 'Acesso total e suporte prioritário para escala máxima.',
@@ -110,7 +110,7 @@ const PLANS = [
       'Grupo de Networking no WhatsApp',
     ],
     excluded: [],
-    prices: { BR: { annual: '266.00' }, EU: { annual: '64.00' } }, region: 'BR',
+    prices: { BR: { annual: '272.30' }, EU: { annual: '62.00' } }, region: 'BR',
   },
 ];
 
