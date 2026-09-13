@@ -168,7 +168,7 @@ const StripeForm = ({ plan, onSuccess, isSetupIntent, guestEmail, guestName, gue
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <PaymentElement
                 onChange={handlePaymentElementChange}
                 options={{
@@ -178,28 +178,26 @@ const StripeForm = ({ plan, onSuccess, isSetupIntent, guestEmail, guestName, gue
                     terms: { card: 'never' },
                 }}
             />
-            <label className="flex items-start gap-3 cursor-pointer py-1">
-                <div className="relative flex items-center shrink-0 mt-0.5">
-                    <input
-                        type="checkbox"
-                        className="peer h-4 w-4 cursor-pointer appearance-none rounded border border-slate-200 transition-all checked:bg-[#4D5BFF] checked:border-[#4D5BFF]"
-                        checked={agreedToTerms}
-                        onChange={(e) => setAgreedToTerms(e.target.checked)}
-                    />
-                    <Icons.Check className="absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none left-0.5" />
-                </div>
-                <span className="text-[12px] text-slate-400 leading-snug">
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', cursor: 'pointer' }}>
+                <input
+                    type="checkbox"
+                    checked={agreedToTerms}
+                    onChange={(e) => setAgreedToTerms(e.target.checked)}
+                    style={{ width: '16px', height: '16px', marginTop: '2px' }}
+                />
+                <span style={{ fontSize: '12px', color: '#64748b', lineHeight: '1.4' }}>
                     Ao fornecer os seus dados, você permite que a Stripe faça a cobrança no seu cartão de acordo com os seus termos.
                 </span>
             </label>
             <button
                 type="submit"
                 disabled={loading || !stripe || !agreedToTerms}
-                className="w-full h-14 bg-[#A3AFFF] hover:bg-[#8F9FFF] text-white rounded-2xl font-bold text-base transition-all disabled:opacity-40 flex items-center justify-center gap-2"
+                style={{
+                    width: '100%', padding: '18px', background: (loading || !stripe || !agreedToTerms) ? '#94a3b8' : '#254bff',
+                    color: '#fff', borderRadius: '14px', fontSize: '17px', fontWeight: '700', border: 'none', cursor: (loading || !stripe || !agreedToTerms) ? 'not-allowed' : 'pointer'
+                }}
             >
-                {loading
-                    ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    : <>Comprar <Icons.ArrowRight className="w-4 h-4" /></>}
+                {loading ? 'Processando...' : 'Comprar →'}
             </button>
         </form>
     );
@@ -286,11 +284,14 @@ const ApplePayButton = ({
     return (
         <button
             onClick={handleClick}
-            className={`flex-1 h-12 flex items-center justify-center bg-black rounded-xl transition-opacity hover:opacity-90 ${isActive ? 'ring-2 ring-[#4D5BFF]' : ''}`}
+            style={{
+                flex: 1, height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: '#000', borderRadius: '12px', border: isActive ? '2px solid #254bff' : '1px solid #e2e8f0', cursor: 'pointer'
+            }}
         >
             <img
                 src="https://i.postimg.cc/YS7x3Xjp/5977576_2.png"
-                className="h-7 brightness-0 invert"
+                style={{ height: '28px', filter: 'invert(1)' }}
                 alt="Apple Pay"
             />
         </button>
@@ -589,184 +590,124 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
         }
     };
 
-    const inputStyle = "w-full h-14 bg-white border border-slate-200 rounded-xl px-4 text-sm font-medium text-slate-700 outline-none focus:border-[#4D5BFF] transition-all placeholder:text-slate-300";
-    const labelStyle = "block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5";
+    const inputStyle = { width: '100%', border: '1.5px solid #E2E8F0', borderRadius: '12px', padding: '14px 16px', fontSize: '16px', boxSizing: 'border-box' as const };
+    const labelStyle = { display: 'block', fontSize: '14px', fontWeight: 600, color: '#1e293b', marginBottom: '8px' };
 
     return (
-        <form onSubmit={handleProcessPayment} className="space-y-4 animate-in fade-in duration-300">
-            {/* Card number */}
+        <form onSubmit={handleProcessPayment} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div>
-                <label className={labelStyle}>NÚMERO DO CARTÃO</label>
-                <div className="relative">
-                    <input
-                        name="card_number"
-                        type="tel"
-                        inputMode="numeric"
-                        pattern="[0-9 ]*"
-                        placeholder="1234 1234 1234 1234"
-                        required
-                        className={`${inputStyle} pr-24`}
-                        value={formData.card_number}
-                        onChange={handleInputChange}
-                        maxLength={19}
-                    />
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
-                        {/* Visa */}
-                        <svg width="38" height="24" viewBox="0 0 38 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="38" height="24" rx="4" fill="#1A1F71"/>
-                            <text x="6" y="17" fontFamily="Arial" fontWeight="bold" fontSize="12" fill="white" letterSpacing="0.5">VISA</text>
-                        </svg>
-                        {/* Mastercard */}
-                        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="34" height="24" rx="4" fill="#252525"/>
-                            <circle cx="13" cy="12" r="7" fill="#EB001B"/>
-                            <circle cx="21" cy="12" r="7" fill="#F79E1B"/>
-                            <path d="M17 6.8a7 7 0 0 1 0 10.4A7 7 0 0 1 17 6.8z" fill="#FF5F00"/>
-                        </svg>
-                    </div>
-                </div>
+                <label style={labelStyle}>NÚMERO DO CARTÃO</label>
+                <input
+                    name="card_number"
+                    type="tel"
+                    inputMode="numeric"
+                    placeholder="1234 1234 1234 1234"
+                    required
+                    style={inputStyle}
+                    value={formData.card_number}
+                    onChange={handleInputChange}
+                    maxLength={19}
+                />
             </div>
-
-            {/* Name on card & CPF */}
-            <div className="grid grid-cols-2 gap-3">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
-                    <label className={labelStyle}>NOME NO CARTÃO</label>
+                    <label style={labelStyle}>NOME NO CARTÃO</label>
                     <input
                         name="card_name"
                         placeholder="Nome impresso"
                         required
-                        className={inputStyle}
+                        style={inputStyle}
                         value={formData.card_name}
                         onChange={handleInputChange}
                     />
                 </div>
                 <div>
-                    <label className={labelStyle}>CPF DO TITULAR</label>
+                    <label style={labelStyle}>CPF DO TITULAR</label>
                     <input
                         name="cpf"
                         type="tel"
                         inputMode="numeric"
-                        pattern="[0-9]*"
                         placeholder="000.000.000-00"
                         required
-                        className={inputStyle}
+                        style={inputStyle}
                         value={formData.cpf}
                         onChange={handleInputChange}
                         maxLength={14}
                     />
                 </div>
             </div>
-
-            {/* Expiry + CVV */}
-            <div className="grid grid-cols-2 gap-3">
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
-                    <label className={labelStyle}>DATA DE VALIDADE</label>
+                    <label style={labelStyle}>DATA DE VALIDADE</label>
                     <input
                         name="card_expiry"
                         type="tel"
                         inputMode="numeric"
-                        pattern="[0-9/]*"
                         placeholder="MM/AA"
                         required
-                        className={inputStyle}
+                        style={inputStyle}
                         value={formData.card_expiry}
                         onChange={handleInputChange}
                         maxLength={5}
                     />
                 </div>
                 <div>
-                    <label className={labelStyle}>CÓDIGO (CVC)</label>
-                    <div className="relative">
-                        <input
-                            name="card_cvv"
-                            type="tel"
-                            inputMode="numeric"
-                            pattern="[0-9]*"
-                            placeholder="123"
-                            required
-                            className={`${inputStyle} pr-10`}
-                            value={formData.card_cvv}
-                            onChange={handleInputChange}
-                            maxLength={4}
-                        />
-                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300">
-                            <svg width="22" height="15" viewBox="0 0 22 15" fill="none">
-                                <rect x="0.5" y="0.5" width="21" height="14" rx="2" stroke="currentColor"/>
-                                <rect y="3" width="22" height="3" fill="currentColor" opacity="0.25"/>
-                                <rect x="3" y="9" width="8" height="2" rx="1" fill="currentColor" opacity="0.4"/>
-                                <text x="13.5" y="12" fontSize="5" fill="currentColor" fontWeight="bold">123</text>
-                            </svg>
-                        </div>
-                    </div>
+                    <label style={labelStyle}>CÓDIGO (CVC)</label>
+                    <input
+                        name="card_cvv"
+                        type="tel"
+                        inputMode="numeric"
+                        placeholder="123"
+                        required
+                        style={inputStyle}
+                        value={formData.card_cvv}
+                        onChange={handleInputChange}
+                        maxLength={4}
+                    />
+                </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                <div>
+                    <label style={labelStyle}>PARCELAS</label>
+                    <select name="installments" style={{...inputStyle, appearance: 'auto'}} value={formData.installments} onChange={handleInputChange}>
+                        {adjustedInstallments.map((inst: any, i: number) => {
+                            const n = i + 1;
+                            return (
+                                <option key={n} value={n}>
+                                    {n}x de R$ {inst.value}
+                                </option>
+                            );
+                        })}
+                        {adjustedInstallments.length === 0 && Array.from({ length: 21 }, (_, i) => (
+                            <option key={i + 1} value={i + 1}>{i + 1}x</option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label style={labelStyle}>PAÍS</label>
+                    <select name="country" style={{...inputStyle, appearance: 'auto'}} value={formData.country} onChange={handleInputChange}>
+                        <option value="BR">Brasil</option>
+                        <option value="US">Estados Unidos</option>
+                        <option value="PT">Portugal</option>
+                    </select>
                 </div>
             </div>
 
-            {/* Installments & Country */}
-            <div className="grid grid-cols-2 gap-3">
-                <div>
-                    <label className={labelStyle}>PARCELAS</label>
-                    <div className="relative">
-                        <select name="installments" className={`${inputStyle} appearance-none pr-10`} value={formData.installments} onChange={handleInputChange}>
-                            {adjustedInstallments.map((inst: any, i: number) => {
-                                const n = i + 1;
-                                return (
-                                    <option key={n} value={n}>
-                                        {n}x de R$ {inst.value}
-                                    </option>
-                                );
-                            })}
-                            {adjustedInstallments.length === 0 && Array.from({ length: 21 }, (_, i) => (
-                                <option key={i + 1} value={i + 1}>{i + 1}x</option>
-                            ))}
-                        </select>
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <label className={labelStyle}>PAÍS</label>
-                    <div className="relative">
-                        <select name="country" className={`${inputStyle} appearance-none pr-10`} value={formData.country} onChange={handleInputChange}>
-                            <option value="BR">Brasil</option>
-                            <option value="US">Estados Unidos</option>
-                            <option value="PT">Portugal</option>
-                        </select>
-                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
-                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
-                                <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Terms */}
-            <label className="flex items-start gap-3 cursor-pointer py-1">
-                <div className="relative flex items-center shrink-0 mt-0.5">
-                    <input type="checkbox" className="peer h-4 w-4 appearance-none rounded border border-slate-200 checked:bg-[#4D5BFF] transition-all" checked={agreedToTerms} onChange={e => setAgreedToTerms(e.target.checked)} />
-                    <Icons.Check className="absolute h-3 w-3 text-white opacity-0 peer-checked:opacity-100 left-0.5 transition-opacity" />
-                </div>
-                <span className="text-[11px] text-slate-400 leading-snug">
-                    Ao fornecer os seus dados, você permite que a <strong>Appmax</strong> realize a cobrança no seu cartão de acordo com os <a href="https://appmax.com.br/termos-de-uso" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-600 transition-colors">Termos de Uso da Appmax</a>.
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', cursor: 'pointer', marginTop: '4px' }}>
+                <input type="checkbox" style={{ width: '16px', height: '16px', marginTop: '2px' }} checked={agreedToTerms} onChange={e => setAgreedToTerms(e.target.checked)} />
+                <span style={{ fontSize: '12px', color: '#64748b', lineHeight: '1.4' }}>
+                    Ao fornecer os seus dados, você permite que a Appmax realize a cobrança no seu cartão.
                 </span>
             </label>
 
-            {/* Submit */}
             <button
                 type="submit"
                 disabled={loading || !agreedToTerms}
-                className={`w-full h-14 text-white rounded-2xl font-bold text-base transition-all duration-300 flex items-center justify-center gap-2 ${
-                    agreedToTerms
-                        ? 'bg-[#4D5BFF] hover:bg-[#3D4AE5] shadow-lg shadow-[#4D5BFF]/30 scale-[1.01]'
-                        : 'bg-[#A3AFFF] opacity-60 cursor-not-allowed'
-                }`}
+                style={{
+                    width: '100%', background: (!agreedToTerms || loading) ? '#94a3b8' : '#254bff', color: '#fff', borderRadius: '14px', padding: '18px', fontSize: '17px', fontWeight: '700', border: 'none', cursor: (!agreedToTerms || loading) ? 'not-allowed' : 'pointer'
+                }}
             >
-                {loading
-                    ? <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    : <>Comprar <Icons.ArrowRight className="w-4 h-4" /></>}
+                {loading ? 'Processando...' : '🔒 Comprar →'}
             </button>
         </form>
     );
