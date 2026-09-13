@@ -203,6 +203,7 @@ function submitCatalogForm(e){
   window._caRegion = localStorage.getItem(STORED) || 'BR';
 
   function setRegion(r){
+    if(r==='BR' && localStorage.getItem('ca_forced_eu')==='1') return; // EU bloqueado
     window._caRegion = r;
     localStorage.setItem(STORED, r);
     updateFlagBtn(r);
@@ -260,7 +261,9 @@ function submitCatalogForm(e){
     dd.id = 'region-dropdown';
     wrapper.appendChild(dd);
 
-    [['BR','🇧🇷','Brasil (R$)'],['EU','🇵🇹','Portugal (€)']].forEach(function(opt){
+    var isForcedEU = localStorage.getItem('ca_forced_eu')==='1';
+    var regionOpts = isForcedEU ? [['EU','🇵🇹','Portugal (€)']] : [['BR','🇧🇷','Brasil (R$)'],['EU','🇵🇹','Portugal (€)']];
+    regionOpts.forEach(function(opt){
       var b = document.createElement('button');
       b.textContent = opt[1]+' '+opt[2];
       b.addEventListener('click', function(e){
@@ -290,6 +293,7 @@ function submitCatalogForm(e){
       .then(function(r){return r.json();})
       .then(function(d){
         var r = EU.indexOf(d.country_code)>=0 ? 'EU':'BR';
+        if(r==='EU') localStorage.setItem('ca_forced_eu','1');
         setRegion(r);
         updatePrices(r);
       })
