@@ -1,12 +1,13 @@
 {
   "redirects": [
     { "source": "/novos", "destination": "https://connect-academy-landing.vercel.app", "permanent": false },
-    { "source": "/portal", "destination": "/portal/", "permanent": false }
+    { "source": "/portal", "destination": "/", "permanent": true }
   ],
   "rewrites": [
     { "source": "/portal/assets/:path*", "destination": "/portal/assets/:path*" },
     { "source": "/portal/app.js",        "destination": "/portal/app.js" },
     { "source": "/portal/styles.css",    "destination": "/portal/styles.css" },
+    { "source": "/",                     "destination": "/portal/index.html" },
     { "source": "/portal/",             "destination": "/portal/index.html" },
     { "source": "/(.*)",                "destination": "/index.html" }
   ],
