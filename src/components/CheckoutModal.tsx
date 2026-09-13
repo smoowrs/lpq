@@ -707,7 +707,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
                     width: '100%', background: (!agreedToTerms || loading) ? '#94a3b8' : '#254bff', color: '#fff', borderRadius: '14px', padding: '18px', fontSize: '17px', fontWeight: '700', border: 'none', cursor: (!agreedToTerms || loading) ? 'not-allowed' : 'pointer'
                 }}
             >
-                {loading ? 'Processando...' : '🔒 Comprar →'}
+                {loading ? 'Processando...' : 'Comprar →'}
             </button>
         </form>
     );
@@ -1143,7 +1143,7 @@ export const CheckoutModal = ({
                                         onClick={() => setMethod('pix')}
                                         style={{ flex: 1, height: 48, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 12, border: `2px solid ${method === 'pix' ? BLUE : '#E2E8F0'}`, background: '#fff', cursor: 'pointer' }}
                                     >
-                                        <Icons.Pix style={{ height: 18, width: 'auto', display: 'block' }} />
+                                        <Icons.Pix style={{ height: 14, width: 'auto', maxWidth: 44, display: 'block' }} />
                                     </button>
                                 )}
                                 <ApplePayButton plan={plan} priceNum={totalPriceNum} region={region} guestEmail={guestEmail} guestName={guestName} onSuccess={handleLocalSuccess} isActive={method === 'apple_pay'} onClick={() => setMethod('apple_pay')} />
@@ -1177,10 +1177,10 @@ export const CheckoutModal = ({
                         </div>
 
                         {/* Order total */}
-                        {(method === 'cc_appmax' || method === 'cc') && (
+                        {(method === 'cc_appmax' || method === 'cc' || method === 'pix') && (
                             <div style={{ borderTop: '1px solid #F1F3F7', paddingTop: 16 }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
-                                    <span style={{ fontSize: 13, color: '#64748b' }}>{planAccessDuration.replace('de acesso', '').trim()} · {planAccessDuration}</span>
+                                    <span style={{ fontSize: 13, color: '#64748b' }}>{planAccessDuration}</span>
                                     <span style={{ fontSize: 13, fontWeight: 600 }}>{currencySymbol} {priceStr}</span>
                                 </div>
                                 {orderBump && (
@@ -1192,12 +1192,23 @@ export const CheckoutModal = ({
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 8 }}>
                                     <div>
                                         <div style={{ fontSize: 14, fontWeight: 600 }}>Total do pedido</div>
-                                        <div style={{ fontSize: 12, color: '#94a3b8' }}>Pagamento único</div>
+                                        {region === 'BR' && oldPriceStr && (
+                                            <div style={{ fontSize: 12, color: '#94a3b8', textDecoration: 'line-through' }}>De R$ {oldPriceStr}</div>
+                                        )}
+                                        {region === 'BR' && (method === 'cc_appmax' || method === 'cc') && (
+                                            <div style={{ fontSize: 12, color: '#64748b' }}>
+                                                Ou {selectedInstallment.n}x de R$ {selectedInstallment.info?.value || monthly12x}
+                                            </div>
+                                        )}
                                     </div>
                                     <div style={{ fontSize: 28, fontWeight: 800, fontFamily: "'Bricolage Grotesque',system-ui" }}>{currencySymbol} {orderBump ? totalPriceStr : priceStr}</div>
                                 </div>
                             </div>
                         )}
+                        {/* Logos de cartão na aba pagamento */}
+                        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 8 }}>
+                            <img src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png" alt="Formas de pagamento" style={{ height: 20, opacity: 0.35, filter: 'grayscale(1)' }} />
+                        </div>
                     </div>
                 )}
             </div>
