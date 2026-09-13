@@ -520,9 +520,6 @@ function submitCatalogForm(e){
   </div>
   <div id="fb-modal-body">
     <div id="fb-grid"></div>
-    <div style="text-align:center;padding:32px 0 16px">
-      <button onclick="document.getElementById('fb-modal-overlay').classList.remove('open');document.body.style.overflow=''" type="button" style="background:#254bff;color:#fff;border:none;border-radius:14px;padding:16px 40px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:10px;transition:background .2s" onmouseover="this.style.background='#1a38d4'" onmouseout="this.style.background='#254bff'"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 7H2M2 7L7 2M2 7L7 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Voltar</button>
-    </div>
   </div>
 </div>
 
@@ -569,6 +566,7 @@ function submitCatalogForm(e){
   }
 
   closeBtn.addEventListener('click',closeModal);
+  document.getElementById('fb-back-btn').addEventListener('click',closeModal);
   overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open'))closeModal();});
 
