@@ -1024,7 +1024,7 @@ export const CheckoutModal = ({
                             <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Seu nome completo</label>
                             <input
                                 type="text"
-                                placeholder="Marina Oliveira"
+                                placeholder="Seu nome"
                                 value={guestName}
                                 onChange={e => setGuestName(e.target.value)}
                                 style={{ width: '100%', boxSizing: 'border-box', border: '1.5px solid #E2E8F0', borderRadius: 12, padding: '14px 16px', fontSize: 16, outline: 'none', background: '#fff' }}
@@ -1035,7 +1035,7 @@ export const CheckoutModal = ({
                             <label style={{ display: 'block', fontSize: 14, fontWeight: 600, color: '#1e293b', marginBottom: 8 }}>Seu e-mail</label>
                             <input
                                 type="email"
-                                placeholder="marina@example.com"
+                                placeholder="seu@email.com"
                                 value={guestEmail}
                                 onChange={e => setGuestEmail(e.target.value)}
                                 style={{ width: '100%', boxSizing: 'border-box', border: '1.5px solid #E2E8F0', borderRadius: 12, padding: '14px 16px', fontSize: 16, outline: 'none', background: '#fff' }}
@@ -1204,7 +1204,6 @@ export const CheckoutModal = ({
 
             {/* ── FOOTER BAR ── */}
             <div style={{ background: '#fff', borderTop: '1px solid #EAECF0', padding: '14px 20px', flexShrink: 0, textAlign: 'center' }}>
-                <img src="https://i.postimg.cc/NGKLLVXr/LOGOSCARTAO.png" alt="" style={{ height: 18, opacity: 0.3, filter: 'grayscale(1)', display: 'block', margin: '0 auto 10px' }} />
                 <p style={{ fontSize: 11, color: '#94a3b8', margin: 0, lineHeight: 1.6 }}>
                     © 2026 Connect Academy Ltda.<br />
                     <span style={{ fontSize: 10 }}>Todos os direitos reservados · CNPJ: 44.292.841/0001-85</span>
