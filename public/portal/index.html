@@ -514,7 +514,7 @@ function submitCatalogForm(e){
   <div id="fb-modal-header">
     <div style="display:flex;align-items:baseline;gap:8px">
       <h3 id="fb-modal-title">Feedbacks dos alunos</h3>
-      <span id="fb-count"></span>
+      
     </div>
     <button id="fb-modal-close" aria-label="Fechar">✕</button>
   </div>
@@ -544,7 +544,7 @@ function submitCatalogForm(e){
       var img=document.createElement('img');
       img.src=src; img.alt='Feedback '+(i+1); img.loading='lazy'; img.decoding='async';
       img.onerror=function(){item.style.display='none';};
-      img.onload=function(){valid++;countEl.textContent=valid+' resultados';};
+      img.onload=function(){valid++;};
       item.appendChild(img); grid.appendChild(item);
     });
     // Staggered reveal via IntersectionObserver
