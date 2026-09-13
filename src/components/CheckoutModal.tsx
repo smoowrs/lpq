@@ -1179,9 +1179,8 @@ export const CheckoutModal = ({
                         {/* Order total */}
                         {(method === 'cc_appmax' || method === 'cc' || method === 'pix') && (
                             <div style={{ borderTop: '1px solid #F1F3F7', paddingTop: 16 }}>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 }}>
+                                <div style={{ marginBottom: 4 }}>
                                     <span style={{ fontSize: 13, color: '#64748b' }}>{planAccessDuration}</span>
-                                    <span style={{ fontSize: 13, fontWeight: 600 }}>{currencySymbol} {priceStr}</span>
                                 </div>
                                 {orderBump && (
                                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4, fontSize: 13, color: '#64748b' }}>
