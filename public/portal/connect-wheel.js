@@ -197,7 +197,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       $('.badge').textContent = 'DESBLOQUEADO!';
       $('.orbit-label span').textContent = 'O próximo passo é seu.';
       if (cfg.demo || expired()) { $('.checkout').removeAttribute('href'); $('.checkout').setAttribute('aria-disabled','true'); $('.checkout').setAttribute('tabindex','0'); }
-      else { const url = new URL(target.href); if (cfg.checkoutCouponParameter) url.searchParams.set(String(cfg.checkoutCouponParameter), prize.coupon); $('.checkout').href = url.href; }
+      else { $('.checkout').href = '#planos'; }
       $('.status').textContent = expired() ? 'Esta campanha terminou.' : 'Você recebeu ' + prize.discount + '% OFF. Cupom: ' + $('.code').textContent + '.';
       if (celebrate) { if(dialog.open){ confetti(); playSuccess(); } if (dialog.open) $('.copy').focus({ preventScroll:true }); emit('revealed',{discount:prize.discount,prizeId:prize.id}); }
     }
@@ -241,8 +241,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       try { await navigator.clipboard.writeText($('.code').textContent); if(disposed)return; $('.copy').textContent='Copiado ✓'; $('.status').textContent='Cupom copiado. Use no checkout.'; emit('copied'); }
       catch { $('.status').textContent='Selecione e copie o código acima.'; const selection=global.getSelection(); const range=document.createRange(); range.selectNodeContents($('.code')); if(selection){selection.removeAllRanges();selection.addRange(range);} }
     });
-    on($('.checkout'),'click',e=>{if(cfg.demo||expired()){e.preventDefault();$('.status').textContent=cfg.demo?'Demonstração: configure um cupom válido para ativar a compra.':'Esta campanha terminou.';return;}emit('checkout_clicked',{discount:cfg.prizes[selected].discount,prizeId:cfg.prizes[selected].id});});
-    const instance={open,close,destroy(){disposed=true;clearTimeout(timer);clearTimeout(spinTimer);clearTimeout(expiryTimer);clearTimeout(confettiTimer);stopAudio();if(audioContext)audioContext.close().catch(()=>{});const wasOpen=dialog.open;close();if(wasOpen&&previousFocus&&previousFocus.isConnected&&typeof previousFocus.focus==='function')previousFocus.focus({preventScroll:true});cleanups.forEach(fn=>fn());host.remove();if(current===instance)current=null;},getState(){return{open:dialog.open,spinning,revealed:resultVisible,discount:resultVisible&&selected>=0?cfg.prizes[selected].discount:null};}};
+    on($('.checkout'),'click',e=>{ if(cfg.demo||expired()){e.preventDefault();$('.status').textContent=cfg.demo?'Demonstração':'Esta campanha terminou.';return;} emit('checkout_clicked',{discount:cfg.prizes[selected].discount,prizeId:cfg.prizes[selected].id}); close(); });const wasOpen=dialog.open;close();if(wasOpen&&previousFocus&&previousFocus.isConnected&&typeof previousFocus.focus==='function')previousFocus.focus({preventScroll:true});cleanups.forEach(fn=>fn());host.remove();if(current===instance)current=null;},getState(){return{open:dialog.open,spinning,revealed:resultVisible,discount:resultVisible&&selected>=0?cfg.prizes[selected].discount:null};}};
     current=instance;
     if(resultVisible){$('.disk').style.transform='rotate('+angleFor(selected)+'deg)';displayResult(false);}
     if(cfg.autoOpen){const attempt=()=>{if(disposed||!eligible())return;if(busy()){timer=setTimeout(attempt,1000);return;}open();};timer=setTimeout(attempt,Math.max(0,Number(cfg.delayMs)));emit('assigned',{variant:session().allowed?'wheel':'no_popup'});}
