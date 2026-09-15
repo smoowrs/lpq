@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { CheckoutModal } from '../components/CheckoutModal';
 
+class ErrorBoundary extends React.Component<any, any> {
+  constructor(props: any) { super(props); this.state = { hasError: false, error: null }; }
+  static getDerivedStateFromError(error: any) { return { hasError: true, error }; }
+  render() { if (this.state.hasError) return <div style={{padding:40,color:'red',background:'#fff'}}>{String(this.state.error)}</div>; return this.props.children; }
+}
+
+
 const PLANS = [
   { id: 'starter', label: 'STARTER', emoji: '🌎', period: '3 MESES DE ACESSO', periodLabel: 'trimestre', priceOriginal: 'R$ 97,00', price: 'R$ 67,90', installment: 'ou 12x de R$ 7,66', priceEU: '€ 16,00', cta: 'Comprar agora', ctaHref: '', highlight: false, free: false, desc: 'Acesso essencial para começar suas importações.', included: [], excluded: [], prices: { BR: { annual: '67.90' }, EU: { annual: '16.00' } }, region: 'BR' },
   { id: 'pro', label: 'PRO', emoji: '🌎', period: '1 ANO DE ACESSO', periodLabel: 'ano', priceOriginal: 'R$ 197,00', price: 'R$ 137,90', installment: 'ou 12x de R$ 14,91', priceEU: '€ 32,00', cta: 'Comprar agora', ctaHref: '', highlight: true, free: false, desc: 'O plano intermediário para quem busca variedade e ferramentas de IA.', included: [], excluded: [], prices: { BR: { annual: '137.90' }, EU: { annual: '32.00' } }, region: 'BR' },
@@ -8,6 +15,13 @@ const PLANS = [
 ];
 
 export function CheckoutPage() {
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  useEffect(() => {
+    const errHandler = (e: any) => setErrorMsg(e.message || String(e));
+    window.addEventListener("error", errHandler);
+    return () => window.removeEventListener("error", errHandler);
+  }, []);
+
   const [plan, setPlan] = useState<any>(null);
 
   useEffect(() => {
@@ -65,12 +79,15 @@ export function CheckoutPage() {
 
   return (
     <>
+      {errorMsg && <div style={{position:"fixed",top:0,left:0,zIndex:9999,background:"red",color:"white",padding:20,width:"100%"}}>{errorMsg}</div>}
       <div style={{ minHeight: '100vh', background: '#0a0a0a' }} />
-      <CheckoutModal
+      <ErrorBoundary>
+        <CheckoutModal
         plan={plan}
         onClose={() => { window.location.href = '/'; }}
         onSuccess={() => { window.location.href = '/'; }}
       />
+      </ErrorBoundary>
     </>
   );
 }
