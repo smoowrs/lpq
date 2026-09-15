@@ -403,7 +403,10 @@ function submitCatalogForm(e){
     var hasDiscount = localStorage.getItem('connect-wheel:connect-roleta-oficial:result') !== null;
     
     var banner = document.getElementById('discount-banner');
-    if(banner) banner.style.display = hasDiscount ? 'block' : 'none';
+    if(banner) banner.style.display = (hasDiscount && r!=='EU') ? 'block' : 'none';
+    
+    var widget = document.getElementById('cw-widget');
+    if(widget) widget.style.display = (r==='EU') ? 'none' : 'flex';
     
     document.querySelectorAll('.plan').forEach(function(plan){
        var badge = plan.querySelector('.plan-off-badge');
@@ -619,7 +622,7 @@ function submitCatalogForm(e){
 <!-- Roleta Script -->
 <script>
   window.CONNECT_WHEEL_CONFIG = {
-    enabled: true,
+    enabled: localStorage.getItem('ca_region') !== 'EU',
     campaignId: 'connect-roleta-oficial',
     brand: 'CONNECT ACADEMY',
     checkoutUrl: 'https://connectacademy.com.br/comprar',

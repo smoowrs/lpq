@@ -16,7 +16,38 @@ export function CheckoutPage() {
     const regionParam = (params.get('region') || 'BR').toUpperCase();
     if (planId) {
       const found = PLANS.find(p => p.id === planId.toLowerCase());
-      if (found) setPlan({ ...found, region: regionParam });
+      if (found) {
+        const hasDiscount = !!localStorage.getItem('connect-wheel:connect-roleta-oficial:result');
+        const isBR = regionParam !== 'EU';
+        const applyDiscount = hasDiscount && isBR;
+        
+        let p = { ...found, region: regionParam };
+        
+        // Define original vs discounted prices
+        if (p.id === 'starter') {
+            p.prices = { BR: { annual: applyDiscount ? '67.90' : '97.00' }, EU: { annual: '16.00' } };
+            p.price = applyDiscount ? 'R$ 67,90' : 'R$ 97,00';
+            p.installment = applyDiscount ? 'ou 12x de R$ 7,34' : 'ou 12x de R$ 10,48';
+            p.priceOriginal = 'R$ 97,00';
+        } else if (p.id === 'pro') {
+            p.prices = { BR: { annual: applyDiscount ? '137.90' : '197.00' }, EU: { annual: '32.00' } };
+            p.price = applyDiscount ? 'R$ 137,90' : 'R$ 197,00';
+            p.installment = applyDiscount ? 'ou 12x de R$ 14,92' : 'ou 12x de R$ 21,31';
+            p.priceOriginal = 'R$ 197,00';
+        } else if (p.id === 'elite') {
+            p.prices = { BR: { annual: applyDiscount ? '272.30' : '389.00' }, EU: { annual: '62.00' } };
+            p.price = applyDiscount ? 'R$ 272,30' : 'R$ 389,00';
+            p.installment = applyDiscount ? 'ou 12x de R$ 29,47' : 'ou 12x de R$ 42,09';
+            p.priceOriginal = 'R$ 389,00';
+        }
+        
+        // If not discounted, don't show the original price badge trick
+        if (!applyDiscount) {
+            p.priceOriginal = '';
+        }
+
+        setPlan(p);
+      }
       else window.location.href = '/';
     } else {
       window.location.href = '/';
