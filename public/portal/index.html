@@ -402,6 +402,9 @@ function submitCatalogForm(e){
   function updatePrices(r){
     var hasDiscount = localStorage.getItem('connect-wheel:connect-roleta-oficial:result') !== null;
     
+    var banner = document.getElementById('discount-banner');
+    if(banner) banner.style.display = hasDiscount ? 'block' : 'none';
+    
     document.querySelectorAll('.plan').forEach(function(plan){
        var badge = plan.querySelector('.plan-off-badge');
        var oldP = plan.querySelector('.plan-old-price');
