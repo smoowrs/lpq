@@ -19,49 +19,16 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 // ── Tabela de parcelas Appmax — 30% off + juros repassados ao comprador ──
 // Calculado com base nos multiplicadores originais escalados para os novos preços:
 // Starter: 67,90 (antes 58,20) | Pro: 137,90 (antes 118,20) | Elite: 272,30 (antes 233,40)
-const INSTALLMENTS: Record<string, { value: string; total: string }[]> = {
-    starter: [
-        { value: '67,90',  total: '67,90'  }, // 1x  sem juros
-        { value: '35,95',  total: '71,90'  }, // 2x
-        { value: '24,61',  total: '73,82'  }, // 3x
-        { value: '18,98',  total: '75,90'  }, // 4x
-        { value: '15,57',  total: '77,84'  }, // 5x
-        { value: '13,32',  total: '79,91'  }, // 6x
-        { value: '11,70',  total: '81,88'  }, // 7x
-        { value: '10,49',  total: '83,90'  }, // 8x
-        { value: '9,55',   total: '85,98'  }, // 9x
-        { value: '8,80',   total: '88,00'  }, // 10x
-        { value: '8,18',   total: '89,94'  }, // 11x
-        { value: '7,66',   total: '91,88'  }, // 12x
-    ],
-    pro: [
-        { value: '137,90',  total: '137,90'  }, // 1x  sem juros
-        { value: '72,31',   total: '144,62'  }, // 2x
-        { value: '49,35',   total: '148,04'  }, // 3x
-        { value: '37,86',   total: '151,46'  }, // 4x
-        { value: '30,99',   total: '154,95'  }, // 5x
-        { value: '26,38',   total: '158,28'  }, // 6x
-        { value: '23,12',   total: '161,82'  }, // 7x
-        { value: '20,65',   total: '165,20'  }, // 8x
-        { value: '18,74',   total: '168,62'  }, // 9x
-        { value: '17,21',   total: '172,08'  }, // 10x
-        { value: '15,96',   total: '175,54'  }, // 11x
-        { value: '14,91',   total: '178,90'  }, // 12x
-    ],
-    elite: [
-        { value: '272,30',  total: '272,30'  }, // 1x  sem juros
-        { value: '142,81',  total: '285,61'  }, // 2x
-        { value: '97,48',   total: '292,44'  }, // 3x
-        { value: '74,81',   total: '299,24'  }, // 4x
-        { value: '61,21',   total: '306,05'  }, // 5x
-        { value: '52,12',   total: '312,75'  }, // 6x
-        { value: '45,66',   total: '319,62'  }, // 7x
-        { value: '40,78',   total: '326,26'  }, // 8x
-        { value: '37,00',   total: '333,01'  }, // 9x
-        { value: '33,99',   total: '339,90'  }, // 10x
-        { value: '31,53',   total: '346,81'  }, // 11x
-        { value: '29,49',   total: '353,83'  }, // 12x
-    ],
+const getInstallments = (price: number) => {
+    const mults = [1.0, 0.524458, 0.357987, 0.274733, 0.224788, 0.191406, 0.167682, 0.149761, 0.135879, 0.124825, 0.115791, 0.108299];
+    return mults.map((m, i) => {
+        const val = i === 0 ? price : price * m;
+        const total = i === 0 ? price : val * (i + 1);
+        return {
+            value: val.toFixed(2).replace('.', ','),
+            total: total.toFixed(2).replace('.', ',')
+        };
+    });
 };
 
 
@@ -497,7 +464,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
     const [agreedToTerms, setAgreedToTerms] = useState(false);
     const hasFiredAddPaymentInfo = useRef(false);
 
-    const planInstallments = INSTALLMENTS[plan.id] || [];
+    const planInstallments = getInstallments(priceNum);
 
     // Recalculate installment values if order bump is active
     const adjustedInstallments = planInstallments.map((inst: any, i: number) => {
@@ -753,7 +720,7 @@ const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guest
 /* ─── ORDER SUMMARY SECTION ────────────────────────────────────── */
 const OrderSummary = ({ plan, region, priceStr, totalPriceStr, orderBump, monthly12x, currencySymbol, planDisplayName, selectedInstallment, planAccessDuration, oldPriceStr }: any) => {
     const displayPrice = orderBump ? totalPriceStr : priceStr;
-    const showDiscount = region === 'BR' && !plan.free && oldPriceStr && !orderBump;
+    const showDiscount = region === 'BR' && !plan.free && plan.priceOriginal && !orderBump;
     return (
         <div className="w-full bg-white border-b border-slate-100">
             <div className="flex items-center gap-3 px-5 py-3">
@@ -769,7 +736,7 @@ const OrderSummary = ({ plan, region, priceStr, totalPriceStr, orderBump, monthl
                     {showDiscount && (
                         <div className="flex items-center gap-1.5 mb-0.5">
                             <span className="text-[11px] text-slate-400 line-through font-medium">{currencySymbol} {oldPriceStr}</span>
-                            <span className="text-[9px] font-black text-white bg-emerald-500 rounded-full px-1.5 py-0.5 leading-none">30% OFF</span>
+                            <span className="text-[9px] font-black text-white bg-[#254bff] rounded-full px-1.5 py-0.5 leading-none">Presente Aplicado - 30% OFF</span>
                         </div>
                     )}
                     <span className="text-[17px] font-black text-slate-900 transition-all duration-300">{currencySymbol} {displayPrice}</span>
@@ -798,7 +765,7 @@ export const CheckoutModal = ({
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [step, setStep] = useState<1 | 2>(1);
     const [isPaymentApproved, setIsPaymentApproved] = useState(false);
-    const [selectedInstallment, setSelectedInstallment] = useState<{ n: number; info: { value: string; total: string } | null }>({ n: 1, info: region === 'BR' ? (INSTALLMENTS[plan.id]?.[0] || null) : null });
+    const [selectedInstallment, setSelectedInstallment] = useState<{ n: number; info: { value: string; total: string } | null }>({ n: 1, info: region === 'BR' ? (getInstallments(priceNum)[0] || null) : null });
     const [orderBump, setOrderBump] = useState(false);
     const showOrderBump = region === 'BR' && ['starter', 'pro'].includes(plan.id?.toLowerCase());
     const ORDER_BUMP_PRICE = 49.90;
@@ -817,8 +784,8 @@ export const CheckoutModal = ({
         ? plan.priceOriginal.replace('R$ ', '').replace('R$', '').trim()
         : null;
     let monthly12x = (priceNum / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    if (region === 'BR' && INSTALLMENTS[plan.id]?.[11]) {
-        monthly12x = INSTALLMENTS[plan.id][11].value;
+    if (region === 'BR' && getInstallments(priceNum)[11]) {
+        monthly12x = getInstallments(priceNum)[11].value;
     }
 
     const planPeriodLabel = plan.id?.toLowerCase().includes('starter')
@@ -1000,7 +967,7 @@ export const CheckoutModal = ({
             <div style={{ margin: '12px 16px 0', background: '#fff', borderRadius: 16, border: '1px solid #E8EAF0', padding: '14px 16px', flexShrink: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
                     <span style={{ fontSize: 10, fontWeight: 700, color: '#94a3b8', letterSpacing: '0.12em', textTransform: 'uppercase' }}>RESUMO DO PEDIDO</span>
-                    {region === 'BR' && <span style={{ background: '#EEF2FF', color: BLUE, fontSize: 10, fontWeight: 700, padding: '3px 10px', borderRadius: 20 }}>30% OFF</span>}
+                    {region === 'BR' && plan.priceOriginal && <span style={{ background: '#254bff', color: '#fff', fontSize: 10, fontWeight: 700, padding: '4px 10px', borderRadius: 20 }}>Presente Aplicado - 30% OFF</span>}
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                     <div style={{ width: 54, height: 54, borderRadius: 12, background: '#f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28, flexShrink: 0 }}>
