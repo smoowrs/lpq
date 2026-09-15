@@ -180,7 +180,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       selected = 5; spinning = true; prepareAudio();
       save('localStorage','result',{id:cfg.prizes[selected].id,fingerprint});
       $('.spin').disabled = true; $('.spin span').textContent = 'Seu desconto está chegando…';
-      $('.status').textContent = 'Roleta girando.'; $('.layout').classList.add('spinning');
+      $('.status').textContent = 'Roleta girando.'; $('.amount').textContent = '0'; $('.off').textContent = 'Tentativas'; $('.layout').classList.add('spinning');
       const ms = global.matchMedia('(prefers-reduced-motion: reduce)').matches ? 120 : 5600;
       $('.disk').style.transition = 'transform ' + ms + 'ms cubic-bezier(.12,.72,.13,1)';
       // Rotates multiple times and lands precisely on 'selected'
