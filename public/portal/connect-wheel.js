@@ -163,7 +163,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       $('.layout').classList.remove('spinning'); $('.layout').classList.add('result','won');
       $('.kicker').textContent = '✦ DESCONTO DESBLOQUEADO';
       $('.heading').textContent = 'Pronto. O desconto é seu!';
-      $('.amount').textContent = prize.discount + '%';
+      $('.amount').textContent = prize.discount + '%'; $('.off').textContent = 'OFF';
       $('.intro').textContent = 'Copie seu cupom e dê o próximo passo com a Connect.';
       $('.spin').hidden = true; $('.result-panel').hidden = false;
       $('.code').textContent = prize.coupon || 'DEMO' + prize.discount;
