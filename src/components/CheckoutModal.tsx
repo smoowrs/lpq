@@ -361,7 +361,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
             if (!data?.payload && !data?.qr_code) throw new Error('PIX não gerado. Tente novamente.');
             setPixData(data);
         } catch (err: any) {
-            toast.error(err?.message || 'Erro ao gerar PIX. Tente novamente.');
+            toast.error('ERRO PIX: ' + (err?.message || 'Erro desconhecido.')); console.error('Pix Error:', err);
         } finally {
             setLoading(false);
         }
