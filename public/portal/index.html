@@ -257,6 +257,19 @@ body.eu-mode .price-old-br, body.eu-mode .price-installment-br { display: none !
       // Full opacity in center, slight fade at edges
       card.el.style.opacity=String(Math.max(0.35, 1-Math.max(0,dist-0.8)*1.2));
     });
+    // Switch iPhone price
+    var iphonePrice = document.getElementById('iphone-price');
+    if(iphonePrice) iphonePrice.textContent = r==='EU' ? '€ 830' : 'R$ 4.500';
+
+    // Switch Yuan converter section
+    var yuanTitle = document.getElementById('yuan-title');
+    var yuanRate = document.getElementById('yuan-rate');
+    var yuanValue = document.getElementById('yuan-value');
+    var yuanCurrency = document.getElementById('yuan-currency');
+    if(yuanTitle) yuanTitle.innerHTML = r==='EU' ? 'Yuan para Euro. <br>Automático.' : 'Yuan para Real. <br>Automático.';
+    if(yuanRate) yuanRate.textContent = r==='EU' ? '≈ € 0,13/¥' : '≈ R$ 0,83/¥';
+    if(yuanValue) yuanValue.textContent = r==='EU' ? '€ 75,40' : 'R$ 481,26';
+    if(yuanCurrency) yuanCurrency.textContent = r==='EU' ? 'Euro' : 'Real brasileiro';
   }
   function tick(t){
     frame=0;
@@ -398,6 +411,19 @@ function submitCatalogForm(e){
       if(r==='EU') h += '&region=EU';
       a.setAttribute('href', h);
     });
+    // Switch iPhone price
+    var iphonePrice = document.getElementById('iphone-price');
+    if(iphonePrice) iphonePrice.textContent = r==='EU' ? '€ 830' : 'R$ 4.500';
+
+    // Switch Yuan converter section
+    var yuanTitle = document.getElementById('yuan-title');
+    var yuanRate = document.getElementById('yuan-rate');
+    var yuanValue = document.getElementById('yuan-value');
+    var yuanCurrency = document.getElementById('yuan-currency');
+    if(yuanTitle) yuanTitle.innerHTML = r==='EU' ? 'Yuan para Euro. <br>Automático.' : 'Yuan para Real. <br>Automático.';
+    if(yuanRate) yuanRate.textContent = r==='EU' ? '≈ € 0,13/¥' : '≈ R$ 0,83/¥';
+    if(yuanValue) yuanValue.textContent = r==='EU' ? '€ 75,40' : 'R$ 481,26';
+    if(yuanCurrency) yuanCurrency.textContent = r==='EU' ? 'Euro' : 'Real brasileiro';
   }
 
   function updatePrices(r){
@@ -444,6 +470,19 @@ function submitCatalogForm(e){
            }
        }
     });
+    // Switch iPhone price
+    var iphonePrice = document.getElementById('iphone-price');
+    if(iphonePrice) iphonePrice.textContent = r==='EU' ? '€ 830' : 'R$ 4.500';
+
+    // Switch Yuan converter section
+    var yuanTitle = document.getElementById('yuan-title');
+    var yuanRate = document.getElementById('yuan-rate');
+    var yuanValue = document.getElementById('yuan-value');
+    var yuanCurrency = document.getElementById('yuan-currency');
+    if(yuanTitle) yuanTitle.innerHTML = r==='EU' ? 'Yuan para Euro. <br>Automático.' : 'Yuan para Real. <br>Automático.';
+    if(yuanRate) yuanRate.textContent = r==='EU' ? '≈ € 0,13/¥' : '≈ R$ 0,83/¥';
+    if(yuanValue) yuanValue.textContent = r==='EU' ? '€ 75,40' : 'R$ 481,26';
+    if(yuanCurrency) yuanCurrency.textContent = r==='EU' ? 'Euro' : 'Real brasileiro';
   }}
 
   function buildDropdown(){
@@ -503,6 +542,19 @@ function submitCatalogForm(e){
       updateLinks(window._caRegion);
       updatePrices(window._caRegion);
     });
+    // Switch iPhone price
+    var iphonePrice = document.getElementById('iphone-price');
+    if(iphonePrice) iphonePrice.textContent = r==='EU' ? '€ 830' : 'R$ 4.500';
+
+    // Switch Yuan converter section
+    var yuanTitle = document.getElementById('yuan-title');
+    var yuanRate = document.getElementById('yuan-rate');
+    var yuanValue = document.getElementById('yuan-value');
+    var yuanCurrency = document.getElementById('yuan-currency');
+    if(yuanTitle) yuanTitle.innerHTML = r==='EU' ? 'Yuan para Euro. <br>Automático.' : 'Yuan para Real. <br>Automático.';
+    if(yuanRate) yuanRate.textContent = r==='EU' ? '≈ € 0,13/¥' : '≈ R$ 0,83/¥';
+    if(yuanValue) yuanValue.textContent = r==='EU' ? '€ 75,40' : 'R$ 481,26';
+    if(yuanCurrency) yuanCurrency.textContent = r==='EU' ? 'Euro' : 'Real brasileiro';
   }
 
   document.addEventListener('DOMContentLoaded', buildDropdown);
@@ -576,6 +628,19 @@ function submitCatalogForm(e){
       item.appendChild(img); grid.appendChild(item);
       io.observe(item);
     });
+    // Switch iPhone price
+    var iphonePrice = document.getElementById('iphone-price');
+    if(iphonePrice) iphonePrice.textContent = r==='EU' ? '€ 830' : 'R$ 4.500';
+
+    // Switch Yuan converter section
+    var yuanTitle = document.getElementById('yuan-title');
+    var yuanRate = document.getElementById('yuan-rate');
+    var yuanValue = document.getElementById('yuan-value');
+    var yuanCurrency = document.getElementById('yuan-currency');
+    if(yuanTitle) yuanTitle.innerHTML = r==='EU' ? 'Yuan para Euro. <br>Automático.' : 'Yuan para Real. <br>Automático.';
+    if(yuanRate) yuanRate.textContent = r==='EU' ? '≈ € 0,13/¥' : '≈ R$ 0,83/¥';
+    if(yuanValue) yuanValue.textContent = r==='EU' ? '€ 75,40' : 'R$ 481,26';
+    if(yuanCurrency) yuanCurrency.textContent = r==='EU' ? 'Euro' : 'Real brasileiro';
   }
 
   function openModal(){
