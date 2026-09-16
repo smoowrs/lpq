@@ -31,7 +31,7 @@ export function CheckoutPage() {
     if (planId) {
       const found = PLANS.find(p => p.id === planId.toLowerCase());
       if (found) {
-        const hasDiscount = !!localStorage.getItem('connect-wheel:connect-roleta-oficial:result');
+        let hasDiscount=false; try { hasDiscount = !!localStorage.getItem('connect-wheel:connect-roleta-oficial:result'); } catch(e){}
         const isBR = regionParam !== 'EU';
         const applyDiscount = hasDiscount && isBR;
         
@@ -57,7 +57,7 @@ export function CheckoutPage() {
         
         // If not discounted, don't show the original price badge trick
         if (!applyDiscount) {
-            delete p.priceOriginal;
+            p.priceOriginal = null;
         }
 
         setPlan(p);
@@ -80,7 +80,7 @@ export function CheckoutPage() {
   return (
     <>
       {errorMsg && <div style={{position:"fixed",top:0,left:0,zIndex:9999,background:"red",color:"white",padding:20,width:"100%"}}>{errorMsg}</div>}
-      <div style={{ minHeight: '100vh', background: '#0a0a0a' }} />
+      
       <ErrorBoundary>
         <CheckoutModal
         plan={plan}
