@@ -72,7 +72,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       }
       if (cfg.expiresAt && !Number.isFinite(Date.parse(cfg.expiresAt))) throw Error('Data de término inválida.');
       if (['delayMs','audienceRate','cooldownHours'].some(k => !Number.isFinite(Number(cfg[k])))) throw Error('Tempo e frequência devem ser números.');
-    } catch (e) { console.warn('[ConnectWheel] Desativado: ' + e.message); return null; }
+    } catch (e) { alert('Init Error: ' + e.message); return null; }
     const expired = () => Boolean(cfg.expiresAt && Date.now() >= Date.parse(cfg.expiresAt));
     if (expired()) return null;
     const max = 30;
@@ -261,11 +261,17 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       else expiryTimer = setTimeout(armExpiry, Math.min(2147483647,remaining));
     }
     function open({force=false} = {}) {
-      if (disposed || expired() || dialog.open || (!force && (!eligible() || busy())) || typeof dialog.showModal !== 'function') return false;
+      
+      if (disposed) { alert('disposed'); return false; }
+      if (expired()) { alert('expired'); return false; }
+      if (dialog.open) { alert('dialog.open is true! is it invisible?'); return false; }
+      if (!force && (!eligible() || busy())) { alert('not eligible or busy'); return false; }
+      if (typeof dialog.showModal !== 'function') { alert('showModal not supported on this device'); return false; }
+
       clearTimeout(timer); previousFocus=deepActive();
       if (previousFocus && typeof previousFocus.blur==='function') previousFocus.blur();
       previousOverflow=document.documentElement.style.overflow; document.documentElement.style.overflow='hidden'; locked=true;
-      try { dialog.showModal(); } catch { unlockScroll(); return false; }
+      try { dialog.showModal(); } catch (e) { alert('Erro ao abrir: ' + e.message); unlockScroll(); return false; }
       $('.close').focus({preventScroll:true}); shown=true; memorySeen=Date.now();
       session().shown=true; save('sessionStorage','session',session()); save('localStorage','shown',memorySeen);
       armExpiry(); emit('shown',{trigger:force?'manual':'automatic'}); 
@@ -289,6 +295,6 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
     return instance;
   }
   function destroy(){if(pendingReady){document.removeEventListener('DOMContentLoaded',pendingReady);pendingReady=null;}if(current)current.destroy();}
-  global.ConnectWheel={init,open:options=>current?current.open(options):false,close:()=>current&&current.close(),destroy,getState:()=>current?current.getState():null};
+  global.ConnectWheel={init,open:options=>{if(!current){alert("Erro: current é null. O ConnectWheel foi desativado no init().");return false;}return current.open(options);},close:()=>current&&current.close(),destroy,getState:()=>current?current.getState():null};
   if(global.CONNECT_WHEEL_CONFIG)init(global.CONNECT_WHEEL_CONFIG);
 })(window);
