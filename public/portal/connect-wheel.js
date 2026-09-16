@@ -230,9 +230,31 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       try { dialog.showModal(); } catch { unlockScroll(); return false; }
       $('.close').focus({preventScroll:true}); shown=true; memorySeen=Date.now();
       session().shown=true; save('sessionStorage','session',session()); save('localStorage','shown',memorySeen);
-      armExpiry(); emit('shown',{trigger:force?'manual':'automatic'}); return true;
+      armExpiry(); emit('shown',{trigger:force?'manual':'automatic'}); 
+      if (!window.__cwSpinTimer) {
+          window.__cwSpinTimer = setInterval(() => {
+            if (spinning || resultVisible) { clearInterval(window.__cwSpinTimer); return; }
+            const elapsed = performance.now();
+            const btn = $('.spin');
+            if(!btn) return;
+            const span = btn.querySelector('span');
+            if (elapsed < 30000) {
+               btn.disabled = true;
+               btn.style.opacity = '0.6';
+               btn.style.cursor = 'not-allowed';
+               span.textContent = 'Assista ao vídeo para girar (' + Math.ceil((30000 - elapsed)/1000) + 's)';
+            } else {
+               btn.disabled = false;
+               btn.style.opacity = '1';
+               btn.style.cursor = 'pointer';
+               span.textContent = 'Girar e desbloquear desconto';
+               clearInterval(window.__cwSpinTimer);
+            }
+          }, 500);
+      }
+      return true;
     }
-    function close() { if (dialog.open) dialog.close(); unlockScroll(); stopAudio(); }
+    function close() { if (dialog.open) dialog.close(); unlockScroll(); stopAudio(); if(window.__cwSpinTimer) clearInterval(window.__cwSpinTimer); }
     on($('.close'),'click',close);
     on(dialog,'click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect(); if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close();}});
     on(dialog,'close',()=>{unlockScroll(); stopAudio(); if(!disposed&&previousFocus&&previousFocus.isConnected&&typeof previousFocus.focus==='function')previousFocus.focus({preventScroll:true}); emit('closed');});
