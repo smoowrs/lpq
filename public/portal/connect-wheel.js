@@ -202,6 +202,11 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       if (celebrate) { if(dialog.open){ confetti(); playSuccess(); } if (dialog.open) $('.copy').focus({ preventScroll:true }); emit('revealed',{discount:prize.discount,prizeId:prize.id}); }
     }
     function spin() {
+      if ($('.spin').getAttribute('data-locked') === 'true') {
+        close();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
       if (spinning || resultVisible || disposed || !dialog.open || expired()) return;
       // EDITADO: O desconto é sempre 30%, que é o último elemento do array cfg.prizes (índice 5).
       selected = 5; spinning = true; prepareAudio();
@@ -239,15 +244,19 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
             if(!btn) return;
             const span = btn.querySelector('span');
             if (elapsed < 60000) {
-               btn.disabled = true;
-               btn.style.opacity = '0.6';
-               btn.style.cursor = 'not-allowed';
-               span.textContent = 'Assista ao vídeo de apresentação para desbloquear um giro'; btn.style.fontSize = '12px';
+               btn.disabled = false;
+               btn.style.opacity = '1';
+               btn.style.cursor = 'pointer';
+               btn.setAttribute('data-locked', 'true');
+               span.textContent = 'Assista ao video de apresentação';
+               btn.style.fontSize = '14px';
             } else {
                btn.disabled = false;
                btn.style.opacity = '1';
                btn.style.cursor = 'pointer';
+               btn.setAttribute('data-locked', 'false');
                span.textContent = 'Girar e desbloquear desconto';
+               btn.style.fontSize = '';
                clearInterval(window.__cwSpinTimer);
             }
           }, 500);
