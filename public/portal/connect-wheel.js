@@ -271,12 +271,26 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
             const btn = $('.spin');
             if(!btn) return;
             const span = btn.querySelector('span');
-            if (elapsed < 60000 && !window.__cwVideoWatched) {
+            let unlocked = false;
+            let timeRemaining = 60;
+
+            if (window.__cwVideoPlayTime) {
+                const elapsedSincePlay = (performance.now() - window.__cwVideoPlayTime) / 1000;
+                timeRemaining = Math.max(0, 60 - Math.floor(elapsedSincePlay));
+                if (timeRemaining <= 0) unlocked = true;
+            }
+
+            if (!unlocked) {
                btn.disabled = false;
                btn.style.opacity = '1';
                btn.style.cursor = 'pointer';
                btn.setAttribute('data-locked', 'true');
-               span.textContent = 'Assista ao video de apresentação';
+               if (!window.__cwVideoPlayTime) {
+                   span.textContent = 'Assista ao vídeo para liberar (01:00)';
+               } else {
+                   const secs = timeRemaining.toString().padStart(2, '0');
+                   span.textContent = 'Assistindo... liberando em 00:' + secs;
+               }
                btn.style.fontSize = '14px'; if (document.getElementById('cw-lead-email')) document.getElementById('cw-lead-email').style.display = 'none';
             } else {
                btn.disabled = false;

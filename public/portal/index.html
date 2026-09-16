@@ -707,7 +707,7 @@ function submitCatalogForm(e){
 window.addEventListener('blur', function() {
     setTimeout(function() {
         if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
-            window.__cwVideoWatched = true;
+            if (!window.__cwVideoPlayTime) window.__cwVideoPlayTime = performance.now();
         }
     }, 100);
 });
@@ -715,11 +715,12 @@ window.addEventListener('blur', function() {
 window.addEventListener('message', function(event) {
     try {
         var data = event.data;
-        if (typeof data === 'string') {
-            if (data.toLowerCase().includes('play')) window.__cwVideoWatched = true;
-        } else if (typeof data === 'object' && data !== null) {
-            var str = JSON.stringify(data).toLowerCase();
-            if (str.includes('play')) window.__cwVideoWatched = true;
+        var isPlay = false;
+        if (typeof data === 'string' && data.toLowerCase().includes('play')) isPlay = true;
+        else if (typeof data === 'object' && data !== null && JSON.stringify(data).toLowerCase().includes('play')) isPlay = true;
+        
+        if (isPlay && !window.__cwVideoPlayTime) {
+            window.__cwVideoPlayTime = performance.now();
         }
     } catch(e) {}
 });
