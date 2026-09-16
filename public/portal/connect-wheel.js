@@ -242,7 +242,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
                btn.disabled = true;
                btn.style.opacity = '0.6';
                btn.style.cursor = 'not-allowed';
-               span.textContent = 'Assista ao vídeo para girar (' + Math.ceil((30000 - elapsed)/1000) + 's)';
+               span.textContent = 'Assista ao vídeo de apresentação para desbloquear um giro'; btn.style.fontSize = '12px';
             } else {
                btn.disabled = false;
                btn.style.opacity = '1';

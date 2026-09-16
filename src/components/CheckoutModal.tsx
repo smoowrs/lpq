@@ -457,7 +457,7 @@ const PixPayment = ({ plan, onSuccess, guestEmail, guestName, guestPhone, orderB
 };
 
 /* ─── APPMAX CC ─────────────────────────────────────────────────── */
-const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guestPhone, orderBump, orderBumpPrice, onInstallmentChange, onSwitchToPix }: any) => {
+const AppmaxCCPayment = ({ plan, onSuccess, region, guestEmail, guestName, guestPhone, orderBump, orderBumpPrice, onInstallmentChange, onSwitchToPix, priceNum }: any) => {
     const [loading, setLoading] = useState(false);
     const [cardError, setCardError] = useState<string | null>(null);
     const [formData, setFormData] = useState({ card_number: '', card_name: '', card_expiry: '', card_cvv: '', cpf: '', installments: '1', country: 'BR' });
@@ -1160,7 +1160,7 @@ export const CheckoutModal = ({
                         <div>
                             {method === 'cc_appmax' ? (
                                 <AppmaxCCPayment
-                                    plan={plan} onSuccess={handleLocalSuccess} region={region}
+                                    priceNum={priceNum} plan={plan} onSuccess={handleLocalSuccess} region={region}
                                     guestEmail={guestEmail} guestName={guestName} guestPhone={guestPhone}
                                     orderBump={orderBump} orderBumpPrice={ORDER_BUMP_PRICE}
                                     onInstallmentChange={(info: any, n: number) => setSelectedInstallment({ n, info })}
