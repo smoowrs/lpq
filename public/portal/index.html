@@ -703,12 +703,25 @@ function submitCatalogForm(e){
 </script>
 <script src="/portal/connect-wheel.js"></script>
 <script>
+// Detect iframe clicks (fallback)
 window.addEventListener('blur', function() {
     setTimeout(function() {
         if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
             window.__cwVideoWatched = true;
         }
     }, 100);
+});
+// Detect Panda Video / Vimeo / YT play events via postMessage
+window.addEventListener('message', function(event) {
+    try {
+        var data = event.data;
+        if (typeof data === 'string') {
+            if (data.toLowerCase().includes('play')) window.__cwVideoWatched = true;
+        } else if (typeof data === 'object' && data !== null) {
+            var str = JSON.stringify(data).toLowerCase();
+            if (str.includes('play')) window.__cwVideoWatched = true;
+        }
+    } catch(e) {}
 });
 </script>
 </body>
