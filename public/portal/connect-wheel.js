@@ -204,7 +204,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
     function spin() {
       if ($('.spin').getAttribute('data-locked') === 'true') {
         close();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        var vsl = document.getElementById('conheca'); if(vsl) { vsl.scrollIntoView({ behavior: 'smooth' }); } else { window.scrollTo({ top: 0, behavior: 'smooth' }); }
         return;
       }
       if (spinning || resultVisible || disposed || !dialog.open || expired()) return;
@@ -243,7 +243,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
             const btn = $('.spin');
             if(!btn) return;
             const span = btn.querySelector('span');
-            if (elapsed < 60000) {
+            if (elapsed < 60000 && !window.__cwVideoWatched) {
                btn.disabled = false;
                btn.style.opacity = '1';
                btn.style.cursor = 'pointer';
