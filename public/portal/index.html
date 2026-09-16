@@ -703,27 +703,6 @@ function submitCatalogForm(e){
 </script>
 <script src="/portal/connect-wheel.js"></script>
 <script>
-// Detect iframe clicks (fallback)
-window.addEventListener('blur', function() {
-    setTimeout(function() {
-        if (document.activeElement && document.activeElement.tagName === 'IFRAME') {
-            if (!window.__cwVideoPlayTime) window.__cwVideoPlayTime = performance.now();
-        }
-    }, 100);
-});
-// Detect Panda Video / Vimeo / YT play events via postMessage
-window.addEventListener('message', function(event) {
-    try {
-        var data = event.data;
-        var isPlay = false;
-        if (typeof data === 'string' && data.toLowerCase().includes('play')) isPlay = true;
-        else if (typeof data === 'object' && data !== null && JSON.stringify(data).toLowerCase().includes('play')) isPlay = true;
-        
-        if (isPlay && !window.__cwVideoPlayTime) {
-            window.__cwVideoPlayTime = performance.now();
-        }
-    } catch(e) {}
-});
 </script>
 </body>
 </html>
