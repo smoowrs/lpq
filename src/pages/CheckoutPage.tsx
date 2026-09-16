@@ -57,7 +57,7 @@ export function CheckoutPage() {
         
         // If not discounted, don't show the original price badge trick
         if (!applyDiscount) {
-            p.priceOriginal = '';
+            delete p.priceOriginal;
         }
 
         setPlan(p);
