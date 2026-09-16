@@ -761,24 +761,26 @@ export const CheckoutModal = ({
     const region = plan.region || 'BR';
     const currencySymbol = region === 'EU' ? '€' : 'R$';
 
+    const ORDER_BUMP_PRICE = 49.90;
+    const [orderBump, setOrderBump] = useState(false);
+
+    const priceNum = parseFloat((plan.prices?.[region]?.annual || '0').replace(',', '.'));
+    const priceStr = priceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    const totalPriceNum = priceNum + (orderBump ? ORDER_BUMP_PRICE : 0);
+    const totalPriceStr = totalPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
     const [method, setMethod] = useState<'cc' | 'pix' | 'cc_appmax' | 'apple_pay'>(region === 'EU' ? 'cc' : 'cc_appmax');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [step, setStep] = useState<1 | 2>(1);
     const [isPaymentApproved, setIsPaymentApproved] = useState(false);
     const [selectedInstallment, setSelectedInstallment] = useState<{ n: number; info: { value: string; total: string } | null }>({ n: 1, info: region === 'BR' ? (getInstallments(priceNum)[0] || null) : null });
-    const [orderBump, setOrderBump] = useState(false);
     const showOrderBump = region === 'BR' && ['starter', 'pro'].includes(plan.id?.toLowerCase());
-    const ORDER_BUMP_PRICE = 49.90;
     const [guestEmail, setGuestEmail] = useState('');
     const [guestName, setGuestName] = useState('');
     const [guestPhone, setGuestPhone] = useState('');
     const [clientSecret, setClientSecret] = useState<string | null>(null);
     const [mounted, setMounted] = useState(false);
 
-    const priceNum = parseFloat((plan.prices?.[region]?.annual || '0').replace(',', '.'));
-    const priceStr = priceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
-    const totalPriceNum = priceNum + (orderBump ? ORDER_BUMP_PRICE : 0);
-    const totalPriceStr = totalPriceNum.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
     // Preço original antes do desconto (ex: "R$ 97,00" → "97,00")
     const oldPriceStr = region === 'BR' && plan.priceOriginal
         ? plan.priceOriginal.replace('R$ ', '').replace('R$', '').trim()
