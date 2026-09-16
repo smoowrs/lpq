@@ -219,7 +219,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
           const email = emailInput.value.trim();
           if (!email || !email.includes('@') || !email.includes('.')) {
               emailInput.style.borderColor = '#ef4444';
-              emailInput.focus();
+              emailInput.focus(); alert('⚠️ Por favor, digite seu e-mail antes de girar a roleta!');
               const statusEl = $('.status');
               if (statusEl) statusEl.textContent = 'Por favor, insira um e-mail válido antes de girar.';
               return;
