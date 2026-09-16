@@ -199,7 +199,7 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
       if (cfg.demo || expired()) { $('.checkout').removeAttribute('href'); $('.checkout').setAttribute('aria-disabled','true'); $('.checkout').setAttribute('tabindex','0'); }
       else { $('.checkout').href = '#planos'; }
       $('.status').textContent = expired() ? 'Esta campanha terminou.' : 'Você recebeu ' + prize.discount + '% OFF. Cupom: ' + $('.code').textContent + '.';
-      if (celebrate) { if(dialog.open){ confetti(); playSuccess(); } if (dialog.open) $('.copy').focus({ preventScroll:true }); emit('revealed',{discount:prize.discount,prizeId:prize.id}); }
+      if (celebrate) { if(dialog.open){ confetti(); playSuccess(); } if (dialog.open) $('.copy').focus({ preventScroll:true }); emit('revealed',{discount:prize.discount,prizeId:prize.id}); } if (typeof window.updatePrices === 'function') { window.updatePrices(window._caRegion || 'BR'); }
     }
     function spin() {
       if ($('.spin').getAttribute('data-locked') === 'true') {
