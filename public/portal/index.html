@@ -409,46 +409,42 @@ function submitCatalogForm(e){
     var widget = document.getElementById('cw-widget');
     if(widget && r==='EU') widget.style.display = 'none';
     
+    // Switch plan card prices BR <-> EU
+    document.querySelectorAll('.plan-price').forEach(function(el){
+      var sym = el.querySelector('.price-symbol');
+      var main = el.querySelector('.price-main');
+      if(sym) sym.textContent = r==='EU' ? '€' : 'R$';
+      if(main) {
+          if (r==='EU') {
+              main.innerHTML = el.getAttribute('data-eu-price');
+          } else {
+              main.innerHTML = hasDiscount ? el.getAttribute('data-br-discount') : el.getAttribute('data-br-original');
+          }
+      }
+    });
+
+    // Hide BR-only elements (old price, installments) when EU, show otherwise according to discount
     document.querySelectorAll('.plan').forEach(function(plan){
        var badge = plan.querySelector('.plan-off-badge');
        var oldP = plan.querySelector('.plan-old-price');
-       if(badge) badge.style.setProperty('display', (hasDiscount && r!=='EU') ? 'block' : 'none', 'important');
-       if(oldP) oldP.style.setProperty('display', (hasDiscount && r!=='EU') ? 'block' : 'none', 'important');
-       
        var inst = plan.querySelector('.price-installment-br');
-       if(inst && inst.getAttribute('data-inst-original')){
-           inst.textContent = hasDiscount ? inst.getAttribute('data-inst-discount') : inst.getAttribute('data-inst-original');
+       
+       if (r === 'EU') {
+           if(badge) badge.style.setProperty('display', 'none', 'important');
+           if(oldP) oldP.style.setProperty('display', 'none', 'important');
+           if(inst) inst.style.setProperty('display', 'none', 'important');
+       } else {
+           if(badge) badge.style.setProperty('display', hasDiscount ? 'block' : 'none', 'important');
+           if(oldP) oldP.style.setProperty('display', hasDiscount ? 'block' : 'none', 'important');
+           if(inst) {
+               inst.style.setProperty('display', 'block', 'important');
+               if (inst.getAttribute('data-inst-original')) {
+                   inst.textContent = hasDiscount ? inst.getAttribute('data-inst-discount') : inst.getAttribute('data-inst-original');
+               }
+           }
        }
     });
-
-    document.querySelectorAll('.plan-price[data-br-price]').forEach(function(el){
-      var sym = el.querySelector('.price-symbol');
-      var main = el.querySelector('.price-main');
-      var priceKey = hasDiscount ? 'data-' + r.toLowerCase() + '-discount' : 'data-' + r.toLowerCase() + '-original';
-      var val = el.getAttribute(priceKey) || el.getAttribute('data-' + r.toLowerCase() + '-price');
-      if(sym) sym.textContent = r==='EU' ? '€' : 'R$';
-      if(main) main.innerHTML = val;
-    });
-    // Hide BR-only elements (old price, installments) when EU
-    if(r==='EU'){
-      document.body.classList.add('eu-mode');
-    } else {
-      document.body.classList.remove('eu-mode');
-    }
-    // Switch iPhone price
-    var iphonePrice = document.getElementById('iphone-price');
-    if(iphonePrice) iphonePrice.textContent = r==='EU' ? '€ 830' : 'R$ 4.500';
-
-    // Switch Yuan converter section
-    var yuanTitle = document.getElementById('yuan-title');
-    var yuanRate = document.getElementById('yuan-rate');
-    var yuanValue = document.getElementById('yuan-value');
-    var yuanCurrency = document.getElementById('yuan-currency');
-    if(yuanTitle) yuanTitle.innerHTML = r==='EU' ? 'Yuan para Euro. <br>Automático.' : 'Yuan para Real. <br>Automático.';
-    if(yuanRate) yuanRate.textContent = r==='EU' ? '≈ € 0,13/¥' : '≈ R$ 0,83/¥';
-    if(yuanValue) yuanValue.textContent = r==='EU' ? '€ 75,40' : 'R$ 481,26';
-    if(yuanCurrency) yuanCurrency.textContent = r==='EU' ? 'Euro' : 'Real brasileiro';
-  }
+  }}
 
   function buildDropdown(){
     var btn = document.querySelector('.header-region');
@@ -607,44 +603,21 @@ function submitCatalogForm(e){
 </script>
 
 <!-- Widget Flutuante Roleta -->
-<div id="cw-widget" onclick="window.ConnectWheel && window.ConnectWheel.open({force: true})">
-  <div class="cw-icon">🎁</div>
-  <div class="cw-text">
-    <span class="cw-title">Cupom exclusivo</span>
-    <span class="cw-subtitle">Toque para revelar</span>
-  </div>
+<div id="cw-widget" class="cw-hidden" onclick="window.ConnectWheel && window.ConnectWheel.open({force: true})" style="position:fixed;bottom:24px;right:24px;z-index:999;cursor:pointer;display:flex;transition:transform 0.4s ease, opacity 0.4s ease;filter:drop-shadow(0 10px 15px rgba(0,0,0,0.2));animation:bounceWidget 3s infinite">
+  <img src="https://i.postimg.cc/43hGx1Hx/Chat-GPT-Image-15-de-set-de-2026-21-50-51-3.png" alt="Presente" style="width:90px;height:auto;" />
 </div>
 <style>
-#cw-widget {
-  position: fixed; bottom: 24px; right: 24px; z-index: 999; cursor: pointer;
-  display: flex; align-items: center; gap: 12px; background: #fff;
-  padding: 10px 16px 10px 12px; border-radius: 100px;
-  box-shadow: 0 12px 32px rgba(0,0,0,0.15); border: 1px solid #eef2ff;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+@keyframes bounceWidget {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
+#cw-widget:hover { transform: scale(1.05) translateY(-5px); }
 .cw-hidden {
   transform: translateY(100px) scale(0.8) !important;
   opacity: 0 !important;
   pointer-events: none !important;
+  animation: none !important;
 }
-#cw-widget:not(.cw-hidden) {
-  animation: cw-bounce-subtle 3s infinite ease-in-out;
-}
-.cw-icon { width:40px; height:40px; background:#254bff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; box-shadow:0 4px 12px rgba(37,75,255,0.3); }
-.cw-text { display: flex; flex-direction: column; }
-.cw-title { font-size: 11px; font-weight: 800; color: #254bff; letter-spacing: 0.5px; text-transform: uppercase; }
-.cw-subtitle { font-size: 13px; font-weight: 600; color: #121316; }
-@keyframes cw-bounce-subtle {
-  0%, 100% { transform: translateY(0) }
-  50% { transform: translateY(-6px) }
-}
-#vsl-gift-btn {
-  margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;
-  width: 100%; padding: 14px; background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  border: 1px solid #e2e8f0; border-radius: 12px; color: #254bff; font-weight: 800;
-  font-size: 14px; cursor: pointer; transition: all 0.4s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-}
-#vsl-gift-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,75,255,0.15); border-color: #cbd5e1; }
 </style>
 
 
