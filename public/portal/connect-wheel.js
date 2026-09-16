@@ -104,7 +104,12 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
     }
     const host = document.createElement('div'); host.setAttribute('data-connect-wheel', '');
     const root = host.attachShadow({ mode: 'open' });
-    const style = document.createElement('style'); style.textContent = css; root.append(style);
+    css += `
+.layout:not(.won) .visual { transform: scale(0.85); transform-origin: center center; }
+@media(max-width:900px) {
+  .layout:not(.won) .visual { transform: scale(0.75); transform-origin: center center; margin-bottom: -20px; }
+}
+`; const style = document.createElement('style'); style.textContent = css; root.append(style);
     const dialog = document.createElement('dialog');
     dialog.setAttribute('aria-labelledby', 'cw-title'); dialog.setAttribute('aria-describedby', 'cw-intro');
     // EDITADO: Logo incluída na div brand
@@ -291,14 +296,14 @@ dialog{width:min(386px,calc(100vw - 24px));max-width:calc(100vw - 24px);max-heig
                    const secs = timeRemaining.toString().padStart(2, '0');
                    span.textContent = 'Assistindo... liberando em 00:' + secs;
                }
-               btn.style.fontSize = '14px'; if (document.getElementById('cw-lead-email')) document.getElementById('cw-lead-email').style.display = 'none';
+               btn.style.fontSize = '14px'; 
             } else {
                btn.disabled = false;
                btn.style.opacity = '1';
                btn.style.cursor = 'pointer';
                btn.setAttribute('data-locked', 'false');
                span.textContent = 'Girar e desbloquear desconto';
-               btn.style.fontSize = ''; if (document.getElementById('cw-lead-email')) document.getElementById('cw-lead-email').style.display = 'block';
+               btn.style.fontSize = ''; 
                clearInterval(window.__cwSpinTimer);
             }
           }, 500);
