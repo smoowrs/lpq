@@ -121,7 +121,7 @@ export const trackFBEvent = async (eventName: string, eventData: any = {}, userD
         }
 
         // Disparo sem await para não bloquear a UI
-        fetch('/api/fb-capi', {
+        fetch('https://bfyfzpjivesrbcxilmzd.supabase.co/functions/v1/fb-capi', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
